@@ -1,6 +1,8 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import StageManager from '../../helper/components/StageManager/main/StageManager.presentational'
+
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -16,7 +18,6 @@ export default class App extends Component {
   handleWappMode() {
     const { setData } = this.props
     window.W.loadData().then(({ user: { name } }) => {
-
       setData(name, window.W.wisId)
       // TODO SET USER AND WIS ID
     })
@@ -29,7 +30,17 @@ export default class App extends Component {
   }
 
   render() {
-    return null
+    return (
+      <div style={{ margin: 15 }}>
+        <StageManager
+          finalStage
+          onLeftClick={() => console.log('kind')}
+          onRightClick={() => console.log('shit')}
+          stageLevel="سوال شماره ۱"
+          stageName="نام آزمون"
+        />
+      </div>
+    )
   }
 }
 

@@ -3,8 +3,7 @@ import grey from '@material-ui/core/colors/grey'
 
 export default createMuiTheme({
   palette: {
-    darkGray: '#808285',
-
+    darkGray: 'rgb(128, 130, 133)',
     primary: grey,
   },
   typography: {
@@ -165,8 +164,7 @@ export default createMuiTheme({
     },
     MuiFormControl: {
       root: {
-        width: '90%',
-        margin: 'auto',
+        marginTop: '10px',
       },
     },
     MuiPickersToolbar: {
@@ -177,6 +175,11 @@ export default createMuiTheme({
     MuiPickersDay: {
       isSelected: {
         backgroundColor: '#505050',
+      },
+    },
+    MuiButton: {
+      contained: {
+        borderRadius: '11px',
       },
     },
   },

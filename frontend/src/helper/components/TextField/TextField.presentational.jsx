@@ -9,24 +9,24 @@ import styles from '../../style/appStyle'
 
 const TextField = ({
   classes,
-  defaultValue,
+  placeholder,
   hasError,
   required,
   label,
   value,
 }) => {
-  const id = `bootstrap-input--${defaultValue.substr(5)}__${Math.random()}`
+  const id = `bootstrap-input--${placeholder.substr(5)}__${Math.random()}`
   return (
     <FormControl fullWidth error={hasError} required={required}>
       <BootstrapInputLabel htmlFor={id}>{label}</BootstrapInputLabel>
-      <BootstrapInput value={value} defaultValue={defaultValue} id={id} />
+      <BootstrapInput value={value} placeholder={placeholder} id={id} />
     </FormControl>
   )
 }
 
 TextField.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  defaultValue: PropTypes.string,
+  placeholder: PropTypes.string,
   hasError: PropTypes.bool,
   required: PropTypes.bool,
   label: PropTypes.string,
@@ -34,7 +34,7 @@ TextField.propTypes = {
 }
 
 TextField.defaultProps = {
-  defaultValue: '',
+  placeholder: '',
   hasError: false,
   required: false,
   label: '',
@@ -61,8 +61,8 @@ const BootstrapInput = withStyles(theme => ({
     padding: '10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     '&:focus': {
-      boxShadow: `${fade(theme.palette.darkGray, 0.5)} 0 0 0 0.1rem`,
-      borderColor: theme.palette.darkGray,
+      boxShadow: `${fade('rgb(128, 130, 133)', 0.5)} 0 0 0 0.1rem`,
+      borderColor: 'rgb(128, 130, 133)',
     },
   },
 }))(InputBase)

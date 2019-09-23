@@ -13,7 +13,8 @@ import store from './redux'
 // Styles
 
 // Component
-import App from "../components/App/App.container";
+import App from '../components/App/App.container'
+import Create from '../components/Create/Create.container'
 
 const source = createMemorySource()
 const history = createHistory(source)
@@ -23,9 +24,9 @@ export default () => (
   <Provider store={store}>
     <LocationProvider history={history}>
       <App />
-      {/* <Router> */}
-        {/* <RecentPens path="/" /> */}
-      {/* </Router> */}
+      <Router>
+        <Create path="/" />
+      </Router>
     </LocationProvider>
   </Provider>
 )

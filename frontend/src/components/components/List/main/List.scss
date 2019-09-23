@@ -1,0 +1,115 @@
+@import '../../../../helper/style/_mixin.scss';
+
+.c--task_header {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  background-color: white;
+  @include user-select-none;
+}
+
+.c--list_text {
+  display: flex;
+  justify-content: space-between;
+  margin: -5px 30px 0px 10px;
+  align-items: flex-start;
+}
+
+.c--list_brief-info {
+  white-space: nowrap;
+  width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c--list_brief-info-assignee {
+  color: #505050;
+}
+
+@media screen and (max-width: 400px) {
+  .c--list_brief-info {
+    white-space: nowrap;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.c--list_title {
+  &-high,
+  &-middle,
+  &-low {
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
+}
+
+.c--list_title-high::before {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  content: '\2022';
+  color: #da4445;
+  font-size: 30px;
+  display: inline-block;
+}
+.c--list_title-high {
+  align-items: flex-start;
+}
+
+.c--list_title-middle::before {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  content: '\2022';
+  color: #ffad00;
+  font-size: 30px;
+  display: inline-block;
+}
+
+.c--list_title-low::before {
+  display: flex;
+  align-content: center;
+  content: '\2022';
+  color: #60c102;
+  font-size: 30px;
+  display: inline-block;
+}
+
+.c--list_collapse {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 30px;
+  @include user-select-none;
+}
+
+.c--list_progress_panel {
+  width: 250px;
+  margin-bottom: 15px;
+}
+
+.c--list_progress {
+  max-width: 200px;
+}
+
+.c--list_textField {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 0px;
+  width: 250px;
+}
+
+.c--list_button {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.c--list_img {
+  width: 37px;
+  height: 38px;
+  margin-top: 8px;
+  margin-left: 2px;
+  opacity: 0.1;
+  margin-right: -10px;
+}

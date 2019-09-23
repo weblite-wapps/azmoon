@@ -1,0 +1,17 @@
+{
+  "name": "آزمون",
+  "id": "5d88c12f3871b67f14674962",
+  "searchable": true,
+  "instantiable": true,
+  "creator": true,
+  "userInfo": true,
+  "shareDB": false,
+  "fullscreen": true,
+  "inline": false,
+  "width": false,
+  "height": false,
+  "servIndexes": {
+    "main": "index"
+  },
+  "version": "0.0.1"
+}

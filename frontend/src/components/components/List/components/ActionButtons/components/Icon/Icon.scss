@@ -1,0 +1,12 @@
+.c--icon_container {
+  outline: none;
+}
+
+.c--icon_icon {
+  -webkit-filter: invert(100%) opacity(60%);
+  /* Safari */
+  filter: invert(100%) opacity(60%);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}

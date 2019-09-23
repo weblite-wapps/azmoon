@@ -3,15 +3,15 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { createEpicMiddleware, combineEpics } from 'redux-observable'
 
 // reducers
-import RecentPensReducer from '../components/RecentPens/RecentPens.reducer'
-import CreatePenReducer from '../components/CreatePen/CreatePen.reducer'
+// import RecentPensReducer from '../components/RecentPens/RecentPens.reducer'
+// import CreatePenReducer from '../components/CreatePen/CreatePen.reducer'
 // import DashboardReducer from '../components/Dashboard/Dashboard.reducer'
-import AppReducer from '../components/App/App.reducer'
+// import AppReducer from '../components/App/App.reducer'
 
 // epics
-import AppEffect from '../components/App/App.effect'
-import CreatePensEffect from '../components/CreatePen/CreatePen.effect'
-import RecentPensEffect from '../components/RecentPens/RecentPens.effect'
+// import AppEffect from '../components/App/App.effect'
+// import CreatePensEffect from '../components/CreatePen/CreatePen.effect'
+// import RecentPensEffect from '../components/RecentPens/RecentPens.effect'
 // import DashboardEffect from '../components/Dashboard/Dashboard.effect'
 
 /* eslint-disable no-underscore-dangle */
@@ -23,20 +23,19 @@ const composeEnhancers =
     : compose
 /* eslint-enable */
 
-const rootEpic = combineEpics(
-  AppEffect,
-  CreatePensEffect,
-  // DashboardEffect,
-  RecentPensEffect,
-)
+const rootEpic = combineEpics()
+// AppEffect,
+// CreatePensEffect,
+// DashboardEffect,
+// RecentPensEffect,
 const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(
   combineReducers({
-    RecentPens: RecentPensReducer,
-    CreatePen: CreatePenReducer,
+    // RecentPens: RecentPensReducer,
+    // CreatePen: CreatePenReducer,
     // Dashboard: DashboardReducer,
-    App: AppReducer,
+    // App: AppReducer,
   }),
   composeEnhancers(applyMiddleware(epicMiddleware)),
 )

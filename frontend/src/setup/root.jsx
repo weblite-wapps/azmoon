@@ -13,10 +13,10 @@ import store from './redux'
 // Styles
 
 // Component
-import RecentPens from '../components/RecentPens/RecentPens.container'
-import CreatePen from '../components/CreatePen/CreatePen.container'
+// import RecentPens from "../components/RecentPens/RecentPens.container";
+// import CreatePen from "../components/CreatePen/CreatePen.container";
 // import Dashboard from '../components/Dashboard/Dashboard.container'
-import App from '../components/App/App.container'
+// import App from "../components/App/App.container";
 // import PenNaming from '../components/App/App.container'
 
 const source = createMemorySource()
@@ -28,9 +28,9 @@ export default () => (
     <LocationProvider history={history}>
       <App />
       <Router>
-        <RecentPens path="/" />
+        {/* <RecentPens path="/" /> */}
         {/* <Dashboard path="/Dashboard" /> */}
-        <CreatePen path="/CreatePen" />
+        {/* <CreatePen path="/CreatePen" /> */}
         {/* <PenNaming path="/" /> */}
       </Router>
     </LocationProvider>

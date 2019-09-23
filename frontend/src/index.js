@@ -5,7 +5,7 @@ import { AppContainer } from 'react-hot-loader'
 // components
 import Root from './setup/root.jsx'
 
-const renderPennelite = () =>
+const renderAzmoon = () =>
   render(
     <AppContainer>
       <Root />
@@ -13,7 +13,7 @@ const renderPennelite = () =>
     window.document.getElementById('root'),
   )
 
-renderPennelite()
+renderAzmoon()
 
 // Hot Module Replacement API
-if (module.hot) module.hot.accept('./setup/root.jsx', renderPennelite)
+if (module.hot) module.hot.accept('./setup/root.jsx', renderAzmoon)

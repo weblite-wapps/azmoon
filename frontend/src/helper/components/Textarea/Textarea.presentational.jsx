@@ -9,6 +9,14 @@ const styles = theme => ({
     direction: 'rtl',
     'label + &': {
       marginTop: theme.spacing(2),
+      borderRadius: 11,
+      resize: 'none',
+      outline: 'none',
+      transition: theme.transitions.create(['border-color', 'box-shadow']),
+      '&:focus': {
+        boxShadow: `${fade('rgb(128, 130, 133)', 0.5)} 0 0 0 0.1rem`,
+        borderColor: 'rgb(128, 130, 133)',
+      },
     },
   },
 })
@@ -18,8 +26,9 @@ const TextField = ({
   placeholder,
   hasError,
   required,
-  label = 'amirhosein',
+  label,
   value,
+  onChange,
 }) => {
   const id = `bootstrap-textarea-${Math.random()
     .toString(36)
@@ -31,7 +40,9 @@ const TextField = ({
         className={classes.root}
         rows={4}
         rowsMax={10}
+        value={value}
         placeholder={placeholder}
+        onChange={onChange}
         id={id}
       />
     </FormControl>
@@ -45,6 +56,7 @@ TextField.propTypes = {
   required: PropTypes.bool,
   label: PropTypes.string,
   value: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 TextField.defaultProps = {
@@ -53,6 +65,7 @@ TextField.defaultProps = {
   required: false,
   label: '',
   value: '',
+  onChange: Function.prototype,
 }
 
 export default withStyles(styles)(TextField)

@@ -7,23 +7,23 @@
   overflow: hidden;
   text-overflow: ellipsis;
   direction: rtl;
-  font-family: $font-stack;
-
+  white-space: nowrap;
 }
 .info-tags--title {
   @extend %text-placeholder;
-  width: 30%;
+  width: 40%;
   background-color: #808285;
   color: #fff !important;
 }
 
 .info-tags--description {
   @extend %text-placeholder;
-  width: 70%;
+  width: 60%;
   background-color: #F0F0F0;
   margin-right: 5px !important;
 }
 
 .info-tags {
   display: flex;
+  margin: 10px 0px;
 }

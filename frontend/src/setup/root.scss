@@ -17,6 +17,6 @@ body {
   overflow: hidden; // for sticking whole app to top
 }
 
-button, textarea, input, p, span {
-  font-family: Iranyekan;
+button, textarea, input, p, span, h2 {
+  font-family: Iranyekan !important;
 }

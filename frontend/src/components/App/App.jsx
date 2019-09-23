@@ -1,7 +1,7 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import StageManager from '../../helper/components/StageManager/main/StageManager.presentational'
+import Home from '../Home/Home.presentational'
 
 export default class App extends Component {
   // constructor(props) {
@@ -32,13 +32,13 @@ export default class App extends Component {
   render() {
     return (
       <div style={{ margin: 15 }}>
-        <StageManager
-          finalStage
-          onLeftClick={() => console.log('kind')}
-          onRightClick={() => console.log('shit')}
-          stageLevel="سوال شماره ۱"
-          stageName="نام آزمون"
-          finalStageLabel="انمام ازمون"
+        <Home
+          examStatus="در حال برگزاری"
+          examParticipants="۱۰ نفر"
+          examMaxPercent="۹۳.۳۳٪"
+          examMinPercent="۱۱.۲٪"
+          examAveragePercent="۴۵٪"
+          remainingTime="۱۴:۱۵:۳۰"
         />
       </div>
     )

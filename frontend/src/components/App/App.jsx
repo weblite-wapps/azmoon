@@ -1,8 +1,9 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// components
-import Button from '../../helper/components/Button/Button.presentational'
+import TextArea from '../../helper/components/Textarea/Textarea.presentational'
+import TextField from '../../helper/components/TextField/TextField.presentational'
+
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -18,7 +19,6 @@ export default class App extends Component {
   handleWappMode() {
     const { setData } = this.props
     window.W.loadData().then(({ user: { name } }) => {
-
       setData(name, window.W.wisId)
       // TODO SET USER AND WIS ID
     })
@@ -31,7 +31,14 @@ export default class App extends Component {
   }
 
   render() {
-    return <Button fullWidth label="بستن آزمون" />
+    return (
+      <div style={{ margin: 15 }}>
+        <TextArea label="AB" />
+
+        <br />
+        <TextField label="AB" />
+      </div>
+    )
   }
 }
 

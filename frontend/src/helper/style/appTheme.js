@@ -3,8 +3,7 @@ import grey from '@material-ui/core/colors/grey'
 
 export default createMuiTheme({
   palette: {
-    darkGray: '#808285',
-
+    darkGray: 'rgb(128, 130, 133)',
     primary: grey,
   },
   typography: {
@@ -116,6 +115,9 @@ export default createMuiTheme({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         margin: '20px 0px',
       },
+    },
+    MuiFormControl: {
+      root: { marginTop: '15px' },
     },
     MuiList: {
       root: {

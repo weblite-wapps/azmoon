@@ -2,32 +2,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { fade, withStyles } from '@material-ui/core/styles'
-import { FormControl, InputLabel, InputBase } from '@material-ui/core'
+import { FormControl, InputLabel, TextareaAutosize } from '@material-ui/core'
 // styles
-import './TextField.scss'
-import styles from '../../style/appStyle'
+const styles = theme => ({
+  root: {
+    direction: 'rtl',
+    'label + &': {
+      marginTop: theme.spacing(2),
+    },
+  },
+})
 
 const TextField = ({
   classes,
-  defaultValue,
+  placeholder,
   hasError,
-  label,
-  onChange,
   required,
+  label = 'amirhosein',
   value,
 }) => {
-  const id = `bootstrap-input-${Math.random()
+  const id = `bootstrap-textarea-${Math.random()
     .toString(36)
     .substr(-5)}`
-
   return (
     <FormControl fullWidth error={hasError} required={required}>
       <BootstrapInputLabel htmlFor={id}>{label}</BootstrapInputLabel>
-      <BootstrapInput
-        defaultValue={defaultValue}
+      <TextareaAutosize
+        className={classes.root}
+        rows={4}
+        rowsMax={10}
+        placeholder={placeholder}
         id={id}
-        onChange={onChange}
-        value={value}
       />
     </FormControl>
   )
@@ -35,7 +40,7 @@ const TextField = ({
 
 TextField.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  defaultValue: PropTypes.string,
+  placeholder: PropTypes.string,
   hasError: PropTypes.bool,
   required: PropTypes.bool,
   label: PropTypes.string,
@@ -43,7 +48,7 @@ TextField.propTypes = {
 }
 
 TextField.defaultProps = {
-  defaultValue: '',
+  placeholder: '',
   hasError: false,
   required: false,
   label: '',
@@ -51,30 +56,6 @@ TextField.defaultProps = {
 }
 
 export default withStyles(styles)(TextField)
-
-// helper/components
-const BootstrapInput = withStyles(theme => ({
-  root: {
-    direction: 'rtl',
-    'label + &': {
-      marginTop: theme.spacing(3),
-    },
-  },
-  input: {
-    borderRadius: 11,
-    position: 'relative',
-    backgroundColor: theme.palette.common.white,
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    width: '100%',
-    padding: '10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    '&:focus': {
-      boxShadow: `${fade('rgb(128, 130, 133)', 0.5)} 0 0 0 0.1rem`,
-      borderColor: 'rgb(128, 130, 133)',
-    },
-  },
-}))(InputBase)
 
 const BootstrapInputLabel = withStyles(theme => ({
   formControl: {
@@ -85,6 +66,7 @@ const BootstrapInputLabel = withStyles(theme => ({
     color: '#000',
     fontSize: 12,
   },
+
   shrink: {
     transformOrigin: 'top right',
   },

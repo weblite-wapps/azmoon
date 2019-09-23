@@ -116,9 +116,6 @@ export default createMuiTheme({
         margin: '20px 0px',
       },
     },
-    MuiFormControl: {
-      root: { marginTop: '15px' },
-    },
     MuiList: {
       root: {
         width: '100%',
@@ -167,8 +164,7 @@ export default createMuiTheme({
     },
     MuiFormControl: {
       root: {
-        width: '90%',
-        margin: 'auto',
+        marginTop: '10px',
       },
     },
     MuiPickersToolbar: {

@@ -1,7 +1,6 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Header from './App.helper'
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -11,7 +10,7 @@ export default class App extends Component {
 
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
-    else this.handleNormalMode()
+    // else this.handleNormalMode()
   }
 
   handleWappMode() {
@@ -30,7 +29,7 @@ export default class App extends Component {
   }
 
   render() {
-    return <Header {...this.props} />
+    return null
   }
 }
 

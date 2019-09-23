@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import TextArea from '../../helper/components/Textarea/Textarea.presentational'
 import TextField from '../../helper/components/TextField/TextField.presentational'
+import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 
 export default class App extends Component {
   // constructor(props) {
@@ -36,7 +37,9 @@ export default class App extends Component {
         <TextArea label="AB" />
 
         <br />
-        <TextField label="AB" />
+        <TextField label="AB" placeholder="placeholder" />
+        <br />
+        <InfoTags title="vaziat" description="87%" />
       </div>
     )
   }

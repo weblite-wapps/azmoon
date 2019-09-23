@@ -9,7 +9,7 @@ import styles from '../../style/appStyle'
 
 const TextField = ({
   classes,
-  defaultValue,
+  placeholder,
   hasError,
   label,
   onChange,
@@ -24,7 +24,7 @@ const TextField = ({
     <FormControl fullWidth error={hasError} required={required}>
       <BootstrapInputLabel htmlFor={id}>{label}</BootstrapInputLabel>
       <BootstrapInput
-        defaultValue={defaultValue}
+        placeholder={placeholder}
         id={id}
         onChange={onChange}
         value={value}
@@ -35,7 +35,7 @@ const TextField = ({
 
 TextField.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  defaultValue: PropTypes.string,
+  placeholder: PropTypes.string,
   hasError: PropTypes.bool,
   required: PropTypes.bool,
   label: PropTypes.string,
@@ -43,7 +43,7 @@ TextField.propTypes = {
 }
 
 TextField.defaultProps = {
-  defaultValue: '',
+  placeholder: '',
   hasError: false,
   required: false,
   label: '',

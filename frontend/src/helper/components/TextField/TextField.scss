@@ -1,5 +1,14 @@
 .c--textField_textField {
   display: flex;
   align-items: flex-end;
-  margin: 0px 20px 15px 20px;
+  margin: 0 20px 15px 20px;
+}
+
+
+/* Edge */
+/* Internet Explorer 10-11 */
+::placeholder,
+:-ms-input-placeholder,
+::-webkit-input-placeholder  {
+  color: #ccc;
 }

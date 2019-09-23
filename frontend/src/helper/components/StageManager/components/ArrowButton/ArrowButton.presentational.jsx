@@ -8,7 +8,7 @@ import { cns, ab } from '../../../../functions/utils.helper'
 // style
 import '../../main/StageManager.scss'
 
-const ArrowButton = ({ type, hasError }) => {
+const ArrowButton = ({ type, hasError, onClick }) => {
   const Comp = assets[type]
 
   const buttonCN = cns(
@@ -17,7 +17,7 @@ const ArrowButton = ({ type, hasError }) => {
   )
 
   return (
-    <button className={buttonCN} type="button">
+    <button className={buttonCN} type="button" onClick={onClick}>
       <Comp />
     </button>
   )

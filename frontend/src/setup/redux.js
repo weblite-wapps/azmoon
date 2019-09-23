@@ -3,8 +3,8 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { createEpicMiddleware, combineEpics } from 'redux-observable'
 
 // reducers
+import AppReducer from '../components/App/App.reducer'
 import CreateReducer from '../components/Create/Create.reducer'
-// import AppReducer from '../components/App/App.reducer'
 
 // epics
 // import AppEffect from '../components/App/App.effect'
@@ -33,7 +33,7 @@ const store = createStore(
     // RecentPens: RecentPensReducer,
     Create: CreateReducer,
     // Dashboard: DashboardReducer,
-    // App: AppReducer,
+    App: AppReducer,
   }),
   composeEnhancers(applyMiddleware(epicMiddleware)),
 )

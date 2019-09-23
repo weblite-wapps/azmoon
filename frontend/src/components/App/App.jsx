@@ -30,14 +30,15 @@ export default class App extends Component {
   }
 
   render() {
+    const { stageLevel, stageName } = this.props
     return (
       <div style={{ margin: 15 }}>
         <StageManager
           finalStage
           onLeftClick={() => console.log('kind')}
           onRightClick={() => console.log('shit')}
-          stageLevel="سوال شماره ۱"
-          stageName="نام آزمون"
+          stageLevel={stageLevel}
+          stageName={stageName}
         />
       </div>
     )

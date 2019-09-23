@@ -1,8 +1,7 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TextArea from '../../helper/components/Textarea/Textarea.presentational'
-import TextField from '../../helper/components/TextField/TextField.presentational'
+import StageManager from '../../helper/components/StageManager/main/StageManager.presentational'
 
 export default class App extends Component {
   // constructor(props) {
@@ -33,10 +32,13 @@ export default class App extends Component {
   render() {
     return (
       <div style={{ margin: 15 }}>
-        <TextArea label="AB" />
-
-        <br />
-        <TextField label="AB" />
+        <StageManager
+          finalStage
+          onLeftClick={() => console.log('kind')}
+          onRightClick={() => console.log('shit')}
+          stageLevel="سوال شماره ۱"
+          stageName="نام آزمون"
+        />
       </div>
     )
   }

@@ -17,17 +17,19 @@
     "react-beautiful-dnd": "^11.0.5",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.8.8",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
-    "react-router-redux": "^5.0.0-alpha.9",
-    "react-scripts": "^3.0.1",
-    "redux": "^3.7.2",
-    "redux-actions": "^2.2.1",
-    "redux-observable": "^0.17.0",
     "reselect": "^3.0.1",
-    "rxjs": "^5.5.2",
-    "superagent": "^3.8.1",
-    "typeface-roboto": "^0.0.45"
+    "typeface-roboto": "^0.0.45",
+    "@reach/router": "^1.2.1",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^3.0.1",
+    "react-simple-code-editor": "^0.9.11",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.4",
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.3.3",
+    "sass-loader": "^7.1.0",
+    "superagent": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,6 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": ".",
   "eslintConfig": {
     "extends": "react-app"
   },

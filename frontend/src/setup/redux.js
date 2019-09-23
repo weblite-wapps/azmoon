@@ -1,59 +1,46 @@
 // modules
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { createEpicMiddleware, combineEpics } from 'redux-observable'
-import { routerReducer, routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createMemoryHistory'
-// reducers
-import AppReducer from '../components/Main/App.reducer'
-import HomeReducer from '../components/components/Home/Home.reducer'
-import AddReducer from '../components/components/Add/Add.reducer'
-import FilterReducer from '../components/components/Filter/Filter.reducer'
-import ListReducer from '../components/components/List/main/List.reducer'
-import EditReducer from '../components/components/Edit/Main/Edit.reducer'
-import SnackbarReducer from '../components/components/Snackbar/Snackbar.reducer'
-// epics
-import AppEpic from '../components/Main/App.effect'
-import HomeEpic from '../components/components/Home/Home.effect'
-import HomeSubscribeEpic from '../components/components/Home/Home.subscribe'
-import AddEpic from '../components/components/Add/Add.effect'
-import ListEpic from '../components/components/List/main/List.effect'
-import FilterEpic from '../components/components/Filter/Filter.effect'
-import EditEpic from '../components/components/Edit/Main/Edit.effect'
-// Create a history of your choosing (we're using a browser history in this case)
-export const history = createHistory()
 
-// Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history)
+// reducers
+// import RecentPensReducer from '../components/RecentPens/RecentPens.reducer'
+// import CreatePenReducer from '../components/CreatePen/CreatePen.reducer'
+// import DashboardReducer from '../components/Dashboard/Dashboard.reducer'
+// import AppReducer from '../components/App/App.reducer'
+
+// epics
+// import AppEffect from '../components/App/App.effect'
+// import CreatePensEffect from '../components/CreatePen/CreatePen.effect'
+// import RecentPensEffect from '../components/RecentPens/RecentPens.effect'
+// import DashboardEffect from '../components/Dashboard/Dashboard.effect'
 
 /* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        name: 'pennelite',
+      })
+    : compose
 /* eslint-enable */
 
-// redux observable
-const rootEpic = combineEpics(
-  AppEpic,
-  HomeEpic,
-  HomeSubscribeEpic,
-  AddEpic,
-  ListEpic,
-  FilterEpic,
-  EditEpic,
-)
-const epicMiddleware = createEpicMiddleware(rootEpic)
+const rootEpic = combineEpics()
+// AppEffect,
+// CreatePensEffect,
+// DashboardEffect,
+// RecentPensEffect,
+const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(
   combineReducers({
-    App: AppReducer,
-    Home: HomeReducer,
-    Add: AddReducer,
-    Filter: FilterReducer,
-    List: ListReducer,
-    Edit: EditReducer,
-    Snackbar: SnackbarReducer,
-    router: routerReducer,
+    // RecentPens: RecentPensReducer,
+    // CreatePen: CreatePenReducer,
+    // Dashboard: DashboardReducer,
+    // App: AppReducer,
   }),
-  composeEnhancers(applyMiddleware(middleware, epicMiddleware)),
+  composeEnhancers(applyMiddleware(epicMiddleware)),
 )
+
+epicMiddleware.run(rootEpic)
 
 export const { dispatch, getState } = store
 export default store

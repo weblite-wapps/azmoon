@@ -1,3 +1,4 @@
+
 html {
   overflow: auto; // for full height which applies to body tag
 }
@@ -16,6 +17,6 @@ body {
   overflow: hidden; // for sticking whole app to top
 }
 
-* {
-  box-sizing: border-box;
+button, textarea, input, p, span {
+  font-family: Iranyekan;
 }

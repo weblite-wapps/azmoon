@@ -1,13 +1,7 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-<<<<<<< HEAD
-import TextArea from '../../helper/components/Textarea/Textarea.presentational'
-import TextField from '../../helper/components/TextField/TextField.presentational'
-import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
-=======
 import StageManager from '../../helper/components/StageManager/main/StageManager.presentational'
->>>>>>> 6a63bfc16803c598f9e31dbc789e24a6c88bab0e
 
 export default class App extends Component {
   // constructor(props) {
@@ -38,22 +32,14 @@ export default class App extends Component {
   render() {
     return (
       <div style={{ margin: 15 }}>
-<<<<<<< HEAD
-        <TextArea label="AB" />
-
-        <br />
-        <TextField label="AB" placeholder="placeholder" />
-        <br />
-        <InfoTags title="vaziat" description="87%" />
-=======
         <StageManager
           finalStage
           onLeftClick={() => console.log('kind')}
           onRightClick={() => console.log('shit')}
           stageLevel="سوال شماره ۱"
           stageName="نام آزمون"
+          finalStageLabel="انمام ازمون"
         />
->>>>>>> 6a63bfc16803c598f9e31dbc789e24a6c88bab0e
       </div>
     )
   }

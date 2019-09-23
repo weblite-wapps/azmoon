@@ -1,10 +1,23 @@
+html {
+  overflow: auto; // for full height which applies to body tag
+}
 body {
-  width: 100%;
-  height: 100%;
+  // position: fixed;
+  // width: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: black;
+  color: white;
+  font-family: monospace; // move this to html or * or never mind :)
+  overflow: hidden;
 }
 
-.c--root_container {
-  width: 100%;
+#root {
   height: 100%;
-  overflow: auto;
+  overflow: hidden; // for sticking whole app to top
+}
+
+* {
+  box-sizing: border-box;
 }

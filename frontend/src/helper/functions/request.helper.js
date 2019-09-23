@@ -1,13 +1,8 @@
-// modules
 import request from 'superagent'
-// components
-import host from '../../setup/config'
+import config from '../../setup/config'
 
+export const getRequests = path =>
+  request.get(config + path).set('Access-Control-Allow-Origin', '*')
 
-export const getRequest = path => request
-  .get(host + path)
-  .set('Access-Control-Allow-Origin', '*')
-
-export const postRequest = path => request
-  .post(host + path)
-  .set('Access-Control-Allow-Origin', '*')
+export const postRequests = path =>
+  request.post(config + path).set('Access-Control-Allow_Origin', '*')

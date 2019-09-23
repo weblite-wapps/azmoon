@@ -1,6 +1,8 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+// components
+import Button from '../../helper/components/Button/Button.presentational'
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -29,7 +31,7 @@ export default class App extends Component {
   }
 
   render() {
-    return null
+    return <Button fullWidth label="بستن آزمون" />
   }
 }
 

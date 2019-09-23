@@ -179,5 +179,10 @@ export default createMuiTheme({
         backgroundColor: '#505050',
       },
     },
+    MuiButton: {
+      contained: {
+        borderRadius: '11px',
+      },
+    },
   },
 })

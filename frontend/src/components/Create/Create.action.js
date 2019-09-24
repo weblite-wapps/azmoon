@@ -9,3 +9,8 @@ export const CHANGE_QUESTION_PAGE = 'CHANGE_QUESTION_PAGE`'
 export const changeQuestionPage = createAction(CHANGE_QUESTION_PAGE)
 export const dispatchChangeQuestionPage = args =>
   dispatch(changeQuestionPage(args))
+
+export const INSERT_QUESTION_DATA = 'INSERT_QUESTION_DATA`'
+export const insertQuestionData = createAction(INSERT_QUESTION_DATA)
+export const dispatchInsertQuestionData = args =>
+  dispatch(insertQuestionData(args))

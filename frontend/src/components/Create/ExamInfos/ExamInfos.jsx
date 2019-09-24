@@ -14,7 +14,7 @@ export default class ExamInfos extends Component {
     super(props)
     this.state = {
       title: '',
-      context: '',
+      section: '',
       questionCount: 20,
       duration: 15,
       startTime: {
@@ -26,6 +26,17 @@ export default class ExamInfos extends Component {
         hour: null,
       },
     }
+    this.handleAddData = this.handleAddData.bind(this)
+  }
+
+  handleAddData(e, type) {
+    return this.setState({
+      [type]: e.target.value,
+    })
+  }
+
+  componentDidUpdate() {
+    console.log('new state ', this.state)
   }
 
   render() {
@@ -33,10 +44,26 @@ export default class ExamInfos extends Component {
     const { setInitialInfo } = this.props
     return (
       <div>
-        <TextField value={title} label={nameAzmoon} />
-        <TextField value={context} label={mabhaseAzmoon} />
-        <TextField value={questionCount} label={tedadeSoal} />
-        <TextField value={duration} label={zamaneAzmoon} />
+        <TextField
+          onChange={e => this.handleAddData(e, 'title')}
+          value={title}
+          label={nameAzmoon}
+        />
+        <TextField
+          onChange={e => this.handleAddData(e, 'section')}
+          value={context}
+          label={mabhaseAzmoon}
+        />
+        <TextField
+          onChange={e => this.handleAddData(e, 'questionCount')}
+          value={questionCount}
+          label={tedadeSoal}
+        />
+        <TextField
+          onChange={e => this.handleAddData(e, 'duration')}
+          value={duration}
+          label={zamaneAzmoon}
+        />
         <button onClick={() => setInitialInfo(this.state)}>
           {ijadeAzmoon}
         </button>

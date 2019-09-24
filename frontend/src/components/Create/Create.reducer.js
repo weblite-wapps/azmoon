@@ -1,6 +1,10 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
-import { SET_INITIAL_INFO, CHANGE_QUESTION_PAGE } from './Create.action'
+import {
+  SET_INITIAL_INFO,
+  CHANGE_QUESTION_PAGE,
+  INSERT_QUESTION_DATA,
+} from './Create.action'
 
 const initialState = {
   title: '',
@@ -34,6 +38,11 @@ const reducer = {
   [CHANGE_QUESTION_PAGE]: (state, value) => ({
     ...state,
     questionIndex: state.questionIndex + value,
+  }),
+
+  [INSERT_QUESTION_DATA]: (state, value) => ({
+    ...state,
+    questions: R.insert(state.questionIndex, value, state.questions),
   }),
 }
 

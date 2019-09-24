@@ -12,13 +12,17 @@ export default createMuiTheme({
   },
   overrides: {
     MuiTypography: {
-      body2: {
-        fontWeight: '100',
-        color: '#cfcfcf',
-      },
       body1: {
         color: 'black',
-        fontSize: '0.9rem',
+        fontSize: '14px',
+      },
+      body2: {
+        color: '#808285',
+        fontSize: '12px',
+      },
+      h2: {
+        fontSize: '42px',
+        color: '#808285',
       },
       h4: {
         color: '#000000',

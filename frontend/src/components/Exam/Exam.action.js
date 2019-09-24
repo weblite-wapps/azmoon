@@ -17,10 +17,14 @@ export const CHANGE_ANSWER_OPT = 'CHANGE_ANSWER_OPT'
 export const changeAnswerOpt = createAction(CHANGE_ANSWER_OPT, (opt, index) => ({ opt, index }))
 export const dispatchChangeAnswerOpt = (...args) => dispatch(changeAnswerOpt(...args))
 
-export const DECREASE_DURATION = 'DECREASE_DURATION'
-export const decreaseDuration = createAction(DECREASE_DURATION)
-export const dispatchDecreaseDuration = (...args) => dispatch(decreaseDuration(...args))
+export const HANDLE_CHANGE_ANSWER_OPT = 'HANDLE_CHANGE_ANSWER_OPT'
+export const handleChangeAnswerOpt = createAction(HANDLE_CHANGE_ANSWER_OPT, opt => ({ opt }))
+export const dispatchHandleChangeAnswerOpt = (...args) => dispatch(handleChangeAnswerOpt(...args))
 
-export const HANDLE_DECREASE_DURATION = 'HANDLE_DECREASE_DURATION'
-export const handleDecreaseDuration = createAction(HANDLE_DECREASE_DURATION)
-export const dispatchHandleDecreaseDuration = (...args) => dispatch(handleDecreaseDuration(...args))
+export const CHANGE_DURATION = 'CHANGE_DURATION'
+export const changeDuration = createAction(CHANGE_DURATION)
+export const dispatchChangeDuration = (...args) => dispatch(changeDuration(...args))
+
+export const HANDLE_CHANGE_DURATION = 'HANDLE_CHANGE_DURATION'
+export const handlechangeDuration = createAction(HANDLE_CHANGE_DURATION)
+export const dispatchHandleChangeDuration = (...args) => dispatch(handlechangeDuration(...args))

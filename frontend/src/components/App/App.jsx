@@ -42,6 +42,7 @@ export default class App extends Component {
       <div>
         <AppBar />
         <Create />
+        <Exam />
         {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"

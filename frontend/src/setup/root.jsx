@@ -15,7 +15,7 @@ import theme from '../helper/style/appTheme'
 import './root.scss'
 
 // Component
-import App from "../components/App/App.container";
+import App from "../components/App/App.container"
 
 const source = createMemorySource()
 const history = createHistory(source)

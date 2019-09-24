@@ -9,15 +9,16 @@ const initialState = {
   isLoading: false,
   user: {},
   wis: (window.W && window.W.wisId) || '110',
-  creator: false,
-  isParticipated: false,
-  isExamReady: false,
+  isParticipated: true,
+  isExamReady: true,
+  isAdmin: true,
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
 
 export const isParticipatedView = () => R.path(['App', 'isParticipated'])(getState())
 export const isExamReadyView = () => R.path(['App', 'isExamReady'])(getState())
+export const isAdminView = () => R.path(['App', 'isAdmin'])(getState())
 
 const reducer = {
   [SET_IS_PARTICIPATED]: (state, { isParticipated }) => ({

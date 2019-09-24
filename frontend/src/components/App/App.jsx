@@ -1,7 +1,7 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Home from '../Home/Home.presentational'
+import Home from '../Home/Home.container'
 
 export default class App extends Component {
   // constructor(props) {

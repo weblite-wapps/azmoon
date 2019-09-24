@@ -14,11 +14,16 @@ const StageManager = ({
   onRightClick,
   stageLevel,
   stageName,
+  finalStageLabel,
   finalStage,
 }) => (
   <div className="recast--stage-manager">
     {finalStage ? (
-      <Button label="اتمام آزمون" />
+      <ArrowButton
+        type="Titled"
+        title={finalStageLabel}
+        onClick={onLeftClick}
+      />
     ) : (
       <ArrowButton type="Left" onClick={onLeftClick} />
     )}
@@ -30,6 +35,7 @@ const StageManager = ({
 StageManager.propTypes = {
   error: PropTypes.bool,
   finalStage: PropTypes.bool,
+  finalStageLabel: PropTypes.string.isRequired,
   onLeftClick: PropTypes.func.isRequired,
   onRightClick: PropTypes.func.isRequired,
   stageLevel: PropTypes.string.isRequired,

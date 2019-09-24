@@ -4,7 +4,9 @@
   justify-content: space-between;
   width: 100%;
   height: 50px;
-  background-color: #7DD9DE;
+  background-color: #F0F0F0;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .stage-manager--info {
@@ -16,16 +18,21 @@
   transition: width 3s ease;
 
   &__stage-name {
+    font-size: 8px;
+    line-height: 13px;
+    letter-spacing: -0.06px;
     margin: 0;
     margin-top: 10px;
-    font-weight: bold;
-    color: white;
+    color: #808285;
   }
   &__stage {
+
+    font-size: 10px;
+    line-height: 17px;
+    letter-spacing: -0.07px;
     margin-top: 3px;
-    font-size: 14px;
-    font-weight: bold;
-    color: red;
+    color: #000000;
+    // font-weight: bold; TODO: add font first
   }
 }
 
@@ -34,18 +41,31 @@
   padding: 0;
   border: none;
   width: auto;
-  min-width: 50px;
-  height: 50px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
   flex-shrink: 0;
   cursor: pointer;
   outline: none;
   background-color: #7DD9DE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* TODO: TechnicalDebt &:foucs,&:hover for eyboard user*/
 }
-.recast--arrow-svg {
-  width: 30px;
-  height: 30px;
+
+.recast--arrow-svg{
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
   fill: white;
+  position: relative;
+}
+.recast--arrow-svg.right {
+  left: 1px;
+}
+.recast--arrow-svg.left {
+  right: 1px;
 }
 
 .arrow-button__error {
@@ -79,13 +99,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
-  height: 30px;
-  border-radius: 20px;
-  margin-right: 10px;
+  margin: 0 10px;
+  font-size: 10px;
+  line-height: 17px;
+  letter-spacing: -0.07px;
 
   color: white;
-  background-color:blue;
+  white-space: nowrap;
 }
 .arrow-button--send__error {
   background-color: red;

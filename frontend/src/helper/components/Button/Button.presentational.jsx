@@ -3,15 +3,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import MuiButton from '@material-ui/core/Button'
 
-
-const Button = ({
-  label,
-  fullWidth,
-  onClick,
-}) => {
+const Button = ({ label, fullWidth, onClick, ...other }) => {
   return (
-    <MuiButton fullWidth={fullWidth} onClick={onClick} variant="contained">
-        { label }
+    <MuiButton
+      fullWidth={fullWidth}
+      onClick={onClick}
+      variant="contained"
+      {...other}
+    >
+      {label}
     </MuiButton>
   )
 }

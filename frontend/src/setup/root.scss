@@ -11,6 +11,15 @@ body {
   overflow: hidden;
 }
 
-* {
-  box-sizing: border-box;
+#root {
+  height: 100%;
+  overflow: hidden; // for sticking whole app to top
+}
+
+button,
+textarea,
+input,
+p,
+span {
+  font-family: Iranyekan;
 }

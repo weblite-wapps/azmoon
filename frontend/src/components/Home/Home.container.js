@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Home from './Home.presentational'
 // views
 // import { tabIndexView, numbersObjectView, isLoadingView } from './Home.reducer'
-import { isParticipatedView, isExamReadyView, isAdminView } from '../App/App.reducer'
+import { isParticipatedView, isExamReadyView, isExamStartedView, isAdminView } from '../App/App.reducer'
 // actions
 // import { dispatchChangeTab, dispatchHandleDragTask } from './Home.action'
 
@@ -12,6 +12,7 @@ import { isParticipatedView, isExamReadyView, isAdminView } from '../App/App.red
 const mapStateToProps = () => ({
   isParticipated: isParticipatedView(),
   isExamReady: isExamReadyView(),
+  isExamStarted: isExamStartedView(),
   isAdmin: isAdminView(),
 })
 

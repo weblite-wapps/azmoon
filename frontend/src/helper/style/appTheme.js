@@ -64,16 +64,6 @@ export default createMuiTheme({
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
       },
     },
-    MuiToolbar: {
-      root: {
-        backgroundColor: '#505050',
-        justifyContent: 'space-between',
-      },
-      gutters: {
-        paddingRight: '10px',
-        paddingLeft: '10px',
-      },
-    },
     MuiTab: {
       root: {
         height: '50px',
@@ -162,7 +152,6 @@ export default createMuiTheme({
     },
     MuiToolbar: {
       root: {
-        display: 'flex',
         justifyContent: 'space-between',
       },
       regular: {

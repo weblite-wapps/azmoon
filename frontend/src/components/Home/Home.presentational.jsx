@@ -12,6 +12,7 @@ import './Home.scss'
 const Home = ({
     isParticipated,
     isExamReady,
+    isExamStarted,
     isAdmin,
 
     examTitle,
@@ -46,7 +47,7 @@ const Home = ({
       <InfoTags title="تعداد سوالات" description={questionCount} />
       <InfoTags title="مدت پاسخگویی" description={examDuration} />
 
-      {isAdmin &&
+      {isAdmin && isExamStarted &&
       <>
         <InfoTags title="بیشترین درصد" description={examMaxPercent} />
         <InfoTags title="کمترین درصد" description={examMinPercent} />
@@ -58,16 +59,19 @@ const Home = ({
       {isParticipated && !isAdmin && <InfoTags title="نتیجه شما" description={userResult} />}
     </div>
 
-    {!isExamReady && isAdmin &&
+    {isExamReady && !isExamStarted && isAdmin &&
       <>
-        <Button onClick={onCloseExam} color="#D65555" fullWidth label="بستن آزمون" />
         <Button onClick={onOpenExam} color="#84CE2D" fullWidth label="آغاز آزمون" />
         <Button onClick={onEditExam} color="#808285" fullWidth label="ویرایش آزمون" />
       </>
     }
 
-    {!isParticipated && !isAdmin && <Button onClick={onStartExam} color="#6DC2EF" fullWidth label="شروع آزمون" />}
-    {((isExamReady && isAdmin) || (isParticipated && !isAdmin)) && <Button onClick={onShowResults} disabled color="#6DC2EF" fullWidth label="نتایج آزمون" />}
+    {isExamStarted &&  isAdmin &&
+      <Button onClick={onCloseExam} color="#D65555" fullWidth label="بستن آزمون" />
+    }
+
+    {!isParticipated && isExamStarted && !isAdmin && <Button onClick={onStartExam} color="#6DC2EF" fullWidth label="شروع آزمون" />}
+    {((isExamStarted && isAdmin) || (isParticipated && !isAdmin)) && <Button onClick={onShowResults} disabled color="#6DC2EF" fullWidth label="نتایج آزمون" />}
     {isParticipated && !isAdmin && <Button onClick={onShowAnswerSheet} disabled color="#84CE2D" fullWidth label="پاسخ‌نامه" />}
     {/* <Button color="#808285" fullWidth label="ویرایش آزمون و ارسال مجدد" /> */}
   </div>
@@ -76,6 +80,7 @@ const Home = ({
 Home.propTypes = {
     isParticipated: PropTypes.bool.isRequired,
     isExamReady: PropTypes.bool.isRequired,
+    isExamStarted: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
 
     examTitle: PropTypes.string.isRequired,

@@ -1,7 +1,10 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Home from '../Home/Home.presentational'
+import Exam from '../Exam/Exam.container'
+
+//test
+import { dispatchHandleStartExam } from '../Exam/Exam.action'
 
 export default class App extends Component {
   // constructor(props) {
@@ -12,7 +15,8 @@ export default class App extends Component {
 
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
-    // else this.handleNormalMode()
+
+    setTimeout(dispatchHandleStartExam, 1000)
   }
 
   handleWappMode() {
@@ -31,26 +35,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <div style={{ margin: 20 }}>
-        <Home
-          examTitle="آزمون جامع دین‌ و زندگی"
-          examSection="درس یک تا پنج"
-          examDuration="۳۰ دقیقه"
-          examStatus="در حال برگزاری"
-          examParticipantCount="۱۰ نفر"
-          examMaxPercent="۹۳.۳۳٪"
-          examMinPercent="۱۱.۲٪"
-          examAveragePercent="۴۵٪"
-          remainingTime="۱۴:۱۵:۳۰"
-          userReuslt="۳۸.۳۳٪"
-        />
-        {/* <Result
-          userReuslt="۳۸.۳۳٪"
-          examParticipantCount="۱۰ نفر"
-          examMaxPercent="۹۳.۳۳٪"
-          examMinPercent="۱۱.۲٪"
-          examAveragePercent="۴۵٪"
-        /> */}
+      <div>
+        <Exam />
       </div>
     )
   }

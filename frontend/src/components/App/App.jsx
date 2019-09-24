@@ -30,6 +30,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { stageLevel, stageName } = this.props
     return (
       <div>
         <AppBar />

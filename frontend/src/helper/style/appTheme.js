@@ -12,39 +12,36 @@ export default createMuiTheme({
   },
   overrides: {
     MuiTypography: {
-      body2: {
-        fontWeight: '100',
-        color: '#cfcfcf',
-      },
       body1: {
         color: 'black',
-        fontSize: '0.9rem',
+        fontSize: '14px',
+      },
+      body2: {
+        color: '#808285',
+        fontSize: '12px',
+      },
+      h2: {
+        fontSize: '42px',
+        color: '#808285',
       },
       h4: {
         color: '#000000',
         fontWeight: '500',
       },
       h5: {
-        color: '#919191',
-        textTransform: 'uppercase',
-        margin: '5px',
-        textAlign: 'center',
-        fontSize: '27px',
-        width: '165px',
+        color: 'white',
+        fontSize: '18px',
       },
       h6: {
         fontSize: '18px',
         textTransform: 'uppercase',
         fontWeight: '900',
       },
-      button: {
-        color: '#cfcfcf',
-        fontSize: '12px',
-        fontWeight: '500',
-        marginBottom: '3px',
-      },
       caption: {
-        color: 'black',
+        color: '#ccc',
+        marginBottom: '-10px',
+        fontSize: '8px',
+
       },
     },
     MuiIconButton: {
@@ -65,16 +62,6 @@ export default createMuiTheme({
     MuiBackdrop: {
       root: {
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
-      },
-    },
-    MuiToolbar: {
-      root: {
-        backgroundColor: '#505050',
-        justifyContent: 'space-between',
-      },
-      gutters: {
-        paddingRight: '10px',
-        paddingLeft: '10px',
       },
     },
     MuiTab: {
@@ -161,6 +148,14 @@ export default createMuiTheme({
       root: {
         width: '50px',
         height: '50px',
+      },
+    },
+    MuiToolbar: {
+      root: {
+        justifyContent: 'space-between',
+      },
+      regular: {
+        minHeight: '45px',
       },
     },
     MuiFormControl: {

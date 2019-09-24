@@ -3,10 +3,8 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { createEpicMiddleware, combineEpics } from 'redux-observable'
 
 // reducers
-// import RecentPensReducer from '../components/RecentPens/RecentPens.reducer'
-// import CreatePenReducer from '../components/CreatePen/CreatePen.reducer'
-// import DashboardReducer from '../components/Dashboard/Dashboard.reducer'
-// import AppReducer from '../components/App/App.reducer'
+import AppReducer from '../components/App/App.reducer'
+import CreateReducer from '../components/Create/Create.reducer'
 
 // epics
 // import AppEffect from '../components/App/App.effect'
@@ -18,7 +16,7 @@ import { createEpicMiddleware, combineEpics } from 'redux-observable'
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        name: 'pennelite',
+        name: 'azmoon',
       })
     : compose
 /* eslint-enable */
@@ -33,9 +31,9 @@ const epicMiddleware = createEpicMiddleware()
 const store = createStore(
   combineReducers({
     // RecentPens: RecentPensReducer,
-    // CreatePen: CreatePenReducer,
+    Create: CreateReducer,
     // Dashboard: DashboardReducer,
-    // App: AppReducer,
+    App: AppReducer,
   }),
   composeEnhancers(applyMiddleware(epicMiddleware)),
 )

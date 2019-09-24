@@ -15,7 +15,9 @@ import theme from '../helper/style/appTheme'
 import './root.scss'
 
 // Component
-import App from "../components/App/App.container";
+import App from '../components/App/App.container'
+import Home from '../components/Home/Home.container'
+import Create from '../components/Create/Create.container'
 
 const source = createMemorySource()
 const history = createHistory(source)
@@ -26,9 +28,10 @@ export default () => (
     <MuiThemeProvider theme={theme}>
       <LocationProvider history={history}>
         <App />
-        {/* <Router> */}
-          {/* <RecentPens path="/" /> */}
-        {/* </Router> */}
+        <Router>
+          <Home path="/home" />
+          <Create path="/create" />
+        </Router>
       </LocationProvider>
     </MuiThemeProvider>
   </Provider>

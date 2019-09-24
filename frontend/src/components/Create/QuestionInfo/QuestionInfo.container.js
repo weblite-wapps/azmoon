@@ -1,13 +1,27 @@
 import { connect } from 'react-redux'
 import QuestionInfo from './QuestionInfo'
-import { dispatchChangeQuestionPage } from '../Create.action'
-// import {} from './ExamInfos.action'
-// import {} from './ExamInfos.reducer'
+import {
+  dispatchChangeQuestionPage,
+  dispatchAddQuestion,
+  dispatchHandleCreateQuiz,
+} from '../Create.action'
+import {
+  questionIndexView,
+  questionsView,
+  currentStateView,
+} from '../Create.reducer'
 
 const mapDispatchToProps = () => ({
   changePage: dispatchChangeQuestionPage,
+  addQuestion: dispatchAddQuestion,
+  createQuiz: () => dispatchHandleCreateQuiz(currentStateView()),
 })
-const mapStateToProps = () => ({})
+
+const mapStateToProps = () => ({
+  index: questionIndexView(),
+  questions: questionsView(),
+})
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

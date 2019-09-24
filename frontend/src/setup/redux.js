@@ -9,9 +9,7 @@ import CreateReducer from '../components/Create/Create.reducer'
 
 // epics
 import ExamEffect from '../components/Exam/Exam.effect'
-// import CreatePensEffect from '../components/CreatePen/CreatePen.effect'
-// import RecentPensEffect from '../components/RecentPens/RecentPens.effect'
-// import DashboardEffect from '../components/Dashboard/Dashboard.effect'
+import CreateEffect from '../components/Create/Create.effect'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers =
@@ -22,7 +20,7 @@ const composeEnhancers =
     : compose
 /* eslint-enable */
 
-const rootEpic = combineEpics(ExamEffect)
+const rootEpic = combineEpics(ExamEffect, CreateEffect)
 const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(

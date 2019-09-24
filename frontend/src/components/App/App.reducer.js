@@ -1,9 +1,6 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
-import {
-  SET_IS_PARTICIPATED,
-  SET_IS_EXAM_READY,
-} from './App.action'
+import { SET_IS_PARTICIPATED, SET_IS_EXAM_READY } from './App.action'
 
 const initialState = {
   isLoading: false,
@@ -17,9 +14,11 @@ const initialState = {
 
 // const isParticipatedLens = R.lensProp('isParticipated')
 
-export const isParticipatedView = () => R.path(['App', 'isParticipated'])(getState())
+export const isParticipatedView = () =>
+  R.path(['App', 'isParticipated'])(getState())
 export const isExamReadyView = () => R.path(['App', 'isExamReady'])(getState())
-export const isExamStartedView = () => R.path(['App', 'isExamStarted'])(getState())
+export const isExamStartedView = () =>
+  R.path(['App', 'isExamStarted'])(getState())
 export const isAdminView = () => R.path(['App', 'isAdmin'])(getState())
 
 const reducer = {

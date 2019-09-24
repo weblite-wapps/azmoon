@@ -1,29 +1,24 @@
+import * as R from 'ramda'
 import { combineEpics, ofType } from 'redux-observable'
-import { pluck, tap, ignoreElements } from 'rxjs/operators'
+import { pluck, tap, ignoreElements, mergeMap } from 'rxjs/operators'
+import { HANDLE_CREATE_QUIZ, diapatchSetIsLoading } from './Create.action'
+import {
+  getRequests,
+  postRequests,
+} from '../../helper/functions/request.helper'
+const effectCreateQuiz = action$ =>
+  action$.pipe(
+    ofType(HANDLE_CREATE_QUIZ),
+    pluck('payload'),
+    tap(() => diapatchSetIsLoading(true)),
+    mergeMap(data =>
+      postRequests('/exam/new')
+        // .send({...R.dissoc('questionIndex', data),_id: wisIdView()})
+        .then()
+        .catch(),
+    ),
+    tap(console.log),
+    ignoreElements(),
+  )
 
-// const effectStartWapp = action$ =>
-//   action$.pipe(
-//     ofType(SET_DATA),
-//     pluck('payload'),
-//     tap(window.W && window.W.start()),
-//     ignoreElements(),
-//   )
-
-// const effectMenuButtonClick = action$ =>
-//   action$.pipe(
-//     ofType(CHANGE_MENU_MODE),
-//     pluck('payload'),
-//     tap(dispatchSetAnchorEl),
-//     ignoreElements(),
-//   )
-
-// const effectChangePage = action$ =>
-//   action$.pipe(
-//     ofType(SET_PAGE),
-//     pluck('payload'),
-//     tap(({ oldPage }) => oldPage === 'CreatePen' && dispatchResetState()),
-//     // tap(console.log),
-//     ignoreElements(),
-//   )
-
-export default combineEpics()
+export default combineEpics(effectCreateQuiz)

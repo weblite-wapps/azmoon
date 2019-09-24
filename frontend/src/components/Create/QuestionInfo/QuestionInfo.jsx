@@ -10,19 +10,19 @@ import FileUpload from '../../../helper/components/FileUpload/FileUpload.present
 import GroupButton from '../../../helper/components/GroupButton/GroupButton.presentational'
 // style
 import './QuestionInfo.scss'
+import { dispatchHandleCreateQuiz } from '../Create.action'
 export default class QuestionInfo extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      prob: '',
-      probAttach: '',
-      options: [],
-      correct: 0,
-      sol: '',
-      solAttach: '',
-    }
+    this.state = {}
     this.handleAddData = this.handleAddData.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.index !== props.index)
+      return { ...props.questions[props.index], index: props.index }
+    return null
   }
 
   handleAddData(type) {
@@ -42,18 +42,26 @@ export default class QuestionInfo extends Component {
     }
   }
 
+  handleChangePage(num) {
+    const { index, changePage, addQuestion } = this.props
+    if (num > 0) {
+      addQuestion(R.dissoc('index', this.state))
+    }
+    changePage(num)
+  }
+
   render() {
     const { prob, sol, questionImage, options, correct } = this.state
-    const { changePage } = this.props
+    const { index, questions, createQuiz } = this.props
     return (
       <>
         <StageManager
-          // finalStage={isFinalStage}
+          finalStage={index + 1 === questions.length}
           finalStageLabel="ایجاد آزمون"
-          // firstStage={questionIndex === 0}
-          onLeftClick={() => changePage(1)}
-          onRightClick={() => changePage(-1)}
-          onFinalStageClick={() => console.log('final')}
+          firstStage={index === 0}
+          onLeftClick={() => this.handleChangePage(1)}
+          onRightClick={() => this.handleChangePage(-1)}
+          onFinalStageClick={createQuiz}
           // stageLevel={`سوال شماره ${questionIndex + 1}`}
           stageName="آزمون"
         />
@@ -64,10 +72,7 @@ export default class QuestionInfo extends Component {
             label="سوال"
             placeholder="صورت سوال را وارد کنید"
           />
-          <FileUpload
-            id="kind"
-            onUpload={() => console.log('kind')}
-          />
+          <FileUpload id="kind" onUpload={() => console.log('kind')} />
           <TextField
             onChange={this.handleAddOption(0)}
             value={options[0]}
@@ -99,10 +104,7 @@ export default class QuestionInfo extends Component {
             label="پاسخ تشریحی"
             placeholder="پاسخ تشریحی را وارد کنید"
           />
-          <FileUpload
-            id="kind"
-            onUpload={() => console.log('kind')}
-          />
+          <FileUpload id="kind" onUpload={() => console.log('kind')} />
         </div>
       </>
     )

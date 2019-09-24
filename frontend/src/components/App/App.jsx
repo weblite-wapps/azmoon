@@ -22,7 +22,7 @@ export default class App extends Component {
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
 
-    setTimeout(dispatchHandleStartExam, 1000)
+    // setTimeout(dispatchHandleStartExam, 1000)
   }
 
   handleWappMode() {

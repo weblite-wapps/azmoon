@@ -12,7 +12,7 @@ export default class Create extends Component {
   render() {
     const { index } = this.props
     // console.log(index)
-    return !index ? <ExamInfos /> : <QuestionInfo />
+    return index === -1 ? <ExamInfos /> : <QuestionInfo />
   }
   //
 }

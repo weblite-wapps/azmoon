@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
+import { withTheme } from '@material-ui/styles';
 
 export default createMuiTheme({
   palette: {
@@ -26,8 +27,10 @@ export default createMuiTheme({
         color: '#808285',
       },
       h4: {
-        color: '#000000',
-        fontWeight: '500',
+        fontSize: '16px',
+        lineHeight: '28px',
+        fontWeight: 'Bold',
+        color: '#FFFFFF',
       },
       h5: {
         color: 'white',

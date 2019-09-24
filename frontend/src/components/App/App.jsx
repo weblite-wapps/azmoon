@@ -2,10 +2,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import Home from '../Home/Home.container'
+import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 import Result from '../Result/Result.container'
 // import Create from '../Create/Create.container'
+import Exam from '../Exam/Exam.container'
 
-import AppBar from '../../helper/components/AppBar/AppBar.presentational'
+//test
+import { dispatchHandleStartExam } from '../Exam/Exam.action'
+
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -15,7 +19,8 @@ export default class App extends Component {
 
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
-    // else this.handleNormalMode()
+
+    setTimeout(dispatchHandleStartExam, 1000)
   }
 
   handleWappMode() {
@@ -46,13 +51,11 @@ export default class App extends Component {
           examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
           remainingTime="۱۴:۱۵:۳۰"
-          userResult="۳۸.۳۳٪"
-        /> */}
-        <Result
-          userResult="۳۸.۳۳٪"
+        <Exam />
+        {/* <Result
+          userReuslt="۳۸.۳۳٪"
           examParticipantCount="۱۰ نفر"
           examMaxPercent="۹۳.۳۳٪"
-          examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
           results={[
             {
@@ -81,6 +84,8 @@ export default class App extends Component {
             },
           ]}
         />
+        /> */}
+        
       </div>
     )
   }

@@ -1,6 +1,8 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+// import Home from '../Home/Home.container'
+import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 import Exam from '../Exam/Exam.container'
 
 //test
@@ -34,9 +36,35 @@ export default class App extends Component {
   }
 
   render() {
+    const { stageLevel, stageName } = this.props
     return (
       <div>
+
+        <AppBar />
+
+        {/* <Home
+          examTitle="آزمون جامع دین‌ و زندگی"
+          examSection="درس یک تا پنج"
+          examDuration="۳۰ دقیقه"
+          examStatus="در حال برگزاری"
+          examParticipantCount="۱۰ نفر"
+          examMaxPercent="۹۳.۳۳٪"
+          examMinPercent="۱۱.۲٪"
+          examAveragePercent="۴۵٪"
+          remainingTime="۱۴:۱۵:۳۰"
+          userReuslt="۳۸.۳۳٪"
+        /> */}
+
         <Exam />
+
+        {/* <Result
+          userReuslt="۳۸.۳۳٪"
+          examParticipantCount="۱۰ نفر"
+          examMaxPercent="۹۳.۳۳٪"
+          examMinPercent="۱۱.۲٪"
+          examAveragePercent="۴۵٪"
+        /> */}
+        
       </div>
     )
   }

@@ -1,0 +1,19 @@
+.c--appBar_typo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.c--appBar_toolbar {
+  background-color: #0D2154;
+}
+
+.c--appBar_toolbar:after {
+  background: linear-gradient(to right, #CCCCCC 25%,#84CE2D 25%, #84CE2D 50%, #D65555 50%, #D65555 75%, #6DC2EF 75%);
+  position: absolute;
+  content: '';
+  height: 4px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}

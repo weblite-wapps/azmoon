@@ -18,6 +18,8 @@ import './root.scss'
 import App from '../components/App/App.container'
 import Home from '../components/Home/Home.container'
 import Create from '../components/Create/Create.container'
+import Result from '../components/Result/Result.container'
+
 
 const source = createMemorySource()
 const history = createHistory(source)
@@ -31,6 +33,7 @@ export default () => (
         <Router>
           <Home path="/home" />
           <Create path="/create" />
+          <Result path="/result" />
         </Router>
       </LocationProvider>
     </MuiThemeProvider>

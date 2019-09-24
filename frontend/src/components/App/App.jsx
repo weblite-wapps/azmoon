@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Home from '../Home/Home.container'
+import Result from '../Result/Result.container'
 import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 export default class App extends Component {
   // constructor(props) {
@@ -34,7 +35,7 @@ export default class App extends Component {
     return (
       <div>
         <AppBar />
-        <Home
+        {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"
           examDuration="۳۰ دقیقه"
@@ -45,14 +46,14 @@ export default class App extends Component {
           examAveragePercent="۴۵٪"
           remainingTime="۱۴:۱۵:۳۰"
           userReuslt="۳۸.۳۳٪"
-        />
-        {/* <Result
+        /> */}
+        <Result
           userReuslt="۳۸.۳۳٪"
           examParticipantCount="۱۰ نفر"
           examMaxPercent="۹۳.۳۳٪"
           examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
-        /> */}
+        />
       </div>
     )
   }

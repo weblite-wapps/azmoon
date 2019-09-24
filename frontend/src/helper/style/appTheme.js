@@ -19,6 +19,7 @@ export default createMuiTheme({
       body2: {
         color: '#808285',
         fontSize: '12px',
+        fontWeight: 'bold',
       },
       h2: {
         fontSize: '42px',
@@ -41,7 +42,15 @@ export default createMuiTheme({
         color: '#ccc',
         marginBottom: '-10px',
         fontSize: '8px',
-
+      },
+      subtitle1: {
+        fontSize: '12px',
+        color: 'black',
+      },
+      subtitle2: {
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: '#808285',
       },
     },
     MuiIconButton: {
@@ -146,8 +155,8 @@ export default createMuiTheme({
     },
     MuiAvatar: {
       root: {
-        width: '50px',
-        height: '50px',
+        width: '35px',
+        height: '35px',
       },
     },
     MuiToolbar: {

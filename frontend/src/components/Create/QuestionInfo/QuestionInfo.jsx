@@ -7,6 +7,7 @@ import TextArea from '../../../helper/components/Textarea/Textarea.presentationa
 import TextField from '../../../helper/components/TextField/TextField.presentational'
 import StageManager from '../../../helper/components/StageManager/main/StageManager.presentational'
 import FileUpload from '../../../helper/components/FileUpload/FileUpload.presentational'
+import GroupButton from '../../../helper/components/GroupButton/GroupButton.presentational'
 // style
 import './QuestionInfo.scss'
 export default class QuestionInfo extends Component {
@@ -42,7 +43,7 @@ export default class QuestionInfo extends Component {
   }
 
   render() {
-    const { prob, questionImage, options, correct } = this.state
+    const { prob, sol, questionImage, options, correct } = this.state
     const { changePage } = this.props
     return (
       <>
@@ -90,6 +91,17 @@ export default class QuestionInfo extends Component {
             value={options[3]}
             label="گزینه چهار"
             placeholder="متن گزینه چهارم"
+          />
+          <GroupButton />
+          <TextArea
+            onChange={this.handleAddData('sol')}
+            value={sol}
+            label="پاسخ تشریحی"
+            placeholder="پاسخ تشریحی را وارد کنید"
+          />
+          <FileUpload
+            id="kind"
+            onUpload={() => console.log('kind')}
           />
         </div>
       </>

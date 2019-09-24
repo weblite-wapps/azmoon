@@ -44,7 +44,7 @@ export default class App extends Component {
       <div>
         <AppBar />
         <Create />
-        <Exam />
+        {/* <Exam /> */}
         {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"
@@ -89,7 +89,6 @@ export default class App extends Component {
           ]}
         />
         /> */}
-        <GroupButton onChange={console.log} />
       </div>
     )
   }

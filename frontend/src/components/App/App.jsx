@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Home from '../Home/Home.container'
-
+import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -31,7 +31,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <div style={{ margin: 20 }}>
+      <div>
+        <AppBar />
         <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"

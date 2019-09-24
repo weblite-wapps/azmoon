@@ -19,7 +19,11 @@ const StageManager = ({
 }) => (
   <div className="recast--stage-manager">
     {finalStage ? (
-      <Button label={finalStageLabel} />
+      <ArrowButton
+        type="Titled"
+        title={finalStageLabel}
+        onClick={onLeftClick}
+      />
     ) : (
       <ArrowButton type="Left" onClick={onLeftClick} />
     )}

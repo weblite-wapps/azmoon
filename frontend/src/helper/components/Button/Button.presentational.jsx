@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import MuiButton from '@material-ui/core/Button'
-import { red } from '@material-ui/core/colors'
 
 
 const Button = ({
@@ -10,6 +9,7 @@ const Button = ({
   label,
   fullWidth,
   onClick,
+  ...other,
 }) => {
   return (
     <MuiButton
@@ -17,6 +17,7 @@ const Button = ({
       fullWidth={fullWidth}
       onClick={onClick}
       variant="contained"
+      {...other}
     >
         { label }
     </MuiButton>

@@ -1,21 +1,34 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
 import {
+  SET_IS_PARTICIPATED,
+  SET_IS_EXAM_READY,
 } from './App.action'
 
 const initialState = {
+  isLoading: false,
+  user: {},
+  wis: (window.W && window.W.wisId) || '110',
+  creator: false,
+  isParticipated: false,
+  isExamReady: false,
 }
 
-// const menuIsOpenLens = R.lensProp('menuIsOpen')
+// const isParticipatedLens = R.lensProp('isParticipated')
 
-// export const appUserView = () => R.path(['App', 'user'])(getState())
+export const isParticipatedView = () => R.path(['App', 'isParticipated'])(getState())
+export const isExamReadyView = () => R.path(['App', 'isExamReady'])(getState())
 
 const reducer = {
-  // [SET_DATA]: (state, { user, wisId }) => ({
-  //   ...state,
-  //   user,
-  //   wisId,
-  // }),
+  [SET_IS_PARTICIPATED]: (state, { isParticipated }) => ({
+    ...state,
+    isParticipated,
+  }),
+
+  [SET_IS_EXAM_READY]: (state, { isExamReady }) => ({
+    ...state,
+    isExamReady,
+  }),
 }
 
 export default (state = initialState, { type, payload }) =>

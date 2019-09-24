@@ -31,15 +31,26 @@ export default class App extends Component {
 
   render() {
     return (
-      <div style={{ margin: 15 }}>
+      <div style={{ margin: 20 }}>
         <Home
+          examTitle="آزمون جامع دین‌ و زندگی"
+          examSection="درس یک تا پنج"
+          examDuration="۳۰ دقیقه"
           examStatus="در حال برگزاری"
-          examParticipants="۱۰ نفر"
+          examParticipantCount="۱۰ نفر"
           examMaxPercent="۹۳.۳۳٪"
           examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
           remainingTime="۱۴:۱۵:۳۰"
+          userReuslt="۳۸.۳۳٪"
         />
+        {/* <Result
+          userReuslt="۳۸.۳۳٪"
+          examParticipantCount="۱۰ نفر"
+          examMaxPercent="۹۳.۳۳٪"
+          examMinPercent="۱۱.۲٪"
+          examAveragePercent="۴۵٪"
+        /> */}
       </div>
     )
   }

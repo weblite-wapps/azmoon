@@ -1,0 +1,24 @@
+{
+  "name": "azmoon-server",
+  "version": "0.1.0",
+  "description": "Server for Azmoon wapp",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": "https://github.com/weblite-wapps/azmoon",
+  "author": "Masoud Salehi <msk.masoud.74@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@koa/cors": "^3.0.0",
+    "@koa/router": "^8.0.1",
+    "koa": "^2.8.1",
+    "koa-bodyparser": "^4.2.1",
+    "mongoose": "^5.7.1",
+    "ramda": "^0.26.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}

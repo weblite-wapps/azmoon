@@ -1,7 +1,7 @@
 export const nameAzmoon = 'نام آزمون'
 export const mabhaseAzmoon = 'مبحث آزمون'
 export const tedadeSoal = 'تعداد سوالات'
-export const zamaneAzmoon = 'زمان آزمون - دقیقه'
+export const zamaneAzmoon = 'زمان آزمون (دقیقه)'
 export const ijadeAzmoon = 'ایجاد آزمون'
 
 export const soal = 'سوال'

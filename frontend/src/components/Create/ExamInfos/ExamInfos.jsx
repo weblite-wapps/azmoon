@@ -1,7 +1,8 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TextField from './../../../helper/components/TextField/TextField.presentational'
+import TextField from '../../../helper/components/TextField/TextField.presentational'
+import Button from '../../../helper/components/Button/Button.presentational'
 import {
   mabhaseAzmoon,
   nameAzmoon,
@@ -9,6 +10,9 @@ import {
   zamaneAzmoon,
   ijadeAzmoon,
 } from '../../../helper/functions/constants'
+// style
+import './ExamInfos.scss'
+
 export default class ExamInfos extends Component {
   constructor(props) {
     super(props)
@@ -19,11 +23,11 @@ export default class ExamInfos extends Component {
       duration: 15,
       startTime: {
         date: null,
-        hour: null,
+        time: null,
       },
       endTime: {
         date: null,
-        hour: null,
+        time: null,
       },
     }
     this.handleAddData = this.handleAddData.bind(this)
@@ -43,30 +47,42 @@ export default class ExamInfos extends Component {
     const { title, context, duration, questionCount } = this.state
     const { setInitialInfo } = this.props
     return (
-      <div>
+      <div className="c--exam-info_container">
         <TextField
           onChange={e => this.handleAddData(e, 'title')}
           value={title}
           label={nameAzmoon}
+          placeholder="نام آزمون را وارد کنید"
         />
+
         <TextField
           onChange={e => this.handleAddData(e, 'section')}
           value={context}
           label={mabhaseAzmoon}
+          placeholder="مبحث آزمون را وارد کنید"
         />
+
         <TextField
           onChange={e => this.handleAddData(e, 'questionCount')}
           value={questionCount}
           label={tedadeSoal}
+          placeholder="تعداد سوالات آزمون را وارد کنید"
         />
+
         <TextField
           onChange={e => this.handleAddData(e, 'duration')}
           value={duration}
           label={zamaneAzmoon}
+          placeholder="زمان آزمون را به دقیقه وارد کنید"
+        /> 
+
+        <Button
+          className="c--exam-info_button"
+          fullWidth
+          color="#7DD9DE"
+          label="ایجاد آزمون"
+          onClick={() => setInitialInfo(this.state)}
         />
-        <button onClick={() => setInitialInfo(this.state)}>
-          {ijadeAzmoon}
-        </button>
       </div>
     )
   }

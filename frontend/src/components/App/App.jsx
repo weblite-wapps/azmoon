@@ -6,6 +6,8 @@ import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 import Result from '../Result/Result.container'
 // import Create from '../Create/Create.container'
 import Exam from '../Exam/Exam.container'
+// components
+import ImageModal from '../../helper/components/ImageModal/ImageModal.presentational'
 
 //test
 import { dispatchHandleStartExam } from '../Exam/Exam.action'
@@ -85,7 +87,7 @@ export default class App extends Component {
           ]}
         />
         /> */}
-        
+        <ImageModal />
       </div>
     )
   }

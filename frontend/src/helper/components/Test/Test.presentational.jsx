@@ -6,27 +6,27 @@ import Typography from '@material-ui/core/Typography'
 // style
 import './Test.scss'
 
-const persianNumber = ['۱', '۲', '۳', '۴']
-
 const Test = ({
-  text,
-  opts,
-  correctOpt,
+  prob,
+  options,
+  answer,
+  chooseAnswer,
 }) => {
   return ( 
     <div style={{ color: 'black' }}>
       <div dir='auto' class='test-text'>
-        {text}
+        {prob}
       </div>
 
       <div class="test-opts">
-        {opts.map((value, index) => (
+        {options.map((value, index) => (
           <div dir="rtl" class="test-opt" key={index}>
             <div
               class="test-opt-circle"
-              style={{ background: correctOpt === index ? '#84CE2D' : '#CCCCCC' }}
+              style={{ background: answer === index ? '#84CE2D' : '#CCCCCC' }}
+              onClick={() => chooseAnswer(index)}
             >
-              {persianNumber[index]}
+              {index + 1}
             </div>
             <div class="test-opt-text"> {value} </div>
           </div>

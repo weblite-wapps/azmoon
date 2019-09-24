@@ -4,13 +4,14 @@ import {
   HANDLE_START_EXAM,
   HANDLE_DECREASE_DURATION, handleDecreaseDuration,
   dispatchDecreaseDuration,
+  dispatchStartExam,
 } from './Exam.action'
 
 const effectStartExamEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_START_EXAM),
     pluck('payload'),
-    tap(console.log),
+    tap(dispatchStartExam),
     map(handleDecreaseDuration),
   )
 

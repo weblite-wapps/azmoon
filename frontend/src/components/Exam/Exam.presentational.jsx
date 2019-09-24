@@ -10,23 +10,31 @@ import { Typography } from '@material-ui/core'
 
 const Exam = ({
   duration,
+  question,
+  questionIndex,
+  answer,
+  isFinalStage,
   increaseQuestionIndex,
-  decreaseQuestionIndex
+  decreaseQuestionIndex,
+  changeAnswerOpt,
 }) => (
   <div>
     <StageManager
-      finalStage={false}
+      finalStage={isFinalStage}
       finalStageLabel="اتمام آزمون"
+      firstStage={questionIndex === 0}
       onLeftClick={increaseQuestionIndex}
       onRightClick={decreaseQuestionIndex}
-      stageLevel="سوال شماره ۱"
+      onFinalStageClick={() => console.log('final')}
+      stageLevel={`سوال شماره ${questionIndex + 1}`}
       stageName="آزمون"
     />
     <Timer time={duration} />
     <Test
-      text=" مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز"
-      opts={['۲ جمله', '۳ جمله', '۱ جمله', '۴ جمله']}
-      correctOpt={1}
+      prob={question.prob}
+      options={question.options}
+      answer={answer}
+      chooseAnswer={changeAnswerOpt}
     />
   </div>
 )

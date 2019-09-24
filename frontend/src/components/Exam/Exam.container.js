@@ -12,7 +12,7 @@ import {
 } from './Exam.reducer'
 // actions
 import {
-  dispatchChangeAnswerOpt,
+  dispatchHandleChangeAnswerOpt,
   dispatchChangeQuestionIndex,
 } from './Exam.action'
 
@@ -28,9 +28,7 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = () => ({
   increaseQuestionIndex: () => dispatchChangeQuestionIndex(1),
   decreaseQuestionIndex: () => dispatchChangeQuestionIndex(-1),
-  changeAnswerOpt: opt => {
-    dispatchChangeAnswerOpt(opt, questionIndexView())
-  }
+  changeAnswerOpt: dispatchHandleChangeAnswerOpt,
 })
 
 export default connect(

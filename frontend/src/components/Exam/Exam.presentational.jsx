@@ -5,7 +5,6 @@ import StageManager from '../../helper/components/StageManager/main/StageManager
 import Timer from '../../helper/components/Timer/Timer.container'
 import Test from '../../helper/components/Test/Test.presentational'
 // style
-import './Exam.scss'
 import { Typography } from '@material-ui/core'
 
 const Exam = ({
@@ -25,7 +24,8 @@ const Exam = ({
       firstStage={questionIndex === 0}
       onLeftClick={increaseQuestionIndex}
       onRightClick={decreaseQuestionIndex}
-      onFinalStageClick={() => console.log('final')}
+      // TODO: handle it guys pls :)
+      onFinalStageClick={() => console.log('handle final click!!!!!')}
       stageLevel={`سوال شماره ${questionIndex + 1}`}
       stageName="آزمون"
     />

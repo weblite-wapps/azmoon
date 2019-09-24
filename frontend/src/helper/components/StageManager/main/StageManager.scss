@@ -1,0 +1,112 @@
+.recast--stage-manager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  background-color: #F0F0F0;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.stage-manager--info {
+  flex-grow: 2;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+  padding-right: 10px;
+  transition: width 3s ease;
+
+  &__stage-name {
+    font-size: 8px;
+    line-height: 13px;
+    letter-spacing: -0.06px;
+    margin: 0;
+    margin-top: 10px;
+    color: #808285;
+  }
+  &__stage {
+
+    font-size: 10px;
+    line-height: 17px;
+    letter-spacing: -0.07px;
+    margin-top: 3px;
+    color: #000000;
+    // font-weight: bold; TODO: add font first
+  }
+}
+
+/* ingredients */
+.recast--arrow-button {
+  padding: 0;
+  border: none;
+  width: auto;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  outline: none;
+  background-color: #7DD9DE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* TODO: TechnicalDebt &:foucs,&:hover for eyboard user*/
+}
+
+.recast--arrow-svg{
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  fill: white;
+  position: relative;
+}
+.recast--arrow-svg.right {
+  left: 1px;
+}
+.recast--arrow-svg.left {
+  right: 1px;
+}
+
+.arrow-button__error {
+  cursor: not-allowed;
+  &::before {
+    content: '!';
+    float: left;
+    width: 20px;
+    line-height: 20px;
+    margin-right: 5px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: red;
+    color: white;
+    /* animation */
+    animation: pop-up 0.5s cubic-bezier(0, 1.6, 1, 1);
+    animation-fill-mode: forwards;
+  }
+  & > .arrow-button--send {
+    background-color: red;
+  }
+  & > .recast--arrow-svg {
+    background-color: red;
+    margin-right: 15px;
+    fill: white;
+    border-radius: 50%;
+  }
+}
+
+.arrow-button--send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  font-size: 10px;
+  line-height: 17px;
+  letter-spacing: -0.07px;
+
+  color: white;
+  white-space: nowrap;
+}
+.arrow-button--send__error {
+  background-color: red;
+}

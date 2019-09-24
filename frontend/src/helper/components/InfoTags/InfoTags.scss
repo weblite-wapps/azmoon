@@ -1,0 +1,29 @@
+%text-placeholder {
+  text-align: center;
+  border-radius: 11px;
+  line-height: 30px !important;
+  padding: 0 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+  font-family: $font-stack;
+
+}
+.info-tags--title {
+  @extend %text-placeholder;
+  width: 30%;
+  background-color: #808285;
+  color: #fff !important;
+}
+
+.info-tags--description {
+  @extend %text-placeholder;
+  width: 70%;
+  background-color: #F0F0F0;
+  margin-right: 5px !important;
+}
+
+.info-tags {
+  display: flex;
+}

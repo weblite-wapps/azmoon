@@ -1,3 +1,4 @@
+
 html {
   overflow: auto; // for full height which applies to body tag
 }
@@ -7,9 +8,7 @@ body {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  background-color: black;
   color: white;
-  font-family: monospace; // move this to html or * or never mind :)
   overflow: hidden;
 }
 
@@ -18,6 +17,6 @@ body {
   overflow: hidden; // for sticking whole app to top
 }
 
-* {
-  box-sizing: border-box;
+button, textarea, input, p, span {
+  font-family: Iranyekan;
 }

@@ -7,10 +7,12 @@ import {
   createHistory,
   createMemorySource,
 } from '@reach/router'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 // Setup
-import './root.scss'
 import store from './redux'
 // Styles
+import theme from '../helper/style/appTheme'
+import './root.scss'
 
 // Component
 import App from "../components/App/App.container";
@@ -21,11 +23,13 @@ export const push = history.push
 
 export default () => (
   <Provider store={store}>
-    <LocationProvider history={history}>
-      <App />
-      {/* <Router> */}
-        {/* <RecentPens path="/" /> */}
-      {/* </Router> */}
-    </LocationProvider>
+    <MuiThemeProvider theme={theme}>
+      <LocationProvider history={history}>
+        <App />
+        {/* <Router> */}
+          {/* <RecentPens path="/" /> */}
+        {/* </Router> */}
+      </LocationProvider>
+    </MuiThemeProvider>
   </Provider>
 )

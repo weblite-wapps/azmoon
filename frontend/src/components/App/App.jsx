@@ -6,37 +6,35 @@ import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 import Result from '../Result/Result.container'
 import Create from '../Create/Create.container'
 import Exam from '../Exam/Exam.container'
-// components
-import GroupButton from '../../helper/components/GroupButton/GroupButton.presentational'
 
 //test
 import { dispatchHandleStartExam } from '../Exam/Exam.action'
 
 export default class App extends Component {
-  // constructor(props) {
-  //   super(props)
-  // this.handleWappMode = this.handleWappMode.bind(this)
-  // this.handleNormalMode = this.handleNormalMode.bind(this)
-  // }
+  constructor(props) {
+    super(props)
+    this.handleWappMode = this._handleWappMode.bind(this)
+    this.handleNormalMode = this._handleNormalMode.bind(this)
+  }
 
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
-
-    setTimeout(dispatchHandleStartExam, 1000)
+    else this.handleNormalMode()
+    // setTimeout(dispatchHandleStartExam, 1000)
   }
 
-  handleWappMode() {
-    const { setData } = this.props
-    window.W.loadData().then(({ user: { name } }) => {
-      setData(name, window.W.wisId)
-      // TODO SET USER AND WIS ID
+  _handleWappMode() {
+    const { setAPI, fetchInitialData } = this.props
+    window.W.loadData().then(({ creator, user }) => {
+      setAPI(creator, user)
+      fetchInitialData()
     })
   }
 
-  handleNormalMode() {
-    const { setData } = this.props
-    setData('javad', '110')
-    // console.log('normalMode :')
+  _handleNormalMode() {
+    const { setAPI, fetchInitialData } = this.props
+    setAPI(true, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
+    fetchInitialData()
   }
 
   render() {

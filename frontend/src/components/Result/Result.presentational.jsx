@@ -13,10 +13,11 @@ const Result = ({
     examMaxPercent,
     examMinPercent,
     examAveragePercent,
-    userReuslt,
+    userResult,
+    results,
 }) => (
   <div className="c--result_container">
-    <InfoTags title="نتیجه شما" description={userReuslt} />
+    <InfoTags title="نتیجه شما" description={userResult} />
     <InfoTags title="تعداد شرکت‌کننده" description={examParticipantCount} />
     <InfoTags title="بیشترین درصد" description={examMaxPercent} />
     <InfoTags title="کمترین درصد" description={examMinPercent} />
@@ -24,14 +25,14 @@ const Result = ({
 
     <Divider variant="middle" />
 
-    
-    <ResultItem
-      rank={2}
-      profileImage="kind"
-      fullName="مصطفی محسنی کبیر"
-      finishTime="چهارشنبه - ۳ : ۱۳"
-      score="۸۷٪"
-    />
+    {results.map((result, index) =>
+      <ResultItem
+        rank={index + 1}
+        profileImage={result.profileImage}
+        fullName={result.fullName}
+        finishTime={result.finishTime}
+        score={result.score}
+      />)}
   </div>
 )
 Result.propTypes = {
@@ -39,14 +40,14 @@ Result.propTypes = {
     examMaxPercent: PropTypes.string,
     examMinPercent: PropTypes.string,
     examAveragePercent: PropTypes.string,
-    userReuslt: PropTypes.string,
+    userResult: PropTypes.string,
 }
 Result.defaultProps = {
     examParticipantCount: '-',
     examMaxPercent: '-',
     examMinPercent: '-',
     examAveragePercent: '-',
-    userReuslt: '-',
+    userResult: '-',
 }
 
 export default Result

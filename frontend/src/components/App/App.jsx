@@ -1,8 +1,10 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Home from '../Home/Home.container'
+// import Home from '../Home/Home.container'
 import Result from '../Result/Result.container'
+// import Create from '../Create/Create.container'
+
 import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 export default class App extends Component {
   // constructor(props) {
@@ -31,7 +33,6 @@ export default class App extends Component {
   }
 
   render() {
-    const { stageLevel, stageName } = this.props
     return (
       <div>
         <AppBar />
@@ -45,14 +46,40 @@ export default class App extends Component {
           examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
           remainingTime="۱۴:۱۵:۳۰"
-          userReuslt="۳۸.۳۳٪"
+          userResult="۳۸.۳۳٪"
         /> */}
         <Result
-          userReuslt="۳۸.۳۳٪"
+          userResult="۳۸.۳۳٪"
           examParticipantCount="۱۰ نفر"
           examMaxPercent="۹۳.۳۳٪"
           examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
+          results={[
+            {
+              profileImage: 'kind',
+              fullName: 'مصطفی محسنی کبیر',
+              finishTime: 'چهارشنبه - ۱۳:۳۰',
+              score: '۱۰۰٪',
+            },
+            {
+              profileImage: 'kind',
+              fullName: 'مسعود محمدصالحی',
+              finishTime: 'چهارشنبه - ۱۱:۳۰',
+              score: '۹۰٪',
+            },
+            {
+              profileImage: 'kind',
+              fullName: 'علی عسگری',
+              finishTime: 'چهارشنبه - ۱۲:۳۰',
+              score: '۸۰٪',
+            },
+            {
+              profileImage: 'kind',
+              fullName: 'فرزین پزشکی',
+              finishTime: 'سه‌شنبه - ۱۷:۳۰',
+              score: '۶۰٪',
+            },
+          ]}
         />
       </div>
     )

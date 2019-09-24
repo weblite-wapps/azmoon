@@ -26,7 +26,8 @@ const router = new Router()
       const exam = await getExamById(ctx.params.id)
       ctx.body = exam
       if (!exam.result) analyze(exam._id)
-    } catch {
+    } catch(e) {
+      console.log(e)
       ctx.status = 400 // Bad Request
     }
   })

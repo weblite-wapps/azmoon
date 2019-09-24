@@ -6,6 +6,8 @@ import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 import Result from '../Result/Result.container'
 import Create from '../Create/Create.container'
 import Exam from '../Exam/Exam.container'
+// components
+import GroupButton from '../../helper/components/GroupButton/GroupButton.presentational'
 
 //test
 import { dispatchHandleStartExam } from '../Exam/Exam.action'
@@ -87,7 +89,7 @@ export default class App extends Component {
           ]}
         />
         /> */}
-        
+        <GroupButton onChange={console.log} />
       </div>
     )
   }

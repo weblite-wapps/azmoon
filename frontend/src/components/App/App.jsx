@@ -6,6 +6,8 @@ import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 import Result from '../Result/Result.container'
 import Create from '../Create/Create.container'
 import Exam from '../Exam/Exam.container'
+// components
+import GroupButton from '../../helper/components/GroupButton/GroupButton.presentational'
 
 //test
 import { dispatchHandleStartExam } from '../Exam/Exam.action'
@@ -42,7 +44,7 @@ export default class App extends Component {
       <div>
         <AppBar />
         <Create />
-        <Exam />
+        {/* <Exam /> */}
         {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"
@@ -87,7 +89,6 @@ export default class App extends Component {
           ]}
         />
         /> */}
-        
       </div>
     )
   }

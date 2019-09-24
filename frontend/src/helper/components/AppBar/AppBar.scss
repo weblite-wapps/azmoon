@@ -9,11 +9,11 @@
 }
 
 .c--appBar_toolbar:after {
-  background: linear-gradient(to right, #CCCCCC 25%,#84CE2D 25%, #84CE2D 50%, #D65555 50%, #D65555 75%, #6DC2EF 75%);
-  position: absolute;
   content: '';
+  position: absolute;
   height: 4px;
   right: 0;
   left: 0;
   bottom: 0;
+  background: linear-gradient(to right, #EDCB19 25%,#84CE2D 25%, #84CE2D 50%, #D65555 50%, #D65555 75%, #6DC2EF 75%);
 }

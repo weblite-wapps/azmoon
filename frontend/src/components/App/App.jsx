@@ -36,9 +36,9 @@ export default class App extends Component {
           finalStage
           onLeftClick={() => console.log('kind')}
           onRightClick={() => console.log('shit')}
-          stageLevel="سوال شماره ۱"
+          stageLevel="سوال شماره ۲"
           stageName="نام آزمون"
-          finalStageLabel="انمام ازمون"
+          finalStageLabel="اتمام آزمون"
         />
       </div>
     )

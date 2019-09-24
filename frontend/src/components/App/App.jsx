@@ -41,6 +41,7 @@ export default class App extends Component {
     return (
       <div>
         <AppBar />
+        <Exam />
         {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"

@@ -2,14 +2,14 @@ import * as R from 'ramda'
 import { getState } from '../../setup/redux'
 import { 
   START_EXAM,
-  DECREASE_DURATION,
+  CHANGE_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
 } from './Exam.action'
 
 const initialState = {
   questionCount: 5,
-  duration: 15 * 60,
+  duration: 60 * 1,
   questionIndex: 0,
   questions: [
     {
@@ -49,14 +49,23 @@ const reducer = {
     answers: R.times(() => ({ opt: undefined, dur: 0 }), state.questionCount),
   }),
 
-  [DECREASE_DURATION]: state => ({
+  [CHANGE_DURATION]: state => ({
     ...state,
     duration: state.duration - 1, 
+    answers: R.adjust(
+      state.questionIndex,
+      ({ dur, opt }) => ({ opt, dur: dur + 1 }),
+      state.answers,
+    ),
   }),
 
-  [CHANGE_ANSWER_OPT]: (state, { opt, index }) => ({
+  [CHANGE_ANSWER_OPT]: (state, { opt }) => ({
     ...state,
-    answers: R.adjust(index, answer => ({ ...answer, opt }), state.answers),
+    answers: R.adjust(
+      state.questionIndex,
+      answer => ({ ...answer, opt }),
+      state.answers,
+    ),
   }),
 
   [CHANGE_QUESTION_INDEX]: (state, { number }) => ({

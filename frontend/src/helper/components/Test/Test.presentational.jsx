@@ -11,6 +11,7 @@ const Test = ({
   options,
   answer,
   chooseAnswer,
+  correctAnswer,
 }) => {
   return ( 
     <div style={{ color: 'black' }}>
@@ -23,8 +24,14 @@ const Test = ({
           <div dir="rtl" class="test-opt" key={index}>
             <div
               class="test-opt-circle"
-              style={{ background: answer === index ? '#84CE2D' : '#CCCCCC' }}
-              onClick={() => chooseAnswer(index)}
+              style={{
+                background: correctAnswer === index ? '#84CE2D' :
+                            ((correctAnswer != null) && answer) === index ? '#D65555' :
+                            ((correctAnswer == null) && answer) === index ? '#84CE2D' :
+                            '#CCCCCC'
+                            
+              }}
+              onClick={() => (correctAnswer != null) || chooseAnswer(index)}
             >
               {index + 1}
             </div>

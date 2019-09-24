@@ -16,7 +16,7 @@ const defaultStyle = {
   minWidth: 25,
 }
 
-const ArrowButton = ({ type, hasError, title }) => {
+const ArrowButton = ({ type, hasError, title, ...other }) => {
   const Comp = assets[type]
 
   const buttonCN = cns(
@@ -26,6 +26,7 @@ const ArrowButton = ({ type, hasError, title }) => {
 
   return (
     <Fab
+      {...other}
       className={buttonCN}
       size="small"
       variant="extended"

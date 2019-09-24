@@ -11,19 +11,19 @@
 }
 .info-tags--title {
   @extend %text-placeholder;
-  width: 40%;
+  width: 45%;
   background-color: #808285;
   color: #fff !important;
 }
 
 .info-tags--description {
   @extend %text-placeholder;
-  width: 60%;
+  width: 55%;
   background-color: #F0F0F0;
   margin-right: 5px !important;
 }
 
 .info-tags {
   display: flex;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }

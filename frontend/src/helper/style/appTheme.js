@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
+import { withTheme } from '@material-ui/styles';
 
 export default createMuiTheme({
   palette: {
@@ -19,14 +20,17 @@ export default createMuiTheme({
       body2: {
         color: '#808285',
         fontSize: '12px',
+        fontWeight: 'bold',
       },
       h2: {
         fontSize: '42px',
         color: '#808285',
       },
       h4: {
-        color: '#000000',
-        fontWeight: '500',
+        fontSize: '16px',
+        lineHeight: '28px',
+        fontWeight: 'Bold',
+        color: '#FFFFFF',
       },
       h5: {
         color: 'white',
@@ -41,7 +45,15 @@ export default createMuiTheme({
         color: '#ccc',
         marginBottom: '-10px',
         fontSize: '8px',
-
+      },
+      subtitle1: {
+        fontSize: '12px',
+        color: 'black',
+      },
+      subtitle2: {
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: '#808285',
       },
     },
     MuiIconButton: {
@@ -146,8 +158,8 @@ export default createMuiTheme({
     },
     MuiAvatar: {
       root: {
-        width: '50px',
-        height: '50px',
+        width: '35px',
+        height: '35px',
       },
     },
     MuiToolbar: {

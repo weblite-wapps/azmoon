@@ -1,8 +1,15 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Home from '../Home/Home.container'
+// import Home from '../Home/Home.container'
 import AppBar from '../../helper/components/AppBar/AppBar.presentational'
+import Result from '../Result/Result.container'
+// import Create from '../Create/Create.container'
+import Exam from '../Exam/Exam.container'
+
+//test
+import { dispatchHandleStartExam } from '../Exam/Exam.action'
+
 export default class App extends Component {
   // constructor(props) {
   //   super(props)
@@ -12,7 +19,8 @@ export default class App extends Component {
 
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
-    // else this.handleNormalMode()
+
+    setTimeout(dispatchHandleStartExam, 1000)
   }
 
   handleWappMode() {
@@ -30,11 +38,10 @@ export default class App extends Component {
   }
 
   render() {
-    const { stageLevel, stageName } = this.props
     return (
       <div>
         <AppBar />
-        <Home
+        {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"
           examSection="درس یک تا پنج"
           examDuration="۳۰ دقیقه"
@@ -44,15 +51,41 @@ export default class App extends Component {
           examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
           remainingTime="۱۴:۱۵:۳۰"
-          userReuslt="۳۸.۳۳٪"
-        />
+        <Exam />
         {/* <Result
           userReuslt="۳۸.۳۳٪"
           examParticipantCount="۱۰ نفر"
           examMaxPercent="۹۳.۳۳٪"
-          examMinPercent="۱۱.۲٪"
           examAveragePercent="۴۵٪"
+          results={[
+            {
+              profileImage: 'kind',
+              fullName: 'مصطفی محسنی کبیر',
+              finishTime: 'چهارشنبه - ۱۳:۳۰',
+              score: '۱۰۰٪',
+            },
+            {
+              profileImage: 'kind',
+              fullName: 'مسعود محمدصالحی',
+              finishTime: 'چهارشنبه - ۱۱:۳۰',
+              score: '۹۰٪',
+            },
+            {
+              profileImage: 'kind',
+              fullName: 'علی عسگری',
+              finishTime: 'چهارشنبه - ۱۲:۳۰',
+              score: '۸۰٪',
+            },
+            {
+              profileImage: 'kind',
+              fullName: 'فرزین پزشکی',
+              finishTime: 'سه‌شنبه - ۱۷:۳۰',
+              score: '۶۰٪',
+            },
+          ]}
+        />
         /> */}
+        
       </div>
     )
   }

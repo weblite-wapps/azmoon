@@ -4,10 +4,11 @@ import { createEpicMiddleware, combineEpics } from 'redux-observable'
 
 // reducers
 import AppReducer from '../components/App/App.reducer'
+import ExamReducer from '../components/Exam/Exam.reducer'
 import CreateReducer from '../components/Create/Create.reducer'
 
 // epics
-// import AppEffect from '../components/App/App.effect'
+import ExamEffect from '../components/Exam/Exam.effect'
 // import CreatePensEffect from '../components/CreatePen/CreatePen.effect'
 // import RecentPensEffect from '../components/RecentPens/RecentPens.effect'
 // import DashboardEffect from '../components/Dashboard/Dashboard.effect'
@@ -21,18 +22,13 @@ const composeEnhancers =
     : compose
 /* eslint-enable */
 
-const rootEpic = combineEpics()
-// AppEffect,
-// CreatePensEffect,
-// DashboardEffect,
-// RecentPensEffect,
+const rootEpic = combineEpics(ExamEffect)
 const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(
   combineReducers({
-    // RecentPens: RecentPensReducer,
+    Exam: ExamReducer,
     Create: CreateReducer,
-    // Dashboard: DashboardReducer,
     App: AppReducer,
   }),
   composeEnhancers(applyMiddleware(epicMiddleware)),

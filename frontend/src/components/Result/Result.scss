@@ -1,0 +1,29 @@
+%text-placeholder {
+    text-align: center;
+    border-radius: 11px;
+    line-height: 30px !important;
+    padding: 0 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
+    white-space: nowrap;
+  }
+  .result--title {
+    @extend %text-placeholder;
+    width: 40%;
+    background-color: #808285;
+    color: #fff !important;
+  }
+  
+  .result--description {
+    @extend %text-placeholder;
+    width: 60%;
+    background-color: #F0F0F0;
+    margin-right: 5px !important;
+  }
+  
+  .result {
+    display: flex;
+    margin: 10px 0px;
+  }

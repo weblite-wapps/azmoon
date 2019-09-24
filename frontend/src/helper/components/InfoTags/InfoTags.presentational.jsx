@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 // components
 import Typography from '@material-ui/core/Typography'
 // style
@@ -10,5 +11,10 @@ const InfoTags = ({ title, description }) => (
     <Typography className="info-tags--title">{title}</Typography>
   </div>
 )
+
+InfoTags.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+}
 
 export default InfoTags

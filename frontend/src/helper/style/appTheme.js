@@ -99,7 +99,8 @@ export default createMuiTheme({
       },
       middle: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        margin: '10px 0px',
+        marginLeft: '5px',
+        marginRight: '5px',
       },
       inset: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',

@@ -26,7 +26,7 @@ import {
   getRequest,
   postRequest,
 } from '../../helper/functions/request.helper'
-
+import { push } from '../../setup/redux'
 
 const initialFetchEpic = action$ =>
   action$.pipe(
@@ -58,6 +58,7 @@ const initialFetchEpic = action$ =>
       }
       return true
     }),
+    tap(() => push('/home')),
     tap(() => dispatchSetIsExamReady(true)),
     tap(({ exam }) => isWithinRange(
       new Date(), new Date(exam.startTime), new Date(exam.endTime)

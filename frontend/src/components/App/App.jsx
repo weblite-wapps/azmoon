@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import Home from '../Home/Home.container'
 import AppBar from '../../helper/components/AppBar/AppBar.presentational'
-import Result from '../Result/Result.container'
-import Create from '../Create/Create.container'
-import Exam from '../Exam/Exam.container'
+// import Result from '../Result/Result.container'
+// import Create from '../Create/Create.container'
+// import Exam from '../Exam/Exam.container'
 
 //test
-import { dispatchHandleStartExam } from '../Exam/Exam.action'
+// import { dispatchHandleStartExam } from '../Exam/Exam.action'
 
 export default class App extends Component {
   constructor(props) {
@@ -41,7 +41,6 @@ export default class App extends Component {
     return (
       <div>
         <AppBar />
-        <Create />
         {/* <Exam /> */}
         {/* <Home
           examTitle="آزمون جامع دین‌ و زندگی"

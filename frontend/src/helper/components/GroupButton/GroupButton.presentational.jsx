@@ -47,7 +47,7 @@ const GroupButton = ({ items, onChange }) => {
   }
 
   return (
-    <div className={classes.groupButton}>
+    <div className={classes.groupButton} dir="rtl">
       {items.map((item, index) => (
         <Button
           key={item.id}

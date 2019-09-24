@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 // third-party-packages
 import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
 import Zoom from '@material-ui/core/Zoom'
 // helper
 import { cns, ab } from '../../functions/utils.helper'

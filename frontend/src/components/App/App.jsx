@@ -1,7 +1,7 @@
 // modules
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import StageManager from '../../helper/components/StageManager/main/StageManager.presentational'
+import FileUpload from '../../helper/components/FileUpload/FileUpload.presentational'
 
 export default class App extends Component {
   // constructor(props) {
@@ -32,13 +32,10 @@ export default class App extends Component {
   render() {
     return (
       <div style={{ margin: 15 }}>
-        <StageManager
-          finalStage
-          onLeftClick={() => console.log('kind')}
-          onRightClick={() => console.log('shit')}
-          stageLevel="سوال شماره ۲"
-          stageName="نام آزمون"
-          finalStageLabel="اتمام آزمون"
+        <FileUpload
+          uploadLabel="انتخاب فایل"
+          id="question-file-upload"
+          onUpload={() => alert('file uploaded')}
         />
       </div>
     )

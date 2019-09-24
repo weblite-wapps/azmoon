@@ -14,3 +14,10 @@ export const cns = (...args) => {
   }
   return classNames.trimEnd()
 }
+
+/* === Logical helpers === */
+
+/** onEnterPress */
+const onEnterPress = (handler = Function.prototype) => ({ key }) => {
+  if (key === 'Enter') handler()
+}

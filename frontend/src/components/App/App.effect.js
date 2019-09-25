@@ -15,17 +15,10 @@ import {
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
-import {
-  wisView,
-  isAdminView,
-  userIdView,
-} from './App.reducer'
+import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
 // import { mapToUsername } from './Home.helper'
-import {
-  getRequest,
-  postRequest,
-} from '../../helper/functions/request.helper'
+import { getRequest, postRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
 
 const initialFetchEpic = action$ =>
@@ -34,13 +27,12 @@ const initialFetchEpic = action$ =>
     tap(() => dispatchSetIsLoading(true)),
     mergeMap(() =>
       Promise.all([
-        getRequest(`/exam/${wisView()}`)
-          .on(
-            'error',
-            err =>
-              err.status !== 304 &&
-              dispatchChangeSnackbarStage('Server disconnected!'),
-          ),
+        getRequest(`/exam/${wisView()}`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
         getRequest(`/result`)
           .query({ stdId: userIdView(), examId: wisView() })
           .on(
@@ -49,7 +41,7 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-      ]).then(([exam, result]) => ({ exam, result }))
+      ]).then(([exam, result]) => ({ exam: exam, result: result })),
     ),
     filter(({ exam }) => {
       if (!exam) {
@@ -59,11 +51,20 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
+    tap(console.log),
     tap(() => dispatchSetIsExamReady(true)),
-    tap(({ exam }) => isWithinRange(
-      new Date(), new Date(exam.startTime), new Date(exam.endTime)
-    ) && dispatchSetIsExamStarted(true)),
-    tap(({ exam }) => new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true)),
+    tap(
+      ({ exam }) =>
+        isWithinRange(
+          new Date(),
+          new Date(exam.startTime),
+          new Date(exam.endTime),
+        ) && dispatchSetIsExamStarted(true),
+    ),
+    tap(
+      ({ exam }) =>
+        new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
+    ),
     filter(() => !isAdminView()),
     tap(({ result }) => result && dispatchSetIsParticipated(true)),
     ignoreElements(),
@@ -98,7 +99,4 @@ const initialFetchEpic = action$ =>
 //     .do(() => dispatchSetIsLoading(false))
 //     .ignoreElements()
 
-
-export default combineEpics(
-  initialFetchEpic,
-)
+export default combineEpics(initialFetchEpic)

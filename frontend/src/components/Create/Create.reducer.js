@@ -8,17 +8,11 @@ import {
 
 const initialState = {
   title: '',
-  context: '',
+  section: '',
   questionCount: '',
   duration: '',
-  startTime: {
-    date: null,
-    hour: null,
-  },
-  endTime: {
-    date: null,
-    hour: null,
-  },
+  startTime: null,
+  endTime: null,
   questions: [],
   questionIndex: -1,
 }
@@ -41,7 +35,7 @@ const reducer = {
       () => ({
         prob: '',
         probAttach: '',
-        options: [],
+        options: ['', '', '', ''],
         correct: 0,
         sol: '',
         solAttach: '',

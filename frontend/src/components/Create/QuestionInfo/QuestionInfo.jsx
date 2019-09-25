@@ -34,10 +34,8 @@ export default class QuestionInfo extends Component {
 
   handleAddOption(index) {
     return ({ target: { value } }) => {
-      var arr = this.state.options
-      arr[index] = value
       this.setState({
-        options: arr,
+        options: R.update(index, value, this.state.options),
       })
     }
   }

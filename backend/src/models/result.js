@@ -49,6 +49,9 @@ module.exports.startExam = ({ stdId, exam }) =>
         Result.create({ exam, stdId, answers: [], startTime: new Date() })
     );
 
+module.exports.endExam = ({ stdId, exam }) =>
+  Result.updateOne({ stdId, exam }, { $set: { endTime: new Date() } }).exec()
+
 // TODO: check `startTime: { $gt: now }, endTime: { $lt: now }` for exam
 module.exports.saveOption = ({ stdId, examId: exam, index, opt }) =>
   Result.updateOne(

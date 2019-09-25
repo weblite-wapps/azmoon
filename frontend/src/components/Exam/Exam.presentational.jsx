@@ -20,9 +20,10 @@ const Exam = ({
   changeAnswerOpt,
   isExamFinished,
   title,
+  onReturn,
 }) => (
   <>
-    <Tabs onReturn={onReturn} single />
+    {isExamFinished && <Tabs onReturn={onReturn} single />}
 
     <div>
       <StageManager
@@ -41,6 +42,7 @@ const Exam = ({
         prob={question.prob}
         sol={question.sol}
         options={question.options}
+        stats={question.stats}
         answer={answer}
         level="سخت"
         averageTime="1:35"
@@ -55,8 +57,8 @@ const Exam = ({
 
 Exam.propTypes = {
     duration: PropTypes.number.isRequired,
-    showAnalysis: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
+    onReturn: PropTypes.func.isRequired,
 }
 Exam.defaultProps = {}
 

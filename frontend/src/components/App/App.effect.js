@@ -15,6 +15,7 @@ import {
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { dispatchSetExamInfo } from '../Home/Home.action'
+import { dispatchSetExamDuration } from '../Exam/Exam.action'
 // views
 import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
@@ -67,8 +68,8 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
-    tap(console.log),
     tap(({ exam, participantsCount, result }) => dispatchSetExamInfo({ ...exam, participantsCount, result })),
+    tap(({ exam }) => dispatchSetExamDuration(exam.duration * 60)),
     tap(() => dispatchSetIsExamReady(true)),
     tap(
       ({ exam }) =>

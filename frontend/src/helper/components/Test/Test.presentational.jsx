@@ -65,7 +65,7 @@ const Test = ({
 }
 
 Test.propTypes = {
-  showAnalysis: PropTypes.isRequired,
+  showAnalysis: PropTypes.bool.isRequired,
 }
 
 Test.defaultProps = {

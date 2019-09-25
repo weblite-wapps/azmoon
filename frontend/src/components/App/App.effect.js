@@ -1,5 +1,4 @@
 // modules
-import * as R from 'ramda'
 import 'rxjs'
 import { isWithinRange } from 'date-fns'
 import { ofType, combineEpics } from 'redux-observable'
@@ -18,7 +17,7 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
 // import { mapToUsername } from './Home.helper'
-import { getRequest, postRequest } from '../../helper/functions/request.helper'
+import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
 
 const initialFetchEpic = action$ =>

@@ -55,7 +55,7 @@ export default class ExamInfos extends Component {
 
   render() {
     const { title, section, duration, questionCount, hasError } = this.state
-    const { setInitialInfo } = this.props
+
     return (
       <div className="c--exam-info_container">
         <TextField

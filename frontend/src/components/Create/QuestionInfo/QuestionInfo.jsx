@@ -10,7 +10,7 @@ import FileUpload from '../../../helper/components/FileUpload/FileUpload.present
 import GroupButton from '../../../helper/components/GroupButton/GroupButton.presentational'
 // style
 import './QuestionInfo.scss'
-import { dispatchHandleCreateQuiz } from '../Create.action'
+
 export default class QuestionInfo extends Component {
   constructor(props) {
     super(props)

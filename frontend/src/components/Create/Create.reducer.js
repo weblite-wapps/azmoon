@@ -7,7 +7,6 @@ import {
 } from './Create.action'
 
 const initialState = {
-  startTime: '',
   section: '',
   questionCount: '',
   duration: '',

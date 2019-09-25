@@ -9,6 +9,7 @@ import store, { history } from './redux'
 // Styles
 import theme from '../helper/style/appTheme'
 import './root.scss'
+import './fonts/fonts.scss'
 // Component
 import App from '../components/App/App.container'
 import Snackbar from '../components/Snackbar/Snackbar.container.react'

@@ -68,7 +68,6 @@ export default class QuestionInfo extends Component {
   render() {
     const { prob, sol, questionImage, options, correct, hasError } = this.state
     const { index, questions, createQuiz } = this.props
-    console.log('hasError ', hasError)
     return (
       <>
         <StageManager

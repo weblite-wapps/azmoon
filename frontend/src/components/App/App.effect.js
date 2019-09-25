@@ -27,14 +27,12 @@ const initialFetchEpic = action$ =>
     tap(() => dispatchSetIsLoading(true)),
     mergeMap(() =>
       Promise.all([
-        getRequest(`/exam/${wisView()}`)
-          .on(
-            'error',
-            err =>
-              err.status !== 304 &&
-              dispatchChangeSnackbarStage('Server disconnected!'),
-          )
-          .then(x => console.log(x) || x),
+        getRequest(`/exam/${wisView()}`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
         getRequest(`/result`)
           .query({ stdId: userIdView(), examId: wisView() })
           .on(
@@ -54,7 +52,7 @@ const initialFetchEpic = action$ =>
     }),
     tap(() => push('/home')),
     tap(({ exam }) => dispatchSetExamInfo(exam)),
-    tap(console.log),
+    // tap(console.log),
     tap(() => dispatchSetIsExamReady(true)),
     tap(
       ({ exam }) =>

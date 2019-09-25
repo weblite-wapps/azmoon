@@ -36,14 +36,14 @@ export default class App extends Component {
 
   _handleNormalMode() {
     const { setAPI, fetchInitialData } = this.props
-    setAPI(true, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
+    setAPI(false, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
     fetchInitialData()
   }
 
   render() {
     return (
       <div>
-        <AppBar />        
+        <AppBar />
         {/* <Exam /> */}
       </div>
     )

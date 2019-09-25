@@ -40,3 +40,8 @@ export const HANDLE_CHANGE_DURATION = 'HANDLE_CHANGE_DURATION'
 export const handlechangeDuration = createAction(HANDLE_CHANGE_DURATION)
 export const dispatchHandleChangeDuration = (...args) =>
   dispatch(handlechangeDuration(...args))
+
+export const SET_USER_START_TIME = 'SET_USER_START_TIME'
+export const handleUserStartTime = createAction(SET_USER_START_TIME)
+export const dispatchHandleUserStartTime = (...args) =>
+  dispatch(handleUserStartTime(...args))

@@ -16,7 +16,7 @@ const Test = ({
   correctAnswer,
   showAnalysis,
 }) => {
-  return ( 
+  return (
     <div style={{ color: 'black' }}>
       <div dir="auto" className="test-text">
         {prob}
@@ -50,7 +50,7 @@ const Test = ({
       {showAnalysis && (
         <>
           <Divider variant="middle" />
-          <div dir='auto' className='test-text'>
+          <div dir="auto" className="test-text">
             {sol}
           </div>
         </>
@@ -59,13 +59,9 @@ const Test = ({
   )
 }
 
-<<<<<<< HEAD
-Test.propTypes = {}
-=======
 Test.propTypes = {
   showAnalysis: PropTypes.isRequired,
 }
->>>>>>> master
 
 Test.defaultProps = {}
 

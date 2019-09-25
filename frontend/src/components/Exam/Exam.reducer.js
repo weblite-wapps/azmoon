@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   questionCount: 5,
-  duration: 10 * 1,
+  duration: 1200 * 1,
   questionIndex: 0,
   questions: [
     {
@@ -71,14 +71,15 @@ const reducer = {
     ),
   }),
 
-  [CHANGE_ANSWER_OPT]: (state, { opt }) => ({
-    ...state,
-    answers: R.adjust(
-      state.questionIndex,
-      answer => ({ ...answer, opt }),
-      state.answers,
-    ),
-  }),
+  [CHANGE_ANSWER_OPT]: (state, { opt }) =>
+    console.log('aa', opt) || {
+      ...state,
+      answers: R.adjust(
+        state.questionIndex,
+        answer => ({ ...answer, opt }),
+        state.answers,
+      ),
+    },
 
   [CHANGE_QUESTION_INDEX]: (state, { number }) => ({
     ...state,

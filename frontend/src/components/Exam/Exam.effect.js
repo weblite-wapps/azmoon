@@ -1,5 +1,12 @@
 import { ofType, combineEpics } from 'redux-observable'
-import { tap, delay, map, pluck, mergeMap } from 'rxjs/operators'
+import {
+  tap,
+  delay,
+  map,
+  pluck,
+  mergeMap,
+  ignoreElements,
+} from 'rxjs/operators'
 import {
   HANDLE_START_EXAM,
   HANDLE_CHANGE_DURATION,
@@ -8,6 +15,7 @@ import {
   changeAnswerOpt,
   dispatchChangeDuration,
   dispatchStartExam,
+  SET_USER_START_TIME,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView } from './Exam.reducer'
@@ -47,14 +55,14 @@ const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
     pluck('payload', 'opt'),
-    // tap(console.log),
+    tap(console.log),
     map(changeAnswerOpt),
     pluck('payload', 'opt'),
     map(opt => ({ opt, index: questionIndexView() })),
     tap(console.log),
     mergeMap(data =>
-      postRequest('/kind')
-        .query({ ...data, wisId: wisView(), creatorId: userIdView() })
+      postRequest('/result/saveOption')
+        .send({ ...data, examId: wisView(), stdId: userIdView() })
         .on(
           'error',
           err =>
@@ -62,12 +70,31 @@ const effectChangeAnswerOptEpic = action$ =>
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
     ),
-
     tap(console.log),
+    ignoreElements(),
+  )
+
+const effectSetUserStartTime = action$ =>
+  action$.pipe(
+    ofType(SET_USER_START_TIME),
+    tap(console.log),
+    mergeMap(() =>
+      postRequest('/result/start')
+        .send({ exam: wisView(), stdId: userIdView() })
+        .on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+    ),
+    tap(console.log),
+    ignoreElements(),
   )
 
 export default combineEpics(
   effectStartExamEpic,
   effectDecreaseDurationEpic,
   effectChangeAnswerOptEpic,
+  effectSetUserStartTime,
 )

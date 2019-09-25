@@ -1,4 +1,5 @@
 // modules
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import Home from '../Home/Home.container'
@@ -43,7 +44,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <AppBar />        
+        <AppBar />
         {/* <Exam /> */}
       </div>
     )

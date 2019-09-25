@@ -32,13 +32,17 @@ const Test = ({
             <div
               className="c--test_opt-circle"
               style={{
-                background: correctAnswer === index ? '#84CE2D' :
-                            ((correctAnswer != null) && answer) === index ? '#D65555' :
-                            ((correctAnswer == null) && answer) === index ? '#84CE2D' :
-                            '#CCCCCC'
-                            
+                cursor: 'pointer',
+                background:
+                  correctAnswer === index
+                    ? '#84CE2D'
+                    : (correctAnswer != null && answer) === index
+                    ? '#D65555'
+                    : (correctAnswer == null && answer) === index
+                    ? '#84CE2D'
+                    : '#CCCCCC',
               }}
-              onClick={() => (correctAnswer != null) || chooseAnswer(index)}
+              onClick={() => correctAnswer != null || chooseAnswer(index)}
             >
               {index + 1}
             </div>
@@ -68,7 +72,6 @@ Test.propTypes = {
   showAnalysis: PropTypes.bool.isRequired,
 }
 
-Test.defaultProps = {
-}
+Test.defaultProps = {}
 
 export default Test

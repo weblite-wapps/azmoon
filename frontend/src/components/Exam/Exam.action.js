@@ -7,19 +7,29 @@ export const dispatchStartExam = (...args) => dispatch(startExam(...args))
 
 export const HANDLE_START_EXAM = 'HANDLE_START_EXAM'
 export const handleStartExam = createAction(HANDLE_START_EXAM)
-export const dispatchHandleStartExam = (...args) => dispatch(handleStartExam(...args))
+export const dispatchHandleStartExam = (...args) =>
+  dispatch(handleStartExam(...args))
 
 export const CHANGE_QUESTION_INDEX = 'CHANGE_QUESTION_INDEX'
-export const changeQuestionIndex = createAction(CHANGE_QUESTION_INDEX, number => ({ number }))
-export const dispatchChangeQuestionIndex = (...args) => dispatch(changeQuestionIndex(...args))
+export const changeQuestionIndex = createAction(
+  CHANGE_QUESTION_INDEX,
+  number => ({ number }),
+)
+export const dispatchChangeQuestionIndex = (...args) =>
+  dispatch(changeQuestionIndex(...args))
 
 export const CHANGE_ANSWER_OPT = 'CHANGE_ANSWER_OPT'
-export const changeAnswerOpt = createAction(CHANGE_ANSWER_OPT, (opt, index) => ({ opt, index }))
-export const dispatchChangeAnswerOpt = (...args) => dispatch(changeAnswerOpt(...args))
+export const changeAnswerOpt = createAction(CHANGE_ANSWER_OPT, opt => ({ opt }))
+export const dispatchChangeAnswerOpt = (...args) =>
+  dispatch(changeAnswerOpt(...args))
 
 export const HANDLE_CHANGE_ANSWER_OPT = 'HANDLE_CHANGE_ANSWER_OPT'
-export const handleChangeAnswerOpt = createAction(HANDLE_CHANGE_ANSWER_OPT, opt => ({ opt }))
-export const dispatchHandleChangeAnswerOpt = (...args) => dispatch(handleChangeAnswerOpt(...args))
+export const handleChangeAnswerOpt = createAction(
+  HANDLE_CHANGE_ANSWER_OPT,
+  opt => ({ opt }),
+)
+export const dispatchHandleChangeAnswerOpt = (...args) =>
+  dispatch(handleChangeAnswerOpt(...args))
 
 export const CHANGE_EXAM_DURATION = 'CHANGE_EXAM_DURATION'
 export const changeExamDuration = createAction(CHANGE_EXAM_DURATION)

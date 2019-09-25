@@ -46,6 +46,11 @@ module.exports.getExamById = (id, populate = true) => {
     : query;
 };
 
+module.exports.getExamTimesById = id =>
+  Exam.findById(id)
+    .select("startTime endTime")
+    .lean();
+
 module.exports.getExamsByCreator = creatorId =>
   Exam.find({ creatorId })
     .sort("-createdAt")

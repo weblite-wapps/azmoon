@@ -19,7 +19,10 @@ export const dispatchChangeQuestionIndex = (...args) =>
   dispatch(changeQuestionIndex(...args))
 
 export const CHANGE_ANSWER_OPT = 'CHANGE_ANSWER_OPT'
-export const changeAnswerOpt = createAction(CHANGE_ANSWER_OPT, opt => ({ opt }))
+export const changeAnswerOpt = createAction(
+  CHANGE_ANSWER_OPT,
+  (opt, index) => ({ opt, index }),
+)
 export const dispatchChangeAnswerOpt = (...args) =>
   dispatch(changeAnswerOpt(...args))
 

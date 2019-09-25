@@ -16,6 +16,7 @@ import {
   dispatchChangeDuration,
   dispatchStartExam,
   SET_USER_START_TIME,
+  dispatchChangeAnswerOpt,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView } from './Exam.reducer'
@@ -55,10 +56,17 @@ const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
     pluck('payload', 'opt'),
+    tap(() => console.log(111)),
     tap(console.log),
     map(changeAnswerOpt),
     pluck('payload', 'opt'),
-    map(opt => ({ opt, index: questionIndexView() })),
+    tap(dispatchChangeAnswerOpt),
+    map(opt => ({
+      opt,
+      index: questionIndexView(),
+      stdId: userIdView(),
+      exam: wisView(),
+    })),
     tap(console.log),
     mergeMap(data =>
       postRequest('/result/saveOption')

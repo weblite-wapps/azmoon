@@ -72,7 +72,7 @@ const reducer = {
   }),
 
   [CHANGE_ANSWER_OPT]: (state, { opt }) =>
-    console.log('aa', opt) || {
+    console.log('opt ', opt) || {
       ...state,
       answers: R.adjust(
         state.questionIndex,

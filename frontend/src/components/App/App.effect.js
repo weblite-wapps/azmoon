@@ -13,6 +13,7 @@ import {
   FETCH_INITIAL_DATA,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
+import { dispatchSetExamInfo } from '../Home/Home.action'
 // views
 import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
@@ -52,6 +53,7 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
+    tap(({ exam }) => dispatchSetExamInfo(exam)),
     tap(console.log),
     tap(() => dispatchSetIsExamReady(true)),
     tap(

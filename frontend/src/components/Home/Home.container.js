@@ -8,6 +8,7 @@ import {
   isParticipatedView,
   isExamReadyView,
   isExamStartedView,
+  isExamFinishedView,
   isAdminView,
 } from '../App/App.reducer'
 import {
@@ -16,30 +17,29 @@ import {
   durationView,
   endTimeView,
   questionCountView,
-  startTimeView,
-} from '../Create/Create.reducer'
+} from '../Home/Home.reducer'
 import { getStatus, getRemainingTime } from './Home.helper'
 // actions
-// import { dispatchChangeTab, dispatchHandleDragTask } from './Home.action'
+import { dispatchEffectOpenExam, dispatchEffectCloseExam } from './Home.action'
 
 const mapStateToProps = () => ({
   isParticipated: isParticipatedView(),
   isExamReady: isExamReadyView(),
   isExamStarted: isExamStartedView(),
+  isExamFinished: isExamFinishedView(),
   isAdmin: isAdminView(),
 
   title: titleView(),
   section: sectionView(),
   duration: durationView(),
-  status: getStatus(startTimeView(), endTimeView()),
+  status: getStatus(), 
   questionCount: questionCountView(),
   remainingTime: getRemainingTime(endTimeView()),
 })
 
 const mapDispatchToProps = () => ({
-  //   changeTab: dispatchChangeTab,
-  //   dragTask: dispatchHandleDragTask,
-  //   onLoadMore: (skipLength, tabIndex) => dispatchLoadMore(skipLength, tabIndex),
+  onOpenExam: dispatchEffectOpenExam,
+  onCloseExam: dispatchEffectCloseExam,
 })
 
 export default connect(

@@ -12,6 +12,7 @@ const Home = ({
     isParticipated,
     isExamReady,
     isExamStarted,
+    isExamFinished,
     isAdmin,
 
     title,
@@ -54,7 +55,7 @@ const Home = ({
       </>
       }
 
-      <InfoTags title="زمان باقیمانده" description={remainingTime} />
+      {!isExamFinished && <InfoTags title="زمان باقیمانده" description={remainingTime} />}
       {isParticipated && !isAdmin && <InfoTags title="نتیجه شما" description={userResult} />}
     </div>
 
@@ -80,6 +81,7 @@ Home.propTypes = {
     isParticipated: PropTypes.bool.isRequired,
     isExamReady: PropTypes.bool.isRequired,
     isExamStarted: PropTypes.bool.isRequired,
+    isExamFinished: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
 
     title: PropTypes.string.isRequired,

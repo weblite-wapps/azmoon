@@ -5,6 +5,7 @@ import { createMemoryHistory } from 'history'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 // reducers
 import AppReducer from '../components/App/App.reducer'
+import HomeReducer from '../components/Home/Home.reducer'
 import ExamReducer from '../components/Exam/Exam.reducer'
 import CreateReducer from '../components/Create/Create.reducer'
 import SnackbarReducer from '../components/Snackbar/Snackbar.reducer'
@@ -34,10 +35,11 @@ const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(
   combineReducers({
+    App: AppReducer,
+    Home: HomeReducer,
     Exam: ExamReducer,
     Create: CreateReducer,
     Snackbar: SnackbarReducer,
-    App: AppReducer,
     router: connectRouter(history),
   }),
   composeEnhancers(applyMiddleware(middleware, epicMiddleware)),

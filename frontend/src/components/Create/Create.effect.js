@@ -6,6 +6,7 @@ import { pluck, tap, ignoreElements, mergeMap } from 'rxjs/operators'
 import { HANDLE_CREATE_EXAM } from './Create.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { dispatchSetIsLoading, dispatchSetIsExamReady } from '../App/App.action'
+import { dispatchSetExamInfo } from '../Home/Home.action'
 // helpers
 import { postRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
@@ -18,6 +19,7 @@ const effectCreateExam = action$ =>
     ofType(HANDLE_CREATE_EXAM),
     pluck('payload'),
     tap(() => dispatchSetIsLoading(true)),
+    tap(data => dispatchSetExamInfo(data)),
     mergeMap(data =>
       postRequest('/exam/new')
         .send({

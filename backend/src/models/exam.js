@@ -51,10 +51,13 @@ module.exports.getExamsByCreator = creatorId =>
     .select('-analyzing')
     .lean()
 
-module.exports.isCreator = (examId, creatorId) =>
-  Exam.find({ examId, creatorId })
+module.exports.isCreatorOfExam = (examId, creatorId) =>
+  Exam.find({ _id: examId, creatorId })
     .select('-_id examId')
     .lean()
+
+module.exports.updateExam = (examId, updated) =>
+  Exam.updateOne({ _id: examId }, { $set: updated }).exec()
 
 const MAX_ANALYSIS_TIME = 60 * 1000
 module.exports.startExamAnalysis = examId =>
@@ -67,7 +70,7 @@ module.exports.startExamAnalysis = examId =>
       ],
     },
     result: { $exists: false },
-    endTime: { $lt: new Date() }
+    endTime: { $lt: new Date() },
   }, { analyzing: Date.now() })
     .populate('questions', 'correct')
 

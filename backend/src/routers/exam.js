@@ -1,7 +1,7 @@
 const Router = require('@koa/router')
 const R = require('ramda')
 
-const { createExam, getExamById } = require('../models/exam')
+const { createExam, getExamById, updateExam } = require('../models/exam')
 const { getParticipantsCount } = require('../models/result')
 const { shouldAnalyze, analyze } = require('../helper')
 
@@ -29,6 +29,14 @@ const router = new Router()
   })
   .get('/:id/count', async ctx => {
     ctx.body = await getParticipantsCount(ctx.params.id)
+  })
+  .post('/:id/start', async ctx => {
+    await updateExam(ctx.params.id, { startTime: new Date()})
+    ctx.status = 200
+  })
+  .post('/:id/end', async ctx => {
+    await updateExam(ctx.params.id, { endTime: new Date()})
+    ctx.status = 200
   })
 
 module.exports = router

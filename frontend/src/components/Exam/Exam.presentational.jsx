@@ -8,7 +8,6 @@ import Tabs from '../../helper/components/Tabs/Tabs.presentational'
 // style
 import './Exam.scss'
 
-
 const Exam = ({
   duration,
   question,
@@ -21,6 +20,7 @@ const Exam = ({
   isExamFinished,
   title,
   onReturn,
+  finalStageClick,
 }) => (
   <>
     {isExamFinished && <Tabs onReturn={onReturn} single />}
@@ -32,8 +32,7 @@ const Exam = ({
         firstStage={questionIndex === 0}
         onLeftClick={increaseQuestionIndex}
         onRightClick={decreaseQuestionIndex}
-       // TODO: handle it guys pls :)
-        onFinalStageClick={() => console.log('handle final click!!!!!')}
+        onFinalStageClick={finalStageClick}
         stageLevel={`سوال شماره ${questionIndex + 1}`}
         stageName={title}
       />

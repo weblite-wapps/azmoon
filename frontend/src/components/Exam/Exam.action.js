@@ -19,7 +19,10 @@ export const dispatchChangeQuestionIndex = (...args) =>
   dispatch(changeQuestionIndex(...args))
 
 export const CHANGE_ANSWER_OPT = 'CHANGE_ANSWER_OPT'
-export const changeAnswerOpt = createAction(CHANGE_ANSWER_OPT, opt => ({ opt }))
+export const changeAnswerOpt = createAction(
+  CHANGE_ANSWER_OPT,
+  (opt, index) => ({ opt, index }),
+)
 export const dispatchChangeAnswerOpt = (...args) =>
   dispatch(changeAnswerOpt(...args))
 
@@ -42,3 +45,14 @@ export const dispatchSetExamDuration = (...args) => dispatch(setExamDuration(...
 export const HANDLE_CHANGE_EXAM_DURATION = 'HANDLE_CHANGE_EXAM_DURATION'
 export const handleChangeExamDuration = createAction(HANDLE_CHANGE_EXAM_DURATION)
 export const dispatchHandleChangeExamDuration = (...args) => dispatch(handleChangeExamDuration(...args))
+
+
+export const SET_USER_START_TIME = 'SET_USER_START_TIME'
+export const handleUserStartTime = createAction(SET_USER_START_TIME)
+export const dispatchHandleUserStartTime = (...args) =>
+  dispatch(handleUserStartTime(...args))
+
+export const HANDLE_FINAL_STAGE_CLICK = 'HANDLE_FINAL_STAGE_CLICK'
+export const handleFinalStageClick = createAction(HANDLE_FINAL_STAGE_CLICK)
+export const dispatchHandleFinalStageClick = (...args) =>
+  dispatch(handleFinalStageClick(...args))

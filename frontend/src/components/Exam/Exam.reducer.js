@@ -8,7 +8,7 @@ import {
 } from './Exam.action'
 
 const initialState = {
-  questionCount: 5,
+  questionCount: 2,
   duration: 1200 * 1,
   questionIndex: 0,
   questions: [
@@ -72,7 +72,7 @@ const reducer = {
   }),
 
   [CHANGE_ANSWER_OPT]: (state, { opt }) =>
-    console.log('aa', opt) || {
+    console.log('opt ', opt) || {
       ...state,
       answers: R.adjust(
         state.questionIndex,

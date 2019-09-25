@@ -12,6 +12,7 @@ import {
 } from '../../../helper/functions/constants'
 // style
 import './ExamInfos.scss'
+import { onExamError } from '../../../helper/functions/utils.helper'
 
 export default class ExamInfos extends Component {
   constructor(props) {
@@ -48,17 +49,22 @@ export default class ExamInfos extends Component {
   }
 
   handleSetInitialInfo(data) {
-    const { setInitialInfo } = this.props
+    const { setInitialInfo, openSnackbar } = this.props
+
     setInitialInfo(data)
-    // if (!hasErro(data)) console.log(data)
+    // if (!onExamError(data)) setInitialInfo(data)
+    // else {
+    //   this.setState({ hasError: onExamError(data) })
+    //   openSnackbar('همه ی موارد * دار را وارد کنید')
+    // }
   }
 
   render() {
     const { title, section, duration, questionCount, hasError } = this.state
-    const { setInitialInfo } = this.props
     return (
       <div className="c--exam-info_container">
         <TextField
+          required
           hasError={hasError.title}
           onChange={e => this.handleAddData(e, 'title')}
           value={title}
@@ -73,6 +79,9 @@ export default class ExamInfos extends Component {
           placeholder="مبحث آزمون را وارد کنید"
         />
         <TextField
+          required
+          type={'number'}
+          hasError={hasError.questionCount}
           onChange={e => this.handleAddData(e, 'questionCount')}
           value={questionCount}
           label={tedadeSoal}
@@ -80,6 +89,9 @@ export default class ExamInfos extends Component {
         />
 
         <TextField
+          required
+          type={'number'}
+          hasError={hasError.duration}
           onChange={e => this.handleAddData(e, 'duration')}
           value={duration}
           label={zamaneAzmoon}
@@ -87,10 +99,13 @@ export default class ExamInfos extends Component {
         />
 
         <TimePicker
+          required
           onChange={this.handleAddDate('startTime')}
           label="موعد شروع آزمون"
         />
         <TimePicker
+          required
+          hasError={hasError.endTime}
           onChange={this.handleAddDate('endTime')}
           label="موعد پایان آزمون"
         />

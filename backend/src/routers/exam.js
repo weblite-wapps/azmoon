@@ -11,6 +11,7 @@ const router = new Router()
       return ctx.status = 400
 
     ctx.body = await createExam(R.pick([
+      '_id',
       'title',
       'section',
       'questions',

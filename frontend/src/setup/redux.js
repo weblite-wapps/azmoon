@@ -11,6 +11,7 @@ import CreateReducer from '../components/Create/Create.reducer'
 import SnackbarReducer from '../components/Snackbar/Snackbar.reducer'
 // epics
 import AppEffect from '../components/App/App.effect'
+import HomeEffect from '../components/Home/Home.effect'
 import ExamEffect from '../components/Exam/Exam.effect'
 import CreateEffect from '../components/Create/Create.effect'
 
@@ -30,7 +31,7 @@ const composeEnhancers =
     : compose
 /* eslint-enable */
 
-const rootEpic = combineEpics(AppEffect, ExamEffect, CreateEffect)
+const rootEpic = combineEpics(AppEffect, HomeEffect, ExamEffect, CreateEffect)
 const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(

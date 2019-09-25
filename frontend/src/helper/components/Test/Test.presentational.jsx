@@ -15,15 +15,15 @@ const Test = ({
 }) => {
   return ( 
     <div style={{ color: 'black' }}>
-      <div dir='auto' class='test-text'>
+      <div dir='auto' className='test-text'>
         {prob}
       </div>
 
-      <div class="test-opts">
+      <div className="test-opts">
         {options.map((value, index) => (
-          <div dir="rtl" class="test-opt" key={index}>
+          <div dir="rtl" className="test-opt" key={index}>
             <div
-              class="test-opt-circle"
+              className="test-opt-circle"
               style={{
                 background: correctAnswer === index ? '#84CE2D' :
                             ((correctAnswer != null) && answer) === index ? '#D65555' :
@@ -35,7 +35,7 @@ const Test = ({
             >
               {index + 1}
             </div>
-            <div class="test-opt-text"> {value} </div>
+            <div className="test-opt-text"> {value} </div>
           </div>
         ))}
       </div>

@@ -55,7 +55,7 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, onUpload }) => 
   //   else setOutput(`${length} files`)
   // }
 
-  const [name, setName] = React.useState('')
+  const [name] = React.useState('')
 
   const classes = useStyles()
   return (

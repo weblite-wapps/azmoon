@@ -19,6 +19,9 @@ export const cns = (...args) => {
 /* === Logical helpers === */
 
 /** onEnterPress */
+// const onEnterPress = (handler = Function.prototype) => ({ key }) => {
+//   if (key === 'Enter') handler()
+// }
 const onEnterPress = (handler = Function.prototype) => ({ key }) => {
   if (key === 'Enter') handler()
 }

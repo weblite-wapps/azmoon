@@ -1,17 +1,25 @@
+// modules
 import * as R from 'ramda'
 import { combineEpics, ofType } from 'redux-observable'
 import { pluck, tap, ignoreElements, mergeMap } from 'rxjs/operators'
-import { HANDLE_CREATE_QUIZ, diapatchSetIsLoading } from './Create.action'
-import { postRequest } from '../../helper/functions/request.helper'
-import { wisView, userIdView } from '../App/App.reducer'
+// actions
+import { HANDLE_CREATE_EXAM } from './Create.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
+import { dispatchSetIsLoading, dispatchSetIsExamReady } from '../App/App.action'
+import { dispatchSetExamInfo } from '../Home/Home.action'
+// helpers
+import { postRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
-const effectCreateQuiz = action$ =>
+// views
+import { wisView, userIdView } from '../App/App.reducer'
+
+
+const effectCreateExam = action$ =>
   action$.pipe(
-    ofType(HANDLE_CREATE_QUIZ),
+    ofType(HANDLE_CREATE_EXAM),
     pluck('payload'),
-    tap(() => diapatchSetIsLoading(true)),
-    tap(console.log),
+    tap(() => dispatchSetIsLoading(true)),
+    tap(data => dispatchSetExamInfo(data)),
     mergeMap(data =>
       postRequest('/exam/new')
         .send({
@@ -27,9 +35,9 @@ const effectCreateQuiz = action$ =>
         )
         .catch(),
     ),
-    // tap(() => push('/'))
-    tap(console.log),
+    tap(() => dispatchSetIsExamReady(true)),
+    tap(() => push('/home')),
     ignoreElements(),
   )
 
-export default combineEpics(effectCreateQuiz)
+export default combineEpics(effectCreateExam)

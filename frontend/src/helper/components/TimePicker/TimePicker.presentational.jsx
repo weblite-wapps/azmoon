@@ -6,14 +6,12 @@ import { Typography } from '@material-ui/core'
 import JalaliUtils from '@date-io/jalaali'
 import {
   TimePicker,
-  DateTimePicker,
   DatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers'
-import { cns, ab } from '../../functions/utils.helper'
+import { cns } from '../../functions/utils.helper'
 
 jMoment.loadPersian({ dialect: 'persian-modern', usePersianDigits: true })
-// helper
 
 // style
 const useStyles = makeStyles(theme => ({
@@ -78,10 +76,11 @@ const PersianExample = ({ label, onChange }) => {
             <TimePicker
               className={classes.datePicker}
               clearable
+              disablePast
               okLabel="تأیید"
               cancelLabel="لغو"
               clearLabel="پاک کردن"
-              ampm={false}
+              ampm={false} 
               labelFunc={date => (date ? date.format('hh:mm') : '')}
               value={selectedDate}
               onChange={changeHandler}
@@ -94,6 +93,7 @@ const PersianExample = ({ label, onChange }) => {
             <DatePicker
               className={classes.datePicker}
               clearable
+              disablePast
               okLabel="تأیید"
               cancelLabel="لغو"
               clearLabel="پاک کردن"

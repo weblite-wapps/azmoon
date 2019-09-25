@@ -8,9 +8,11 @@ import TextField from '../../../helper/components/TextField/TextField.presentati
 import StageManager from '../../../helper/components/StageManager/main/StageManager.presentational'
 import FileUpload from '../../../helper/components/FileUpload/FileUpload.presentational'
 import GroupButton from '../../../helper/components/GroupButton/GroupButton.presentational'
+// helpers
+import { onQuestionError } from '../../../helper/functions/utils.helper'
 // style
 import './QuestionInfo.scss'
-import { onQuestionError } from '../../../helper/functions/utils.helper'
+
 export default class QuestionInfo extends Component {
   constructor(props) {
     super(props)

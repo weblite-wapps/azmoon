@@ -23,10 +23,6 @@ export const ADD_QUESTION = 'ADD_QUESTION'
 export const addQuestion = createAction(ADD_QUESTION)
 export const dispatchAddQuestion = args => dispatch(addQuestion(args))
 
-export const HANDLE_CREATE_QUIZ = 'HANDLE_CREATE_QUIZ'
-export const handleCreateQuiz = createAction(HANDLE_CREATE_QUIZ)
-export const dispatchHandleCreateQuiz = args => dispatch(handleCreateQuiz(args))
-
-export const SET_IS_LOADING = 'SET_IS_LOADING'
-export const setIsLoading = createAction(SET_IS_LOADING)
-export const diapatchSetIsLoading = args => dispatch(setIsLoading(args))
+export const HANDLE_CREATE_EXAM = 'HANDLE_CREATE_QUIZ'
+export const handleCreateExam = createAction(HANDLE_CREATE_EXAM)
+export const dispatchHandleCreateExam = args => dispatch(handleCreateExam(args))

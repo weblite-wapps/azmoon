@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 // third party packages
 // components
-import Button from '../../Button/Button.presentational'
 import StageManagerInfo from '../components/StageManagerInfo/StageManagerInfo.presentational'
 import ArrowButton from '../components/ArrowButton/ArrowButton.presentational'
 // style

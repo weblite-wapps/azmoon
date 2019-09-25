@@ -1,5 +1,4 @@
 // modules
-import * as R from 'ramda'
 import 'rxjs'
 import { isWithinRange } from 'date-fns'
 import { ofType, combineEpics } from 'redux-observable'
@@ -14,11 +13,12 @@ import {
   FETCH_INITIAL_DATA,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
+import { dispatchSetExamInfo } from '../Home/Home.action'
 // views
 import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
 // import { mapToUsername } from './Home.helper'
-import { getRequest, postRequest } from '../../helper/functions/request.helper'
+import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
 
 const initialFetchEpic = action$ =>
@@ -53,6 +53,7 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
+    tap(({ exam }) => dispatchSetExamInfo(exam)),
     tap(console.log),
     tap(() => dispatchSetIsExamReady(true)),
     tap(

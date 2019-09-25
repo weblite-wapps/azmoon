@@ -51,3 +51,38 @@ Result.defaultProps = {
 }
 
 export default Result
+
+
+{/* <Result
+    userReuslt="۳۸.۳۳٪"
+    examParticipantCount="۱۰ نفر"
+    examMaxPercent="۹۳.۳۳٪"
+    examAveragePercent="۴۵٪"
+    results={[
+      {
+        profileImage: 'kind',
+        fullName: 'مصطفی محسنی کبیر',
+        finishTime: 'چهارشنبه - ۱۳:۳۰',
+        score: '۱۰۰٪',
+      },
+      {
+        profileImage: 'kind',
+        fullName: 'مسعود محمدصالحی',
+        finishTime: 'چهارشنبه - ۱۱:۳۰',
+        score: '۹۰٪',
+      },
+      {
+        profileImage: 'kind',
+        fullName: 'علی عسگری',
+        finishTime: 'چهارشنبه - ۱۲:۳۰',
+        score: '۸۰٪',
+      },
+      {
+        profileImage: 'kind',
+        fullName: 'فرزین پزشکی',
+        finishTime: 'سه‌شنبه - ۱۷:۳۰',
+        score: '۶۰٪',
+      },
+    ]}
+  />
+  /> */}

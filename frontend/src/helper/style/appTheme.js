@@ -1,8 +1,8 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
-import { withTheme } from '@material-ui/styles'
 
 export default createMuiTheme({
+  direction: 'rtl',
   palette: {
     darkGray: 'rgb(128, 130, 133)',
     primary: grey,

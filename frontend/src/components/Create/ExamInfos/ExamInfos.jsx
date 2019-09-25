@@ -51,12 +51,12 @@ export default class ExamInfos extends Component {
   handleSetInitialInfo(data) {
     const { setInitialInfo, openSnackbar } = this.props
 
-    // setInitialInfo(data)
-    if (!onExamError(data)) setInitialInfo(data)
-    else {
-      this.setState({ hasError: onExamError(data) })
-      openSnackbar('همه ی موارد * دار را وارد کنید')
-    }
+    setInitialInfo(data)
+    // if (!onExamError(data)) setInitialInfo(data)
+    // else {
+    //   this.setState({ hasError: onExamError(data) })
+    //   openSnackbar('همه ی موارد * دار را وارد کنید')
+    // }
   }
 
   render() {

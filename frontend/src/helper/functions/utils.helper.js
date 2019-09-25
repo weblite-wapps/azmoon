@@ -38,14 +38,12 @@ export const onExamError = ({ title, questionCount, duration, endTime }) => {
 }
 
 export const onQuestionError = ({ prob, options }) => {
-  const arr = R.times(() => false, 4)
   if (!!prob && !R.includes('', options)) {
     return false
   } else if (!prob) {
-    return { prob: true, options: arr }
+    return { prob: true }
   } else {
     return {
-      prob: false,
       options: R.update(
         R.findIndex(R.equals(''))(options),
         true,

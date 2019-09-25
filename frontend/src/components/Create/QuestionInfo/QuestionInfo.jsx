@@ -91,7 +91,7 @@ export default class QuestionInfo extends Component {
           <FileUpload id="kind" onUpload={() => console.log('kind')} />
           <TextField
             required
-            hasError={hasError.options[0]}
+            hasError={hasError.options && hasError.options[0]}
             onChange={this.handleAddOption(0)}
             value={options[0]}
             label="گزینه یک"
@@ -99,7 +99,7 @@ export default class QuestionInfo extends Component {
           />
           <TextField
             required
-            hasError={hasError.options[1]}
+            hasError={hasError.options && hasError.options[1]}
             onChange={this.handleAddOption(1)}
             value={options[1]}
             label="گزینه دو"
@@ -107,7 +107,7 @@ export default class QuestionInfo extends Component {
           />
           <TextField
             required
-            hasError={hasError.options[2]}
+            hasError={hasError.options && hasError.options[2]}
             onChange={this.handleAddOption(2)}
             value={options[2]}
             label="گزینه سه"
@@ -115,7 +115,7 @@ export default class QuestionInfo extends Component {
           />
           <TextField
             required
-            hasError={hasError.options[3]}
+            hasError={hasError.options && hasError.options[3]}
             onChange={this.handleAddOption(3)}
             value={options[3]}
             label="گزینه چهار"

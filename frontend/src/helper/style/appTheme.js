@@ -2,7 +2,6 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
 
 export default createMuiTheme({
-  direction: 'rtl',
   palette: {
     darkGray: 'rgb(128, 130, 133)',
     primary: grey,
@@ -199,18 +198,6 @@ export default createMuiTheme({
     MuiButton: {
       contained: {
         borderRadius: '11px',
-      },
-      '&:hover': {
-        backgroundColor: '#0069d9',
-        borderColor: '#0062cc',
-      },
-      '&:active': {
-        boxShadow: 'none',
-        backgroundColor: '#0062cc',
-        borderColor: '#005cbf',
-      },
-      '&:focus': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
       },
     },
   },

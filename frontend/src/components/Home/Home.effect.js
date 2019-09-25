@@ -1,60 +1,116 @@
+// modules
 import { ofType, combineEpics } from 'redux-observable'
-import { tap, delay, map, pluck, ignoreElements } from 'rxjs/operators'
+import { tap, mergeMap, ignoreElements } from 'rxjs/operators'
+// actions
 import {
+  EFFECT_EDIT_EXAM,
   EFFECT_OPEN_EXAM,
   EFFECT_CLOSE_EXAM,
   EFFECT_START_EXAM,
+  EFFECT_SHOW_RESULTS,
+  EFFECT_SHOW_ANSWER_SHEET,
 } from './Home.action'
-// view
-// import { durationView } from './Exam.reducer'
+import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
+// views
+import { wisView } from '../App/App.reducer'
 // helpers
 import { push } from '../../setup/redux'
+import { postRequest } from '../../helper/functions/request.helper'
+import { dispatchSetIsExamFinished, dispatchSetIsExamStarted } from '../App/App.action'
 
 
-// const effectOpenExam = action$ =>
-//   action$.pipe(
-//     ofType(EFFECT_OPEN_EXAM),
-//     pluck('payload'),
-//     tap(dispatchStartExam),
-//     map(handlechangeDuration),
-//   )
+const effectEditExam = action$ =>
+  action$.pipe(
+    ofType(EFFECT_EDIT_EXAM),
+    // mergeMap(() =>
+    //   postRequest(`/exam/${wisView()}/start`)
+    //     .on(
+    //       'error',
+    //       err =>
+    //         err.status !== 304 &&
+    //         dispatchChangeSnackbarStage('Server disconnected!'),
+    //     )
+    //   ),
+    tap(() => console.log('edit exam effect')),
+    ignoreElements(),
+  )
 
-// const effectCloseExam = action$ =>
-//   action$.pipe(
-//     ofType(EFFECT_CLOSE_EXAM),
-//     pluck('payload'),
-//     tap(dispatchChangeDuration),
-//     delay(1000),
-//     map(() => {
-//       if (durationView() < 1) {
-//         // TODO: handle it guys pls ;)
-//         console.log('do something after time ends!!!!')
-//         return { type: 'NOTHING' }
-//       } else return handlechangeDuration()
-//     }),
-//   )
+const effectOpenExam = action$ =>
+  action$.pipe(
+    ofType(EFFECT_OPEN_EXAM),
+    mergeMap(() =>
+      postRequest(`/exam/${wisView()}/start`)
+        .on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        )
+      ),
+    tap(() => dispatchSetIsExamStarted(true)),
+    ignoreElements(),
+  )
+
+const effectCloseExam = action$ =>
+  action$.pipe(
+    ofType(EFFECT_CLOSE_EXAM),
+    mergeMap(() =>
+      postRequest(`/exam/${wisView()}/end`)
+        .on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        )
+      ),
+    tap(() => dispatchSetIsExamFinished(true)),
+    ignoreElements(),
+  )
 
 const effectStartExam = action$ =>
   action$.pipe(
     ofType(EFFECT_START_EXAM),
-    pluck('payload'),
-    tap(console.log),
     tap(() => push('/exam')),
     ignoreElements(),
   )
 
-// const effectChangeAnswerOptEpic = action$ =>
-//   action$.pipe(
-//     ofType(HANDLE_CHANGE_ANSWER_OPT),
-//     pluck('payload', 'opt'),
-//     map(changeAnswerOpt),
-//     // TODO: handle it guys pls :)
-//     tap(() => console.log('send result to server!!!!!')),
-//   )
+const effectShowResults = action$ =>
+  action$.pipe(
+    ofType(EFFECT_SHOW_RESULTS),
+    // mergeMap(() =>
+    //   postRequest(`/exam/${wisView()}/start`)
+    //     .on(
+    //       'error',
+    //       err =>
+    //         err.status !== 304 &&
+    //         dispatchChangeSnackbarStage('Server disconnected!'),
+    //     )
+    //   ),
+    tap(() => push('/result')),
+    ignoreElements(),
+  )
 
+const effectShowAnswerSheet = action$ =>
+  action$.pipe(
+    ofType(EFFECT_SHOW_ANSWER_SHEET),
+    // mergeMap(() =>
+    //   postRequest(`/exam/${wisView()}/start`)
+    //     .on(
+    //       'error',
+    //       err =>
+    //         err.status !== 304 &&
+    //         dispatchChangeSnackbarStage('Server disconnected!'),
+    //     )
+    //   ),
+    tap(() => push('/exam')),
+    ignoreElements(),
+  )
 
 export default combineEpics(
-    // effectOpenExam,
-    // effectCloseExam,
-    effectStartExam,
+  effectEditExam,
+  effectOpenExam,
+  effectCloseExam,
+  effectStartExam,
+  effectShowResults,
+  effectShowAnswerSheet,
 )

@@ -8,6 +8,11 @@ export const dispatchSetExamInfo = (...args) =>
 
 
 // effects
+export const EFFECT_EDIT_EXAM = 'EFFECT_EDIT_EXAM'
+export const effectEditExam = createAction(EFFECT_EDIT_EXAM)
+export const dispatchEffectEditExam = (...args) =>
+  dispatch(effectEditExam(...args))
+
 export const EFFECT_OPEN_EXAM = 'EFFECT_OPEN_EXAM'
 export const effectOpenExam = createAction(EFFECT_OPEN_EXAM)
 export const dispatchEffectOpenExam = (...args) =>
@@ -22,3 +27,13 @@ export const EFFECT_START_EXAM = 'EFFECT_START_EXAM'
 export const effectStartExam = createAction(EFFECT_START_EXAM)
 export const dispatchEffectStartExam = (...args) =>
   dispatch(effectStartExam(...args))
+
+export const EFFECT_SHOW_RESULTS = 'EFFECT_SHOW_RESULTS'
+export const effectShowResults = createAction(EFFECT_SHOW_RESULTS)
+export const dispatchEffectShowResults = (...args) =>
+  dispatch(effectShowResults(...args))
+
+export const EFFECT_SHOW_ANSWER_SHEET = 'EFFECT_SHOW_ANSWER_SHEET'
+export const effectShowAnswerSheet = createAction(EFFECT_SHOW_ANSWER_SHEET)
+export const dispatchEffectShowAnswerSheet = (...args) =>
+  dispatch(effectShowAnswerSheet(...args))

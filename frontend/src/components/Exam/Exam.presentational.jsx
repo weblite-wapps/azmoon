@@ -5,13 +5,15 @@ import StageManager from '../../helper/components/StageManager/main/StageManager
 import Timer from '../../helper/components/Timer/Timer.container'
 import Test from '../../helper/components/Test/Test.presentational'
 // style
-import { Typography } from '@material-ui/core'
+import './Exam.scss'
+
 
 const Exam = ({
   duration,
   question,
   questionIndex,
   answer,
+  sol,
   isFinalStage,
   increaseQuestionIndex,
   decreaseQuestionIndex,
@@ -32,9 +34,11 @@ const Exam = ({
     <Timer time={duration} />
     <Test
       prob={question.prob}
+      sol={question.sol}
       options={question.options}
       answer={answer}
       chooseAnswer={changeAnswerOpt}
+      // showAnalysis={isAdmin || isExamFinished}
     />
   </div>
 )

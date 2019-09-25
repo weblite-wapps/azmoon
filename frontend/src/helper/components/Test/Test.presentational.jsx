@@ -1,13 +1,22 @@
 // modules
 import React from 'react'
 import PropTypes from 'prop-types'
+import Divider from '@material-ui/core/Divider'
 // components
 import Typography from '@material-ui/core/Typography'
 // style
 import './Test.scss'
 
-const Test = ({ prob, options, answer, chooseAnswer, correctAnswer }) => {
-  return (
+const Test = ({
+  prob,
+  sol,
+  options,
+  answer,
+  chooseAnswer,
+  correctAnswer,
+  showAnalysis,
+}) => {
+  return ( 
     <div style={{ color: 'black' }}>
       <div dir="auto" className="test-text">
         {prob}
@@ -37,11 +46,26 @@ const Test = ({ prob, options, answer, chooseAnswer, correctAnswer }) => {
           </div>
         ))}
       </div>
+
+      {showAnalysis && (
+        <>
+          <Divider variant="middle" />
+          <div dir='auto' className='test-text'>
+            {sol}
+          </div>
+        </>
+      )}
     </div>
   )
 }
 
+<<<<<<< HEAD
 Test.propTypes = {}
+=======
+Test.propTypes = {
+  showAnalysis: PropTypes.isRequired,
+}
+>>>>>>> master
 
 Test.defaultProps = {}
 

@@ -27,12 +27,13 @@ const initialFetchEpic = action$ =>
     tap(() => dispatchSetIsLoading(true)),
     mergeMap(() =>
       Promise.all([
-        getRequest(`/exam/${wisView()}`).on(
-          'error',
-          err =>
-            err.status !== 304 &&
-            dispatchChangeSnackbarStage('Server disconnected!'),
-        ),
+        getRequest(`/exam/${wisView()}`)
+          .on(
+            'error',
+            err =>
+              err.status !== 304 &&
+              dispatchChangeSnackbarStage('Server disconnected!'),
+          ),
         getRequest(`/result`)
           .query({ stdId: userIdView(), examId: wisView() })
           .on(
@@ -41,7 +42,14 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-      ]).then(([exam, result]) => ({ exam: exam.body, result: result.body })),
+        getRequest(`/exam/${wisView()}/count`)
+          .on(
+            'error',
+            err =>
+              err.status !== 304 &&
+              dispatchChangeSnackbarStage('Server disconnected!'),
+          ),
+      ]).then(([exam, result, participantsCount]) => ({ exam: exam.body, result: result.body, participantsCount: participantsCount.body })),
     ),
     filter(({ exam }) => {
       if (!exam) {
@@ -51,16 +59,16 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
+<<<<<<< HEAD
     tap(({ exam }) => dispatchSetExamInfo(exam)),
     // tap(console.log),
+=======
+    tap(({ exam, participantsCount }) => dispatchSetExamInfo({ ...exam, participantsCount })),
+>>>>>>> master
     tap(() => dispatchSetIsExamReady(true)),
     tap(
       ({ exam }) =>
-        isWithinRange(
-          new Date(),
-          new Date(exam.startTime),
-          new Date(exam.endTime),
-        ) && dispatchSetIsExamStarted(true),
+        new Date() > new Date(exam.startTime) && dispatchSetIsExamStarted(true),
     ),
     tap(
       ({ exam }) =>

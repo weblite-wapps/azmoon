@@ -14,7 +14,10 @@ const InfoTags = ({ title, description }) => (
 
 InfoTags.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 }
 
 export default InfoTags

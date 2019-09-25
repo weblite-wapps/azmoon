@@ -26,7 +26,6 @@ const Exam = ({
       firstStage={questionIndex === 0}
       onLeftClick={increaseQuestionIndex}
       onRightClick={decreaseQuestionIndex}
-      // TODO: handle it guys pls :)
       onFinalStageClick={finalStageClick}
       stageLevel={`سوال شماره ${questionIndex + 1}`}
       stageName="آزمون"

@@ -67,6 +67,7 @@ module.exports.startExamAnalysis = examId =>
       ],
     },
     result: { $exists: false },
+    endTime: { $lt: new Date() }
   }, { analyzing: Date.now() })
     .populate('questions', 'correct')
 

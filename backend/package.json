@@ -4,7 +4,8 @@
   "description": "Server for Azmoon wapp",
   "main": "./src/index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "repository": "https://github.com/weblite-wapps/azmoon",
   "author": "Masoud Salehi <msk.masoud.74@gmail.com>",

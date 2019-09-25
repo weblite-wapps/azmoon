@@ -3,9 +3,12 @@ const { startExamAnalysis, endExamAnalysis } = require('./models/exam')
 const { updateQuestionStats } = require('./models/question')
 const { getResultsByExam } = require('./models/result')
 
+module.exports.shouldAnalyze = exam =>
+  exam && !exam.result && new Date(exam.endTime) < new Date()
+
 module.exports.analyze = async examId => {
   const exam = await startExamAnalysis(examId)
-  if (!exam) return 'analyzing or analyzed'
+  if (!exam) return // analyzing or analyzed
 
   const results = await getResultsByExam(examId)
   if (!results.length) return

@@ -44,7 +44,7 @@ AppBar.defaultProps = {
   color: 'silver',
   label: '',
   fullWidth: false,
-  onClick: () => {},
+  onClick: Function.prototype,
 }
 
 export default AppBar

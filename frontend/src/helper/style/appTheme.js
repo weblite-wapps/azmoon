@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
-import { withTheme } from '@material-ui/styles';
+import { withTheme } from '@material-ui/styles'
 
 export default createMuiTheme({
   palette: {
@@ -175,14 +175,25 @@ export default createMuiTheme({
         marginTop: '10px',
       },
     },
+
     MuiPickersToolbar: {
       toolbar: {
-        backgroundColor: '#505050',
+        backgroundColor: '#EDCB19',
       },
     },
     MuiPickersDay: {
       isSelected: {
-        backgroundColor: '#505050',
+        backgroundColor: '#EDCB19',
+      },
+      daySelected: {
+        backgroundColor: '#EDCB19',
+      },
+    },
+    MuiInput: {
+      underline: {
+        '&::after, &::before': {
+          display: 'none',
+        },
       },
     },
     MuiButton: {

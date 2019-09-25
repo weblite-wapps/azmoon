@@ -111,12 +111,12 @@ Home.defaultProps = {
     remainingTime: '-',
     userResult: '-',
 
-    onCloseExam: () => {},
-    onOpenExam: () => {},
-    onEditExam: () => {},
-    onStartExam: () => {},
-    onShowResults: () => {},
-    onShowAnswerSheet: () => {},
+    onCloseExam: Function.prototype,
+    onOpenExam: Function.prototype,
+    onEditExam: Function.prototype,
+    onStartExam: Function.prototype,
+    onShowResults: Function.prototype,
+    onShowAnswerSheet: Function.prototype,
 }
 
 export default Home

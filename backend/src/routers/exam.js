@@ -7,7 +7,6 @@ const { shouldAnalyze, analyze } = require('../helper')
 const router = new Router()
   .post('/new', async ctx => {
     const exam = ctx.request.body
-    console.log('exam', exam)
     if (!exam.title || !exam.creatorId)
       return ctx.status = 400
 
@@ -26,7 +25,8 @@ const router = new Router()
       const exam = await getExamById(ctx.params.id)
       ctx.body = exam
       if (shouldAnalyze(exam)) analyze(exam._id)
-    } catch {
+    } catch(e) {
+      console.err(e)
       ctx.status = 400 // Bad Request
     }
   })

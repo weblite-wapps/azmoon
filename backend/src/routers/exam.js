@@ -2,6 +2,7 @@ const Router = require('@koa/router')
 const R = require('ramda')
 
 const { createExam, getExamById } = require('../models/exam')
+const { getParticipantsCount } = require('../models/result')
 const { shouldAnalyze, analyze } = require('../helper')
 
 const router = new Router()
@@ -22,14 +23,12 @@ const router = new Router()
     ], exam))
   })
   .get('/:id', async ctx => {
-    try {
-      const exam = await getExamById(ctx.params.id)
-      ctx.body = exam
-      if (shouldAnalyze(exam)) analyze(exam._id)
-    } catch(e) {
-      console.err(e)
-      ctx.status = 400 // Bad Request
-    }
+    const exam = await getExamById(ctx.params.id)
+    ctx.body = exam
+    if (shouldAnalyze(exam)) analyze(exam._id)
+  })
+  .get('/:id/count', async ctx => {
+    ctx.body = await getParticipantsCount(ctx.params.id)
   })
 
 module.exports = router

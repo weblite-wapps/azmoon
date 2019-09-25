@@ -5,14 +5,14 @@ import Typography from '@material-ui/core/Typography'
 // style
 import './InfoTags.scss'
 
-const InfoTags = ({ title, description }) => (
+const AnalysisBox = ({ title, description }) => (
   <div className="info-tags">
     <Typography className="info-tags--description">{description}</Typography>
     <Typography className="info-tags--title">{title}</Typography>
   </div>
 )
 
-InfoTags.propTypes = {
+AnalysisBox.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([
     PropTypes.string,
@@ -20,7 +20,7 @@ InfoTags.propTypes = {
   ]),
 }
 
-InfoTags.defaultProps = {
+AnalysisBox.defaultProps = {
 }
 
-export default InfoTags
+export default AnalysisBox

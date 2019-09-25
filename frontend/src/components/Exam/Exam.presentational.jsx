@@ -13,11 +13,11 @@ const Exam = ({
   question,
   questionIndex,
   answer,
-  sol,
   isFinalStage,
   increaseQuestionIndex,
   decreaseQuestionIndex,
   changeAnswerOpt,
+  isExamFinished,
 }) => (
   <div>
     <StageManager
@@ -37,14 +37,18 @@ const Exam = ({
       sol={question.sol}
       options={question.options}
       answer={answer}
+      level="سخت"
+      averageTime="1:35"
+      studentTime="0:56"
       chooseAnswer={changeAnswerOpt}
-      // showAnalysis={isAdmin || isExamFinished}
+      showAnalysis={isExamFinished}
     />
   </div>
 )
 
 Exam.propTypes = {
     duration: PropTypes.number.isRequired,
+    showAnalysis: PropTypes.bool.isRequired,
 }
 Exam.defaultProps = {}
 

@@ -10,11 +10,13 @@ import {
   questionsView,
   currentStateView,
 } from '../Create.reducer'
+import { dispatchChangeSnackbarStage } from '../../Snackbar/Snackbar.action'
 
 const mapDispatchToProps = () => ({
   changePage: dispatchChangeQuestionPage,
   addQuestion: dispatchAddQuestion,
   createQuiz: () => dispatchHandleCreateQuiz(currentStateView()),
+  openSnackBar: dispatchChangeSnackbarStage,
 })
 
 const mapStateToProps = () => ({

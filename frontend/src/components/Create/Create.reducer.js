@@ -39,6 +39,7 @@ const reducer = {
         correct: 0,
         sol: '',
         solAttach: '',
+        hasError: { prob: false, options: [false, false, false, false] },
       }),
       parseInt(data.questionCount),
     ),

@@ -15,6 +15,7 @@ const TextField = ({
   onChange,
   required,
   value,
+  ...others
 }) => {
   const id = `bootstrap-input-${Math.random()
     .toString(36)
@@ -28,6 +29,7 @@ const TextField = ({
         id={id}
         onChange={onChange}
         value={value}
+        {...others}
       />
     </FormControl>
   )

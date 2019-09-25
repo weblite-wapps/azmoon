@@ -3,24 +3,18 @@ import { getState } from '../../setup/redux'
 import {
   SET_INITIAL_INFO,
   CHANGE_QUESTION_PAGE,
-  INSERT_QUESTION_DATA,
+  ADD_QUESTION,
 } from './Create.action'
 
 const initialState = {
   title: '',
-  context: '',
-  questionCount: 20,
-  duration: 15,
-  startTime: {
-    date: null,
-    hour: null,
-  },
-  endTime: {
-    date: null,
-    hour: null,
-  },
+  section: '',
+  questionCount: '',
+  duration: '',
+  startTime: null,
+  endTime: null,
   questions: [],
-  questionIndex: 0,
+  questionIndex: -1,
 }
 
 // const menuIsOpenLens = R.lensProp('menuIsOpen')
@@ -28,11 +22,26 @@ const initialState = {
 export const questionIndexView = () =>
   R.path(['Create', 'questionIndex'])(getState())
 
+export const currentStateView = () => R.path(['Create'])(getState())
+
+export const questionsView = () => R.path(['Create', 'questions'])(getState())
+
 const reducer = {
   [SET_INITIAL_INFO]: (state, data) => ({
     ...state,
     ...data,
-    questionIndex: 1,
+    questionIndex: 0,
+    questions: R.times(
+      () => ({
+        prob: '',
+        probAttach: '',
+        options: ['', '', '', ''],
+        correct: 0,
+        sol: '',
+        solAttach: '',
+      }),
+      parseInt(data.questionCount),
+    ),
   }),
 
   [CHANGE_QUESTION_PAGE]: (state, value) => ({
@@ -40,9 +49,9 @@ const reducer = {
     questionIndex: state.questionIndex + value,
   }),
 
-  [INSERT_QUESTION_DATA]: (state, value) => ({
+  [ADD_QUESTION]: (state, value) => ({
     ...state,
-    questions: R.insert(state.questionIndex, value, state.questions),
+    questions: R.update(state.questionIndex, value, state.questions),
   }),
 }
 

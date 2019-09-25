@@ -58,14 +58,18 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const PersianExample = () => {
+const PersianExample = ({ label, onChange }) => {
   const classes = useStyles()
   const [selectedDate, handleDateChange] = useState(moment())
 
+  const changeHandler = date => {
+    handleDateChange(date)
+    onChange(date)
+  }
   return (
     <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
       <Typography className={cns(classes.typography, classes.label)}>
-        ساعت
+        {label}
       </Typography>
 
       <div className={classes.pickers}>
@@ -80,7 +84,7 @@ const PersianExample = () => {
               ampm={false}
               labelFunc={date => (date ? date.format('hh:mm') : '')}
               value={selectedDate}
-              onChange={handleDateChange}
+              onChange={changeHandler}
             />
           </div>
           <Typography className={classes.typography}>ساعت</Typography>
@@ -95,7 +99,7 @@ const PersianExample = () => {
               clearLabel="پاک کردن"
               labelFunc={date => (date ? date.format('jYYYY/jMM/jDD') : '')}
               value={selectedDate}
-              onChange={handleDateChange}
+              onChange={changeHandler}
             />
           </div>
           <Typography className={classes.typography}>روز</Typography>

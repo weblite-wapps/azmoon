@@ -11,7 +11,8 @@ export default class Create extends Component {
 
   render() {
     const { index } = this.props
-    return !index ? <ExamInfos /> : <QuestionInfo />
+    // console.log(index)
+    return index === -1 ? <ExamInfos /> : <QuestionInfo />
   }
   //
 }

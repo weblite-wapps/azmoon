@@ -11,7 +11,7 @@ import {
 const initialState = {
   isLoading: false,
   user: {},
-  wis: (window.W && window.W.wisId) || "5d8a554ddfc8d5055d9bafff",
+  wis: (window.W && window.W.wisId) || '5d8a554ddfc8d5055d9bafff',
   isParticipated: false,
   isExamReady: false,
   isExamStarted: false,
@@ -25,10 +25,13 @@ export const wisView = () => R.path(['App', 'wis'])(getState())
 export const userView = () => R.path(['App', 'user'])(getState())
 export const userIdView = () => R.path(['App', 'user', 'id'])(getState())
 export const userNameView = () => R.path(['App', 'user', 'name'])(getState())
-export const isParticipatedView = () => R.path(['App', 'isParticipated'])(getState())
+export const isParticipatedView = () =>
+  R.path(['App', 'isParticipated'])(getState())
 export const isExamReadyView = () => R.path(['App', 'isExamReady'])(getState())
-export const isExamStartedView = () => R.path(['App', 'isExamStarted'])(getState())
-export const isExamFinishedView = () => R.path(['App', 'isExamFinished'])(getState())
+export const isExamStartedView = () =>
+  R.path(['App', 'isExamStarted'])(getState())
+export const isExamFinishedView = () =>
+  R.path(['App', 'isExamFinished'])(getState())
 export const isAdminView = () => R.path(['App', 'isAdmin'])(getState())
 
 const reducer = {

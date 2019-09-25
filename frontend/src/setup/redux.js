@@ -11,9 +11,7 @@ import SnackbarReducer from '../components/Snackbar/Snackbar.reducer'
 // epics
 import AppEffect from '../components/App/App.effect'
 import ExamEffect from '../components/Exam/Exam.effect'
-// import CreatePensEffect from '../components/CreatePen/CreatePen.effect'
-// import RecentPensEffect from '../components/RecentPens/RecentPens.effect'
-// import DashboardEffect from '../components/Dashboard/Dashboard.effect'
+import CreateEffect from '../components/Create/Create.effect'
 
 // Create a history of your choosing (we're using a browser history in this case)
 export const history = createMemoryHistory()
@@ -31,7 +29,7 @@ const composeEnhancers =
     : compose
 /* eslint-enable */
 
-const rootEpic = combineEpics(AppEffect, ExamEffect)
+const rootEpic = combineEpics(AppEffect, ExamEffect, CreateEffect)
 const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(

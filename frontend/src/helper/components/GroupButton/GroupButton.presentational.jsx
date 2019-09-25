@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 // third-party-packages
-import { Button, FormControlLabel, Radio } from '@material-ui/core'
-import { fade, makeStyles } from '@material-ui/core/styles'
+import { Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 // helper
 import { cns, ab } from '../../functions/utils.helper'
 
@@ -47,7 +47,7 @@ const GroupButton = ({ items, onChange }) => {
   }
 
   return (
-    <div className={classes.groupButton}>
+    <div className={classes.groupButton} dir="rtl">
       {items.map((item, index) => (
         <Button
           key={item.id}

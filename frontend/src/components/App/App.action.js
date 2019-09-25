@@ -2,8 +2,8 @@ import { createAction } from 'redux-actions'
 import { dispatch } from '../../setup/redux'
 
 export const SET_API = 'SET_API'
-export const setAPI = createAction(SET_API, (creator, user) => ({
-  creator,
+export const setAPI = createAction(SET_API, (isAdmin, user) => ({
+  isAdmin,
   user,
 }))
 export const dispatchSetApi = (...args) => dispatch(setAPI(...args))
@@ -29,3 +29,11 @@ export const dispatchSetIsParticipated = (...args) => dispatch(setIsParticipated
 export const SET_IS_EXAM_READY = 'SET_IS_EXAM_READY'
 export const setIsExamReady = createAction(SET_IS_EXAM_READY)
 export const dispatchSetIsExamReady = (...args) => dispatch(setIsExamReady(...args))
+
+export const SET_IS_EXAM_STARTED = 'SET_IS_EXAM_STARTED'
+export const setIsExamStarted = createAction(SET_IS_EXAM_STARTED)
+export const dispatchSetIsExamStarted = (...args) => dispatch(setIsExamStarted(...args))
+
+export const SET_IS_EXAM_FINISHED = 'SET_IS_EXAM_FINISHED'
+export const setIsExamFinished = createAction(SET_IS_EXAM_FINISHED)
+export const dispatchSetIsExamFinished = (...args) => dispatch(setIsExamFinished(...args))

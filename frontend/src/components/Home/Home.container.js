@@ -17,10 +17,18 @@ import {
   durationView,
   endTimeView,
   questionCountView,
+  participantsCountView,
 } from '../Home/Home.reducer'
 import { getStatus, getRemainingTime } from './Home.helper'
 // actions
-import { dispatchEffectOpenExam, dispatchEffectCloseExam, dispatchEffectStartExam } from './Home.action'
+import {
+  dispatchEffectEditExam,
+  dispatchEffectOpenExam,
+  dispatchEffectCloseExam,
+  dispatchEffectStartExam,
+  dispatchEffectShowResults,
+  dispatchEffectShowAnswerSheet,
+} from './Home.action'
 
 const mapStateToProps = () => ({
   isParticipated: isParticipatedView(),
@@ -35,12 +43,17 @@ const mapStateToProps = () => ({
   status: getStatus(), 
   questionCount: questionCountView(),
   remainingTime: getRemainingTime(endTimeView()),
+  participantsCount: participantsCountView()
 })
 
 const mapDispatchToProps = () => ({
+  onEditExam: dispatchEffectEditExam,
   onOpenExam: dispatchEffectOpenExam,
   onCloseExam: dispatchEffectCloseExam,
   onStartExam: dispatchEffectStartExam,
+  onShowResults: dispatchEffectShowResults,
+  onShowAnswerSheet: dispatchEffectShowAnswerSheet,
+  
 })
 
 export default connect(

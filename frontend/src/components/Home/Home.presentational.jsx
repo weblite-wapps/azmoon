@@ -18,7 +18,7 @@ const Home = ({
     title,
     section,
     status,
-    participantCount,
+    participantsCount,
     questionCount,
     duration,
     maxPercent,
@@ -43,7 +43,7 @@ const Home = ({
 
     <div className="c--home_info-tags">
       <InfoTags title="وضعیت آزمون" description={status} />
-      <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
+      <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
       <InfoTags title="تعداد سوالات" description={questionCount} />
       <InfoTags title="مدت پاسخگویی" description={`${duration} دقیقه`} />
 
@@ -59,20 +59,20 @@ const Home = ({
       {isParticipated && !isAdmin && <InfoTags title="نتیجه شما" description={userResult} />}
     </div>
 
-    {isExamReady && !isExamStarted && isAdmin &&
+    {!isExamStarted && !isExamFinished && isAdmin &&
       <>
         <Button onClick={onOpenExam} color="#84CE2D" fullWidth label="آغاز آزمون" />
         <Button onClick={onEditExam} color="#808285" fullWidth label="ویرایش آزمون" />
       </>
     }
 
-    {isExamStarted &&  isAdmin &&
+    {isExamStarted && !isExamFinished && isAdmin &&
       <Button onClick={onCloseExam} color="#D65555" fullWidth label="بستن آزمون" />
     }
 
     {!isParticipated && isExamStarted && !isAdmin && <Button onClick={onStartExam} color="#6DC2EF" fullWidth label="شروع آزمون" />}
-    {((isExamStarted && isAdmin) || (isParticipated && !isAdmin)) && <Button onClick={onShowResults} disabled color="#6DC2EF" fullWidth label="نتایج آزمون" />}
-    {isParticipated && !isAdmin && <Button onClick={onShowAnswerSheet} disabled color="#84CE2D" fullWidth label="پاسخ‌نامه" />}
+    {((isExamStarted && isAdmin) || (isParticipated && !isAdmin)) && <Button onClick={onShowResults} color="#6DC2EF" fullWidth label="نتایج آزمون" />}
+    {((isParticipated && !isAdmin) || isAdmin) && <Button onClick={onShowAnswerSheet} color="#84CE2D" fullWidth label="پاسخ‌نامه" />}
     {/* <Button color="#808285" fullWidth label="ویرایش آزمون و ارسال مجدد" /> */}
   </div>
 )
@@ -87,8 +87,8 @@ Home.propTypes = {
     title: PropTypes.string.isRequired,
     section: PropTypes.string.isRequired,
     status: PropTypes.string,
-    participantCount: PropTypes.string,
-    questionCount: PropTypes.string,
+    participantsCount: PropTypes.number,
+    questionCount: PropTypes.number,
     maxPercent: PropTypes.string,
     minPercent: PropTypes.string,
     averagePercent: PropTypes.string,
@@ -104,7 +104,7 @@ Home.propTypes = {
 }
 Home.defaultProps = {
     status: '-',
-    participantCount: '-',
+    participantsCount: '-',
     questionCount: '-',
     maxPercent: '-',
     minPercent: '-',
@@ -129,7 +129,7 @@ export default Home
   section="درس یک تا پنج"
   duration="۳۰ دقیقه"
   status="در حال برگزاری"
-  participantCount="۱۰ نفر"
+  participantsCount="۱۰ نفر"
   maxPercent="۹۳.۳۳٪"
   minPercent="۱۱.۲٪"
   averagePercent="۴۵٪"

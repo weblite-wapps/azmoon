@@ -11,6 +11,7 @@ import { isAdminView } from '../App/App.reducer'
 
 const mapStateToProps = () => ({
   isAdmin: isAdminView(),
+  // results:
 })
 
 const mapDispatchToProps = () => ({

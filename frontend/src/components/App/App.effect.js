@@ -33,8 +33,7 @@ const initialFetchEpic = action$ =>
             err =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
-          )
-          .then(x => console.log(x) || x),
+          ),
         getRequest(`/result`)
           .query({ stdId: userIdView(), examId: wisView() })
           .on(
@@ -43,7 +42,14 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-      ]).then(([exam, result]) => ({ exam: exam.body, result: result.body })),
+        getRequest(`/exam/${wisView()}/count`)
+          .on(
+            'error',
+            err =>
+              err.status !== 304 &&
+              dispatchChangeSnackbarStage('Server disconnected!'),
+          ),
+      ]).then(([exam, result, participantsCount]) => ({ exam: exam.body, result: result.body, participantsCount: participantsCount.body })),
     ),
     filter(({ exam }) => {
       if (!exam) {
@@ -53,16 +59,11 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
-    tap(({ exam }) => dispatchSetExamInfo(exam)),
-    tap(console.log),
+    tap(({ exam, participantsCount }) => dispatchSetExamInfo({ ...exam, participantsCount })),
     tap(() => dispatchSetIsExamReady(true)),
     tap(
       ({ exam }) =>
-        isWithinRange(
-          new Date(),
-          new Date(exam.startTime),
-          new Date(exam.endTime),
-        ) && dispatchSetIsExamStarted(true),
+        new Date() > new Date(exam.startTime) && dispatchSetIsExamStarted(true),
     ),
     tap(
       ({ exam }) =>

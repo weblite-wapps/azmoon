@@ -42,7 +42,7 @@ module.exports.getExamById = (id, populate = true) => {
     .select('-createdAt -updatedAt -analyzing')
     .lean()
 
-  return populate ? query.populate('questions', '-stats -createdAt -updatedAt -creatorId') : query
+  return populate ? query.populate('questions', '-createdAt -updatedAt -creatorId') : query
 }
 
 module.exports.getExamsByCreator = creatorId =>

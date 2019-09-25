@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
-
-// third party packages
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
 // style
 import './Home.scss'
+
 
 const Home = ({
     isParticipated,
@@ -15,15 +14,15 @@ const Home = ({
     isExamStarted,
     isAdmin,
 
-    examTitle,
-    examSection,
-    examStatus,
-    examParticipantCount,
+    title,
+    section,
+    status,
+    participantCount,
     questionCount,
-    examDuration,
-    examMaxPercent,
-    examMinPercent,
-    examAveragePercent,
+    duration,
+    maxPercent,
+    minPercent,
+    averagePercent,
     remainingTime,
     userResult,
 
@@ -38,20 +37,20 @@ const Home = ({
     <img alt="home" src="images/home.svg"/>
 
     <Typography style={{ margin: '10px 0px' }} variant="h2" align="center">آزمــــــــون</Typography>
-    <Typography variant="body1" align="center">{examTitle}</Typography>
-    <Typography variant="body2" align="center">{examSection}</Typography>
+    <Typography variant="body1" align="center">{title}</Typography>
+    <Typography variant="body2" align="center">{section}</Typography>
 
     <div className="c--home_info-tags">
-      <InfoTags title="وضعیت آزمون" description={examStatus} />
-      <InfoTags title="تعداد شرکت‌کننده" description={examParticipantCount} />
+      <InfoTags title="وضعیت آزمون" description={status} />
+      <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
       <InfoTags title="تعداد سوالات" description={questionCount} />
-      <InfoTags title="مدت پاسخگویی" description={examDuration} />
+      <InfoTags title="مدت پاسخگویی" description={`${duration} دقیقه`} />
 
       {isAdmin && isExamStarted &&
       <>
-        <InfoTags title="بیشترین درصد" description={examMaxPercent} />
-        <InfoTags title="کمترین درصد" description={examMinPercent} />
-        <InfoTags title="میانگین درصد" description={examAveragePercent} />
+        <InfoTags title="بیشترین درصد" description={maxPercent} />
+        <InfoTags title="کمترین درصد" description={minPercent} />
+        <InfoTags title="میانگین درصد" description={averagePercent} />
       </>
       }
 
@@ -83,14 +82,14 @@ Home.propTypes = {
     isExamStarted: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
 
-    examTitle: PropTypes.string.isRequired,
-    examSection: PropTypes.string.isRequired,
-    examStatus: PropTypes.string,
-    examParticipantCount: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    section: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    participantCount: PropTypes.string,
     questionCount: PropTypes.string,
-    examMaxPercent: PropTypes.string,
-    examMinPercent: PropTypes.string,
-    examAveragePercent: PropTypes.string,
+    maxPercent: PropTypes.string,
+    minPercent: PropTypes.string,
+    averagePercent: PropTypes.string,
     remainingTime: PropTypes.string,
     userResult: PropTypes.string,
 
@@ -102,12 +101,12 @@ Home.propTypes = {
     onShowAnswerSheet: PropTypes.func,
 }
 Home.defaultProps = {
-    examStatus: '-',
-    examParticipantCount: '-',
+    status: '-',
+    participantCount: '-',
     questionCount: '-',
-    examMaxPercent: '-',
-    examMinPercent: '-',
-    examAveragePercent: '-',
+    maxPercent: '-',
+    minPercent: '-',
+    averagePercent: '-',
     remainingTime: '-',
     userResult: '-',
 
@@ -120,3 +119,17 @@ Home.defaultProps = {
 }
 
 export default Home
+
+
+
+{/* <Home
+  title="آزمون جامع دین‌ و زندگی"
+  section="درس یک تا پنج"
+  duration="۳۰ دقیقه"
+  status="در حال برگزاری"
+  participantCount="۱۰ نفر"
+  maxPercent="۹۳.۳۳٪"
+  minPercent="۱۱.۲٪"
+  averagePercent="۴۵٪"
+  remainingTime="۱۴:۱۵:۳۰"
+/> */}

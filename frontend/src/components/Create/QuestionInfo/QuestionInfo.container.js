@@ -3,7 +3,7 @@ import QuestionInfo from './QuestionInfo'
 import {
   dispatchChangeQuestionPage,
   dispatchAddQuestion,
-  dispatchHandleCreateQuiz,
+  dispatchHandleCreateExam,
 } from '../Create.action'
 import {
   questionIndexView,
@@ -14,7 +14,7 @@ import {
 const mapDispatchToProps = () => ({
   changePage: dispatchChangeQuestionPage,
   addQuestion: dispatchAddQuestion,
-  createQuiz: () => dispatchHandleCreateQuiz(currentStateView()),
+  createQuiz: () => dispatchHandleCreateExam(currentStateView()),
 })
 
 const mapStateToProps = () => ({

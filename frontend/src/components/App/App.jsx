@@ -43,52 +43,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <AppBar />
+        <AppBar />        
         {/* <Exam /> */}
-        {/* <Home
-          examTitle="آزمون جامع دین‌ و زندگی"
-          examSection="درس یک تا پنج"
-          examDuration="۳۰ دقیقه"
-          examStatus="در حال برگزاری"
-          examParticipantCount="۱۰ نفر"
-          examMaxPercent="۹۳.۳۳٪"
-          examMinPercent="۱۱.۲٪"
-          examAveragePercent="۴۵٪"
-          remainingTime="۱۴:۱۵:۳۰"
-        <Exam />
-        {/* <Result
-          userReuslt="۳۸.۳۳٪"
-          examParticipantCount="۱۰ نفر"
-          examMaxPercent="۹۳.۳۳٪"
-          examAveragePercent="۴۵٪"
-          results={[
-            {
-              profileImage: 'kind',
-              fullName: 'مصطفی محسنی کبیر',
-              finishTime: 'چهارشنبه - ۱۳:۳۰',
-              score: '۱۰۰٪',
-            },
-            {
-              profileImage: 'kind',
-              fullName: 'مسعود محمدصالحی',
-              finishTime: 'چهارشنبه - ۱۱:۳۰',
-              score: '۹۰٪',
-            },
-            {
-              profileImage: 'kind',
-              fullName: 'علی عسگری',
-              finishTime: 'چهارشنبه - ۱۲:۳۰',
-              score: '۸۰٪',
-            },
-            {
-              profileImage: 'kind',
-              fullName: 'فرزین پزشکی',
-              finishTime: 'سه‌شنبه - ۱۷:۳۰',
-              score: '۶۰٪',
-            },
-          ]}
-        />
-        /> */}
       </div>
     )
   }

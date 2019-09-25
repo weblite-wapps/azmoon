@@ -41,22 +41,22 @@ const reducer = {
     isAdmin,
   }),
 
-  [SET_IS_PARTICIPATED]: (state, { isParticipated }) => ({
+  [SET_IS_PARTICIPATED]: (state, isParticipated) => ({
     ...state,
     isParticipated,
   }),
 
-  [SET_IS_EXAM_READY]: (state, { isExamReady }) => ({
+  [SET_IS_EXAM_READY]: (state, isExamReady) => ({
     ...state,
     isExamReady,
   }),
 
-  [SET_IS_EXAM_STARTED]: (state, { isExamStarted }) => ({
+  [SET_IS_EXAM_STARTED]: (state, isExamStarted) => ({
     ...state,
     isExamStarted,
   }),
 
-  [SET_IS_EXAM_FINISHED]: (state, { isExamFinished }) => ({
+  [SET_IS_EXAM_FINISHED]: (state, isExamFinished) => ({
     ...state,
     isExamFinished,
   }),

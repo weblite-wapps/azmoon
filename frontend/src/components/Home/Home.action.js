@@ -17,3 +17,8 @@ export const EFFECT_CLOSE_EXAM = 'EFFECT_CLOSE_EXAM'
 export const effectCloseExam = createAction(EFFECT_CLOSE_EXAM)
 export const dispatchEffectCloseExam = (...args) =>
   dispatch(effectCloseExam(...args))
+
+export const EFFECT_START_EXAM = 'EFFECT_START_EXAM'
+export const effectStartExam = createAction(EFFECT_START_EXAM)
+export const dispatchEffectStartExam = (...args) =>
+  dispatch(effectStartExam(...args))

@@ -1,37 +1,46 @@
 import { ofType, combineEpics } from 'redux-observable'
-import { tap, delay, map, pluck } from 'rxjs/operators'
+import { tap, delay, map, pluck, ignoreElements } from 'rxjs/operators'
 import {
-  HANDLE_START_EXAM,
-  HANDLE_CHANGE_DURATION, handlechangeDuration,
-  HANDLE_CHANGE_ANSWER_OPT,
-  changeAnswerOpt,
-  dispatchChangeDuration,
-  dispatchStartExam,
-} from './Exam.action'
+  EFFECT_OPEN_EXAM,
+  EFFECT_CLOSE_EXAM,
+  EFFECT_START_EXAM,
+} from './Home.action'
 // view
-import { durationView } from './Exam.reducer'
+// import { durationView } from './Exam.reducer'
+// helpers
+import { push } from '../../setup/redux'
 
-const effectOpenExam = action$ =>
-  action$.pipe(
-    ofType(HANDLE_START_EXAM),
-    pluck('payload'),
-    tap(dispatchStartExam),
-    map(handlechangeDuration),
-  )
 
-const effectCloseExam = action$ =>
+// const effectOpenExam = action$ =>
+//   action$.pipe(
+//     ofType(EFFECT_OPEN_EXAM),
+//     pluck('payload'),
+//     tap(dispatchStartExam),
+//     map(handlechangeDuration),
+//   )
+
+// const effectCloseExam = action$ =>
+//   action$.pipe(
+//     ofType(EFFECT_CLOSE_EXAM),
+//     pluck('payload'),
+//     tap(dispatchChangeDuration),
+//     delay(1000),
+//     map(() => {
+//       if (durationView() < 1) {
+//         // TODO: handle it guys pls ;)
+//         console.log('do something after time ends!!!!')
+//         return { type: 'NOTHING' }
+//       } else return handlechangeDuration()
+//     }),
+//   )
+
+const effectStartExam = action$ =>
   action$.pipe(
-    ofType(HANDLE_CHANGE_DURATION),
+    ofType(EFFECT_START_EXAM),
     pluck('payload'),
-    tap(dispatchChangeDuration),
-    delay(1000),
-    map(() => {
-      if (durationView() < 1) {
-        // TODO: handle it guys pls ;)
-        console.log('do something after time ends!!!!')
-        return { type: 'NOTHING' }
-      } else return handlechangeDuration()
-    }),
+    tap(console.log),
+    tap(() => push('/exam')),
+    ignoreElements(),
   )
 
 // const effectChangeAnswerOptEpic = action$ =>
@@ -45,7 +54,7 @@ const effectCloseExam = action$ =>
 
 
 export default combineEpics(
-    effectOpenExam,
-    effectCloseExam,
-    effectChangeAnswerOptEpic,
+    // effectOpenExam,
+    // effectCloseExam,
+    effectStartExam,
 )

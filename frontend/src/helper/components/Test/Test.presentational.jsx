@@ -2,8 +2,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Divider from '@material-ui/core/Divider'
-// components
 import Typography from '@material-ui/core/Typography'
+// components
+import InfoTags from '../InfoTags/InfoTags.presentational'
 // style
 import './Test.scss'
 
@@ -15,18 +16,21 @@ const Test = ({
   chooseAnswer,
   correctAnswer,
   showAnalysis,
+  level,
+  averageTime,
+  studentTime,
 }) => {
   return ( 
-    <div style={{ color: 'black' }}>
-      <div dir='auto' className='test-text'>
+    <div className="c--test_container" style={{ color: 'black' }}>
+      <div dir='auto' className='c--test_text'>
         {prob}
       </div>
 
-      <div className="test-opts">
+      <div className="c--test_opts">
         {options.map((value, index) => (
-          <div dir="rtl" className="test-opt" key={index}>
+          <div dir="rtl" className="c--test_opt" key={index}>
             <div
-              className="test-opt-circle"
+              className="c--test_opt-circle"
               style={{
                 background: correctAnswer === index ? '#84CE2D' :
                             ((correctAnswer != null) && answer) === index ? '#D65555' :
@@ -38,7 +42,7 @@ const Test = ({
             >
               {index + 1}
             </div>
-            <div className="test-opt-text"> {value} </div>
+            <div className="c--test_opt-text"> {value} </div>
           </div>
         ))}
       </div>
@@ -46,9 +50,14 @@ const Test = ({
       {showAnalysis && (
         <>
           <Divider variant="middle" />
-          <div dir='auto' className='test-text'>
+
+          <Typography variant="subtitle2" dir="auto">پاسخ تشریحی</Typography>
+          <div dir='auto' className='c--test_solution'>
             {sol}
           </div>
+
+          <Typography variant="subtitle2" dir="auto">تحلیل سوال</Typography>
+          <InfoTags title="درجه سوال" description={level} />
         </>
       )}
     </div>

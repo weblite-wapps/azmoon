@@ -1,21 +1,25 @@
-.test-text {
+.c--test_container {
+  margin: 20px;
+}
+
+.c--test_text {
   font-size: 12px;
   border: 1px solid #CCCCCC;
-  margin: 20px;
+  margin: 20px 0px;
   border-radius: 10px;
   padding: 10px;
 }
 
-.test-opts {
-  margin: 20px;
+.c--test_opts {
+  margin: 20px 0px;
 }
 
-.test-opt {
+.c--test_opt {
   display: flex;
   margin-bottom: 15px;
 }
 
-.test-opt-circle {
+.c--test_opt-circle {
   color: #FFFFFF;
   width: 35px;
   height: 35px;
@@ -25,11 +29,20 @@
   cursor: pointer;
 }
 
-.test-opt-text {
+.c--test_opt-text {
   width: calc(100% - 67px);
   margin-right: 10px;                  
   font-size: 12px;
   border: 1px solid #CCCCCC;
   border-radius: 10px;
   padding: 10px;
+}
+
+.c--test_solution {
+  font-size: 12px;
+}
+
+.c--test_stats {
+  display: flex;
+  flex-direction: row;
 }

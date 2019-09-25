@@ -10,6 +10,7 @@ import {
   questionCountView,
   answersView,
 } from './Exam.reducer'
+import { isExamFinishedView } from '../App/App.reducer'
 // actions
 import {
   dispatchHandleChangeAnswerOpt,
@@ -23,6 +24,7 @@ const mapStateToProps = () => ({
   question: questionsView()[questionIndexView()],
   answer: answersView()[questionIndexView()] && answersView()[questionIndexView()].opt,
   isFinalStage: questionCountView() === (questionIndexView() + 1),
+  isExamFinished: isExamFinishedView()
 })
 
 const mapDispatchToProps = () => ({

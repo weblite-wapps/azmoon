@@ -8,6 +8,8 @@ import TextField from '../../../helper/components/TextField/TextField.presentati
 import StageManager from '../../../helper/components/StageManager/main/StageManager.presentational'
 import FileUpload from '../../../helper/components/FileUpload/FileUpload.presentational'
 import GroupButton from '../../../helper/components/GroupButton/GroupButton.presentational'
+// helpers
+import { onQuestionError } from '../../../helper/functions/utils.helper'
 // style
 import './QuestionInfo.scss'
 
@@ -17,6 +19,8 @@ export default class QuestionInfo extends Component {
     this.state = {}
     this.handleAddData = this.handleAddData.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
+    this.handleChangePage = this.handleChangePage.bind(this)
+    this.handleAddCorrect = this.handleAddCorrect.bind(this)
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -41,16 +45,30 @@ export default class QuestionInfo extends Component {
   }
 
   handleChangePage(num) {
-    const { index, changePage, addQuestion } = this.props
+    const { index, changePage, addQuestion, openSnackBar } = this.props
     if (num > 0) {
-      addQuestion(R.dissoc('index', this.state))
+      if (onQuestionError(this.state)) {
+        openSnackBar('باید موارد ستاره دار را پر کنید')
+        this.setState({
+          hasError: onQuestionError(this.state),
+        })
+      } else {
+        addQuestion(R.dissoc('index', this.state))
+        changePage(num)
+      }
     }
-    changePage(num)
+  }
+
+  handleAddCorrect(num) {
+    this.setState({
+      correct: num,
+    })
   }
 
   render() {
-    const { prob, sol, questionImage, options, correct } = this.state
+    const { prob, sol, questionImage, options, correct, hasError } = this.state
     const { index, questions, createQuiz } = this.props
+    console.log('hasError ', hasError)
     return (
       <>
         <StageManager
@@ -60,11 +78,13 @@ export default class QuestionInfo extends Component {
           onLeftClick={() => this.handleChangePage(1)}
           onRightClick={() => this.handleChangePage(-1)}
           onFinalStageClick={createQuiz}
-          // stageLevel={`سوال شماره ${questionIndex + 1}`}
+          stageLevel={`سوال شماره ${index + 1}`}
           stageName="آزمون"
         />
         <div className="c--question-info_container">
           <TextArea
+            required
+            hasError={hasError.prob}
             onChange={this.handleAddData('prob')}
             value={prob}
             label="سوال"
@@ -72,30 +92,38 @@ export default class QuestionInfo extends Component {
           />
           <FileUpload id="kind" onUpload={() => console.log('kind')} />
           <TextField
+            required
+            hasError={hasError.options && hasError.options[0]}
             onChange={this.handleAddOption(0)}
             value={options[0]}
             label="گزینه یک"
             placeholder="متن گزینه یک"
           />
           <TextField
+            required
+            hasError={hasError.options && hasError.options[1]}
             onChange={this.handleAddOption(1)}
             value={options[1]}
             label="گزینه دو"
             placeholder="متن گزینه دو"
           />
           <TextField
+            required
+            hasError={hasError.options && hasError.options[2]}
             onChange={this.handleAddOption(2)}
             value={options[2]}
             label="گزینه سه"
             placeholder="متن گزینه سه"
           />
           <TextField
+            required
+            hasError={hasError.options && hasError.options[3]}
             onChange={this.handleAddOption(3)}
             value={options[3]}
             label="گزینه چهار"
             placeholder="متن گزینه چهارم"
           />
-          <GroupButton />
+          <GroupButton onChange={ans => this.handleAddCorrect(ans)} />
           <TextArea
             onChange={this.handleAddData('sol')}
             value={sol}

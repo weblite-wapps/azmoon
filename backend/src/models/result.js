@@ -35,6 +35,9 @@ module.exports.getResultsByExam = exam =>
   Result.find({ exam })
     .sort('-percent')
 
+module.exports.getParticipantsCount = exam =>
+  Result.countDocuments({ exam })
+
 module.exports.getResult = (stdId, exam) =>
   Result.findOne({ stdId, exam })
     .lean()

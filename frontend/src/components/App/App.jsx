@@ -11,7 +11,7 @@ import AppBar from '../../helper/components/AppBar/AppBar.presentational'
 // import TimePicker from '../../helper/components/TimePicker/TimePicker.presentational'
 
 //test
-// import { dispatchHandleStartExam } from '../Exam/Exam.action'
+import { dispatchHandleStartExam } from '../Exam/Exam.action'
 
 export default class App extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class App extends Component {
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') this.handleWappMode()
     else this.handleNormalMode()
-    // setTimeout(dispatchHandleStartExam, 1000)
+    setTimeout(dispatchHandleStartExam, 1000)
   }
 
   _handleWappMode() {
@@ -36,7 +36,7 @@ export default class App extends Component {
 
   _handleNormalMode() {
     const { setAPI, fetchInitialData } = this.props
-    setAPI(false, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
+    setAPI(true, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
     fetchInitialData()
   }
 

@@ -20,7 +20,7 @@ import {
 } from '../Home/Home.reducer'
 import { getStatus, getRemainingTime } from './Home.helper'
 // actions
-import { dispatchEffectOpenExam, dispatchEffectCloseExam } from './Home.action'
+import { dispatchEffectOpenExam, dispatchEffectCloseExam, dispatchEffectStartExam } from './Home.action'
 
 const mapStateToProps = () => ({
   isParticipated: isParticipatedView(),
@@ -40,6 +40,7 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = () => ({
   onOpenExam: dispatchEffectOpenExam,
   onCloseExam: dispatchEffectCloseExam,
+  onStartExam: dispatchEffectStartExam,
 })
 
 export default connect(

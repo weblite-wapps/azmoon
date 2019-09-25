@@ -7,7 +7,6 @@ import Test from '../../helper/components/Test/Test.presentational'
 // style
 import './Exam.scss'
 
-
 const Exam = ({
   duration,
   question,
@@ -18,6 +17,7 @@ const Exam = ({
   increaseQuestionIndex,
   decreaseQuestionIndex,
   changeAnswerOpt,
+  finalStageClick,
 }) => (
   <div>
     <StageManager
@@ -27,7 +27,7 @@ const Exam = ({
       onLeftClick={increaseQuestionIndex}
       onRightClick={decreaseQuestionIndex}
       // TODO: handle it guys pls :)
-      onFinalStageClick={() => console.log('handle final click!!!!!')}
+      onFinalStageClick={finalStageClick}
       stageLevel={`سوال شماره ${questionIndex + 1}`}
       stageName="آزمون"
     />

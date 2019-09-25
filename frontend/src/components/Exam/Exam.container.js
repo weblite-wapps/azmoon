@@ -14,21 +14,24 @@ import {
 import {
   dispatchHandleChangeAnswerOpt,
   dispatchChangeQuestionIndex,
+  dispatchHandleFinalStageClick,
 } from './Exam.action'
-
 
 const mapStateToProps = () => ({
   duration: durationView(),
   questionIndex: questionIndexView(),
   question: questionsView()[questionIndexView()],
-  answer: answersView()[questionIndexView()] && answersView()[questionIndexView()].opt,
-  isFinalStage: questionCountView() === (questionIndexView() + 1),
+  answer:
+    answersView()[questionIndexView()] &&
+    answersView()[questionIndexView()].opt,
+  isFinalStage: questionCountView() === questionIndexView() + 1,
 })
 
 const mapDispatchToProps = () => ({
   increaseQuestionIndex: () => dispatchChangeQuestionIndex(1),
   decreaseQuestionIndex: () => dispatchChangeQuestionIndex(-1),
   changeAnswerOpt: dispatchHandleChangeAnswerOpt,
+  finalStageClick: () => dispatchHandleFinalStageClick(),
 })
 
 export default connect(

@@ -17,6 +17,8 @@ import {
   dispatchStartExam,
   SET_USER_START_TIME,
   dispatchChangeAnswerOpt,
+  HANDLE_END_EXAM_BUTTON_CLICK,
+  HANDLE_FINAL_STAGE_CLICK,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView } from './Exam.reducer'
@@ -25,6 +27,7 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { wisView, userIdView } from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
+import { dispatch } from 'rxjs/internal/observable/pairs'
 
 const effectStartExamEpic = action$ =>
   action$.pipe(
@@ -56,8 +59,6 @@ const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
     pluck('payload', 'opt'),
-    tap(() => console.log(111)),
-    tap(console.log),
     map(changeAnswerOpt),
     pluck('payload', 'opt'),
     tap(dispatchChangeAnswerOpt),
@@ -67,7 +68,6 @@ const effectChangeAnswerOptEpic = action$ =>
       stdId: userIdView(),
       exam: wisView(),
     })),
-    tap(console.log),
     mergeMap(data =>
       postRequest('/result/saveOption')
         .send({ ...data, examId: wisView(), stdId: userIdView() })
@@ -78,7 +78,6 @@ const effectChangeAnswerOptEpic = action$ =>
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
     ),
-    tap(console.log),
     ignoreElements(),
   )
 
@@ -100,9 +99,19 @@ const effectSetUserStartTime = action$ =>
     ignoreElements(),
   )
 
+const effectEndExamButtonClick = action$ =>
+  action$.pipe(
+    ofType(HANDLE_FINAL_STAGE_CLICK),
+    tap(() => push('/home')),
+    tap(() => dispatchSetIsParticipated(true)),
+    tap(console.log),
+    ignoreElements(),
+  )
+
 export default combineEpics(
   effectStartExamEpic,
   effectDecreaseDurationEpic,
   effectChangeAnswerOptEpic,
   effectSetUserStartTime,
+  effectEndExamButtonClick,
 )

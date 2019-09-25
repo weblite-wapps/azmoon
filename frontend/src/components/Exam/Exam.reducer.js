@@ -8,7 +8,7 @@ import {
 } from './Exam.action'
 
 const initialState = {
-  questionCount: 5,
+  questionCount: 2,
   duration: 1200 * 1,
   questionIndex: 0,
   questions: [

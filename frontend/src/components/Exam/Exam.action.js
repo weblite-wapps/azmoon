@@ -48,3 +48,8 @@ export const SET_USER_START_TIME = 'SET_USER_START_TIME'
 export const handleUserStartTime = createAction(SET_USER_START_TIME)
 export const dispatchHandleUserStartTime = (...args) =>
   dispatch(handleUserStartTime(...args))
+
+export const HANDLE_FINAL_STAGE_CLICK = 'HANDLE_FINAL_STAGE_CLICK'
+export const handleFinalStageClick = createAction(HANDLE_FINAL_STAGE_CLICK)
+export const dispatchHandleFinalStageClick = (...args) =>
+  dispatch(handleFinalStageClick(...args))

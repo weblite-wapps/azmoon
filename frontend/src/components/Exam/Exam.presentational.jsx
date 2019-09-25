@@ -40,7 +40,7 @@ const Exam = ({
 )
 
 Exam.propTypes = {
-    duration: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
 }
 Exam.defaultProps = {}
 

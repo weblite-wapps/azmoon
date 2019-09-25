@@ -6,16 +6,10 @@ import Typography from '@material-ui/core/Typography'
 // style
 import './Test.scss'
 
-const Test = ({
-  prob,
-  options,
-  answer,
-  chooseAnswer,
-  correctAnswer,
-}) => {
-  return ( 
+const Test = ({ prob, options, answer, chooseAnswer, correctAnswer }) => {
+  return (
     <div style={{ color: 'black' }}>
-      <div dir='auto' className='test-text'>
+      <div dir="auto" className="test-text">
         {prob}
       </div>
 
@@ -25,13 +19,17 @@ const Test = ({
             <div
               className="test-opt-circle"
               style={{
-                background: correctAnswer === index ? '#84CE2D' :
-                            ((correctAnswer != null) && answer) === index ? '#D65555' :
-                            ((correctAnswer == null) && answer) === index ? '#84CE2D' :
-                            '#CCCCCC'
-                            
+                cursor: 'pointer',
+                background:
+                  correctAnswer === index
+                    ? '#84CE2D'
+                    : (correctAnswer != null && answer) === index
+                    ? '#D65555'
+                    : (correctAnswer == null && answer) === index
+                    ? '#84CE2D'
+                    : '#CCCCCC',
               }}
-              onClick={() => (correctAnswer != null) || chooseAnswer(index)}
+              onClick={() => correctAnswer != null || chooseAnswer(index)}
             >
               {index + 1}
             </div>
@@ -43,10 +41,8 @@ const Test = ({
   )
 }
 
-Test.propTypes = {
-}
+Test.propTypes = {}
 
-Test.defaultProps = {
-}
+Test.defaultProps = {}
 
 export default Test

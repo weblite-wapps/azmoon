@@ -4,6 +4,7 @@ import { isWithinRange } from 'date-fns'
 import { ofType, combineEpics } from 'redux-observable'
 import { tap, mergeMap, filter, ignoreElements } from 'rxjs/operators'
 // actions
+import { dispatchSetResults } from '../Result/Result.action'
 import {
   dispatchSetIsExamReady,
   dispatchSetIsExamStarted,
@@ -49,7 +50,14 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-      ]).then(([exam, result, participantsCount]) => ({ exam: exam.body, result: result.body, participantsCount: participantsCount.body })),
+        getRequest(`/exam/${wisView()}/result`)
+          .on(
+            'error',
+            err =>
+              err.status !== 304 &&
+              dispatchChangeSnackbarStage('Server disconnected!'),
+          ),
+      ]).then(([exam, result, participantsCount, results]) => ({ exam: exam.body, result: result.body, participantsCount: participantsCount.body, results: results.body })),
     ),
     filter(({ exam }) => {
       if (!exam) {
@@ -59,7 +67,8 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
-    tap(({ exam, participantsCount }) => dispatchSetExamInfo({ ...exam, participantsCount })),
+    tap(console.log),
+    tap(({ exam, participantsCount, result }) => dispatchSetExamInfo({ ...exam, participantsCount, result })),
     tap(() => dispatchSetIsExamReady(true)),
     tap(
       ({ exam }) =>
@@ -69,6 +78,7 @@ const initialFetchEpic = action$ =>
       ({ exam }) =>
         new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
     ),
+    tap(({ results }) => dispatchSetResults(results)),
     filter(() => !isAdminView()),
     tap(({ result }) => result && dispatchSetIsParticipated(true)),
     ignoreElements(),

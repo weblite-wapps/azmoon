@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // third-party-packages
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-// helper
+// helpers
 import { cns, ab } from '../../functions/utils.helper'
 
 // style
@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
   tabsContainer: {
     display: 'flex',
     padding: 0,
+    margin: 0,
   },
   li: {
     listStyle: 'none',
@@ -49,7 +50,7 @@ const Tabs = ({ onReturn, onExport, single }) => {
       {!single && (
         <li className={classes.li}>
           <Button className={classes.button} onClick={onExport}>
-            چاپ پاسخنامه
+            چاپ نتایج
           </Button>
         </li>
       )}
@@ -58,7 +59,7 @@ const Tabs = ({ onReturn, onExport, single }) => {
 }
 
 Tabs.propTypes = {
-  single: PropTypes.func,
+  single: PropTypes.bool,
 
   onReturn: PropTypes.func.isRequired,
   onExport: PropTypes.func,

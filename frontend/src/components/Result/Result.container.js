@@ -3,21 +3,26 @@ import { connect } from 'react-redux'
 // components
 import Result from './Result.presentational'
 // views
-// import { tabIndexView, numbersObjectView, isLoadingView } from './Result.reducer'
 import { isAdminView } from '../App/App.reducer'
+import { resultsView } from './Result.reducer'
+import { participantsCountView, maxPercentView, minPercentView, averagePercentView, userResultView } from '../Home/Home.reducer'
 // actions
-// import { dispatchChangeTab, dispatchHandleDragTask } from './Result.action'
+import { push } from '../../setup/redux'
 
 
 const mapStateToProps = () => ({
   isAdmin: isAdminView(),
-  // results:
+  participantCount: participantsCountView(),
+  maxPercent: maxPercentView(),
+  minPercent: minPercentView(),
+  averagePercent: averagePercentView(),
+  userResult: userResultView(),
+  results: resultsView(),
 })
 
 const mapDispatchToProps = () => ({
-//   changeTab: dispatchChangeTab,
-//   dragTask: dispatchHandleDragTask,
-//   onLoadMore: (skipLength, tabIndex) => dispatchLoadMore(skipLength, tabIndex),
+  onReturn: () => push('/home'),
+  onExport: () => console.log('export'),
 })
 
 export default connect(

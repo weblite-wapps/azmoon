@@ -70,9 +70,9 @@ const Home = ({
       <Button onClick={onCloseExam} color="#D65555" fullWidth label="بستن آزمون" />
     }
 
-    {!isParticipated && isExamStarted && !isAdmin && <Button onClick={onStartExam} color="#6DC2EF" fullWidth label="شروع آزمون" />}
-    {((isExamStarted && isAdmin) || (isParticipated && !isAdmin)) && <Button onClick={onShowResults} color="#6DC2EF" fullWidth label="نتایج آزمون" />}
-    {((isParticipated && !isAdmin) || isAdmin) && <Button onClick={onShowAnswerSheet} color="#84CE2D" fullWidth label="پاسخ‌نامه" />}
+    {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && <Button onClick={onStartExam} color="#6DC2EF" fullWidth label="شروع آزمون" />}
+    {((isExamStarted && isAdmin) || (isExamFinished && !isAdmin)) && <Button onClick={onShowResults} color="#6DC2EF" fullWidth label="نتایج آزمون" />}
+    {((isExamFinished && !isAdmin) || isAdmin) && <Button onClick={onShowAnswerSheet} color="#84CE2D" fullWidth label="پاسخ‌نامه" />}
     {/* <Button color="#808285" fullWidth label="ویرایش آزمون و ارسال مجدد" /> */}
   </div>
 )

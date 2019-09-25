@@ -12,6 +12,10 @@ const initialState = {
   startTime: '',
   endTime: '',
   participantsCount: '',
+  maxPercent: '',
+  minPercent: '',
+  averagePercent: '',
+  userResult: '',
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
@@ -22,9 +26,26 @@ export const questionCountView = () => R.path(['Home', 'questionCount'])(getStat
 export const startTimeView = () => R.path(['Home', 'startTime'])(getState())
 export const endTimeView = () => R.path(['Home', 'endTime'])(getState())
 export const participantsCountView = () => R.path(['Home', 'participantsCount'])(getState())
+export const maxPercentView = () => R.path(['Home', 'maxPercent'])(getState())
+export const minPercentView = () => R.path(['Home', 'minPercent'])(getState())
+export const averagePercentView = () => R.path(['Home', 'averagePercent'])(getState())
+export const userResultView = () => R.path(['Home', 'userResult'])(getState())
 
 const reducer = {
-  [SET_EXAM_INFO]: (state, { title, section, duration, startTime, endTime, questions, participantsCount }) => ({
+  [SET_EXAM_INFO]: (state,
+    {
+      title,
+      section,
+      duration,
+      startTime,
+      endTime,
+      questions,
+      participantsCount,
+      maxPercent,
+      minPercent,
+      averagePercent,
+      result,
+    }) => ({
     ...state,
     title,
     section,
@@ -33,6 +54,10 @@ const reducer = {
     endTime,
     questionCount: questions.length,
     participantsCount,
+    maxPercent,
+    minPercent,
+    averagePercent,
+    userResult: result,
   }),
 
 }

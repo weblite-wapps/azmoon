@@ -1,0 +1,15 @@
+.labeled--button {
+  position: relative;
+  &::after {
+
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid var(--color);
+    bottom: calc(-1 * var(--size));
+
+  }
+}

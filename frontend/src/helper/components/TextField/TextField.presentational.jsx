@@ -59,7 +59,7 @@ const BootstrapInput = withStyles(theme => ({
   root: {
     direction: 'rtl',
     'label + &': {
-      marginTop: theme.spacing(3),
+      marginTop: 20,
     },
   },
   input: {

@@ -112,10 +112,8 @@ export default class ExamInfos extends Component {
         />
 
         <Button
-          className="c--exam-info_button"
-          fullWidth
-          color="#7DD9DE"
-          label="ایجاد آزمون"
+          text="ایجاد آزمون"
+          disableAddIcon
           // onClick={() => setInitialInfo(this.state)}
           onClick={() => this.handleSetInitialInfo(this.state)}
         />

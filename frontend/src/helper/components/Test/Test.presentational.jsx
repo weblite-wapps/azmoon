@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 // components
-import InfoTags from '../InfoTags/InfoTags.presentational'
+import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
 // style
 import './Test.scss'
 
@@ -15,9 +15,8 @@ const Test = ({
   answer,
   chooseAnswer,
   correctAnswer,
-  showAnalysis,
-  level,
-  averageTime,
+  isExamFinished,
+  stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
 }) => {
   return ( 
@@ -51,17 +50,26 @@ const Test = ({
         ))}
       </div>
 
-      {showAnalysis && (
+      {isExamFinished && (
         <>
           <Divider variant="middle" />
 
-          <Typography variant="subtitle2" dir="auto">پاسخ تشریحی</Typography>
+          <Typography
+            style={{ fontSize: 10, lineHeight: '17px', letterSpacing: -0.07, color: '#CCC' }}
+          >پاسخ تشریحی</Typography>
           <div dir='auto' className='c--test_solution'>
             {sol}
           </div>
 
-          <Typography variant="subtitle2" dir="auto">تحلیل سوال</Typography>
-          <InfoTags title="درجه سوال" description={level} />
+          <AnalysisBox
+            label="تحلیل سوال"
+            hardness={hardness}
+            yourTime={studentTime}
+            averageTime={averageTime}
+            corrects={`٪${corrects}`}
+            wrongs={`٪${wrongs}`}
+            whites={`٪${whites}`}
+          />
         </>
       )}
     </div>
@@ -69,7 +77,7 @@ const Test = ({
 }
 
 Test.propTypes = {
-  showAnalysis: PropTypes.bool.isRequired,
+  isExamFinished: PropTypes.bool.isRequired,
 }
 
 Test.defaultProps = {}

@@ -24,7 +24,7 @@ export default () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
-        <div>
+        <div style={{ height: '100%' }}>
           <App />
           <Snackbar location={{ vertical: 'bottom', horizontal: 'right' }} />
 

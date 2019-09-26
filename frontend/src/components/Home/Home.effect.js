@@ -10,17 +10,18 @@ import {
   EFFECT_SHOW_RESULTS,
   EFFECT_SHOW_ANSWER_SHEET,
 } from './Home.action'
+import {
+  dispatchSetIsExamFinished,
+  dispatchSetIsExamStarted,
+} from '../App/App.action'
+import { dispatchHandleUserStartTime } from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
 import { wisView } from '../App/App.reducer'
 // helpers
 import { push } from '../../setup/redux'
 import { postRequest } from '../../helper/functions/request.helper'
-import {
-  dispatchSetIsExamFinished,
-  dispatchSetIsExamStarted,
-} from '../App/App.action'
-import { dispatchHandleUserStartTime } from '../Exam/Exam.action'
+
 
 const effectEditExam = action$ =>
   action$.pipe(

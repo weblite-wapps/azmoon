@@ -50,11 +50,11 @@ module.exports.startExam = ({ stdId, exam }) =>
     );
 
 module.exports.endExam = ({ stdId, exam }) =>
-  Result.updateOne({ stdId, exam }, { $set: { endTime: new Date() } }).exec()
+  Result.updateOne({ stdId, exam }, { $set: { endTime: new Date() } }).exec();
 
 // TODO: check `startTime: { $gt: now }, endTime: { $lt: now }` for exam
-module.exports.saveOption = ({ stdId, examId: exam, index, opt }) =>
+module.exports.saveOption = ({ stdId, exam, index, opt, dur }) =>
   Result.updateOne(
     { stdId, exam },
-    { $set: { [`answers.${index}.opt`]: opt } }
+    { $set: { [`answers.${index}.opt`]: opt, [`answers.${index}.dur`]: dur } }
   ).exec();

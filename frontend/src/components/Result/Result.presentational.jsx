@@ -22,21 +22,22 @@ const Result = ({
   <>
     <Tabs onReturn={onReturn} onExport={onExport} />
     <div className="c--result_container">
-      <InfoTags title="نتیجه شما" description={userResult} />
+      <InfoTags title="نتیجه شما" description={userResult.toFixed(2)} />
       <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
-      <InfoTags title="بیشترین درصد" description={maxPercent} />
-      <InfoTags title="کمترین درصد" description={minPercent} />
-      <InfoTags title="میانگین درصد" description={averagePercent} />
+      <InfoTags title="بیشترین درصد" description={maxPercent.toFixed(2)} />
+      <InfoTags title="کمترین درصد" description={minPercent.toFixed(2)} />
+      <InfoTags title="میانگین درصد" description={averagePercent.toFixed(2)} />
 
       <Divider variant="middle" />
 
       {results.map((result, index) =>
        <ResultItem
+         key={result._id}
          rank={index + 1}
          profileImage={result.profileImage}
          fullName={result.fullName}
-         finishTime={result.finishTime}
-         score={result.score}
+         finishTime={result.endTime}
+         score={result.percent.toFixed(2)}
        />)}
    </div>
   </>
@@ -52,7 +53,10 @@ Result.propTypes = {
       PropTypes.string,
       PropTypes.number,
     ]),
-    userResult: PropTypes.string,
+    userResult: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     results: PropTypes.arrayOf(PropTypes.shape({})),
     onReturn: PropTypes.func.isRequired,
     onExport: PropTypes.func.isRequired,
@@ -67,38 +71,3 @@ Result.defaultProps = {
 }
 
 export default Result
-
-
-{/* <Result
-    userReuslt="۳۸.۳۳٪"
-    examParticipantCount="۱۰ نفر"
-    examMaxPercent="۹۳.۳۳٪"
-    examAveragePercent="۴۵٪"
-    results={[
-      {
-        profileImage: 'kind',
-        fullName: 'مصطفی محسنی کبیر',
-        finishTime: 'چهارشنبه - ۱۳:۳۰',
-        score: '۱۰۰٪',
-      },
-      {
-        profileImage: 'kind',
-        fullName: 'مسعود محمدصالحی',
-        finishTime: 'چهارشنبه - ۱۱:۳۰',
-        score: '۹۰٪',
-      },
-      {
-        profileImage: 'kind',
-        fullName: 'علی عسگری',
-        finishTime: 'چهارشنبه - ۱۲:۳۰',
-        score: '۸۰٪',
-      },
-      {
-        profileImage: 'kind',
-        fullName: 'فرزین پزشکی',
-        finishTime: 'سه‌شنبه - ۱۷:۳۰',
-        score: '۶۰٪',
-      },
-    ]}
-  />
-  /> */}

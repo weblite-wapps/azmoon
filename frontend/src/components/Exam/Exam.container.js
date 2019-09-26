@@ -20,15 +20,21 @@ import {
 } from './Exam.action'
 // helpers
 import { push } from '../../setup/redux'
+import { formattedSecondsForStats } from '../../helper/functions/utils.helper'
 
 const mapStateToProps = () => ({
+  title: titleView(),
   duration: durationView(),
   questionIndex: questionIndexView(),
   question: questionsView()[questionIndexView()],
   answer:
     answersView()[questionIndexView()] &&
     answersView()[questionIndexView()].opt,
+  studentTime:
+    answersView()[questionIndexView()] &&
+    formattedSecondsForStats(answersView()[questionIndexView()].dur),
   isFinalStage: questionCountView() === questionIndexView() + 1,
+  isExamFinished: isExamFinishedView(),
 })
 
 const mapDispatchToProps = () => ({

@@ -36,16 +36,20 @@ export const dispatchHandleChangeAnswerOpt = (...args) =>
 
 export const CHANGE_EXAM_DURATION = 'CHANGE_EXAM_DURATION'
 export const changeExamDuration = createAction(CHANGE_EXAM_DURATION)
-export const dispatchChangeExamDuration = (...args) => dispatch(changeExamDuration(...args))
+export const dispatchChangeExamDuration = (...args) =>
+  dispatch(changeExamDuration(...args))
 
 export const SET_EXAM_DURATION = 'SET_EXAM_DURATION'
 export const setExamDuration = createAction(SET_EXAM_DURATION)
-export const dispatchSetExamDuration = (...args) => dispatch(setExamDuration(...args))
+export const dispatchSetExamDuration = (...args) =>
+  dispatch(setExamDuration(...args))
 
 export const HANDLE_CHANGE_EXAM_DURATION = 'HANDLE_CHANGE_EXAM_DURATION'
-export const handleChangeExamDuration = createAction(HANDLE_CHANGE_EXAM_DURATION)
-export const dispatchHandleChangeExamDuration = (...args) => dispatch(handleChangeExamDuration(...args))
-
+export const handleChangeExamDuration = createAction(
+  HANDLE_CHANGE_EXAM_DURATION,
+)
+export const dispatchHandleChangeExamDuration = (...args) =>
+  dispatch(handleChangeExamDuration(...args))
 
 export const SET_USER_START_TIME = 'SET_USER_START_TIME'
 export const handleUserStartTime = createAction(SET_USER_START_TIME)
@@ -56,3 +60,11 @@ export const HANDLE_FINAL_STAGE_CLICK = 'HANDLE_FINAL_STAGE_CLICK'
 export const handleFinalStageClick = createAction(HANDLE_FINAL_STAGE_CLICK)
 export const dispatchHandleFinalStageClick = (...args) =>
   dispatch(handleFinalStageClick(...args))
+
+export const SET_EXAM_INFO = 'SET_EXAM_INFO'
+export const setExamInfo = createAction(SET_EXAM_INFO)
+export const dispatchSetExamInfo = (...args) => dispatch(setExamInfo(...args))
+
+export const SET_EXAM_ANSWERS = 'SET_EXAM_ANSWERS'
+export const setExamAnswers = createAction(SET_EXAM_ANSWERS)
+export const dispatchSetExamAnswers = (...args) => dispatch(setExamAnswers(...args))

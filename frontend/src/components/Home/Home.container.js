@@ -18,6 +18,10 @@ import {
   endTimeView,
   questionCountView,
   participantsCountView,
+  maxPercentView,
+  minPercentView,
+  averagePercentView,
+  userResultView,
 } from '../Home/Home.reducer'
 import { getStatus, getRemainingTime } from './Home.helper'
 // actions
@@ -43,7 +47,11 @@ const mapStateToProps = () => ({
   status: getStatus(), 
   questionCount: questionCountView(),
   remainingTime: getRemainingTime(endTimeView()),
-  participantsCount: participantsCountView()
+  participantsCount: participantsCountView(),
+  maxPercent: maxPercentView(),
+  minPercent: minPercentView(),
+  averagePercent: averagePercentView(),
+  userResult: userResultView(),
 })
 
 const mapDispatchToProps = () => ({

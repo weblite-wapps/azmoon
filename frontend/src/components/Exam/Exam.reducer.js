@@ -1,39 +1,44 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
-import { 
+import {
   START_EXAM,
-  CHANGE_DURATION,
+  CHANGE_EXAM_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
 } from './Exam.action'
 
 const initialState = {
-  questionCount: 5,
-  duration: 60 * 1,
+  questionCount: 2,
+  duration: 1200 * 1,
   questionIndex: 0,
   questions: [
     {
-      prob: " مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز",
+      prob:
+        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
       options: ['۲ جمله', '۳ جمله', '۱ جمله', '۴ جمله'],
       sol: 'بهترین جواب ممکن',
     },
     {
-      prob: " مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز",
+      prob:
+        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
       options: ['۱ جمله', '۴ جمله', '۲ جمله', '۳ جمله'],
       sol: 'بهترین جواب ممکن',
     },
     {
-      prob: " مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز",
+      prob:
+        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
       options: ['۳ جمله', '۱ جمله', '۴ جمله', '۲ جمله'],
       sol: 'بهترین جواب ممکن',
     },
     {
-      prob: " مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز",
+      prob:
+        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
       options: ['۱ جمله', '۴ جمله', '۲ جمله', '۳ جمله'],
       sol: 'بهترین جواب ممکن',
     },
     {
-      prob: " مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز",
+      prob:
+        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
       options: ['۳ جمله', '۱ جمله', '۴ جمله', '۲ جمله'],
       sol: 'بهترین جواب ممکن',
     },
@@ -44,10 +49,11 @@ const initialState = {
 
 export const durationView = () => R.path(['Exam', 'duration'])(getState())
 export const questionsView = () => R.path(['Exam', 'questions'])(getState())
-export const questionIndexView = () => R.path(['Exam', 'questionIndex'])(getState())
-export const questionCountView = () => R.path(['Exam', 'questionCount'])(getState())
+export const questionIndexView = () =>
+  R.path(['Exam', 'questionIndex'])(getState())
+export const questionCountView = () =>
+  R.path(['Exam', 'questionCount'])(getState())
 export const answersView = () => R.path(['Exam', 'answers'])(getState())
-
 
 const reducer = {
   [START_EXAM]: state => ({
@@ -55,9 +61,9 @@ const reducer = {
     answers: R.times(() => ({ opt: undefined, dur: 0 }), state.questionCount),
   }),
 
-  [CHANGE_DURATION]: state => ({
+  [CHANGE_EXAM_DURATION]: state => ({
     ...state,
-    duration: state.duration - 1, 
+    duration: state.duration - 1,
     answers: R.adjust(
       state.questionIndex,
       ({ dur, opt }) => ({ opt, dur: dur + 1 }),
@@ -65,19 +71,20 @@ const reducer = {
     ),
   }),
 
-  [CHANGE_ANSWER_OPT]: (state, { opt }) => ({
-    ...state,
-    answers: R.adjust(
-      state.questionIndex,
-      answer => ({ ...answer, opt }),
-      state.answers,
-    ),
-  }),
+  [CHANGE_ANSWER_OPT]: (state, { opt }) =>
+    console.log('opt ', opt) || {
+      ...state,
+      answers: R.adjust(
+        state.questionIndex,
+        answer => ({ ...answer, opt }),
+        state.answers,
+      ),
+    },
 
   [CHANGE_QUESTION_INDEX]: (state, { number }) => ({
     ...state,
     questionIndex: state.questionIndex + number,
-  })
+  }),
 }
 
 export default (state = initialState, { type, payload }) =>

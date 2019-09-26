@@ -13,8 +13,12 @@ export default createMuiTheme({
   overrides: {
     MuiTypography: {
       body1: {
-        color: 'black',
-        fontSize: '14px',
+        fontFamily: 'iranyekan',
+        textOverflow: 'ellipsis',
+        fontWeight: 'normal',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        direction: 'rtl',
       },
       body2: {
         color: '#808285',

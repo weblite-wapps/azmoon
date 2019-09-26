@@ -25,7 +25,7 @@ export default class App extends Component {
 
   _handleNormalMode() {
     const { setAPI, fetchInitialData } = this.props
-    setAPI(true, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
+    setAPI(false, { name: 'Ali', id: '5d8a554ddfc8d5055d9baff1' })
     fetchInitialData()
   }
 
@@ -40,5 +40,5 @@ App.propTypes = {
 }
 App.defaultProps = {
   setData: Function.prototype,
-  fetchInitialData: Function.prototype, 
+  fetchInitialData: Function.prototype,
 }

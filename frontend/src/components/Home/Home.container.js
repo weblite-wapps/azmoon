@@ -35,7 +35,6 @@ import {
 import { getRemainingTime } from '../../helper/functions/utils.helper'
 import { getStatus } from './Home.selector'
 
-
 const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),
   isExamReady: isExamReadyView(),
@@ -61,7 +60,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = () => ({
   onEditExam: dispatchEffectEditExam,
   onOpenExam: dispatchEffectOpenExam,
-  onCloseExam: dispatchEffectCloseExam,
+  onCloseExam: () => dispatchEffectCloseExam(),
   onStartExam: () => dispatchEffectStartExam(),
   onShowResults: dispatchEffectShowResults,
   onShowAnswerSheet: dispatchEffectShowAnswerSheet,

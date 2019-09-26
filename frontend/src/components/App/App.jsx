@@ -41,12 +41,7 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <AppBar />
-        {/* <Exam /> */}
-      </div>
-    )
+    return <AppBar />
   }
 }
 

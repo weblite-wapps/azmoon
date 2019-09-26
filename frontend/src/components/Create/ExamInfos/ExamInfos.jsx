@@ -63,7 +63,7 @@ export default class ExamInfos extends Component {
     const { title, section, duration, questionCount, hasError } = this.state
 
     return (
-      <div className="c--exam-info_container">
+      <div className="c--exam-info_container scroll-bar">
         <TextField
           required
           hasError={hasError.title}

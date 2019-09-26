@@ -1,14 +1,22 @@
 // modules
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fade, withStyles } from '@material-ui/core/styles'
+import { fade, withStyles, makeStyles } from '@material-ui/core/styles'
 import { FormControl, InputLabel, InputBase } from '@material-ui/core'
 // styles
 import './TextField.scss'
 import styles from '../../style/appStyle'
 
+const useStyles = makeStyles(() => ({
+  root: {
+    marginTop: 15,
+    '&:first-child': {
+      marginTop: 0,
+    },
+  },
+}))
+
 const TextField = ({
-  classes,
   placeholder,
   hasError,
   label,
@@ -17,13 +25,21 @@ const TextField = ({
   value,
   ...others
 }) => {
+  const classes = useStyles()
   const id = `bootstrap-input-${Math.random()
     .toString(36)
     .substr(-5)}`
 
   return (
-    <FormControl fullWidth error={hasError} required={required}>
-      <BootstrapInputLabel htmlFor={id}>{label}</BootstrapInputLabel>
+    <FormControl
+      fullWidth
+      error={hasError}
+      required={required}
+      className={classes.root}
+    >
+      <BootstrapInputLabel shrink htmlFor={id}>
+        {label}
+      </BootstrapInputLabel>
       <BootstrapInput
         placeholder={placeholder}
         id={id}
@@ -36,7 +52,6 @@ const TextField = ({
 }
 
 TextField.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   placeholder: PropTypes.string,
   hasError: PropTypes.bool,
   required: PropTypes.bool,
@@ -52,7 +67,7 @@ TextField.defaultProps = {
   value: '',
 }
 
-export default withStyles(styles)(TextField)
+export default TextField
 
 // helper/components
 const BootstrapInput = withStyles(theme => ({
@@ -67,7 +82,10 @@ const BootstrapInput = withStyles(theme => ({
     position: 'relative',
     backgroundColor: theme.palette.common.white,
     border: '1px solid #ced4da',
-    fontSize: 16,
+    fontSize: 12,
+    lineHeight: '21px',
+    fontWeight: 500,
+    letterSpacing: -0.08,
     width: '100%',
     padding: '10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
@@ -86,6 +104,7 @@ const BootstrapInputLabel = withStyles(theme => ({
     transform: 'unset',
     color: '#000',
     fontSize: 12,
+    fontWeight: 500,
   },
   shrink: {
     transformOrigin: 'top right',

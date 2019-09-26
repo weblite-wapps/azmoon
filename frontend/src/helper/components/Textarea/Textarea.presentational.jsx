@@ -78,6 +78,7 @@ const BootstrapInputLabel = withStyles(theme => ({
     transform: 'unset',
     color: '#000',
     fontSize: 12,
+    fontWeight: 500,
   },
 
   shrink: {

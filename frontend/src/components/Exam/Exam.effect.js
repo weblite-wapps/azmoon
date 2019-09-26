@@ -88,7 +88,6 @@ const effectChangeAnswerOptEpic = action$ =>
 const effectSetUserStartTime = action$ =>
   action$.pipe(
     ofType(SET_USER_START_TIME),
-    tap(console.log),
     mergeMap(() =>
       postRequest('/result/start')
         .send({ exam: wisView(), stdId: userIdView() })
@@ -99,7 +98,6 @@ const effectSetUserStartTime = action$ =>
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
     ),
-    tap(console.log),
     ignoreElements(),
   )
 
@@ -118,7 +116,6 @@ const effectEndExamButtonClick = action$ =>
     ),
     tap(() => push('/home')),
     tap(() => dispatchSetIsParticipated(true)),
-    tap(console.log),
     ignoreElements(),
   )
 

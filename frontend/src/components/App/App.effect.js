@@ -18,9 +18,10 @@ import {
   dispatchSetExamDuration,
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
+  dispatchHandleStartExam,
 } from '../Exam/Exam.action'
 // views
-import { wisView, isAdminView, userIdView } from './App.reducer'
+import { wisView, isAdminView, userIdView, isExamFinishedView } from './App.reducer'
 // helpers
 // import { mapToUsername } from './Home.helper'
 import { getRequest } from '../../helper/functions/request.helper'
@@ -92,10 +93,11 @@ const initialFetchEpic = action$ =>
       ({ exam }) =>
         new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
     ),
+    tap(() => !isExamFinishedView() && dispatchHandleStartExam()),
     tap(({ results }) => dispatchSetResults(results)),
     filter(() => !isAdminView()),
     tap(({ result }) => result && dispatchSetIsParticipated(true)),
-    tap(({ result }) => result && dispatchSetExamAnswers(result.answers)), 
+    tap(({ result }) => result && dispatchSetExamAnswers(result.answers)),
     ignoreElements(),
   )
 // .do(

@@ -59,11 +59,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = () => ({
   onEditExam: dispatchEffectEditExam,
-  onOpenExam: dispatchEffectOpenExam,
+  onOpenExam: () => dispatchEffectOpenExam(),
   onCloseExam: () => dispatchEffectCloseExam(),
   onStartExam: () => dispatchEffectStartExam(),
-  onShowResults: dispatchEffectShowResults,
-  onShowAnswerSheet: dispatchEffectShowAnswerSheet,
+  onShowResults: () => dispatchEffectShowResults(),
+  onShowAnswerSheet: () => dispatchEffectShowAnswerSheet(),
 })
 
 export default connect(

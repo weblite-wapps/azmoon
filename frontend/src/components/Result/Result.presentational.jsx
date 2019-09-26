@@ -18,43 +18,48 @@ const Result = ({
   results,
   onReturn,
   onExport,
-}) => (
-  <>
-    <Tabs onReturn={onReturn} onExport={onExport} />
-    <div className="c--result_container">
-      <InfoTags
-        title="نتیجه شما"
-        description={userResult !== '-' && userResult && userResult.toFixed(2)}
-      />
-      <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
-      <InfoTags
-        title="بیشترین درصد"
-        description={maxPercent !== '-' && maxPercent.toFixed(2)}
-      />
-      <InfoTags
-        title="کمترین درصد"
-        description={minPercent !== '-' && minPercent.toFixed(2)}
-      />
-      <InfoTags
-        title="میانگین درصد"
-        description={averagePercent !== '-' && averagePercent.toFixed(2)}
-      />
-
-      <Divider variant="middle" />
-
-      {results.map((result, index) => (
-        <ResultItem
-          key={result._id}
-          rank={index + 1}
-          profileImage={result.profileImage}
-          fullName={result.fullName}
-          finishTime={result.endTime}
-          score={result && result.percent.toFixed(2)}
+}) => {
+  console.log(userResult)
+  console.log(results)
+  return (
+    <>
+      <Tabs onReturn={onReturn} onExport={onExport} />
+      <div className="c--result_container">
+        <InfoTags
+          title="نتیجه شما"
+          description={
+            userResult !== '-' && userResult && userResult.toFixed(2)
+          }
         />
-      ))}
-    </div>
-  </>
-)
+        <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
+        <InfoTags
+          title="بیشترین درصد"
+          description={maxPercent !== '-' && maxPercent.toFixed(2)}
+        />
+        <InfoTags
+          title="کمترین درصد"
+          description={minPercent !== '-' && minPercent.toFixed(2)}
+        />
+        <InfoTags
+          title="میانگین درصد"
+          description={averagePercent !== '-' && averagePercent.toFixed(2)}
+        />
+
+        <Divider variant="middle" />
+        {results.map((result, index) => (
+          <ResultItem
+            key={result._id}
+            rank={index + 1}
+            profileImage={result.profileImage}
+            fullName={result.fullName}
+            finishTime={result.endTime}
+            score={result && result.percent && result.percent.toFixed(2)}
+          />
+        ))}
+      </div>
+    </>
+  )
+}
 Result.propTypes = {
   participantCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

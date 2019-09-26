@@ -59,6 +59,7 @@ const Home = ({
             <InfoTags
               title="بیشترین درصد"
               description={maxPercent !== '-' && maxPercent.toFixed(2)}
+              // description={maxPercent !== '-' && maxPercent.toFixed(2)}
             />
             <InfoTags
               title="کمترین درصد"
@@ -76,7 +77,9 @@ const Home = ({
         {isExamFinished && !isAdmin && (
           <InfoTags
             title="نتیجه شما"
-            description={userResult !== '-' && userResult.toFixed(2)}
+            description={
+              userResult !== '-' && userResult && userResult.toFixed(2)
+            }
           />
         )}
       </div>

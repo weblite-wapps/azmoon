@@ -58,21 +58,24 @@ const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
     pluck('payload', 'opt'),
-    map(changeAnswerOpt),
-    pluck('payload', 'opt'),
-    tap(dispatchChangeAnswerOpt),
+    // map(changeAnswerOpt),
+    // tap(a => console.log('2 ', a)),
+    // pluck('payload', 'opt'),
     map(opt => ({
-      opt,
+      opt:
+        R.prop('opt', R.nth(questionIndexView(), answersView())) === opt
+          ? null
+          : opt,
       index: questionIndexView(),
       stdId: userIdView(),
       exam: wisView(),
     })),
+    tap(({ opt, index }) => dispatchChangeAnswerOpt(opt, index)),
+    // tap(console.log),
     mergeMap(data =>
       postRequest('/result/saveOption')
         .send({
           ...data,
-          examId: wisView(),
-          stdId: userIdView(),
           dur: R.path(['dur'], R.nth(questionIndexView(), answersView())),
         })
         .on(

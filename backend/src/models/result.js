@@ -53,7 +53,7 @@ module.exports.endExam = ({ stdId, exam }) =>
   Result.updateOne({ stdId, exam }, { $set: { endTime: new Date() } }).exec();
 
 // TODO: check `startTime: { $gt: now }, endTime: { $lt: now }` for exam
-module.exports.saveOption = ({ stdId, examId: exam, index, opt, dur }) =>
+module.exports.saveOption = ({ stdId, exam, index, opt, dur }) =>
   Result.updateOne(
     { stdId, exam },
     { $set: { [`answers.${index}.opt`]: opt, [`answers.${index}.dur`]: dur } }

@@ -51,7 +51,8 @@ const reducer = {
     ...state,
     answers: R.adjust(
       state.questionIndex,
-      answer => ({ ...answer, opt }),
+      answer =>
+        answer.opt === opt ? R.dissoc('opt', answer) : { ...answer, opt },
       state.answers,
     ),
   }),

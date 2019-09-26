@@ -38,8 +38,8 @@ module.exports.analyze = async examId => {
   results.forEach(result => {
     let corrects = 0;
     let wrongs = 0;
-    result.answers.forEach((answer, i) => {
-      const { opt, dur } = answer || {};
+    for (let i = 0; i < questionCount; i++) {
+      const { opt, dur } = result.answers[i] || {};
       if (opt == null) {
         qStats[i].white += 1;
       } else {
@@ -52,7 +52,7 @@ module.exports.analyze = async examId => {
         }
       }
       if (dur) qStats[i].dur += dur;
-    });
+    }
 
     const percent = ((3 * corrects - wrongs) * 100) / 3 / questionCount;
     result.percent = percent;

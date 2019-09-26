@@ -19,3 +19,39 @@ body {
 button, textarea, input, p, span, h1, h2, h3, h4, h5, h6, div, label {
   font-family: Iranyekan !important;
 }
+
+
+// Fancy scroll-bars
+.scroll-bar {
+  --thumb-color: rgba(0, 0, 0, 0.5);
+  --thumb-color__active: rgba(0, 0, 0, 0.8);
+  --track-color: #fff;
+
+  // simulate vertical Scrolling behavior
+  overflow: auto;
+  overflow-x: hidden;
+
+  // IOS Smooth Scrolling
+  -webkit-overflow-scrolling: touch;
+
+  // Mozilla
+  scrollbar-color: var(--thumb-color) var(--track-color);
+  scrollbar-width: thin;
+
+  // Chrome & Safari
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--thumb-color);
+  }
+  // &::-webkit-scrollbar-thumb {
+  // background: var(--thumb-color__active);
+  // }
+  &::-webkit-scrollbar-track {
+    background-color: var(--track-color);
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+}

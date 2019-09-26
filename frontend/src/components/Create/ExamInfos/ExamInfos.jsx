@@ -63,7 +63,7 @@ export default class ExamInfos extends Component {
     const { title, section, duration, questionCount, hasError } = this.state
 
     return (
-      <div className="c--exam-info_container">
+      <div className="c--exam-info_container scroll-bar">
         <TextField
           required
           hasError={hasError.title}
@@ -112,10 +112,8 @@ export default class ExamInfos extends Component {
         />
 
         <Button
-          className="c--exam-info_button"
-          fullWidth
-          color="#7DD9DE"
-          label="ایجاد آزمون"
+          text="ایجاد آزمون"
+          disableAddIcon
           // onClick={() => setInitialInfo(this.state)}
           onClick={() => this.handleSetInitialInfo(this.state)}
         />

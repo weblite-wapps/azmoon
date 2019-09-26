@@ -199,6 +199,14 @@ export default createMuiTheme({
         },
       },
     },
+    MuiInputBase: {
+      formControl: {
+        fontSize: 12,
+        lineHeight: '21px',
+        fontWeight: 500,
+        letterSpacing: -0.08,
+      },
+    },
     MuiButton: {
       contained: {
         borderRadius: '11px',

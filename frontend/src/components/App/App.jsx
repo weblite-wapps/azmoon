@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import Home from '../Home/Home.container'
 import AppBar from '../../helper/components/AppBar/AppBar.presentational'
+import AnalysisBox from '../../helper/components/AnalysisBox/AnalysisBox.presentational'
 // import Result from '../Result/Result.container'
 // import Create from '../Create/Create.container'
 // import Exam from '../Exam/Exam.container'
@@ -43,7 +44,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <AppBar />        
+        <AppBar />
+        <AnalysisBox hardness="سخت" label="تحلیل سوال" />
         {/* <Exam /> */}
       </div>
     )

@@ -101,6 +101,16 @@ const effectSetUserStartTime = action$ =>
 const effectEndExamButtonClick = action$ =>
   action$.pipe(
     ofType(HANDLE_FINAL_STAGE_CLICK),
+    mergeMap(() =>
+      postRequest('/result/end')
+        .send({ exam: wisView(), stdId: userIdView() })
+        .on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+    ),
     tap(() => push('/home')),
     tap(() => dispatchSetIsParticipated(true)),
     tap(console.log),

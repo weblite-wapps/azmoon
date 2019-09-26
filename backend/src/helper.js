@@ -6,6 +6,16 @@ const { getResultsByExam } = require("./models/result");
 module.exports.shouldAnalyze = exam =>
   exam && !exam.result && new Date(exam.endTime) < new Date();
 
+const prefixStats = stats =>
+  R.reduce(
+    (acc, key) => ({
+      ...acc,
+      [`stats.${key}`]: stats[key]
+    }),
+    {},
+    R.keys(stats)
+  );
+
 module.exports.analyze = async examId => {
   const exam = await startExamAnalysis(examId);
   if (!exam) return; // analyzing or analyzed
@@ -15,13 +25,13 @@ module.exports.analyze = async examId => {
 
   const { questions } = exam;
   const questionCount = questions.length;
-  const qStats = R.repeat(
-    {
+  const qStats = R.times(
+    () => ({
       correct: 0,
       wrong: 0,
       white: 0,
       dur: 0
-    },
+    }),
     questionCount
   );
   const percents = [];
@@ -29,7 +39,8 @@ module.exports.analyze = async examId => {
   results.forEach(result => {
     let corrects = 0;
     let wrongs = 0;
-    result.answers.forEach(({ opt, dur } = {}, i) => {
+    result.answers.forEach((answer, i) => {
+      const { opt, dur } = answer || {};
       if (opt == null) {
         qStats[i].white += 1;
       } else {
@@ -50,12 +61,16 @@ module.exports.analyze = async examId => {
     percents.push(percent);
   });
 
-  await Promise.all(questions.map((q, i) => updateQuestionStats(q, qStats[i])));
+  console.log("max", percents, R.max(-34, ...percents));
+  console.log("qs", qStats, prefixStats(qStats[0]));
+  await Promise.all(
+    questions.map((q, i) => updateQuestionStats(q, prefixStats(qStats[i])))
+  );
 
   return endExamAnalysis(examId, {
     count: percents.length,
-    min: R.min(...percents),
-    max: R.max(...percents),
+    min: R.min(100, ...percents),
+    max: R.max(-34, ...percents),
     avg: R.sum(percents) / percents.length
   });
 };

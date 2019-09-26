@@ -1,11 +1,9 @@
 import { createAction } from 'redux-actions'
 import { dispatch } from '../../setup/redux'
 
-export const SET_EXAM_INFO = 'SET_EXAM_INFO'
-export const setExamInfo = createAction(SET_EXAM_INFO)
-export const dispatchSetExamInfo = (...args) =>
-  dispatch(setExamInfo(...args))
-
+export const SET_HOME_INFO = 'SET_HOME_INFO'
+export const setHomeInfo = createAction(SET_HOME_INFO)
+export const dispatchSetHomeInfo = (...args) => dispatch(setHomeInfo(...args))
 
 // effects
 export const EFFECT_EDIT_EXAM = 'EFFECT_EDIT_EXAM'

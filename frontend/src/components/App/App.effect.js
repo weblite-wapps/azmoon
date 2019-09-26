@@ -14,8 +14,11 @@ import {
   FETCH_INITIAL_DATA,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { dispatchSetExamInfo } from '../Home/Home.action'
-import { dispatchSetExamDuration } from '../Exam/Exam.action'
+import { dispatchSetHomeInfo } from '../Home/Home.action'
+import {
+  dispatchSetExamDuration,
+  dispatchSetExamInfo,
+} from '../Exam/Exam.action'
 // views
 import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
@@ -43,22 +46,27 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-        getRequest(`/exam/${wisView()}/count`)
-          .on(
-            'error',
-            err =>
-              err.status !== 304 &&
-              dispatchChangeSnackbarStage('Server disconnected!'),
-          ),
-        getRequest(`/exam/${wisView()}/result`)
-          .on(
-            'error',
-            err =>
-              err.status !== 304 &&
-              dispatchChangeSnackbarStage('Server disconnected!'),
-          ),
-      ]).then(([exam, result, participantsCount, results]) => ({ exam: exam.body, result: result.body, participantsCount: participantsCount.body, results: results.body })),
+        getRequest(`/exam/${wisView()}/count`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+        getRequest(`/exam/${wisView()}/result`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+      ]).then(([exam, result, participantsCount, results]) => ({
+        exam: exam.body,
+        result: result.body,
+        participantsCount: participantsCount.body,
+        results: results.body,
+      })),
     ),
+    tap(({ exam }) => !exam && !isAdminView() && push('/home')),
+
     filter(({ exam }) => {
       if (!exam) {
         dispatchSetIsLoading(false)
@@ -67,7 +75,13 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
-    tap(({ exam, participantsCount, result }) => dispatchSetExamInfo({ ...exam, participantsCount, result })),
+    tap(console.log),
+    tap(({ exam, participantsCount, result }) =>
+      dispatchSetHomeInfo({ ...exam, participantsCount, result }),
+    ),
+    tap(({ exam: { duration, questions } }) =>
+      dispatchSetExamInfo({ duration, questions }),
+    ),
     tap(({ exam }) => dispatchSetExamDuration(exam.duration * 60)),
     tap(() => dispatchSetIsExamReady(true)),
     tap(

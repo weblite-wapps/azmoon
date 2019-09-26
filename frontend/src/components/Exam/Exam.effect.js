@@ -18,7 +18,6 @@ import {
   dispatchStartExam,
   SET_USER_START_TIME,
   dispatchChangeAnswerOpt,
-  HANDLE_END_EXAM_BUTTON_CLICK,
   HANDLE_FINAL_STAGE_CLICK,
 } from './Exam.action'
 // view
@@ -28,7 +27,6 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { wisView, userIdView } from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
-import { dispatch } from 'rxjs/internal/observable/pairs'
 
 const effectStartExamEpic = action$ =>
   action$.pipe(

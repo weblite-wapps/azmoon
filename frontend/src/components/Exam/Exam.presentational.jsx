@@ -9,6 +9,7 @@ import Tabs from '../../helper/components/Tabs/Tabs.presentational'
 import './Exam.scss'
 
 const Exam = ({
+  title,
   duration,
   question,
   questionIndex,
@@ -18,7 +19,6 @@ const Exam = ({
   decreaseQuestionIndex,
   changeAnswerOpt,
   isExamFinished,
-  title,
   onReturn,
   finalStageClick,
 }) => (
@@ -35,6 +35,7 @@ const Exam = ({
         onFinalStageClick={finalStageClick}
         stageLevel={`سوال شماره ${questionIndex + 1}`}
         stageName={title}
+        examMode={!isExamFinished}
       />
       {!isExamFinished && <Timer time={duration} />}
       <Test

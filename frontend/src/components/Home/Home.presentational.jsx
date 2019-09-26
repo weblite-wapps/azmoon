@@ -37,7 +37,7 @@ const Home = ({
   <div className="c--home_container">
     <img alt="home" src="images/home.svg"/>
 
-    <Typography style={{ margin: '10px 0px' }} variant="h2" align="center">آزمــــــــون</Typography>
+    <Typography style={{ margin: '10px 0px' }} variant="h2" align="center">آزمــــــــــــــون</Typography>
     <Typography variant="body1" align="center">{title}</Typography>
     <Typography variant="body2" align="center">{section}</Typography>
 
@@ -87,7 +87,10 @@ Home.propTypes = {
     title: PropTypes.string.isRequired,
     section: PropTypes.string.isRequired,
     status: PropTypes.string,
-    participantsCount: PropTypes.number,
+    participantsCount: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     questionCount: PropTypes.number,
     maxPercent: PropTypes.string,
     minPercent: PropTypes.string,

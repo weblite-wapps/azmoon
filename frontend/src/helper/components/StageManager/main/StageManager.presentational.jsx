@@ -17,18 +17,20 @@ const StageManager = ({
   finalStageLabel,
   finalStage,
   firstStage,
+  examMode,
 }) => (
   <div className="recast--stage-manager">
-    {finalStage ? (
+    {examMode && finalStage && (
       <ArrowButton
         type="Titled"
         title={finalStageLabel}
         onClick={onFinalStageClick}
       />
-    ) : (
-      <ArrowButton type="Left" onClick={onLeftClick} />
-    )}
+      )}
+      {!finalStage && <ArrowButton type="Left" onClick={onLeftClick} />}
+
     <StageManagerInfo stageName={stageName} stageLevel={stageLevel} />
+
     {!firstStage && <ArrowButton type="Right" onClick={onRightClick} hasError={error} />}
   </div>
 )
@@ -43,12 +45,14 @@ StageManager.propTypes = {
   onFinalStageClick: PropTypes.func.isRequired,
   stageLevel: PropTypes.string.isRequired,
   stageName: PropTypes.string,
+  examMode: PropTypes.bool,
 }
 StageManager.defaultProps = {
   error: false,
   finalStage: false,
   firstStage: false,
   stageName: '',
+  examMode: false,
 }
 
 export default StageManager

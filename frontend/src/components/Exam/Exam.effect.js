@@ -26,7 +26,6 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { wisView, userIdView } from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
-import { dispatch } from 'rxjs/internal/observable/pairs'
 
 const effectStartExamEpic = action$ =>
   action$.pipe(

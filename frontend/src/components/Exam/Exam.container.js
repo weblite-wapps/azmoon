@@ -22,6 +22,7 @@ import {
 import { push } from '../../setup/redux'
 
 const mapStateToProps = () => ({
+  title: titleView(),
   duration: durationView(),
   questionIndex: questionIndexView(),
   question: questionsView()[questionIndexView()],
@@ -29,6 +30,7 @@ const mapStateToProps = () => ({
     answersView()[questionIndexView()] &&
     answersView()[questionIndexView()].opt,
   isFinalStage: questionCountView() === questionIndexView() + 1,
+  isExamFinished: isExamFinishedView(),
 })
 
 const mapDispatchToProps = () => ({

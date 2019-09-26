@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 // components
-import InfoTags from '../InfoTags/InfoTags.presentational'
+import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
 // style
 import './Test.scss'
 
@@ -16,9 +16,9 @@ const Test = ({
   chooseAnswer,
   correctAnswer,
   showAnalysis,
-  level,
-  averageTime,
-  studentTime,
+  // level,
+  // averageTime,
+  // studentTime,
 }) => {
   return ( 
     <div className="c--test_container" style={{ color: 'black' }}>
@@ -55,13 +55,22 @@ const Test = ({
         <>
           <Divider variant="middle" />
 
-          <Typography variant="subtitle2" dir="auto">پاسخ تشریحی</Typography>
+          <Typography
+            style={{ fontSize: 10, lineHeight: '17px', letterSpacing: -0.07, color: '#CCC' }}
+          >پاسخ تشریحی</Typography>
           <div dir='auto' className='c--test_solution'>
             {sol}
           </div>
 
-          <Typography variant="subtitle2" dir="auto">تحلیل سوال</Typography>
-          <InfoTags title="درجه سوال" description={level} />
+          <AnalysisBox
+            label="تحلیل سوال"
+            hardness="متوسط"
+            yourTime="۲:۱۱"
+            averageTime="۳:۱۱"
+            corrects="۳۰٪"
+            wrongs="۳۵٪"
+            whites="۳۵٪"
+          />
         </>
       )}
     </div>

@@ -5,8 +5,6 @@ export default theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: 300,
   },
   textFieldFormLabel: {

@@ -1,6 +1,5 @@
 // modules
 import 'rxjs'
-import { isWithinRange } from 'date-fns'
 import { ofType, combineEpics } from 'redux-observable'
 import { tap, mergeMap, filter, ignoreElements } from 'rxjs/operators'
 // actions

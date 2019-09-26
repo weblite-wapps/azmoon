@@ -2,9 +2,9 @@
     margin-left: 20px;
     margin-right: 1px;
     padding-right: 10px;
-    // app-bar + stageManager  = 45 + 50
+    // app-bar + stageManager  = 50 + 40
     // height: calc(100% - 40px - 50px);
-    height: calc(100% - 95px);
+    height: calc(100% - 90px);
     &:after, &:before {
         content: '';
         height: 20px;

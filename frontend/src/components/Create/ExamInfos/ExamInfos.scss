@@ -6,9 +6,9 @@
   margin-left: 20px;
   margin-right: 1px;
   padding-right: 10px;
-  // app-bar + fixed-button  = 45 + 40
-  // height: calc(100% - 40px - 45px);
-  height: calc(100% - 85px);
+  // app-bar + fixed-button  = 50 + 40
+  // height: calc(100% - 50px - 40px);
+  height: calc(100% - 90px);
   &:after, &:before {
     content: '';
     height: 20px;

@@ -24,9 +24,9 @@ const Result = ({
     <div className="c--result_container">
       <InfoTags title="نتیجه شما" description={userResult.toFixed(2)} />
       <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
-      <InfoTags title="بیشترین درصد" description={maxPercent} />
-      <InfoTags title="کمترین درصد" description={minPercent} />
-      <InfoTags title="میانگین درصد" description={averagePercent} />
+      <InfoTags title="بیشترین درصد" description={maxPercent.toFixed(2)} />
+      <InfoTags title="کمترین درصد" description={minPercent.toFixed(2)} />
+      <InfoTags title="میانگین درصد" description={averagePercent.toFixed(2)} />
 
       <Divider variant="middle" />
 

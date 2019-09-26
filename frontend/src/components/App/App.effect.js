@@ -47,22 +47,15 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-        getRequest(`/exam/${wisView()}/count`).on(
-          'error',
-          err =>
-            err.status !== 304 &&
-            dispatchChangeSnackbarStage('Server disconnected!'),
-        ),
         getRequest(`/exam/${wisView()}/result`).on(
           'error',
           err =>
             err.status !== 304 &&
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
-      ]).then(([exam, result, participantsCount, results]) => ({
+      ]).then(([exam, result, results]) => ({
         exam: exam.body,
         result: result.body,
-        participantsCount: participantsCount.body,
         results: results.body,
       })),
     ),
@@ -77,8 +70,8 @@ const initialFetchEpic = action$ =>
     }),
     tap(() => push('/home')),
     tap(console.log),
-    tap(({ exam, participantsCount, result }) =>
-      dispatchSetHomeInfo({ ...exam, participantsCount, userResult: result && result.percent }),
+    tap(({ exam, result }) =>
+      dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
     ),
     tap(({ exam: { duration, questions } }) =>
       dispatchSetExamInfo({ duration, questions }),

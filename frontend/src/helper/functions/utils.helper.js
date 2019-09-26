@@ -19,7 +19,7 @@ export const cns = (...args) => {
 
 /* === Strings === */
 export const toPersian = (string = '') =>
-  string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('ar-EG'))
+  string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('fa-EG'))
 
 /* === Logical helpers === */
 

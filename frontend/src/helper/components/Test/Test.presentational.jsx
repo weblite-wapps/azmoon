@@ -78,8 +78,17 @@ const Test = ({
 
 Test.propTypes = {
   isExamFinished: PropTypes.bool.isRequired,
+  stats: PropTypes.shape({}),
 }
 
-Test.defaultProps = {}
+Test.defaultProps = {
+  stats: {
+    hardness: '-',
+    averageTime: '-',
+    corrects: '-',
+    wrongs: '-',
+    whites: '-'
+  }
+}
 
 export default Test

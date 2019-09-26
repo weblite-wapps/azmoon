@@ -45,10 +45,10 @@ const Exam = ({
         prob={question.prob}
         sol={question.sol}
         options={question.options}
-        stats={getStats(question.stats)}
+        stats={question.stats && getStats(question.stats)} 
         answer={answer}
         chooseAnswer={changeAnswerOpt}
-        correctAnswer={question.correct}
+        correctAnswer={isExamFinished ? question.correct : null}
         isExamFinished={isExamFinished}
         studentTime={studentTime}
       />

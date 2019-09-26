@@ -43,12 +43,7 @@ const reducer = {
       startTime,
       endTime,
       questions,
-      result: {
-        avg,
-        count,
-        max,
-        min,
-      }, 
+      result,
       userResult,
     },
   ) => ({
@@ -60,10 +55,10 @@ const reducer = {
     endTime,
     questionCount: questions.length,
     questions,
-    participantsCount: count,
-    maxPercent: max,
-    minPercent: min,
-    averagePercent: avg,
+    participantsCount: result && result.count,
+    maxPercent: result && result.max,
+    minPercent: result && result.min,
+    averagePercent: result && result.avg,
     userResult,
   }),
 }

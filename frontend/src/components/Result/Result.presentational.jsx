@@ -22,11 +22,11 @@ const Result = ({
   <>
     <Tabs onReturn={onReturn} onExport={onExport} />
     <div className="c--result_container">
-      <InfoTags title="نتیجه شما" description={userResult.toFixed(2)} />
+      <InfoTags title="نتیجه شما" description={userResult !== '-' && userResult && userResult.toFixed(2)} />
       <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
-      <InfoTags title="بیشترین درصد" description={maxPercent.toFixed(2)} />
-      <InfoTags title="کمترین درصد" description={minPercent.toFixed(2)} />
-      <InfoTags title="میانگین درصد" description={averagePercent.toFixed(2)} />
+      <InfoTags title="بیشترین درصد" description={maxPercent !== '-' && maxPercent.toFixed(2)} />
+      <InfoTags title="کمترین درصد" description={minPercent !== '-' && minPercent.toFixed(2)} />
+      <InfoTags title="میانگین درصد" description={averagePercent !== '-' && averagePercent.toFixed(2)} />
 
       <Divider variant="middle" />
 
@@ -37,7 +37,7 @@ const Result = ({
          profileImage={result.profileImage}
          fullName={result.fullName}
          finishTime={result.endTime}
-         score={result.percent.toFixed(2)}
+         score={result && result.percent.toFixed(2)}
        />)}
    </div>
   </>
@@ -61,6 +61,7 @@ Result.propTypes = {
     onReturn: PropTypes.func.isRequired,
     onExport: PropTypes.func.isRequired,
 }
+
 Result.defaultProps = {
     participantCount: '-',
     maxPercent: '-',

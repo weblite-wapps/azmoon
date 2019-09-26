@@ -46,9 +46,11 @@ const mapStateToProps = state => ({
   section: sectionView(),
   duration: durationView(),
   status: getStatus(state),
-  questionCount: questionCountView(),
-  remainingTime: getRemainingTime(endTimeView()),
-  participantsCount: participantsCountView(),
+  questionCount: questionCountView() ? questionCountView() : '--',
+  remainingTime: endTimeView() ? getRemainingTime(endTimeView()) : '--',
+  participantsCount: participantsCountView()
+    ? parseInt(participantsCountView())
+    : '--',
   maxPercent: maxPercentView(),
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
@@ -59,10 +61,9 @@ const mapDispatchToProps = () => ({
   onEditExam: dispatchEffectEditExam,
   onOpenExam: dispatchEffectOpenExam,
   onCloseExam: dispatchEffectCloseExam,
-  onStartExam: dispatchEffectStartExam,
+  onStartExam: () => dispatchEffectStartExam(),
   onShowResults: dispatchEffectShowResults,
   onShowAnswerSheet: dispatchEffectShowAnswerSheet,
-  
 })
 
 export default connect(

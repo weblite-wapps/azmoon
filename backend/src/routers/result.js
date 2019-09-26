@@ -1,6 +1,11 @@
 const Router = require("@koa/router");
 
-const { getResult, startExam, endExam, saveOption } = require("../models/result");
+const {
+  getResult,
+  startExam,
+  endExam,
+  saveOption
+} = require("../models/result");
 
 const router = new Router()
   .get("/", async ctx => {

@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import { ofType, combineEpics } from 'redux-observable'
 import {
   tap,
@@ -9,18 +10,18 @@ import {
 } from 'rxjs/operators'
 import {
   HANDLE_START_EXAM,
-  HANDLE_CHANGE_EXAM_DURATION, handleChangeExamDuration,
+  HANDLE_CHANGE_EXAM_DURATION,
+  handleChangeExamDuration,
   HANDLE_CHANGE_ANSWER_OPT,
   changeAnswerOpt,
   dispatchChangeExamDuration,
   dispatchStartExam,
   SET_USER_START_TIME,
   dispatchChangeAnswerOpt,
-  HANDLE_END_EXAM_BUTTON_CLICK,
   HANDLE_FINAL_STAGE_CLICK,
 } from './Exam.action'
 // view
-import { durationView, questionIndexView } from './Exam.reducer'
+import { durationView, questionIndexView, answersView } from './Exam.reducer'
 import { postRequest } from '../../helper/functions/request.helper'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { wisView, userIdView } from '../App/App.reducer'
@@ -68,7 +69,12 @@ const effectChangeAnswerOptEpic = action$ =>
     })),
     mergeMap(data =>
       postRequest('/result/saveOption')
-        .send({ ...data, examId: wisView(), stdId: userIdView() })
+        .send({
+          ...data,
+          examId: wisView(),
+          stdId: userIdView(),
+          dur: R.path(['dur'], R.nth(questionIndexView(), answersView())),
+        })
         .on(
           'error',
           err =>

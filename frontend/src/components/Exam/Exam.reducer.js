@@ -6,45 +6,15 @@ import {
   SET_EXAM_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
+  SET_EXAM_DURATION,
+  SET_EXAM_INFO,
 } from './Exam.action'
 
 const initialState = {
   questionCount: 2,
   duration: 1200 * 1,
   questionIndex: 0,
-  questions: [
-    {
-      prob:
-        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
-      options: ['۲ جمله', '۳ جمله', '۱ جمله', '۴ جمله'],
-      sol: 'بهترین جواب ممکن',
-    },
-    {
-      prob:
-        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
-      options: ['۱ جمله', '۴ جمله', '۲ جمله', '۳ جمله'],
-      sol: 'بهترین جواب ممکن',
-    },
-    {
-      prob:
-        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
-      options: ['۳ جمله', '۱ جمله', '۴ جمله', '۲ جمله'],
-      sol: 'بهترین جواب ممکن',
-    },
-    {
-      prob:
-        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
-      options: ['۱ جمله', '۴ جمله', '۲ جمله', '۳ جمله'],
-      sol: 'بهترین جواب ممکن',
-    },
-    {
-      prob:
-        ' مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز مصرع زیر چند جمله است؟ سعدیا مرد نکونام نمیرد هرگز',
-      options: ['۳ جمله', '۱ جمله', '۴ جمله', '۲ جمله'],
-      sol: 'بهترین جواب ممکن',
-    },
-  ],
-
+  questions: [],
   answers: [],
 }
 
@@ -77,19 +47,30 @@ const reducer = {
     duration,
   }),
 
-  [CHANGE_ANSWER_OPT]: (state, { opt }) =>
-    console.log('opt ', opt) || {
-      ...state,
-      answers: R.adjust(
-        state.questionIndex,
-        answer => ({ ...answer, opt }),
-        state.answers,
-      ),
-    },
+  [CHANGE_ANSWER_OPT]: (state, { opt }) => ({
+    ...state,
+    answers: R.adjust(
+      state.questionIndex,
+      answer => ({ ...answer, opt }),
+      state.answers,
+    ),
+  }),
 
   [CHANGE_QUESTION_INDEX]: (state, { number }) => ({
     ...state,
     questionIndex: state.questionIndex + number,
+  }),
+
+  [SET_EXAM_DURATION]: (state, value) => ({
+    ...state,
+    duration: value,
+  }),
+
+  [SET_EXAM_INFO]: (state, { duration, questions }) => ({
+    ...state,
+    duration,
+    questions,
+    questionCount: questions.length,
   }),
 }
 

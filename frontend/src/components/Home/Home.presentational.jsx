@@ -7,32 +7,31 @@ import Button from '../../helper/components/Button/Button.presentational'
 // style
 import './Home.scss'
 
-
 const Home = ({
-    isParticipated,
-    isExamReady,
-    isExamStarted,
-    isExamFinished,
-    isAdmin,
+  isParticipated,
+  isExamReady,
+  isExamStarted,
+  isExamFinished,
+  isAdmin,
 
-    title,
-    section,
-    status,
-    participantsCount,
-    questionCount,
-    duration,
-    maxPercent,
-    minPercent,
-    averagePercent,
-    remainingTime,
-    userResult,
+  title,
+  section,
+  status,
+  participantsCount,
+  questionCount,
+  duration,
+  maxPercent,
+  minPercent,
+  averagePercent,
+  remainingTime,
+  userResult,
 
-    onCloseExam,
-    onOpenExam,
-    onEditExam,
-    onStartExam,
-    onShowResults,
-    onShowAnswerSheet,
+  onCloseExam,
+  onOpenExam,
+  onEditExam,
+  onStartExam,
+  onShowResults,
+  onShowAnswerSheet,
 }) => (
   <div className="c--home_container">
     <img alt="home" src="images/home.svg"/>
@@ -47,19 +46,22 @@ const Home = ({
       <InfoTags title="تعداد سوالات" description={questionCount} />
       <InfoTags title="مدت پاسخگویی" description={`${duration} دقیقه`} />
 
-      {isAdmin && isExamStarted &&
-      <>
-        <InfoTags title="بیشترین درصد" description={maxPercent} />
-        <InfoTags title="کمترین درصد" description={minPercent} />
-        <InfoTags title="میانگین درصد" description={averagePercent} />
-      </>
-      }
-
-      {!isExamFinished && <InfoTags title="زمان باقیمانده" description={remainingTime} />}
-      {isParticipated && !isAdmin && <InfoTags title="نتیجه شما" description={userResult} />}
+      {isAdmin && isExamStarted && (
+        <>
+          <InfoTags title="بیشترین درصد" description={maxPercent} />
+          <InfoTags title="کمترین درصد" description={minPercent} />
+          <InfoTags title="میانگین درصد" description={averagePercent} />
+        </>
+      )}
+      {!isExamFinished && (
+        <InfoTags title="زمان باقیمانده" description={remainingTime} />
+      )}
+      {isParticipated && !isAdmin && (
+        <InfoTags title="نتیجه شما" description={userResult} />
+      )}
     </div>
 
-    {!isExamStarted && !isExamFinished && isAdmin &&
+    {!isExamStarted && !isExamFinished && isAdmin && (
       <>
         <Button variant="labeled" onClick={onOpenExam} color="#84CE2D" fullWidth text="آغاز آزمون" />
         <Button variant="labeled" onClick={onEditExam} color="#808285" fullWidth text="ویرایش آزمون" />
@@ -106,28 +108,27 @@ Home.propTypes = {
     onShowAnswerSheet: PropTypes.func,
 }
 Home.defaultProps = {
-    status: '-',
-    participantsCount: '-',
-    questionCount: '-',
-    maxPercent: '-',
-    minPercent: '-',
-    averagePercent: '-',
-    remainingTime: '-',
-    userResult: '-',
+  status: '-',
+  participantsCount: '-',
+  questionCount: '-',
+  maxPercent: '-',
+  minPercent: '-',
+  averagePercent: '-',
+  remainingTime: '-',
+  userResult: '-',
 
-    onCloseExam: Function.prototype,
-    onOpenExam: Function.prototype,
-    onEditExam: Function.prototype,
-    onStartExam: Function.prototype,
-    onShowResults: Function.prototype,
-    onShowAnswerSheet: Function.prototype,
+  onCloseExam: Function.prototype,
+  onOpenExam: Function.prototype,
+  onEditExam: Function.prototype,
+  onStartExam: Function.prototype,
+  onShowResults: Function.prototype,
+  onShowAnswerSheet: Function.prototype,
 }
 
 export default Home
 
-
-
-{/* <Home
+{
+  /* <Home
   title="آزمون جامع دین‌ و زندگی"
   section="درس یک تا پنج"
   duration="۳۰ دقیقه"
@@ -137,4 +138,5 @@ export default Home
   minPercent="۱۱.۲٪"
   averagePercent="۴۵٪"
   remainingTime="۱۴:۱۵:۳۰"
-/> */}
+/> */
+}

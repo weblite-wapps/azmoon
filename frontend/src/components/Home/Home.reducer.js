@@ -47,7 +47,7 @@ const reducer = {
       maxPercent,
       minPercent,
       averagePercent,
-      result,
+      userResult,
     },
   ) => ({
     ...state,
@@ -62,7 +62,7 @@ const reducer = {
     maxPercent,
     minPercent,
     averagePercent,
-    userResult: result,
+    userResult,
   }),
 }
 

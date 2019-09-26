@@ -3,7 +3,6 @@ import { getState } from '../../setup/redux'
 import {
   START_EXAM,
   CHANGE_EXAM_DURATION,
-  SET_EXAM_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
   SET_EXAM_DURATION,

@@ -76,7 +76,7 @@ const initialFetchEpic = action$ =>
     tap(() => push('/home')),
     tap(console.log),
     tap(({ exam, participantsCount, result }) =>
-      dispatchSetHomeInfo({ ...exam, participantsCount, result }),
+      dispatchSetHomeInfo({ ...exam, participantsCount, userResult: result.percent }),
     ),
     tap(({ exam: { duration, questions } }) =>
       dispatchSetExamInfo({ duration, questions }),

@@ -56,26 +56,26 @@ const Home = ({
       {!isExamFinished && (
         <InfoTags title="زمان باقیمانده" description={remainingTime} />
       )}
-      {isParticipated && !isAdmin && (
+      {isExamFinished && !isAdmin && (
         <InfoTags title="نتیجه شما" description={userResult} />
       )}
     </div>
 
     {!isExamStarted && !isExamFinished && isAdmin && (
       <>
-        <Button variant="labeled" onClick={onOpenExam} color="#84CE2D" fullWidth text="آغاز آزمون" />
-        <Button variant="labeled" onClick={onEditExam} color="#808285" fullWidth text="ویرایش آزمون" />
+        <Button variant="labeled" onClick={onOpenExam} color="#84CE2D" text="آغاز آزمون" />
+        <Button variant="labeled" onClick={onEditExam} color="#808285" text="ویرایش آزمون" />
       </>
-    }
+    )}
 
     {isExamStarted && !isExamFinished && isAdmin &&
-      <Button variant="labeled" onClick={onCloseExam} color="#D65555" fullWidth text="بستن آزمون" />
+      <Button variant="labeled" onClick={onCloseExam} color="#D65555" text="بستن آزمون" />
     }
 
-    {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && <Button variant="labeled" onClick={onStartExam} color="#6DC2EF" fullWidth text="شروع آزمون" />}
-    {((isExamStarted && isAdmin) || (isExamFinished && !isAdmin)) && <Button variant="labeled" onClick={onShowResults} color="#6DC2EF" fullWidth text="نتایج آزمون" />}
-    {((isExamFinished && !isAdmin) || isAdmin) && <Button variant="labeled" onClick={onShowAnswerSheet} color="#84CE2D" fullWidth text="پاسخ‌نامه" />}
-    {/* <Button variant="labeled" color="#808285" fullWidth text="ویرایش آزمون و ارسال مجدد" /> */}
+    {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && <Button variant="labeled" onClick={onStartExam} color="#6DC2EF" text="شروع آزمون" />}
+    {((isExamStarted && isAdmin) || (isExamFinished && !isAdmin)) && <Button variant="labeled" onClick={onShowResults} color="#6DC2EF" text="نتایج آزمون" />}
+    {((isExamFinished && !isAdmin) || isAdmin) && <Button variant="labeled" onClick={onShowAnswerSheet} color="#84CE2D" text="پاسخ‌نامه" />}
+    {/* <Button variant="labeled" color="#808285" text="ویرایش آزمون و ارسال مجدد" /> */}
   </div>
 )
 
@@ -93,7 +93,10 @@ Home.propTypes = {
       PropTypes.string,
       PropTypes.number,
     ]),
-    questionCount: PropTypes.number,
+    questionCount: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     maxPercent: PropTypes.string,
     minPercent: PropTypes.string,
     averagePercent: PropTypes.string,

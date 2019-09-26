@@ -61,7 +61,6 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload
 
     const {
       files: {
-        length,
         0: { name },
       },
     } = inputRef.current

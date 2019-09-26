@@ -34,17 +34,18 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     border: '1px solid #818181',
     borderRadius: 11,
+    boxSizing: 'border-box',
     width: 125,
     height: 35,
     '& input': {
       textAlign: 'center',
       color: '#CCC',
-      letterSpacing: -0.08,
+      fontWeight: 500,
       padding: 6,
     },
   },
   small: {
-    width: 100,
+    width: 85,
   },
   datePicker: {
     marginTop: 0,

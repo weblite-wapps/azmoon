@@ -66,8 +66,8 @@ module.exports.analyze = async examId => {
 
   return endExamAnalysis(examId, {
     count: percents.length,
-    min: R.min(100, ...percents),
-    max: R.max(-34, ...percents),
+    min: Math.min(100, ...percents),
+    max: Math.max(-34, ...percents),
     avg: R.sum(percents) / percents.length
   });
 };

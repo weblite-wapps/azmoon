@@ -60,12 +60,12 @@ const CustomizedButton = ({
   classesProp,
   selected,
   style,
-  disableAddIcon,
+  enableAddIcon,
 }) => {
   const classes = useStyles()
   const fixed = variant === 'fixed'
   const labeled = variant === 'labeled'
-  console.log('TCL: disableAddIcon', disableAddIcon)
+  console.log('TCL: enableAddIcon', enableAddIcon)
   return (
     <Button
       variant="contained"
@@ -83,7 +83,7 @@ const CustomizedButton = ({
       <Typography className={cns(classes.typography, classesProp.typography)}>
         {text}
       </Typography>
-      {variant === 'fixed' && !disableAddIcon && (
+      {variant === 'fixed' && enableAddIcon && (
         <AddIcon className={cns(classes.icon, classesProp.icon)} />
       )}
     </Button>
@@ -101,7 +101,7 @@ CustomizedButton.propTypes = {
   variant: PropTypes.oneOf(['fixed', 'labeled', 'normal']),
   onClick: PropTypes.func,
   selected: PropTypes.bool,
-  disableAddIcon: PropTypes.bool,
+  enableAddIcon: PropTypes.bool,
   text: PropTypes.string.isRequired,
 }
 
@@ -110,7 +110,7 @@ CustomizedButton.defaultProps = {
   className: '',
   variant: 'fixed',
   selected: false,
-  disableAddIcon: false,
+  enableAddIcon: false,
   onClick: Function.prototype,
 }
 

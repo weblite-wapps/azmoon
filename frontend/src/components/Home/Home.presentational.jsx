@@ -61,19 +61,19 @@ const Home = ({
 
     {!isExamStarted && !isExamFinished && isAdmin &&
       <>
-        <Button onClick={onOpenExam} color="#84CE2D" fullWidth label="آغاز آزمون" />
-        <Button onClick={onEditExam} color="#808285" fullWidth label="ویرایش آزمون" />
+        <Button variant="normal" onClick={onOpenExam} color="#84CE2D" fullWidth text="آغاز آزمون" />
+        <Button variant="normal" onClick={onEditExam} color="#808285" fullWidth text="ویرایش آزمون" />
       </>
     }
 
     {isExamStarted && !isExamFinished && isAdmin &&
-      <Button onClick={onCloseExam} color="#D65555" fullWidth label="بستن آزمون" />
+      <Button variant="normal" onClick={onCloseExam} color="#D65555" fullWidth text="بستن آزمون" />
     }
 
-    {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && <Button onClick={onStartExam} color="#6DC2EF" fullWidth label="شروع آزمون" />}
-    {((isExamStarted && isAdmin) || (isExamFinished && !isAdmin)) && <Button onClick={onShowResults} color="#6DC2EF" fullWidth label="نتایج آزمون" />}
-    {((isExamFinished && !isAdmin) || isAdmin) && <Button onClick={onShowAnswerSheet} color="#84CE2D" fullWidth label="پاسخ‌نامه" />}
-    {/* <Button color="#808285" fullWidth label="ویرایش آزمون و ارسال مجدد" /> */}
+    {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && <Button variant="normal" onClick={onStartExam} color="#6DC2EF" fullWidth text="شروع آزمون" />}
+    {((isExamStarted && isAdmin) || (isExamFinished && !isAdmin)) && <Button variant="normal" onClick={onShowResults} color="#6DC2EF" fullWidth text="نتایج آزمون" />}
+    {((isExamFinished && !isAdmin) || isAdmin) && <Button variant="normal" onClick={onShowAnswerSheet} color="#84CE2D" fullWidth text="پاسخ‌نامه" />}
+    {/* <Button variant="normal" color="#808285" fullWidth text="ویرایش آزمون و ارسال مجدد" /> */}
   </div>
 )
 

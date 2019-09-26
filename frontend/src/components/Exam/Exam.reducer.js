@@ -3,6 +3,7 @@ import { getState } from '../../setup/redux'
 import {
   START_EXAM,
   CHANGE_EXAM_DURATION,
+  SET_EXAM_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
 } from './Exam.action'
@@ -69,6 +70,11 @@ const reducer = {
       ({ dur, opt }) => ({ opt, dur: dur + 1 }),
       state.answers,
     ),
+  }),
+
+  [SET_EXAM_DURATION]: (state, duration) => ({
+    ...state,
+    duration,
   }),
 
   [CHANGE_ANSWER_OPT]: (state, { opt }) =>

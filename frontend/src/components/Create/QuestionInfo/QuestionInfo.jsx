@@ -45,7 +45,7 @@ export default class QuestionInfo extends Component {
   }
 
   handleChangePage(num) {
-    const { index, changePage, addQuestion, openSnackBar } = this.props
+    const { changePage, addQuestion, openSnackBar } = this.props
     if (num > 0) {
       if (onQuestionError(this.state)) {
         openSnackBar('باید موارد ستاره دار را پر کنید')
@@ -66,7 +66,7 @@ export default class QuestionInfo extends Component {
   }
 
   render() {
-    const { prob, sol, questionImage, options, correct, hasError } = this.state
+    const { prob, sol, options, hasError } = this.state
     const { index, questions, createExam } = this.props
     return (
       <>

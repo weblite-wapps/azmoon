@@ -40,5 +40,5 @@ App.propTypes = {
 }
 App.defaultProps = {
   setData: Function.prototype,
-  fetchInitialData: Function.prototype, 
+  fetchInitialData: Function.prototype,
 }

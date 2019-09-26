@@ -13,7 +13,6 @@ import {
   HANDLE_CHANGE_EXAM_DURATION,
   handleChangeExamDuration,
   HANDLE_CHANGE_ANSWER_OPT,
-  changeAnswerOpt,
   dispatchChangeExamDuration,
   dispatchStartExam,
   SET_USER_START_TIME,

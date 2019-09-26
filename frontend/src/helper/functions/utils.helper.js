@@ -73,7 +73,7 @@ export const getRemainingTime = (endTime) => {
     return formattedSeconds(differenceInSeconds(end, now))
 }
 
-const formattedSecondsForStats = (time) => `${format(
+export const formattedSecondsForStats = (time) => `${format(
   Math.floor((time % 3600) / 60),
   )}:${format(time % 60)}`
 

@@ -17,7 +17,7 @@ const Test = ({
   correctAnswer,
   isExamFinished,
   stats: { hardness, averageTime, corrects, wrongs, whites },
-  // studentTime,
+  studentTime,
 }) => {
   return ( 
     <div className="c--test_container" style={{ color: 'black' }}>
@@ -64,7 +64,7 @@ const Test = ({
           <AnalysisBox
             label="تحلیل سوال"
             hardness={hardness}
-            yourTime="۲:۱۱"
+            yourTime={studentTime}
             averageTime={averageTime}
             corrects={`٪${corrects}`}
             wrongs={`٪${wrongs}`}

@@ -16,6 +16,7 @@ const Exam = ({
   question,
   questionIndex,
   answer,
+  studentTime,
   isFinalStage,
   increaseQuestionIndex,
   decreaseQuestionIndex,
@@ -49,6 +50,7 @@ const Exam = ({
         chooseAnswer={changeAnswerOpt}
         correctAnswer={question.correct}
         isExamFinished={isExamFinished}
+        studentTime={studentTime}
       />
     </div>
   </>

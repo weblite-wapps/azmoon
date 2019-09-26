@@ -32,11 +32,12 @@ const Result = ({
 
       {results.map((result, index) =>
        <ResultItem
+         key={result._id}
          rank={index + 1}
          profileImage={result.profileImage}
          fullName={result.fullName}
-         finishTime={result.finishTime}
-         score={result.score}
+         finishTime={result.endTime}
+         score={result.percent.toFixed(2)}
        />)}
    </div>
   </>
@@ -70,38 +71,3 @@ Result.defaultProps = {
 }
 
 export default Result
-
-
-{/* <Result
-    userReuslt="۳۸.۳۳٪"
-    examParticipantCount="۱۰ نفر"
-    examMaxPercent="۹۳.۳۳٪"
-    examAveragePercent="۴۵٪"
-    results={[
-      {
-        profileImage: 'kind',
-        fullName: 'مصطفی محسنی کبیر',
-        finishTime: 'چهارشنبه - ۱۳:۳۰',
-        score: '۱۰۰٪',
-      },
-      {
-        profileImage: 'kind',
-        fullName: 'مسعود محمدصالحی',
-        finishTime: 'چهارشنبه - ۱۱:۳۰',
-        score: '۹۰٪',
-      },
-      {
-        profileImage: 'kind',
-        fullName: 'علی عسگری',
-        finishTime: 'چهارشنبه - ۱۲:۳۰',
-        score: '۸۰٪',
-      },
-      {
-        profileImage: 'kind',
-        fullName: 'فرزین پزشکی',
-        finishTime: 'سه‌شنبه - ۱۷:۳۰',
-        score: '۶۰٪',
-      },
-    ]}
-  />
-  /> */}

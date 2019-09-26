@@ -23,7 +23,8 @@ import {
   averagePercentView,
   userResultView,
 } from '../Home/Home.reducer'
-import { getStatus, getRemainingTime } from './Home.helper'
+import { getRemainingTime } from './Home.helper'
+import { getStatus } from './Home.selector'
 // actions
 import {
   dispatchEffectEditExam,
@@ -34,7 +35,7 @@ import {
   dispatchEffectShowAnswerSheet,
 } from './Home.action'
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),
   isExamReady: isExamReadyView(),
   isExamStarted: isExamStartedView(),
@@ -44,7 +45,7 @@ const mapStateToProps = () => ({
   title: titleView(),
   section: sectionView(),
   duration: durationView(),
-  status: getStatus(), 
+  status: getStatus(state),
   questionCount: questionCountView(),
   remainingTime: getRemainingTime(endTimeView()),
   participantsCount: participantsCountView(),

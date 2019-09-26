@@ -27,6 +27,7 @@ const Exam = ({
 
     <div>
       <StageManager
+        examMode={!isExamFinished}
         finalStage={isFinalStage}
         finalStageLabel="اتمام آزمون"
         firstStage={questionIndex === 0}
@@ -35,7 +36,6 @@ const Exam = ({
         onFinalStageClick={finalStageClick}
         stageLevel={`سوال شماره ${questionIndex + 1}`}
         stageName={title}
-        examMode={!isExamFinished}
       />
       {!isExamFinished && <Timer time={duration} />}
       <Test

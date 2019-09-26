@@ -5,13 +5,14 @@ import { pluck, tap, ignoreElements, mergeMap } from 'rxjs/operators'
 // actions
 import { HANDLE_CREATE_EXAM } from './Create.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { dispatchSetIsLoading, dispatchSetIsExamReady } from '../App/App.action'
+import { dispatchSetIsLoading, dispatchSetIsExamReady, dispatchSetIsExamStarted } from '../App/App.action'
 import { dispatchSetExamInfo } from '../Home/Home.action'
 // helpers
 import { postRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
 // views
 import { wisView, userIdView } from '../App/App.reducer'
+import { startTimeView } from '../Home/Home.reducer'
 
 
 const effectCreateExam = action$ =>
@@ -36,6 +37,7 @@ const effectCreateExam = action$ =>
         .catch(),
     ),
     tap(() => dispatchSetIsExamReady(true)),
+    tap(() => (new Date() > new Date(startTimeView())) && dispatchSetIsExamStarted(true)),
     tap(() => push('/home')),
     ignoreElements(),
   )

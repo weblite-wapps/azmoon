@@ -45,14 +45,14 @@ StageManager.propTypes = {
   onFinalStageClick: PropTypes.func.isRequired,
   stageLevel: PropTypes.string.isRequired,
   stageName: PropTypes.string,
-  examMode: PropTypes.bool,
+  examMode: PropTypes.bool.isRequired,
 }
 StageManager.defaultProps = {
   error: false,
   finalStage: false,
   firstStage: false,
   stageName: '',
-  examMode: false,
+  examMode: true,
 }
 
 export default StageManager

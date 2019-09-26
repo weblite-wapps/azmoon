@@ -35,7 +35,6 @@ module.exports.analyze = async examId => {
     questionCount
   );
   const percents = [];
-
   results.forEach(result => {
     let corrects = 0;
     let wrongs = 0;
@@ -61,8 +60,6 @@ module.exports.analyze = async examId => {
     percents.push(percent);
   });
 
-  console.log("max", percents, R.max(-34, ...percents));
-  console.log("qs", qStats, prefixStats(qStats[0]));
   await Promise.all(
     questions.map((q, i) => updateQuestionStats(q, prefixStats(qStats[i])))
   );

@@ -62,17 +62,16 @@ const effectChangeAnswerOptEpic = action$ =>
     pluck('payload', 'opt'),
     tap(dispatchChangeAnswerOpt),
     map(opt => ({
-      opt,
+      opt: opt ? opt : null,
       index: questionIndexView(),
       stdId: userIdView(),
       exam: wisView(),
     })),
+    tap(console.log),
     mergeMap(data =>
       postRequest('/result/saveOption')
         .send({
           ...data,
-          examId: wisView(),
-          stdId: userIdView(),
           dur: R.path(['dur'], R.nth(questionIndexView(), answersView())),
         })
         .on(
@@ -88,7 +87,6 @@ const effectChangeAnswerOptEpic = action$ =>
 const effectSetUserStartTime = action$ =>
   action$.pipe(
     ofType(SET_USER_START_TIME),
-    tap(console.log),
     mergeMap(() =>
       postRequest('/result/start')
         .send({ exam: wisView(), stdId: userIdView() })
@@ -99,7 +97,6 @@ const effectSetUserStartTime = action$ =>
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
     ),
-    tap(console.log),
     ignoreElements(),
   )
 
@@ -118,7 +115,6 @@ const effectEndExamButtonClick = action$ =>
     ),
     tap(() => push('/home')),
     tap(() => dispatchSetIsParticipated(true)),
-    tap(console.log),
     ignoreElements(),
   )
 

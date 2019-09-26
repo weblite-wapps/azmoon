@@ -48,16 +48,16 @@ const Home = ({
 
       {isAdmin && isExamStarted && (
         <>
-          <InfoTags title="بیشترین درصد" description={maxPercent.toFixed(2)} />
-          <InfoTags title="کمترین درصد" description={minPercent.toFixed(2)} />
-          <InfoTags title="میانگین درصد" description={averagePercent.toFixed(2)} />
+          <InfoTags title="بیشترین درصد" description={maxPercent !== '-' && maxPercent.toFixed(2)} />
+          <InfoTags title="کمترین درصد" description={minPercent !== '-' && minPercent.toFixed(2)} />
+          <InfoTags title="میانگین درصد" description={averagePercent !== '-' && averagePercent.toFixed(2)} />
         </>
       )}
       {!isExamFinished && (
         <InfoTags title="زمان باقیمانده" description={remainingTime} />
       )}
       {isExamFinished && !isAdmin && (
-        <InfoTags title="نتیجه شما" description={userResult.toFixed(2)} />
+        <InfoTags title="نتیجه شما" description={userResult !== '-' && userResult.toFixed(2)} />
       )}
     </div>
 
@@ -73,8 +73,8 @@ const Home = ({
     }
 
     {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && <Button variant="labeled" onClick={onStartExam} color="#6DC2EF" text="شروع آزمون" />}
-    {((isExamStarted && isAdmin) || (isExamFinished && !isAdmin)) && <Button variant="labeled" onClick={onShowResults} color="#6DC2EF" text="نتایج آزمون" />}
-    {((isExamFinished && !isAdmin) || isAdmin) && <Button variant="labeled" onClick={onShowAnswerSheet} color="#84CE2D" text="پاسخ‌نامه" />}
+    {isExamFinished && <Button variant="labeled" onClick={onShowResults} color="#6DC2EF" text="نتایج آزمون" />}
+    {isExamFinished && <Button variant="labeled" onClick={onShowAnswerSheet} color="#84CE2D" text="پاسخ‌نامه" />}
     {/* <Button variant="labeled" color="#808285" text="ویرایش آزمون و ارسال مجدد" /> */}
   </div>
 )
@@ -124,6 +124,7 @@ Home.propTypes = {
 }
 Home.defaultProps = {
   status: '-',
+  section: '-',
   participantsCount: '-',
   questionCount: '-',
   maxPercent: '-',

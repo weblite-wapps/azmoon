@@ -59,8 +59,8 @@ const initialFetchEpic = action$ =>
         results: results.body,
       })),
     ),
+    tap(() => window.W && window.W.start()),
     tap(({ exam }) => !exam && !isAdminView() && push('/home')),
-
     filter(({ exam }) => {
       if (!exam) {
         dispatchSetIsLoading(false)

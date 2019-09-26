@@ -19,7 +19,7 @@ export const cns = (...args) => {
 
 /* === Strings === */
 export const toPersian = (string = '') =>
-  string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('ar-EG'))
+  string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('fa-EG'))
 
 // is rlt if arabic pattern contains all character
 const ARABIC_PATTERN = /[\u0600-\u06FF]/

@@ -64,3 +64,7 @@ export const dispatchHandleFinalStageClick = (...args) =>
 export const SET_EXAM_INFO = 'SET_EXAM_INFO'
 export const setExamInfo = createAction(SET_EXAM_INFO)
 export const dispatchSetExamInfo = (...args) => dispatch(setExamInfo(...args))
+
+export const SET_EXAM_ANSWERS = 'SET_EXAM_ANSWERS'
+export const setExamAnswers = createAction(SET_EXAM_ANSWERS)
+export const dispatchSetExamAnswers = (...args) => dispatch(setExamAnswers(...args))

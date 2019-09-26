@@ -7,6 +7,7 @@ import {
   CHANGE_ANSWER_OPT,
   SET_EXAM_DURATION,
   SET_EXAM_INFO,
+  SET_EXAM_ANSWERS,
 } from './Exam.action'
 
 const initialState = {
@@ -70,6 +71,11 @@ const reducer = {
     duration,
     questions,
     questionCount: questions.length,
+  }),
+
+  [SET_EXAM_ANSWERS]: (state, answers) => ({
+    ...state,
+    answers,
   }),
 }
 

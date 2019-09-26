@@ -5,6 +5,8 @@ import StageManager from '../../helper/components/StageManager/main/StageManager
 import Timer from '../../helper/components/Timer/Timer.container'
 import Test from '../../helper/components/Test/Test.presentational'
 import Tabs from '../../helper/components/Tabs/Tabs.presentational'
+// helpers
+import { getStats } from '../../helper/functions/utils.helper'
 // style
 import './Exam.scss'
 
@@ -42,14 +44,11 @@ const Exam = ({
         prob={question.prob}
         sol={question.sol}
         options={question.options}
-        stats={question.stats}
+        stats={getStats(question.stats)}
         answer={answer}
-        level="سخت"
-        averageTime="1:35"
-        studentTime="0:56"
         chooseAnswer={changeAnswerOpt}
-        // correctAnswer={correctAnswer}
-        showAnalysis={isExamFinished}
+        correctAnswer={question.correct}
+        isExamFinished={isExamFinished}
       />
     </div>
   </>

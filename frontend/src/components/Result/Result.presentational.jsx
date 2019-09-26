@@ -22,7 +22,7 @@ const Result = ({
   <>
     <Tabs onReturn={onReturn} onExport={onExport} />
     <div className="c--result_container">
-      <InfoTags title="نتیجه شما" description={userResult} />
+      <InfoTags title="نتیجه شما" description={userResult.toFixed(2)} />
       <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
       <InfoTags title="بیشترین درصد" description={maxPercent} />
       <InfoTags title="کمترین درصد" description={minPercent} />
@@ -52,7 +52,10 @@ Result.propTypes = {
       PropTypes.string,
       PropTypes.number,
     ]),
-    userResult: PropTypes.string,
+    userResult: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     results: PropTypes.arrayOf(PropTypes.shape({})),
     onReturn: PropTypes.func.isRequired,
     onExport: PropTypes.func.isRequired,

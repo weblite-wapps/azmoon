@@ -15,9 +15,8 @@ const Test = ({
   answer,
   chooseAnswer,
   correctAnswer,
-  showAnalysis,
-  // level,
-  // averageTime,
+  isExamFinished,
+  stats: { hardness, averageTime, corrects, wrongs, whites },
   // studentTime,
 }) => {
   return ( 
@@ -51,7 +50,7 @@ const Test = ({
         ))}
       </div>
 
-      {showAnalysis && (
+      {isExamFinished && (
         <>
           <Divider variant="middle" />
 
@@ -64,12 +63,12 @@ const Test = ({
 
           <AnalysisBox
             label="تحلیل سوال"
-            hardness="متوسط"
+            hardness={hardness}
             yourTime="۲:۱۱"
-            averageTime="۳:۱۱"
-            corrects="۳۰٪"
-            wrongs="۳۵٪"
-            whites="۳۵٪"
+            averageTime={averageTime}
+            corrects={`٪${corrects}`}
+            wrongs={`٪${wrongs}`}
+            whites={`٪${whites}`}
           />
         </>
       )}
@@ -78,7 +77,7 @@ const Test = ({
 }
 
 Test.propTypes = {
-  showAnalysis: PropTypes.bool.isRequired,
+  isExamFinished: PropTypes.bool.isRequired,
 }
 
 Test.defaultProps = {}

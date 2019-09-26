@@ -17,6 +17,7 @@ import { dispatchSetHomeInfo } from '../Home/Home.action'
 import {
   dispatchSetExamDuration,
   dispatchSetExamInfo,
+  dispatchSetExamAnswers,
 } from '../Exam/Exam.action'
 // views
 import { wisView, isAdminView, userIdView } from './App.reducer'
@@ -76,7 +77,7 @@ const initialFetchEpic = action$ =>
     tap(() => push('/home')),
     tap(console.log),
     tap(({ exam, participantsCount, result }) =>
-      dispatchSetHomeInfo({ ...exam, participantsCount, userResult: result.percent }),
+      dispatchSetHomeInfo({ ...exam, participantsCount, userResult: result && result.percent }),
     ),
     tap(({ exam: { duration, questions } }) =>
       dispatchSetExamInfo({ duration, questions }),
@@ -94,6 +95,7 @@ const initialFetchEpic = action$ =>
     tap(({ results }) => dispatchSetResults(results)),
     filter(() => !isAdminView()),
     tap(({ result }) => result && dispatchSetIsParticipated(true)),
+    tap(({ result }) => result && dispatchSetExamAnswers(result.answers)), 
     ignoreElements(),
   )
 // .do(

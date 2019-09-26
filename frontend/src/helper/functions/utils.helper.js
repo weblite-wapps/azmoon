@@ -1,3 +1,4 @@
+import { differenceInSeconds } from 'date-fns'
 const R = require('ramda')
 /** Abbreviated for  A & B test for classnames
  * Caution try not to use branch function so much this function lead you to better
@@ -58,4 +59,49 @@ export const onQuestionError = ({ prob, options }) => {
       ),
     }
   }
+}
+
+const { format } = new Intl.NumberFormat([], { minimumIntegerDigits: 2 })
+const formattedSeconds = (time) => `${format(Math.floor(time / 3600))}:${format(
+    Math.floor((time % 3600) / 60),
+    )}:${format(time % 60)}`
+
+export const getRemainingTime = (endTime) => {
+    const now = new Date()
+    const end = new Date(endTime)
+
+    return formattedSeconds(differenceInSeconds(end, now))
+}
+
+const formattedSecondsForStats = (time) => `${format(
+  Math.floor((time % 3600) / 60),
+  )}:${format(time % 60)}`
+
+export const getAverageTime = (stats) => {
+  const { dur, correct, wrong, white } = stats
+
+  return formattedSecondsForStats(dur / (correct + wrong + white))
+}
+
+export const getStats = (stats) => {
+  const { dur, correct, wrong, white } = stats
+  const total = correct + wrong + white
+  const average = dur / total
+  const averageTime = formattedSecondsForStats(average)
+  const corrects = ((correct / total ) * 100).toFixed(0)
+  const wrongs = ((wrong / total ) * 100).toFixed(0)
+  const whites = ((white / total ) * 100).toFixed(0)
+
+  let hardness = ''
+  if (average > 120 || corrects < 25) hardness = 'سخت'
+  else if (corrects > 25 && corrects < 75) hardness = 'متوسط'
+  else hardness = 'آسان'
+
+  return ({
+    hardness,
+    averageTime,
+    corrects,
+    wrongs,
+    whites,
+  })
 }

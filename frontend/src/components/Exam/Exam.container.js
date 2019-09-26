@@ -30,7 +30,6 @@ const mapStateToProps = () => ({
     answersView()[questionIndexView()] &&
     answersView()[questionIndexView()].opt,
   isFinalStage: questionCountView() === questionIndexView() + 1,
-  title: titleView(),
   isExamFinished: isExamFinishedView(),
 })
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 // components
 import Home from './Home.presentational'
 // views
-// import { tabIndexView, numbersObjectView, isLoadingView } from './Home.reducer'
 import {
   isParticipatedView,
   isExamReadyView,
@@ -23,8 +22,6 @@ import {
   averagePercentView,
   userResultView,
 } from '../Home/Home.reducer'
-import { getRemainingTime } from './Home.helper'
-import { getStatus } from './Home.selector'
 // actions
 import {
   dispatchEffectEditExam,
@@ -34,6 +31,10 @@ import {
   dispatchEffectShowResults,
   dispatchEffectShowAnswerSheet,
 } from './Home.action'
+// helpers
+import { getRemainingTime } from '../../helper/functions/utils.helper'
+import { getStatus } from './Home.selector'
+
 
 const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),

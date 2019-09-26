@@ -89,7 +89,7 @@ export default class QuestionInfo extends Component {
             label="سوال"
             placeholder="صورت سوال را وارد کنید"
           />
-          <FileUpload id="kind" onUpload={() => console.log('kind')} />
+          <FileUpload id="image" onUpload={() => console.log('image')} />
           <TextField
             required
             hasError={hasError.options && hasError.options[0]}
@@ -129,7 +129,7 @@ export default class QuestionInfo extends Component {
             label="پاسخ تشریحی"
             placeholder="پاسخ تشریحی را وارد کنید"
           />
-          <FileUpload id="kind" onUpload={() => console.log('kind')} />
+          <FileUpload id="image" onUpload={() => console.log('image')} />
         </div>
       </>
     )

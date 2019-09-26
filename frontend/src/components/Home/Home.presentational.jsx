@@ -48,18 +48,17 @@ const Home = ({
 
       {isAdmin && isExamStarted && (
         <>
-          <InfoTags title="بیشترین درصد" description={maxPercent} />
-          <InfoTags title="کمترین درصد" description={minPercent} />
-          <InfoTags title="میانگین درصد" description={averagePercent} />
+          <InfoTags title="بیشترین درصد" description={maxPercent.toFixed(2)} />
+          <InfoTags title="کمترین درصد" description={minPercent.toFixed(2)} />
+          <InfoTags title="میانگین درصد" description={averagePercent.toFixed(2)} />
         </>
       )}
       {!isExamFinished && (
         <InfoTags title="زمان باقیمانده" description={remainingTime} />
       )}
       {isExamFinished && !isAdmin && (
-        <InfoTags title="نتیجه شما" description={userResult} />
+        <InfoTags title="نتیجه شما" description={userResult.toFixed(2)} />
       )}
-      */}
     </div>
 
     {!isExamStarted && !isExamFinished && isAdmin && (
@@ -98,11 +97,23 @@ Home.propTypes = {
       PropTypes.string,
       PropTypes.number,
     ]),
-    maxPercent: PropTypes.string,
-    minPercent: PropTypes.string,
-    averagePercent: PropTypes.string,
+    maxPercent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    minPercent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    averagePercent: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     remainingTime: PropTypes.string,
-    userResult: PropTypes.string,
+    userResult: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
 
     onCloseExam: PropTypes.func,
     onOpenExam: PropTypes.func,

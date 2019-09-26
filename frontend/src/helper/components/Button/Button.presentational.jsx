@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles, darken } from '@material-ui/core/styles'
 // icons
 import AddIcon from '@material-ui/icons/Add'
-import Down from '@material-ui/icons/ArrowDropDown'
 // helper
 import { cns, ab } from '../../functions/utils.helper'
 import './Button.scss'
@@ -67,7 +66,6 @@ const CustomizedButton = ({
   const classes = useStyles()
   const fixed = variant === 'fixed'
   const labeled = variant === 'labeled'
-  console.log('TCL: enableAddIcon', enableAddIcon)
   return (
     <Button
       variant="contained"

@@ -3,10 +3,15 @@
 }
 
 .c--exam-info_container {
-  margin: 20px;
-  margin-right: 5px;
-  padding-right: 15px;
-  /* height: 100%; */
-  // height: calc(100% - 40px - 40px - 45px);
-  height: calc(100% - 125px);
+  margin-left: 20px;
+  margin-right: 1px;
+  padding-right: 10px;
+  // app-bar + fixed-button  = 45 + 40
+  // height: calc(100% - 40px - 45px);
+  height: calc(100% - 85px);
+  &:after, &:before {
+    content: '';
+    height: 20px;
+    display: block;
+  }
 }

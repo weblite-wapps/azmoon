@@ -65,7 +65,6 @@ const CustomizedButton = ({
   const classes = useStyles()
   const fixed = variant === 'fixed'
   const labeled = variant === 'labeled'
-  console.log('TCL: disableAddIcon', disableAddIcon)
   return (
     <Button
       variant="contained"

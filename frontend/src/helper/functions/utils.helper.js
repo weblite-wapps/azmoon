@@ -20,6 +20,10 @@ export const cns = (...args) => {
 export const toPersian = (string = '') =>
   string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('ar-EG'))
 
+// is rlt if arabic pattern contains all character
+const ARABIC_PATTERN = /[\u0600-\u06FF]/
+export const getDirection = text => (ARABIC_PATTERN.test(text) ? 'rtl' : 'ltr')
+
 /* === Logical helpers === */
 
 /** onEnterPress */

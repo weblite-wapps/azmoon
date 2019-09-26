@@ -81,7 +81,7 @@ export default class QuestionInfo extends Component {
           stageLevel={`سوال شماره ${index + 1}`}
           stageName="آزمون"
         />
-        <div className="c--question-info_container">
+        <div className="c--question-info_container scroll-bar">
           <TextArea
             required
             hasError={hasError.prob}
@@ -90,7 +90,11 @@ export default class QuestionInfo extends Component {
             label="سوال"
             placeholder="صورت سوال را وارد کنید"
           />
-          <FileUpload id="kind" onUpload={() => console.log('kind')} />
+          <FileUpload
+            label="تصویر مربوط به سوال"
+            id="question-input-file"
+            onUpload={() => console.log('kind')}
+          />
           <TextField
             required
             hasError={hasError.options && hasError.options[0]}
@@ -123,14 +127,21 @@ export default class QuestionInfo extends Component {
             label="گزینه چهار"
             placeholder="متن گزینه چهارم"
           />
-          <GroupButton onChange={ans => this.handleAddCorrect(ans)} />
+          <GroupButton
+            label="گزینه صحیح"
+            onChange={ans => this.handleAddCorrect(ans)}
+          />
           <TextArea
             onChange={this.handleAddData('sol')}
             value={sol}
             label="پاسخ تشریحی"
             placeholder="پاسخ تشریحی را وارد کنید"
           />
-          <FileUpload id="kind" onUpload={() => console.log('kind')} />
+          <FileUpload
+            label="تصویر مربوط به سوال"
+            id="answer-input-file"
+            onUpload={() => console.log('kind')}
+          />
         </div>
       </>
     )

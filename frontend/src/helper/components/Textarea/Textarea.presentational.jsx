@@ -8,15 +8,28 @@ const styles = theme => ({
   root: {
     direction: 'rtl',
     'label + &': {
-      marginTop: theme.spacing(2),
+      marginTop: 20,
       borderRadius: 11,
       resize: 'none',
       outline: 'none',
+      padding: '7px 9px',
+      minHeight: 60,
+      maxHeight: 150,
+      boxSizing: 'border-box',
+      fontSize: 12,
+      lineHeight: '21px',
+      letterSpacing: -0.08,
       transition: theme.transitions.create(['border-color', 'box-shadow']),
       '&:focus': {
-        boxShadow: `${fade('rgb(128, 130, 133)', 0.5)} 0 0 0 0.1rem`,
+        boxShadow: `${fade('rgb(128, 130, 133)', 0.6)} 0 0 0 0.1rem`,
         borderColor: 'rgb(128, 130, 133)',
       },
+    },
+  },
+  formControl: {
+    marginTop: 15,
+    '&:first-child': {
+      marginTop: 0,
     },
   },
 })
@@ -34,7 +47,12 @@ const TextField = ({
     .toString(36)
     .substr(-5)}`
   return (
-    <FormControl fullWidth error={hasError} required={required}>
+    <FormControl
+      className={classes.formControl}
+      fullWidth
+      error={hasError}
+      required={required}
+    >
       <BootstrapInputLabel htmlFor={id}>{label}</BootstrapInputLabel>
       <TextareaAutosize
         className={classes.root}
@@ -79,6 +97,8 @@ const BootstrapInputLabel = withStyles(theme => ({
     color: '#000',
     fontSize: 12,
     fontWeight: 500,
+    lineHeight: '21px',
+    letterSpacing: -0.08,
   },
 
   shrink: {

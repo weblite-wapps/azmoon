@@ -6,6 +6,8 @@ import Divider from '@material-ui/core/Divider'
 import Tabs from '../../helper/components/Tabs/Tabs.presentational'
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import ResultItem from '../../helper/components/ResultItem/ResultItem.presentational'
+// helpers
+import { convertToPersianFormat } from '../../helper/functions/time.helper'
 // style
 import './Result.scss'
 
@@ -35,8 +37,8 @@ const Result = ({
          key={result._id}
          rank={index + 1}
          profileImage={result.profileImage}
-         fullName={result.fullName}
-         finishTime={result.endTime}
+         fullName={result.firstname + ' ' + result.lastname}
+         finishTime={result.endTime && convertToPersianFormat(new Date(result.endTime))}
          score={result && result.percent.toFixed(2)}
        />)}
    </div>

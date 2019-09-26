@@ -23,9 +23,9 @@ import {
 // views
 import { wisView, isAdminView, userIdView, isExamFinishedView } from './App.reducer'
 // helpers
-// import { mapToUsername } from './Home.helper'
 import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
+import { mapToUserIds, injectUserInfo } from './App.helper'
 
 const initialFetchEpic = action$ =>
   action$.pipe(
@@ -69,6 +69,13 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
+    tap(({ results }) => {
+      window.W &&
+        window.W.getUsersInfoById(mapToUserIds(results)).then(usersInfo => {
+          const newResults = injectUserInfo(results, usersInfo)
+          dispatchSetResults(newResults)
+        })
+    }),
     tap(console.log),
     tap(({ exam, result }) =>
       dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
@@ -87,7 +94,6 @@ const initialFetchEpic = action$ =>
         new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
     ),
     tap(() => !isExamFinishedView() && dispatchHandleStartExam()),
-    tap(({ results }) => dispatchSetResults(results)),
     filter(() => !isAdminView()),
     tap(({ result }) => result && dispatchSetIsParticipated(true)),
     tap(({ result }) => result && dispatchSetExamAnswers(result.answers)),

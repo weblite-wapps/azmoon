@@ -20,11 +20,8 @@ const Result = ({
   results,
   onReturn,
   onExport,
-}) => {
-  console.log(userResult)
-  console.log(results)
-  return (
-    <>
+}) => (
+  <>
       <Tabs onReturn={onReturn} onExport={onExport} />
       <div className="c--result_container">
         <InfoTags
@@ -50,16 +47,16 @@ const Result = ({
       <Divider variant="middle" />
 
       {results.map((result, index) =>
-       <ResultItem
-         key={result._id}
-         rank={index + 1}
-         profileImage={result.profileImage}
-         fullName={result.firstname + ' ' + result.lastname}
-         finishTime={result.endTime && convertToPersianFormat(new Date(result.endTime))}
-         score={result && result.percent && result.percent.toFixed(2)}
-       />)}
-   </div>
-  </>
+      <ResultItem
+        key={result._id}
+        rank={index + 1}
+        profileImage={result.profileImage}
+        fullName={result.firstname + ' ' + result.lastname}
+        finishTime={result.endTime && convertToPersianFormat(new Date(result.endTime))}
+        score={result && result.percent && result.percent.toFixed(2)}
+      />)}
+  </div>
+</>
 )
 Result.propTypes = {
   participantCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

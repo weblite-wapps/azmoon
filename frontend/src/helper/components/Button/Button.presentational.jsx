@@ -31,6 +31,7 @@ const useStyles = makeStyles(() => ({
   labeledRoot: {
     '--size': '8px',
     '--color': '#6DC2EF',
+    margin: '5px 0px',
   },
   typography: {
     color: '#fff',
@@ -59,6 +60,7 @@ const CustomizedButton = ({
   onClick,
   classesProp,
   selected,
+  color,
   style,
   enableAddIcon,
 }) => {
@@ -78,7 +80,7 @@ const CustomizedButton = ({
         classesProp.button,
       )}
       onClick={onClick}
-      style={style}
+      style={{ ...style, backgroundColor: color }}
     >
       <Typography className={cns(classes.typography, classesProp.typography)}>
         {text}
@@ -101,6 +103,7 @@ CustomizedButton.propTypes = {
   variant: PropTypes.oneOf(['fixed', 'labeled', 'normal']),
   onClick: PropTypes.func,
   selected: PropTypes.bool,
+  color: PropTypes.string,
   enableAddIcon: PropTypes.bool,
   text: PropTypes.string.isRequired,
 }
@@ -110,6 +113,7 @@ CustomizedButton.defaultProps = {
   className: '',
   variant: 'fixed',
   selected: false,
+  color: '',
   enableAddIcon: false,
   onClick: Function.prototype,
 }

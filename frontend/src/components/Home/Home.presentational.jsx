@@ -59,6 +59,7 @@ const Home = ({
       {isExamFinished && !isAdmin && (
         <InfoTags title="نتیجه شما" description={userResult} />
       )}
+      */}
     </div>
 
     {!isExamStarted && !isExamFinished && isAdmin && (

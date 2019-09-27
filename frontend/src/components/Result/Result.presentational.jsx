@@ -28,21 +28,21 @@ const Result = ({
         {!isAdmin &&<InfoTags
           title="نتیجه شما"
           description={
-            userResult !== '-' && userResult && userResult.toFixed(2)
+            userResult !== '-' && userResult && userResult.toFixed(0)
           }
         />}
         <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
         <InfoTags
           title="بیشترین درصد"
-          description={maxPercent !== '-' && maxPercent.toFixed(2)}
+          description={maxPercent !== '-' && maxPercent.toFixed(0)}
         />
         <InfoTags
           title="کمترین درصد"
-          description={minPercent !== '-' && minPercent.toFixed(2)}
+          description={minPercent !== '-' && minPercent.toFixed(0)}
         />
         <InfoTags
           title="میانگین درصد"
-          description={averagePercent !== '-' && averagePercent.toFixed(2)}
+          description={averagePercent !== '-' && averagePercent.toFixed(0)}
         />
 
       <Divider variant="middle" />
@@ -54,7 +54,7 @@ const Result = ({
         profileImage={result.profileImage}
         fullName={result.firstname + ' ' + result.lastname}
         finishTime={result.endTime && convertToPersianFormat(new Date(result.endTime))}
-        score={result && result.percent && result.percent.toFixed(2)}
+        score={result && result.percent && result.percent.toFixed(0)}
       />)}
   </div>
 </>

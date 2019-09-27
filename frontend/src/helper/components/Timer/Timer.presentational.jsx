@@ -3,6 +3,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 // components
 import Typography from '@material-ui/core/Typography'
+// helpers
+import { toPersian } from '../../functions/utils.helper'
 
 
 
@@ -15,7 +17,7 @@ const Timer = ({
         background: '#808285 0% 0% no-repeat padding-box',
       }}
     >
-      <Typography variant="h4" align="center">{formattedTime}</Typography>
+      <Typography variant="h4" align="center">{toPersian(formattedTime)}</Typography>
     </div>
   )
 }

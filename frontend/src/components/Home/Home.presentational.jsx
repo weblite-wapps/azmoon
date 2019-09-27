@@ -54,19 +54,19 @@ const Home = ({
         <InfoTags title="تعداد سوالات" description={questionCount} />
         <InfoTags title="مدت پاسخگویی" description={duration} />
 
-        {isAdmin && isExamStarted && (
+        {isExamFinished && (
           <>
             <InfoTags
               title="بیشترین درصد"
-              description={maxPercent !== '-' && maxPercent.toFixed(2)}
+              description={maxPercent !== '-' && maxPercent.toFixed(0)}
             />
             <InfoTags
               title="کمترین درصد"
-              description={minPercent !== '-' && minPercent.toFixed(2)}
+              description={minPercent !== '-' && minPercent.toFixed(0)}
             />
             <InfoTags
               title="میانگین درصد"
-              description={averagePercent !== '-' && averagePercent.toFixed(2)}
+              description={averagePercent !== '-' && averagePercent.toFixed(0)}
             />
           </>
         )}
@@ -77,7 +77,7 @@ const Home = ({
           <InfoTags
             title="نتیجه شما"
             description={
-              userResult !== '-' && userResult && userResult.toFixed(2)
+              userResult !== '-' && userResult && userResult.toFixed(0)
             }
           />
         )}

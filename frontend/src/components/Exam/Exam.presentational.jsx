@@ -6,7 +6,7 @@ import Timer from '../../helper/components/Timer/Timer.container'
 import Test from '../../helper/components/Test/Test.presentational'
 import Tabs from '../../helper/components/Tabs/Tabs.presentational'
 // helpers
-import { getStats, toPersian } from '../../helper/functions/utils.helper'
+import { getStats } from '../../helper/functions/utils.helper'
 // style
 import './Exam.scss'
 
@@ -40,7 +40,7 @@ const Exam = ({
         stageLevel={`سوال شماره ${questionIndex + 1}`}
         stageName={title}
       />
-      {!isExamFinished && <Timer time={toPersian(duration)} />}
+      {!isExamFinished && <Timer time={duration} />} 
       <Test
         prob={question.prob}
         sol={question.sol}

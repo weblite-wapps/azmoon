@@ -19,7 +19,8 @@ export const cns = (...args) => {
 
 /* === Strings === */
 export const toPersian = (string = '') =>
-  string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('fa-EG'))
+  string.toString().replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('fa-EG'))
+  
 
 // is rlt if arabic pattern contains all character
 const ARABIC_PATTERN = /[\u0600-\u06FF]/
@@ -90,7 +91,7 @@ export const getAverageTime = (stats) => {
 export const getStats = (stats) => {
   const { dur, correct, wrong, white } = stats
   const total = correct + wrong + white
-  const average = dur / total
+  const average = (dur / total).toFixed(0)
   const averageTime = formattedSecondsForStats(average)
   const corrects = ((correct / total ) * 100).toFixed(0)
   const wrongs = ((wrong / total ) * 100).toFixed(0)

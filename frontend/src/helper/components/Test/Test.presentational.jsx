@@ -5,6 +5,8 @@ import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 // components
 import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
+// helpers
+import { toPersian } from '../../functions/utils.helper'
 // style
 import './Test.scss'
 
@@ -43,7 +45,7 @@ const Test = ({
               }}
               onClick={() => correctAnswer != null || chooseAnswer(index)}
             >
-              {index + 1}
+              {toPersian(index + 1)}
             </div>
             <div className="c--test_opt-text"> {value} </div>
           </div>

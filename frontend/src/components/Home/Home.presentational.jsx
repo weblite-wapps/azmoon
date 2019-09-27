@@ -50,16 +50,15 @@ const Home = ({
 
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
-        <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
+        {isExamFinished && <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />}
         <InfoTags title="تعداد سوالات" description={questionCount} />
-        <InfoTags title="مدت پاسخگویی" description={`${duration} دقیقه`} />
+        <InfoTags title="مدت پاسخگویی" description={duration} />
 
         {isAdmin && isExamStarted && (
           <>
             <InfoTags
               title="بیشترین درصد"
               description={maxPercent !== '-' && maxPercent.toFixed(2)}
-              // description={maxPercent !== '-' && maxPercent.toFixed(2)}
             />
             <InfoTags
               title="کمترین درصد"
@@ -131,7 +130,7 @@ const Home = ({
           variant="labeled"
           onClick={onShowAnswerSheet}
           color="#84CE2D"
-          text="پاسخ‌نامه"
+          text="پاسخ‌ نامه"
         />
       )}
       {/* <Button variant="labeled" color="#808285" text="ویرایش آزمون و ارسال مجدد" /> */}

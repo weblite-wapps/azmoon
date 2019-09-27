@@ -1,8 +1,10 @@
+// modules
 import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
-// third party packages
+// helpers
+import { toPersian } from '../../functions/utils.helper'
 // style
 import './ResultItem.scss'
 
@@ -38,7 +40,7 @@ const ResultItem = ({
         <img alt="home" src={`images/${getMedal(rank)}-medal.svg`} />
       </div>}
 
-      <Typography variant="subtitle2">{score}</Typography>
+      <Typography variant="subtitle2">{toPersian(score)}</Typography>
     </div>    
   </div>
 )

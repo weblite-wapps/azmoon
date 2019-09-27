@@ -12,6 +12,7 @@ import { convertToPersianFormat } from '../../helper/functions/time.helper'
 import './Result.scss'
 
 const Result = ({
+  isAdmin,
   participantCount,
   maxPercent,
   minPercent,
@@ -24,12 +25,12 @@ const Result = ({
   <>
       <Tabs onReturn={onReturn} onExport={onExport} />
       <div className="c--result_container">
-        <InfoTags
+        {!isAdmin &&<InfoTags
           title="نتیجه شما"
           description={
             userResult !== '-' && userResult && userResult.toFixed(2)
           }
-        />
+        />}
         <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
         <InfoTags
           title="بیشترین درصد"
@@ -59,6 +60,7 @@ const Result = ({
 </>
 )
 Result.propTypes = {
+  isAdmin: PropTypes.bool,
   participantCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -70,6 +72,7 @@ Result.propTypes = {
 }
 
 Result.defaultProps = {
+  isAdmin: false,
   participantCount: '-',
   maxPercent: '-',
   minPercent: '-',

@@ -1,9 +1,11 @@
+// modules
 import React from 'react'
 import PropTypes from 'prop-types'
-// third party packages
 // components
 import StageManagerInfo from '../components/StageManagerInfo/StageManagerInfo.presentational'
 import ArrowButton from '../components/ArrowButton/ArrowButton.presentational'
+// helpers
+import { toPersian } from '../../../functions/utils.helper'
 // style
 import './StageManager.scss'
 
@@ -29,7 +31,7 @@ const StageManager = ({
       )}
       {!finalStage && <ArrowButton type="Left" onClick={onLeftClick} />}
 
-    <StageManagerInfo stageName={stageName} stageLevel={stageLevel} />
+    <StageManagerInfo stageName={stageName} stageLevel={toPersian(stageLevel)} />
 
     {!firstStage && <ArrowButton type="Right" onClick={onRightClick} hasError={error} />}
   </div>

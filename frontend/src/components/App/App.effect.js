@@ -99,34 +99,5 @@ const initialFetchEpic = action$ =>
     tap(({ result }) => result && dispatchSetExamAnswers(result.answers)),
     ignoreElements(),
   )
-// .do(
-//   ({ body }) =>
-//     window.W &&
-//     window.W.getUsersInfo(mapToUsername(body)).then(info => {
-//       const users = R.values(info)
-//       // TODO: load users
-//     }),
-// )
-// .do(() => dispatchSetIsLoading(false))
-// .ignoreElements()
-
-// const initialFetchEpic = action$ =>
-//   action$
-//     .ofType(FETCH_INITIAL_DATA)
-//     .do(() => window.W && window.W.start())
-//     .do(() => dispatchSetIsLoading(true))
-//     .mergeMap(() =>
-//       getRequest('/initialFetch')
-//         .query({ wis: wisView() })
-//         .on(
-//           'error',
-//           err =>
-//             err.status !== 304 &&
-//             dispatchChangeSnackbarStage('Server disconnected!'),
-//         ),
-//     )
-//     .do(({ body: { tasks } }) => dispatchLoadTasksData(tasks))
-//     .do(() => dispatchSetIsLoading(false))
-//     .ignoreElements()
 
 export default combineEpics(initialFetchEpic)

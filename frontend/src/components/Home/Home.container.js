@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 
   title: titleView(),
   section: sectionView(),
-  duration: durationView(),
+  duration: `${durationView()} دقیقه`,
   status: getStatus(state),
   questionCount: questionCountView() ? questionCountView() : '--',
   remainingTime: endTimeView() ? getRemainingTime(endTimeView()) : '--',

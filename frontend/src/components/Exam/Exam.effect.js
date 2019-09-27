@@ -23,9 +23,10 @@ import {
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
 import { postRequest } from '../../helper/functions/request.helper'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { wisView, userIdView } from '../App/App.reducer'
+import { wisView, userIdView, userNameView } from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
+import { creatorIdView } from '../Home/Home.reducer'
 
 const effectStartExamEpic = action$ =>
   action$.pipe(
@@ -118,6 +119,7 @@ const effectEndExamButtonClick = action$ =>
     ),
     tap(() => push('/home')),
     tap(() => dispatchSetIsParticipated(true)),
+    tap(() => window.W && window.W.sendNotificationToUsers("آزمون", `${userNameView()} در آزمون شرکت کرد`, "", [creatorIdView()])),
     ignoreElements(),
   )
 

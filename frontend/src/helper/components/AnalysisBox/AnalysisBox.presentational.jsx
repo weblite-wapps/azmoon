@@ -8,7 +8,7 @@ import PercentageInfo from '../InfoTags/PercentageInfo.presentational'
 import { makeStyles } from '@material-ui/core/styles'
 
 // style
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   label: {
     fontSize: 10,
     lineHeight: '17px',
@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
   columnInfos: {
     width: '100%',
     display: 'flex',
+    marginTop: '5px',
   },
 }))
 

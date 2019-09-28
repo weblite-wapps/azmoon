@@ -1,9 +1,11 @@
+// modules
 import React from 'react'
 import PropTypes from 'prop-types'
-// third party packages
 // components
 import StageManagerInfo from '../components/StageManagerInfo/StageManagerInfo.presentational'
 import ArrowButton from '../components/ArrowButton/ArrowButton.presentational'
+// helpers
+import { toPersian } from '../../../functions/utils.helper'
 // style
 import './StageManager.scss'
 
@@ -17,18 +19,20 @@ const StageManager = ({
   finalStageLabel,
   finalStage,
   firstStage,
+  examMode,
 }) => (
   <div className="recast--stage-manager">
-    {finalStage ? (
+    {examMode && finalStage && (
       <ArrowButton
         type="Titled"
         title={finalStageLabel}
         onClick={onFinalStageClick}
       />
-    ) : (
-      <ArrowButton type="Left" onClick={onLeftClick} />
-    )}
-    <StageManagerInfo stageName={stageName} stageLevel={stageLevel} />
+      )}
+      {!finalStage && <ArrowButton type="Left" onClick={onLeftClick} />}
+
+    <StageManagerInfo stageName={stageName} stageLevel={toPersian(stageLevel)} />
+
     {!firstStage && <ArrowButton type="Right" onClick={onRightClick} hasError={error} />}
   </div>
 )
@@ -43,12 +47,14 @@ StageManager.propTypes = {
   onFinalStageClick: PropTypes.func.isRequired,
   stageLevel: PropTypes.string.isRequired,
   stageName: PropTypes.string,
+  examMode: PropTypes.bool.isRequired,
 }
 StageManager.defaultProps = {
   error: false,
   finalStage: false,
   firstStage: false,
   stageName: '',
+  examMode: true,
 }
 
 export default StageManager

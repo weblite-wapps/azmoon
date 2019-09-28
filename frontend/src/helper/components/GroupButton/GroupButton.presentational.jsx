@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Button, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 // helper
-import { cns, ab } from '../../functions/utils.helper'
+import { toPersian, cns, ab } from '../../functions/utils.helper'
 
 // style
 const useStyles = makeStyles(theme => ({
@@ -77,7 +77,7 @@ const GroupButton = ({ items, onChange, label }) => {
             )}
             onClick={() => chooseOption(index)}
           >
-            {item.label}
+            {toPersian(item.label)}
           </Button>
         ))}
       </div>

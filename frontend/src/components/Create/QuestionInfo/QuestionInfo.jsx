@@ -45,7 +45,7 @@ export default class QuestionInfo extends Component {
   }
 
   handleChangePage(num) {
-    const { index, changePage, addQuestion, openSnackBar } = this.props
+    const { changePage, addQuestion, openSnackBar } = this.props
     if (num > 0) {
       if (onQuestionError(this.state)) {
         openSnackBar('باید موارد ستاره دار را پر کنید')
@@ -66,9 +66,8 @@ export default class QuestionInfo extends Component {
   }
 
   render() {
-    const { prob, sol, questionImage, options, correct, hasError } = this.state
-    const { index, questions, createQuiz } = this.props
-    console.log('hasError ', hasError)
+    const { prob, sol, options, hasError } = this.state
+    const { index, questions, createExam } = this.props
     return (
       <>
         <StageManager
@@ -77,7 +76,7 @@ export default class QuestionInfo extends Component {
           firstStage={index === 0}
           onLeftClick={() => this.handleChangePage(1)}
           onRightClick={() => this.handleChangePage(-1)}
-          onFinalStageClick={createQuiz}
+          onFinalStageClick={() => createExam(this.state)}
           stageLevel={`سوال شماره ${index + 1}`}
           stageName="آزمون"
         />

@@ -1,3 +1,4 @@
+// modules
 import React from 'react'
 import PropTypes from 'prop-types'
 // components
@@ -10,7 +11,7 @@ import './InfoTags.scss'
 const InfoTags = ({ title, description }) => (
   <div className="info-tags">
     <Typography className="info-tags--description">
-      {console.log(typeof description) || toPersian(description)}
+      {toPersian(description)}
     </Typography>
     <Typography className="info-tags--title">{title}</Typography>
   </div>

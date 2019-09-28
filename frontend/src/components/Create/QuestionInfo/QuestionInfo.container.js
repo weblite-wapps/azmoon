@@ -5,17 +5,13 @@ import {
   dispatchAddQuestion,
   dispatchHandleCreateExam,
 } from '../Create.action'
-import {
-  questionIndexView,
-  questionsView,
-  currentStateView,
-} from '../Create.reducer'
+import { questionIndexView, questionsView } from '../Create.reducer'
 import { dispatchChangeSnackbarStage } from '../../Snackbar/Snackbar.action'
 
 const mapDispatchToProps = () => ({
   changePage: dispatchChangeQuestionPage,
   addQuestion: dispatchAddQuestion,
-  createQuiz: () => dispatchHandleCreateExam(currentStateView()),
+  createExam: lastQuestion => dispatchHandleCreateExam(lastQuestion),
   openSnackBar: dispatchChangeSnackbarStage,
 })
 

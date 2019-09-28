@@ -11,26 +11,38 @@ import {
   answersView,
 } from './Exam.reducer'
 import { isExamFinishedView } from '../App/App.reducer'
+import { titleView } from '../Home/Home.reducer'
 // actions
 import {
   dispatchHandleChangeAnswerOpt,
   dispatchChangeQuestionIndex,
+  dispatchHandleFinalStageClick,
 } from './Exam.action'
-
+// helpers
+import { push } from '../../setup/redux'
+import { formattedSecondsForStats } from '../../helper/functions/utils.helper'
 
 const mapStateToProps = () => ({
+  title: titleView(),
   duration: durationView(),
   questionIndex: questionIndexView(),
   question: questionsView()[questionIndexView()],
-  answer: answersView()[questionIndexView()] && answersView()[questionIndexView()].opt,
-  isFinalStage: questionCountView() === (questionIndexView() + 1),
-  isExamFinished: isExamFinishedView()
+  answer:
+    answersView()[questionIndexView()] &&
+    answersView()[questionIndexView()].opt,
+  studentTime:
+    answersView()[questionIndexView()] &&
+    formattedSecondsForStats(answersView()[questionIndexView()].dur),
+  isFinalStage: questionCountView() === questionIndexView() + 1,
+  isExamFinished: isExamFinishedView(),
 })
 
 const mapDispatchToProps = () => ({
   increaseQuestionIndex: () => dispatchChangeQuestionIndex(1),
   decreaseQuestionIndex: () => dispatchChangeQuestionIndex(-1),
   changeAnswerOpt: dispatchHandleChangeAnswerOpt,
+  onReturn: () => push('/home'),
+  finalStageClick: () => dispatchHandleFinalStageClick(),
 })
 
 export default connect(

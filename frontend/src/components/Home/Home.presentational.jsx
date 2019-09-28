@@ -79,15 +79,14 @@ const Home = ({
   onShowAnswerSheet,
 }) => {
   const classes = useStyles()
-
   return (
     <div className="c--home_container scroll-bar">
       <img alt="home" src="images/home.svg" className={classes.logoImage} />
 
       <Typography className={classes.wappName} variant="h1" align="center">
-        آزمــــــــون
+        آزمــــــــــــــون
       </Typography>
-      <Typography variant="body1" align="center" className={classes.examName}>
+      <Typography className={classes.examName} variant="body1" align="center">
         {title}
       </Typography>
       <Typography
@@ -98,39 +97,53 @@ const Home = ({
         {section}
       </Typography>
 
-      <hr className={classes.separator} />
-
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
-        <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
+        {isExamFinished && (
+          <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
+        )}
         <InfoTags title="تعداد سوالات" description={questionCount} />
-        <InfoTags title="مدت پاسخگویی" description={`${duration} دقیقه`} />
+        <InfoTags title="مدت پاسخگویی" description={duration} />
 
-        {isAdmin && isExamStarted && (
+        {isExamFinished && (
           <>
-            <InfoTags title="بیشترین درصد" description={maxPercent} />
-            <InfoTags title="کمترین درصد" description={minPercent} />
-            <InfoTags title="میانگین درصد" description={averagePercent} />
+            <InfoTags
+              title="بیشترین درصد"
+              description={maxPercent !== '-' && maxPercent.toFixed(0)}
+            />
+            <InfoTags
+              title="کمترین درصد"
+              description={minPercent !== '-' && minPercent.toFixed(0)}
+            />
+            <InfoTags
+              title="میانگین درصد"
+              description={averagePercent !== '-' && averagePercent.toFixed(0)}
+            />
           </>
         )}
-
         {!isExamFinished && (
           <InfoTags title="زمان باقیمانده" description={remainingTime} />
         )}
-        {isParticipated && !isAdmin && (
-          <InfoTags title="نتیجه شما" description={userResult} />
+        {isExamFinished && !isAdmin && (
+          <InfoTags
+            title="نتیجه شما"
+            description={
+              userResult !== '-' && userResult && userResult.toFixed(0)
+            }
+          />
         )}
       </div>
 
       {!isExamStarted && !isExamFinished && isAdmin && (
         <>
           <Button
+            variant="normal"
             classesProp={{
               button: classes.button,
               typography: classes.buttonTypography,
             }}
             onClick={onOpenExam}
-            style={{ backgroundColor: '#84CE2D' }}
+            color="#84CE2D"
             text="آغاز آزمون"
           />
           <Button
@@ -138,8 +151,9 @@ const Home = ({
               button: classes.button,
               typography: classes.buttonTypography,
             }}
+            variant="normal"
             onClick={onEditExam}
-            style={{ backgroundColor: '#808285' }}
+            color="#808285"
             text="ویرایش آزمون"
           />
         </>
@@ -147,17 +161,18 @@ const Home = ({
 
       {isExamStarted && !isExamFinished && isAdmin && (
         <Button
+          variant="normal"
           classesProp={{
             button: classes.button,
             typography: classes.buttonTypography,
           }}
           onClick={onCloseExam}
-          style={{ backgroundColor: '#D65555' }}
+          color="#D65555"
           text="بستن آزمون"
         />
       )}
 
-      {!isParticipated && isExamStarted && !isAdmin && (
+      {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && (
         <Button
           classesProp={{
             button: classes.button,
@@ -165,11 +180,11 @@ const Home = ({
           }}
           variant="normal"
           onClick={onStartExam}
-          style={{ backgroundColor: '#6DC2EF' }}
+          color="#6DC2EF"
           text="شروع آزمون"
         />
       )}
-      {((isExamStarted && isAdmin) || (isParticipated && !isAdmin)) && (
+      {isExamFinished && (
         <Button
           classesProp={{
             button: classes.button,
@@ -177,11 +192,11 @@ const Home = ({
           }}
           variant="normal"
           onClick={onShowResults}
-          style={{ backgroundColor: '#6DC2EF' }}
+          color="#6DC2EF"
           text="نتایج آزمون"
         />
       )}
-      {((isParticipated && !isAdmin) || isAdmin) && (
+      {isExamFinished && (
         <Button
           classesProp={{
             button: classes.button,
@@ -189,11 +204,10 @@ const Home = ({
           }}
           variant="normal"
           onClick={onShowAnswerSheet}
-          style={{ backgroundColor: '#84CE2D' }}
+          color="#84CE2D"
           text="پاسخ‌ نامه"
         />
       )}
-      {/* <Button color="#808285" button label="ویرایش آزمون و ارسال مجدد" /> */}
     </div>
   )
 }
@@ -208,13 +222,13 @@ Home.propTypes = {
   title: PropTypes.string.isRequired,
   section: PropTypes.string.isRequired,
   status: PropTypes.string,
-  participantsCount: PropTypes.number,
-  questionCount: PropTypes.number,
-  maxPercent: PropTypes.string,
-  minPercent: PropTypes.string,
-  averagePercent: PropTypes.string,
+  participantsCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  questionCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  averagePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   remainingTime: PropTypes.string,
-  userResult: PropTypes.string,
+  userResult: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   onCloseExam: PropTypes.func,
   onOpenExam: PropTypes.func,
@@ -225,6 +239,7 @@ Home.propTypes = {
 }
 Home.defaultProps = {
   status: '-',
+  section: '-',
   participantsCount: '-',
   questionCount: '-',
   maxPercent: '-',
@@ -242,17 +257,3 @@ Home.defaultProps = {
 }
 
 export default Home
-
-{
-  /* <Home
-  title="آزمون جامع دین‌ و زندگی"
-  section="درس یک تا پنج"
-  duration="۳۰ دقیقه"
-  status="در حال برگزاری"
-  participantsCount="۱۰ نفر"
-  maxPercent="۹۳.۳۳٪"
-  minPercent="۱۱.۲٪"
-  averagePercent="۴۵٪"
-  remainingTime="۱۴:۱۵:۳۰"
-/> */
-}

@@ -1,8 +1,6 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
-import {
-  SET_EXAM_INFO,
-} from './Home.action'
+import { SET_HOME_INFO } from './Home.action'
 
 const initialState = {
   title: '',
@@ -11,20 +9,48 @@ const initialState = {
   questionCount: '',
   startTime: '',
   endTime: '',
+  questions: [],
   participantsCount: '',
+  maxPercent: '',
+  minPercent: '',
+  averagePercent: '',
+  userResult: '',
+  creatorId: '',
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
 export const titleView = () => R.path(['Home', 'title'])(getState())
 export const sectionView = () => R.path(['Home', 'section'])(getState())
 export const durationView = () => R.path(['Home', 'duration'])(getState())
-export const questionCountView = () => R.path(['Home', 'questionCount'])(getState())
+export const questionCountView = () =>
+  R.path(['Home', 'questionCount'])(getState())
 export const startTimeView = () => R.path(['Home', 'startTime'])(getState())
 export const endTimeView = () => R.path(['Home', 'endTime'])(getState())
-export const participantsCountView = () => R.path(['Home', 'participantsCount'])(getState())
+export const participantsCountView = () =>
+  R.path(['Home', 'participantsCount'])(getState())
+export const maxPercentView = () => R.path(['Home', 'maxPercent'])(getState())
+export const minPercentView = () => R.path(['Home', 'minPercent'])(getState())
+export const averagePercentView = () =>
+  R.path(['Home', 'averagePercent'])(getState())
+export const userResultView = () => R.path(['Home', 'userResult'])(getState())
+export const creatorIdView = () => R.path(['Home', 'creatorId'])(getState())
+
 
 const reducer = {
-  [SET_EXAM_INFO]: (state, { title, section, duration, startTime, endTime, questions, participantsCount }) => ({
+  [SET_HOME_INFO]: (
+    state,
+    {
+      title,
+      section,
+      duration,
+      startTime,
+      endTime,
+      questions,
+      result,
+      userResult,
+      creatorId,
+    },
+  ) => ({
     ...state,
     title,
     section,
@@ -32,9 +58,14 @@ const reducer = {
     startTime,
     endTime,
     questionCount: questions.length,
-    participantsCount,
+    questions,
+    participantsCount: result && result.count,
+    maxPercent: result && result.max,
+    minPercent: result && result.min,
+    averagePercent: result && result.avg,
+    userResult,
+    creatorId,
   }),
-
 }
 
 export default (state = initialState, { type, payload }) =>

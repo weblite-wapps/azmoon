@@ -2,13 +2,10 @@ html {
   overflow: auto; // for full height which applies to body tag
 }
 body {
-  // position: fixed;
-  // width: 100%;
   width: 100vw;
   height: 100vh;
   margin: 0;
   color: black;
-  overflow: hidden;
 }
 
 #root {

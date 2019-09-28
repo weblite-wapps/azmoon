@@ -30,6 +30,7 @@ const useStyles = makeStyles(() => ({
   labeledRoot: {
     '--size': '8px',
     '--color': '#6DC2EF',
+    margin: '5px 0px',
   },
   typography: {
     color: '#fff',
@@ -58,8 +59,9 @@ const CustomizedButton = ({
   onClick,
   classesProp,
   selected,
+  color,
   style,
-  disableAddIcon,
+  enableAddIcon,
 }) => {
   const classes = useStyles()
   const fixed = variant === 'fixed'
@@ -76,12 +78,12 @@ const CustomizedButton = ({
         classesProp.button,
       )}
       onClick={onClick}
-      style={style}
+      style={{ ...style, backgroundColor: color }}
     >
       <Typography className={cns(classes.typography, classesProp.typography)}>
         {text}
       </Typography>
-      {variant === 'fixed' && !disableAddIcon && (
+      {variant === 'fixed' && enableAddIcon && (
         <AddIcon className={cns(classes.icon, classesProp.icon)} />
       )}
     </Button>
@@ -99,7 +101,8 @@ CustomizedButton.propTypes = {
   variant: PropTypes.oneOf(['fixed', 'labeled', 'normal']),
   onClick: PropTypes.func,
   selected: PropTypes.bool,
-  disableAddIcon: PropTypes.bool,
+  color: PropTypes.string,
+  enableAddIcon: PropTypes.bool,
   text: PropTypes.string.isRequired,
 }
 
@@ -108,7 +111,8 @@ CustomizedButton.defaultProps = {
   className: '',
   variant: 'fixed',
   selected: false,
-  disableAddIcon: false,
+  color: '',
+  enableAddIcon: false,
   onClick: Function.prototype,
 }
 

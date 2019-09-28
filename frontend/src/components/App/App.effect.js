@@ -1,9 +1,9 @@
 // modules
 import 'rxjs'
-import { isWithinRange } from 'date-fns'
 import { ofType, combineEpics } from 'redux-observable'
 import { tap, mergeMap, filter, ignoreElements } from 'rxjs/operators'
 // actions
+import { dispatchSetResults } from '../Result/Result.action'
 import {
   dispatchSetIsExamReady,
   dispatchSetIsExamStarted,
@@ -13,13 +13,19 @@ import {
   FETCH_INITIAL_DATA,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { dispatchSetExamInfo } from '../Home/Home.action'
+import { dispatchSetHomeInfo } from '../Home/Home.action'
+import {
+  dispatchSetExamDuration,
+  dispatchSetExamInfo,
+  dispatchSetExamAnswers,
+  dispatchHandleStartExam,
+} from '../Exam/Exam.action'
 // views
-import { wisView, isAdminView, userIdView } from './App.reducer'
+import { wisView, isAdminView, userIdView, isExamFinishedView } from './App.reducer'
 // helpers
-// import { mapToUsername } from './Home.helper'
 import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
+import { mapToUserIds, injectUserInfo } from './App.helper'
 
 const initialFetchEpic = action$ =>
   action$.pipe(
@@ -27,13 +33,12 @@ const initialFetchEpic = action$ =>
     tap(() => dispatchSetIsLoading(true)),
     mergeMap(() =>
       Promise.all([
-        getRequest(`/exam/${wisView()}`)
-          .on(
-            'error',
-            err =>
-              err.status !== 304 &&
-              dispatchChangeSnackbarStage('Server disconnected!'),
-          ),
+        getRequest(`/exam/${wisView()}`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
         getRequest(`/result`)
           .query({ stdId: userIdView(), examId: wisView() })
           .on(
@@ -42,15 +47,20 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-        getRequest(`/exam/${wisView()}/count`)
-          .on(
-            'error',
-            err =>
-              err.status !== 304 &&
-              dispatchChangeSnackbarStage('Server disconnected!'),
-          ),
-      ]).then(([exam, result, participantsCount]) => ({ exam: exam.body, result: result.body, participantsCount: participantsCount.body })),
+        getRequest(`/exam/${wisView()}/result`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+      ]).then(([exam, result, results]) => ({
+        exam: exam.body,
+        result: result.body,
+        results: results.body,
+      })),
     ),
+    tap(() => window.W && window.W.start()),
+    tap(({ exam }) => !exam && !isAdminView() && push('/home')),
     filter(({ exam }) => {
       if (!exam) {
         dispatchSetIsLoading(false)
@@ -59,7 +69,21 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => push('/home')),
-    tap(({ exam, participantsCount }) => dispatchSetExamInfo({ ...exam, participantsCount })),
+    tap(({ results }) => {
+      window.W &&
+        window.W.getUsersInfoById(mapToUserIds(results)).then(usersInfo => {
+          const newResults = injectUserInfo(results, usersInfo)
+          dispatchSetResults(newResults)
+        })
+    }),
+    tap(console.log),
+    tap(({ exam, result }) =>
+      dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
+    ),
+    tap(({ exam: { duration, questions } }) =>
+      dispatchSetExamInfo({ duration, questions }),
+    ),
+    tap(({ exam }) => dispatchSetExamDuration(exam.duration * 60)),
     tap(() => dispatchSetIsExamReady(true)),
     tap(
       ({ exam }) =>
@@ -69,38 +93,11 @@ const initialFetchEpic = action$ =>
       ({ exam }) =>
         new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
     ),
+    tap(() => !isExamFinishedView() && dispatchHandleStartExam()),
     filter(() => !isAdminView()),
     tap(({ result }) => result && dispatchSetIsParticipated(true)),
+    tap(({ result }) => result && dispatchSetExamAnswers(result.answers)),
     ignoreElements(),
   )
-// .do(
-//   ({ body }) =>
-//     window.W &&
-//     window.W.getUsersInfo(mapToUsername(body)).then(info => {
-//       const users = R.values(info)
-//       // TODO: load users
-//     }),
-// )
-// .do(() => dispatchSetIsLoading(false))
-// .ignoreElements()
-
-// const initialFetchEpic = action$ =>
-//   action$
-//     .ofType(FETCH_INITIAL_DATA)
-//     .do(() => window.W && window.W.start())
-//     .do(() => dispatchSetIsLoading(true))
-//     .mergeMap(() =>
-//       getRequest('/initialFetch')
-//         .query({ wis: wisView() })
-//         .on(
-//           'error',
-//           err =>
-//             err.status !== 304 &&
-//             dispatchChangeSnackbarStage('Server disconnected!'),
-//         ),
-//     )
-//     .do(({ body: { tasks } }) => dispatchLoadTasksData(tasks))
-//     .do(() => dispatchSetIsLoading(false))
-//     .ignoreElements()
 
 export default combineEpics(initialFetchEpic)

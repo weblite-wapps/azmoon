@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 // components
-import InfoTags from '../InfoTags/InfoTags.presentational'
+import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
+// helpers
+import { toPersian } from '../../functions/utils.helper'
 // style
 import './Test.scss'
 
@@ -15,9 +17,8 @@ const Test = ({
   answer,
   chooseAnswer,
   correctAnswer,
-  showAnalysis,
-  level,
-  averageTime,
+  isExamFinished,
+  stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
 }) => {
   return ( 
@@ -32,32 +33,45 @@ const Test = ({
             <div
               className="c--test_opt-circle"
               style={{
-                background: correctAnswer === index ? '#84CE2D' :
-                            ((correctAnswer != null) && answer) === index ? '#D65555' :
-                            ((correctAnswer == null) && answer) === index ? '#84CE2D' :
-                            '#CCCCCC'
-                            
+                cursor: 'pointer',
+                background:
+                  correctAnswer === index
+                    ? '#84CE2D'
+                    : (correctAnswer != null && answer) === index
+                    ? '#D65555'
+                    : (correctAnswer == null && answer) === index
+                    ? '#84CE2D'
+                    : '#CCCCCC',
               }}
-              onClick={() => (correctAnswer != null) || chooseAnswer(index)}
+              onClick={() => correctAnswer != null || chooseAnswer(index)}
             >
-              {index + 1}
+              {toPersian(index + 1)}
             </div>
             <div className="c--test_opt-text"> {value} </div>
           </div>
         ))}
       </div>
 
-      {showAnalysis && (
+      {isExamFinished && (
         <>
           <Divider variant="middle" />
 
-          <Typography variant="subtitle2" dir="auto">پاسخ تشریحی</Typography>
+          <Typography
+            style={{ fontSize: 10, lineHeight: '17px', letterSpacing: -0.07, color: '#CCC' }}
+          >پاسخ تشریحی</Typography>
           <div dir='auto' className='c--test_solution'>
             {sol}
           </div>
 
-          <Typography variant="subtitle2" dir="auto">تحلیل سوال</Typography>
-          <InfoTags title="درجه سوال" description={level} />
+          <AnalysisBox
+            label="تحلیل سوال"
+            hardness={hardness}
+            yourTime={studentTime}
+            averageTime={averageTime}
+            corrects={`٪${corrects}`}
+            wrongs={`٪${wrongs}`}
+            whites={`٪${whites}`}
+          />
         </>
       )}
     </div>
@@ -65,10 +79,18 @@ const Test = ({
 }
 
 Test.propTypes = {
-  showAnalysis: PropTypes.isRequired,
+  isExamFinished: PropTypes.bool.isRequired,
+  stats: PropTypes.shape({}),
 }
 
 Test.defaultProps = {
+  stats: {
+    hardness: '-',
+    averageTime: '-',
+    corrects: '-',
+    wrongs: '-',
+    whites: '-'
+  }
 }
 
 export default Test

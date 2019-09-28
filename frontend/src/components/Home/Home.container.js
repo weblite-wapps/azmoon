@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 // components
 import Home from './Home.presentational'
 // views
-// import { tabIndexView, numbersObjectView, isLoadingView } from './Home.reducer'
 import {
   isParticipatedView,
   isExamReadyView,
@@ -18,8 +17,11 @@ import {
   endTimeView,
   questionCountView,
   participantsCountView,
+  maxPercentView,
+  minPercentView,
+  averagePercentView,
+  userResultView,
 } from '../Home/Home.reducer'
-import { getStatus, getRemainingTime } from './Home.helper'
 // actions
 import {
   dispatchEffectEditExam,
@@ -29,8 +31,11 @@ import {
   dispatchEffectShowResults,
   dispatchEffectShowAnswerSheet,
 } from './Home.action'
+// helpers
+import { getRemainingTime } from '../../helper/functions/utils.helper'
+import { getStatus } from './Home.selector'
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),
   isExamReady: isExamReadyView(),
   isExamStarted: isExamStartedView(),
@@ -39,21 +44,26 @@ const mapStateToProps = () => ({
 
   title: titleView(),
   section: sectionView(),
-  duration: durationView(),
-  status: getStatus(), 
-  questionCount: questionCountView(),
-  remainingTime: getRemainingTime(endTimeView()),
+  duration: `${durationView()} دقیقه`,
+  status: getStatus(state),
+  questionCount: questionCountView() ? questionCountView() : '--',
+  remainingTime: endTimeView() ? getRemainingTime(endTimeView()) : '--',
   participantsCount: participantsCountView()
+    ? parseInt(participantsCountView())
+    : '--',
+  maxPercent: maxPercentView(),
+  minPercent: minPercentView(),
+  averagePercent: averagePercentView(),
+  userResult: userResultView(),
 })
 
 const mapDispatchToProps = () => ({
   onEditExam: dispatchEffectEditExam,
-  onOpenExam: dispatchEffectOpenExam,
-  onCloseExam: dispatchEffectCloseExam,
-  onStartExam: dispatchEffectStartExam,
-  onShowResults: dispatchEffectShowResults,
-  onShowAnswerSheet: dispatchEffectShowAnswerSheet,
-  
+  onOpenExam: () => dispatchEffectOpenExam(),
+  onCloseExam: () => dispatchEffectCloseExam(),
+  onStartExam: () => dispatchEffectStartExam(),
+  onShowResults: () => dispatchEffectShowResults(),
+  onShowAnswerSheet: () => dispatchEffectShowAnswerSheet(),
 })
 
 export default connect(

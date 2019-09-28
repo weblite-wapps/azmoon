@@ -99,6 +99,8 @@ const Home = ({
         {toPersian(section)}
       </Typography>
 
+      <hr className={classes.separator} />
+
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
         {isExamFinished && (

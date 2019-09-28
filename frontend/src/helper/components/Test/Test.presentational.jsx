@@ -1,7 +1,7 @@
 // modules
 import React from 'react'
 import PropTypes from 'prop-types'
-import Divider from '@material-ui/core/Divider'
+import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 // components
 import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
@@ -9,6 +9,16 @@ import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
 import { toPersian } from '../../functions/utils.helper'
 // style
 import './Test.scss'
+
+const useStyle = makeStyles(() => ({
+  separator: {
+    height: 1.5,
+    border: 'none',
+    backgroundColor: '#ccc',
+    marginTop: 20,
+    marginBottom: 12,
+  },
+}))
 
 const Test = ({
   prob,
@@ -21,19 +31,25 @@ const Test = ({
   stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
 }) => {
-  return ( 
-    <div className="c--test_container" style={{ color: 'black' }}>
-      <div dir='auto' className='c--test_text'>
+  const classes = useStyle()
+  return (
+    <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
+      <div dir="auto" className="c--test_text">
         {prob}
       </div>
 
       <div className="c--test_opts">
         {options.map((value, index) => (
-          <div dir="rtl" className="c--test_opt" key={index}>
+          <div
+            dir="rtl"
+            className="c--test_opt"
+            key={index}
+            style={{ ...(isExamFinished && { cursor: 'default' }) }}
+            onClick={() => correctAnswer != null || chooseAnswer(index)}
+          >
             <div
               className="c--test_opt-circle"
               style={{
-                cursor: 'pointer',
                 background:
                   correctAnswer === index
                     ? '#84CE2D'
@@ -43,7 +59,6 @@ const Test = ({
                     ? '#84CE2D'
                     : '#CCCCCC',
               }}
-              onClick={() => correctAnswer != null || chooseAnswer(index)}
             >
               {toPersian(index + 1)}
             </div>
@@ -54,12 +69,19 @@ const Test = ({
 
       {isExamFinished && (
         <>
-          <Divider variant="middle" />
+          <hr className={classes.separator} />
 
           <Typography
-            style={{ fontSize: 10, lineHeight: '17px', letterSpacing: -0.07, color: '#CCC' }}
-          >پاسخ تشریحی</Typography>
-          <div dir='auto' className='c--test_solution'>
+            style={{
+              fontSize: 10,
+              lineHeight: '17px',
+              letterSpacing: -0.07,
+              color: '#CCC',
+            }}
+          >
+            پاسخ تشریحی
+          </Typography>
+          <div dir="auto" className="c--test_solution">
             {sol}
           </div>
 
@@ -89,8 +111,8 @@ Test.defaultProps = {
     averageTime: '-',
     corrects: '-',
     wrongs: '-',
-    whites: '-'
-  }
+    whites: '-',
+  },
 }
 
 export default Test

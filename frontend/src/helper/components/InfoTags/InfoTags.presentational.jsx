@@ -8,8 +8,8 @@ import { toPersian } from '../../functions/utils.helper'
 // style
 import './InfoTags.scss'
 
-const InfoTags = ({ title, description }) => (
-  <div className="info-tags">
+const InfoTags = ({ title, description, style }) => (
+  <div className="info-tags" style={style}>
     <Typography className="info-tags--description">
       {toPersian(description)}
     </Typography>

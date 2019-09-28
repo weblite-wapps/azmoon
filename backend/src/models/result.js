@@ -56,5 +56,5 @@ module.exports.endExam = ({ stdId, exam }) =>
 module.exports.saveOption = ({ stdId, exam, index, opt, dur }) =>
   Result.updateOne(
     { stdId, exam },
-    { $set: { [`answers.${index}.opt`]: opt, [`answers.${index}.dur`]: dur } }
+    { $set: { [`answers.${index}`]: { opt, dur } } }
   ).exec();

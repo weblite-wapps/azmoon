@@ -52,4 +52,4 @@ const store = createStore(
 epicMiddleware.run(rootEpic)
 
 export const { dispatch, getState } = store
-export default store
+export default store 

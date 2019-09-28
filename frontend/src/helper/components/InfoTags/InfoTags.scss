@@ -8,9 +8,14 @@
   text-overflow: ellipsis;
   direction: rtl;
   white-space: nowrap;
+  font-size: 12px;
+  line-break: 21px;
+  font-weight: bold;
+  letter-spacing: -0.08px;
 }
 .info-tags--title {
   @extend %text-placeholder;
+
   width: 45%;
   background-color: #808285;
   color: #fff !important;
@@ -25,5 +30,8 @@
 
 .info-tags {
   display: flex;
-  margin: 5px 0px;
+  margin-top: 10px;
+  &:first-child {
+    margin-top: 0
+  }
 }

@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid #ced4da',
     height: 35,
     boxSizing: 'border-box',
+    paddingRight: 6,
   },
 
   button: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
   fileName: {
     marginLeft: 10,
+    width: '100%',
   },
 }))
 

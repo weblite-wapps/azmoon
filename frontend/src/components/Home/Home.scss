@@ -1,10 +1,21 @@
 .c--home_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 45px 20px 20px 20px;
+  margin-left: 15px;
+  margin-right: 1px;
+  padding-right: 10px;
+  // app-bar = 50
+  height: calc(100% - 50px);
+  &:before {
+    content: '';
+    height: 45px;
+    display: block;
+}
+  &:after {
+      content: '';
+      height: 23px;
+      display: block;
+  }
 }
 
 .c--home_info-tags {
-  margin: 25px 0px 50px 0px;
+  margin-bottom: 48px;
 }

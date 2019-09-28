@@ -18,10 +18,14 @@ export const cns = (...args) => {
 }
 
 /* === Strings === */
-export const toPersian = (string = '') =>
-  typeof string === 'string'
-    ? string.replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('fa-IR'))
-    : string.toLocaleString('fa-IR')
+/** caution DON'T PASS NULL */
+export const toPersian = text => {
+  if (!text) return text
+  if (typeof text === 'number') return text.toLocaleString('fa-IR')
+  return text.replace(/[0-9]/g, num =>
+    parseInt(num, 10).toLocaleString('fa-IR'),
+  )
+}
 
 // is rlt if arabic pattern contains all character
 const ARABIC_PATTERN = /[\u0600-\u06FF]/

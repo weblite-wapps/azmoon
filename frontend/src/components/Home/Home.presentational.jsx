@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
+// helper
+import { toPersian } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
 const useStyles = makeStyles(() => ({
@@ -87,14 +89,14 @@ const Home = ({
         آزمــــــــــــــون
       </Typography>
       <Typography className={classes.examName} variant="body1" align="center">
-        {title}
+        {toPersian(title)}
       </Typography>
       <Typography
         variant="body2"
         align="center"
         className={classes.categoryName}
       >
-        {section}
+        {toPersian(section)}
       </Typography>
 
       <div className="c--home_info-tags">

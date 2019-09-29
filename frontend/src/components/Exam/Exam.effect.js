@@ -44,7 +44,7 @@ const effectDecreaseDurationEpic = action$ =>
     delay(1000),
     map(() => {
       if (295 < durationView() && durationView() < 300) {
-        dispatchChangeSnackbarStage('5 minutes stood')
+        dispatchChangeSnackbarStage('زمان باقی مانده: ۵ دقیقه')
       }
       if (durationView() < 1) {
         push('/home')

@@ -39,11 +39,6 @@ export const changeExamDuration = createAction(CHANGE_EXAM_DURATION)
 export const dispatchChangeExamDuration = (...args) =>
   dispatch(changeExamDuration(...args))
 
-export const SET_EXAM_DURATION = 'SET_EXAM_DURATION'
-export const setExamDuration = createAction(SET_EXAM_DURATION)
-export const dispatchSetExamDuration = (...args) =>
-  dispatch(setExamDuration(...args))
-
 export const HANDLE_CHANGE_EXAM_DURATION = 'HANDLE_CHANGE_EXAM_DURATION'
 export const handleChangeExamDuration = createAction(
   HANDLE_CHANGE_EXAM_DURATION,

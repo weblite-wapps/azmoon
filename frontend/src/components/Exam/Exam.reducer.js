@@ -5,14 +5,13 @@ import {
   CHANGE_EXAM_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
-  SET_EXAM_DURATION,
   SET_EXAM_INFO,
   SET_EXAM_ANSWERS,
 } from './Exam.action'
 
 const initialState = {
-  questionCount: 2,
-  duration: 1200 * 1,
+  questionCount: 0,
+  duration: 0,
   questionIndex: 0,
   questions: [],
   answers: [],
@@ -42,11 +41,6 @@ const reducer = {
     ),
   }),
 
-  [SET_EXAM_DURATION]: (state, duration) => ({
-    ...state,
-    duration,
-  }),
-
   [CHANGE_ANSWER_OPT]: (state, { opt }) => ({
     ...state,
     answers: R.adjust(
@@ -60,11 +54,6 @@ const reducer = {
   [CHANGE_QUESTION_INDEX]: (state, { number }) => ({
     ...state,
     questionIndex: state.questionIndex + number,
-  }),
-
-  [SET_EXAM_DURATION]: (state, value) => ({
-    ...state,
-    duration: value,
   }),
 
   [SET_EXAM_INFO]: (state, { duration, questions }) => ({

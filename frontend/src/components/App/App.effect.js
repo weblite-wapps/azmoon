@@ -15,7 +15,6 @@ import {
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { dispatchSetHomeInfo } from '../Home/Home.action'
 import {
-  dispatchSetExamDuration,
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
   dispatchHandleStartExam,
@@ -68,6 +67,7 @@ const initialFetchEpic = action$ =>
       }
       return true
     }),
+    tap(() => dispatchSetIsExamReady(true)),
     tap(() => push('/home')),
     tap(({ results }) => {
       window.W &&
@@ -81,17 +81,15 @@ const initialFetchEpic = action$ =>
       dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
     ),
     tap(({ exam: { duration, questions } }) =>
-      dispatchSetExamInfo({ duration, questions }),
-    ),
-    tap(({ exam }) => dispatchSetExamDuration(exam.duration * 60)),
-    tap(() => dispatchSetIsExamReady(true)),
-    tap(
-      ({ exam }) =>
-        new Date() > new Date(exam.startTime) && dispatchSetIsExamStarted(true),
+      dispatchSetExamInfo({ duration: duration * 60 , questions }),
     ),
     tap(
-      ({ exam }) =>
-        new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
+      ({ exam: { startTime } }) =>
+        new Date() > new Date(startTime) && dispatchSetIsExamStarted(true),
+    ),
+    tap(
+      ({ exam: { endTime } }) =>
+        new Date() > new Date(endTime) && dispatchSetIsExamFinished(true),
     ),
     tap(() => !isExamFinishedView() && dispatchHandleStartExam()),
     filter(() => !isAdminView()),

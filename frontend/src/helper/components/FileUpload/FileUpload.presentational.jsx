@@ -53,12 +53,18 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload }) => {
+const FileUpload = ({
+  uploadLabel = 'انتخاب فایل',
+  id,
+  label,
+  onUpload,
+  onChange,
+}) => {
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
   const direction = React.useRef('rtl')
 
-  const onChange = () => {
+  const onInputChange = () => {
     if (!inputRef.current) return
 
     const {
@@ -69,7 +75,7 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload
     } = inputRef.current
 
     // WAPP API
-    onUpload(files[0])
+    onUpload(files[0]).then(onChange)
     direction.current = getDirection(name)
     setName(name)
   }
@@ -85,7 +91,7 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload
           ref={inputRef}
           accept="image/*"
           className={classes.input}
-          onChange={onChange}
+          onChange={onInputChange}
           id={id}
           type="file"
         />
@@ -95,11 +101,11 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload
             className={cns(classes.button, classes.font)}
             aria-label="upload picture"
             component="span"
-            onClick={e => {
-              // TODO: if Upload API is ready get name and setName that name in resolved Promise
-              // e.preventDefault()
-              // onUpload(e)
-            }}
+            // onClick={e => {
+            // TODO: if Upload API is ready get name and setName that name in resolved Promise
+            // e.preventDefault()
+            // onUpload(e)
+            // }}
           >
             {uploadLabel}
           </Button>

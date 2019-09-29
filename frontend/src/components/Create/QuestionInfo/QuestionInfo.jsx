@@ -93,6 +93,9 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="question-input-file"
             onUpload={onUpload}
+            onChange={url => {
+              this.setState({ answerImageUrl: url })
+            }}
           />
           <TextField
             required
@@ -140,6 +143,9 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="answer-input-file"
             onUpload={onUpload}
+            onChange={url => {
+              this.setState({ answerImageUrl: url })
+            }}
           />
         </div>
       </>

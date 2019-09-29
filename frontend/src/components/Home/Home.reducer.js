@@ -15,7 +15,6 @@ const initialState = {
   minPercent: '',
   averagePercent: '',
   userResult: '',
-  creatorId: '',
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
@@ -33,7 +32,6 @@ export const minPercentView = () => R.path(['Home', 'minPercent'])(getState())
 export const averagePercentView = () =>
   R.path(['Home', 'averagePercent'])(getState())
 export const userResultView = () => R.path(['Home', 'userResult'])(getState())
-export const creatorIdView = () => R.path(['Home', 'creatorId'])(getState())
 
 
 const reducer = {
@@ -48,7 +46,6 @@ const reducer = {
       questions,
       result,
       userResult,
-      creatorId,
     },
   ) => ({
     ...state,
@@ -64,7 +61,6 @@ const reducer = {
     minPercent: result && result.min,
     averagePercent: result && result.avg,
     userResult,
-    creatorId,
   }),
 }
 

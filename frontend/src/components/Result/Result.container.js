@@ -1,5 +1,6 @@
 // modules
 import { connect } from 'react-redux'
+import * as R from 'ramda'
 // components
 import Result from './Result.presentational'
 // views
@@ -17,7 +18,7 @@ const mapStateToProps = () => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
-  results: resultsView(),
+  results: R.take(10, resultsView()), // TODO: show all results for admins
 })
 
 const mapDispatchToProps = () => ({

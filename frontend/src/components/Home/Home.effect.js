@@ -14,7 +14,7 @@ import {
   dispatchSetIsExamFinished,
   dispatchSetIsExamStarted,
 } from '../App/App.action'
-import { dispatchHandleUserStartTime } from '../Exam/Exam.action'
+import { dispatchHandleStartExam } from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
 import { wisView } from '../App/App.reducer'
@@ -73,7 +73,7 @@ const effectStartExam = action$ =>
   action$.pipe(
     ofType(EFFECT_START_EXAM),
     tap(() => push('/exam')),
-    tap(dispatchHandleUserStartTime),
+    tap(dispatchHandleStartExam),
     ignoreElements(),
   )
 

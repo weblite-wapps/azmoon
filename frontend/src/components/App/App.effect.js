@@ -17,14 +17,16 @@ import { dispatchSetHomeInfo } from '../Home/Home.action'
 import {
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
-  dispatchHandleStartExam,
+  dispatchHandleChangeExamDuration,
+  dispatchStartExam,
 } from '../Exam/Exam.action'
 // views
-import { wisView, isAdminView, userIdView, isExamFinishedView } from './App.reducer'
+import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
 import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
-import { mapToUserIds, injectUserInfo } from './App.helper'
+import { mapToUserIds, injectUserInfo, getRemainedTime } from './App.helper'
+import { formattedSecondsForStats } from '../../helper/functions/utils.helper'
 
 const initialFetchEpic = action$ =>
   action$.pipe(
@@ -80,9 +82,6 @@ const initialFetchEpic = action$ =>
     tap(({ exam, result }) =>
       dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
     ),
-    tap(({ exam: { duration, questions } }) =>
-      dispatchSetExamInfo({ duration: duration * 60 , questions }),
-    ),
     tap(
       ({ exam: { startTime } }) =>
         new Date() > new Date(startTime) && dispatchSetIsExamStarted(true),
@@ -91,10 +90,22 @@ const initialFetchEpic = action$ =>
       ({ exam: { endTime } }) =>
         new Date() > new Date(endTime) && dispatchSetIsExamFinished(true),
     ),
-    tap(() => !isExamFinishedView() && dispatchHandleStartExam()),
-    filter(() => !isAdminView()),
-    tap(({ result }) => result && dispatchSetIsParticipated(true)),
-    tap(({ result }) => result && dispatchSetExamAnswers(result.answers)),
+    tap(({ result, exam: { duration, questions } }) => {
+      if (result && !result.endTime) {
+        const remainedTime = getRemainedTime(duration, result.startTime)
+        if (remainedTime > 0) {
+          dispatchSetExamInfo({ duration: remainedTime , questions })
+          dispatchStartExam()
+          dispatchHandleChangeExamDuration()
+          push('/exam')
+          dispatchChangeSnackbarStage(`‍تا پایان آزمون وقت دارید‍ ${formattedSecondsForStats(remainedTime)}`) 
+        }
+      }
+      else dispatchSetExamInfo({ duration: duration * 60 , questions })
+    }),
+    filter(({ result }) => !isAdminView() && result && result.endTime),
+    tap(() => dispatchSetIsParticipated(true)),
+    tap(({ result }) => dispatchSetExamAnswers(result.answers)),
     ignoreElements(),
   )
 

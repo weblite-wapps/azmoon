@@ -33,7 +33,7 @@ const effectStartExamEpic = action$ =>
     ofType(HANDLE_START_EXAM),
     pluck('payload'),
     tap(dispatchSetUserStartTime),
-    tap(dispatchStartExam),
+    tap(() => dispatchStartExam([])),
     map(handleChangeExamDuration),
   )
 

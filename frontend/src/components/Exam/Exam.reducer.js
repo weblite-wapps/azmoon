@@ -26,9 +26,10 @@ export const questionCountView = () =>
 export const answersView = () => R.path(['Exam', 'answers'])(getState())
 
 const reducer = {
-  [START_EXAM]: state => ({
+  [START_EXAM]: (state, answers) => ({
     ...state,
-    answers: R.times(() => ({ opt: undefined, dur: 0 }), state.questionCount),
+    answers: R.times(index =>
+      ({ opt: (answers[index] && answers[index].opt) || undefined, dur: (answers[index] && answers[index].dur) || 0 }), state.questionCount),
   }),
 
   [CHANGE_EXAM_DURATION]: state => ({

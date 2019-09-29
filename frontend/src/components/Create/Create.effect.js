@@ -23,7 +23,6 @@ const effectCreateExam = action$ =>
     tap(() => dispatchSetIsLoading(true)),
     map(currentStateView),
     tap(dispatchSetHomeInfo),
-    tap(a => console.log('11 ', a)),
     mergeMap(data =>
       postRequest('/exam/new')
         .send({

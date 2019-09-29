@@ -95,7 +95,7 @@ const initialFetchEpic = action$ =>
         const remainedTime = getRemainedTime(duration, result.startTime)
         if (remainedTime > 0) {
           dispatchSetExamInfo({ duration: remainedTime , questions })
-          dispatchStartExam()
+          dispatchStartExam(result.answers)
           dispatchHandleChangeExamDuration()
           push('/exam')
           dispatchChangeSnackbarStage(`‍تا پایان آزمون وقت دارید‍ ${formattedSecondsForStats(remainedTime)}`) 

@@ -1,11 +1,58 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
+// helper
+import { toPersian } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
+const useStyles = makeStyles(() => ({
+  logoImage: {
+    margin: 'auto',
+    display: 'block',
+  },
+  button: {
+    width: '100%',
+    marginBottom: 10,
+    '&:last-child': {
+      marginBottom: 0,
+    },
+  },
+  buttonTypography: {
+    fontSize: 12,
+    lineHeight: '21px',
+    fontWeight: 'bold',
+    letterSpacing: -0.08,
+  },
+  wappName: {
+    fontSize: 42,
+    lineHeight: '73px',
+    fontWeight: 'bold',
+    letterSpacing: -0.08,
+    color: '#808285',
+    margin: 0,
+  },
+  examName: {
+    fontSize: 14,
+    lineHeight: '25px',
+    fontWeight: 500,
+  },
+  categoryName: {
+    fontSize: 12,
+    lineHeight: '21px',
+    fontWeight: 500,
+  },
+  separator: {
+    marginTop: 10,
+    height: 1,
+    border: 'none',
+    backgroundColor: '#ccc',
+    marginBottom: 15,
+  },
+}))
 
 const Home = ({
   isParticipated,
@@ -33,24 +80,32 @@ const Home = ({
   onShowResults,
   onShowAnswerSheet,
 }) => {
-  console.log('userResult', userResult)
+  const classes = useStyles()
   return (
-    <div className="c--home_container">
-      <img alt="home" src="images/home.svg" />
+    <div className="c--home_container scroll-bar">
+      <img alt="home" src="images/home.svg" className={classes.logoImage} />
 
-      <Typography style={{ margin: '10px 0px' }} variant="h2" align="center">
+      <Typography className={classes.wappName} variant="h1" align="center">
         آزمــــــــــــــون
       </Typography>
-      <Typography variant="body1" align="center">
-        {title}
+      <Typography className={classes.examName} variant="body1" align="center">
+        {toPersian(title)}
       </Typography>
-      <Typography variant="body2" align="center">
-        {section}
+      <Typography
+        variant="body2"
+        align="center"
+        className={classes.categoryName}
+      >
+        {toPersian(section)}
       </Typography>
+
+      <hr className={classes.separator} />
 
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
-        {isExamFinished && <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />}
+        {isExamFinished && (
+          <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
+        )}
         <InfoTags title="تعداد سوالات" description={questionCount} />
         <InfoTags title="مدت پاسخگویی" description={duration} />
 
@@ -86,13 +141,21 @@ const Home = ({
       {!isExamStarted && !isExamFinished && isAdmin && (
         <>
           <Button
-            variant="labeled"
+            variant="normal"
+            classesProp={{
+              button: classes.button,
+              typography: classes.buttonTypography,
+            }}
             onClick={onOpenExam}
             color="#84CE2D"
             text="آغاز آزمون"
           />
           <Button
-            variant="labeled"
+            classesProp={{
+              button: classes.button,
+              typography: classes.buttonTypography,
+            }}
+            variant="normal"
             onClick={onEditExam}
             color="#808285"
             text="ویرایش آزمون"
@@ -102,7 +165,11 @@ const Home = ({
 
       {isExamStarted && !isExamFinished && isAdmin && (
         <Button
-          variant="labeled"
+          variant="normal"
+          classesProp={{
+            button: classes.button,
+            typography: classes.buttonTypography,
+          }}
           onClick={onCloseExam}
           color="#D65555"
           text="بستن آزمون"
@@ -111,7 +178,11 @@ const Home = ({
 
       {!isParticipated && isExamStarted && !isExamFinished && !isAdmin && (
         <Button
-          variant="labeled"
+          classesProp={{
+            button: classes.button,
+            typography: classes.buttonTypography,
+          }}
+          variant="normal"
           onClick={onStartExam}
           color="#6DC2EF"
           text="شروع آزمون"
@@ -119,7 +190,11 @@ const Home = ({
       )}
       {isExamFinished && (
         <Button
-          variant="labeled"
+          classesProp={{
+            button: classes.button,
+            typography: classes.buttonTypography,
+          }}
+          variant="normal"
           onClick={onShowResults}
           color="#6DC2EF"
           text="نتایج آزمون"
@@ -127,13 +202,16 @@ const Home = ({
       )}
       {isExamFinished && (
         <Button
-          variant="labeled"
+          classesProp={{
+            button: classes.button,
+            typography: classes.buttonTypography,
+          }}
+          variant="normal"
           onClick={onShowAnswerSheet}
           color="#84CE2D"
           text="پاسخ‌ نامه"
         />
       )}
-      {/* <Button variant="labeled" color="#808285" text="ویرایش آزمون و ارسال مجدد" /> */}
     </div>
   )
 }

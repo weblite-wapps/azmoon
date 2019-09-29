@@ -1,3 +1,4 @@
+import superagent from 'superagent'
 import { connect } from 'react-redux'
 import QuestionInfo from './QuestionInfo'
 import {
@@ -13,6 +14,7 @@ const mapDispatchToProps = () => ({
   addQuestion: dispatchAddQuestion,
   createExam: lastQuestion => dispatchHandleCreateExam(lastQuestion),
   openSnackBar: dispatchChangeSnackbarStage,
+  onUpload: file => window.W.upload(superagent, file),
 })
 
 const mapStateToProps = () => ({

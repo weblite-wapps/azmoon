@@ -28,12 +28,17 @@ const StageManager = ({
         title={finalStageLabel}
         onClick={onFinalStageClick}
       />
-      )}
-      {!finalStage && <ArrowButton type="Left" onClick={onLeftClick} />}
+    )}
+    {!finalStage && <ArrowButton type="Left" onClick={onLeftClick} />}
 
-    <StageManagerInfo stageName={stageName} stageLevel={toPersian(stageLevel)} />
+    <StageManagerInfo
+      stageName={toPersian(stageName)}
+      stageLevel={toPersian(stageLevel)}
+    />
 
-    {!firstStage && <ArrowButton type="Right" onClick={onRightClick} hasError={error} />}
+    {!firstStage && (
+      <ArrowButton type="Right" onClick={onRightClick} hasError={error} />
+    )}
   </div>
 )
 

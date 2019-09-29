@@ -19,7 +19,7 @@ const initialState = {
   minPercent: '',
   averagePercent: '',
   userResult: '',
-  remainingTime: '',
+  remainingTime: 0,
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')

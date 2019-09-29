@@ -178,7 +178,6 @@ export default createMuiTheme({
         marginTop: '10px',
       },
     },
-
     MuiPickersToolbar: {
       toolbar: {
         backgroundColor: '#EDCB19',

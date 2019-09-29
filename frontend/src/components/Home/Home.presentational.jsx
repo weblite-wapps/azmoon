@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
 // helper
-import { toPersian, formattedSeconds } from '../../helper/functions/utils.helper'
+import { toPersian } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
 const useStyles = makeStyles(() => ({
@@ -125,7 +125,7 @@ const Home = ({
           </>
         )}
         {!isExamFinished && (
-          <InfoTags title="زمان باقیمانده" description={formattedSeconds(remainingTime)} />
+          <InfoTags title="زمان باقیمانده" description={remainingTime} />
         )}
         {isExamFinished && !isAdmin && (
           <InfoTags

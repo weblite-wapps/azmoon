@@ -13,7 +13,7 @@ import {
   FETCH_INITIAL_DATA,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { dispatchSetHomeInfo } from '../Home/Home.action'
+import { dispatchSetHomeInfo, dispatchEffectChangeRemainingTime } from '../Home/Home.action'
 import {
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
@@ -26,7 +26,6 @@ import { wisView, isAdminView, userIdView } from './App.reducer'
 import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
 import { mapToUserIds, injectUserInfo, getRemainedTime } from './App.helper'
-import { formattedSecondsForStats } from '../../helper/functions/utils.helper'
 
 const initialFetchEpic = action$ =>
   action$.pipe(
@@ -70,7 +69,13 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => dispatchSetIsExamReady(true)),
-    tap(() => push('/home')),
+    tap(({ exam, result }) =>
+      dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
+    ),
+    tap(() => {
+      dispatchEffectChangeRemainingTime()
+      push('/home')
+    }),
     tap(({ results }) => {
       window.W &&
         window.W.getUsersInfoById(mapToUserIds(results)).then(usersInfo => {
@@ -79,9 +84,6 @@ const initialFetchEpic = action$ =>
         })
     }),
     tap(console.log),
-    tap(({ exam, result }) =>
-      dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
-    ),
     tap(
       ({ exam: { startTime } }) =>
         new Date() > new Date(startTime) && dispatchSetIsExamStarted(true),
@@ -98,7 +100,6 @@ const initialFetchEpic = action$ =>
           dispatchStartExam(result.answers)
           dispatchHandleChangeExamDuration()
           push('/exam')
-          dispatchChangeSnackbarStage(`‍تا پایان آزمون وقت دارید‍ ${formattedSecondsForStats(remainedTime)}`) 
         }
       }
       else dispatchSetExamInfo({ duration: duration * 60 , questions })

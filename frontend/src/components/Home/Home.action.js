@@ -5,7 +5,17 @@ export const SET_HOME_INFO = 'SET_HOME_INFO'
 export const setHomeInfo = createAction(SET_HOME_INFO)
 export const dispatchSetHomeInfo = (...args) => dispatch(setHomeInfo(...args))
 
+export const DECREMENT_REMAINING_TIME = 'DECREMENT_REMAINING_TIME'
+export const decrementRemainingTime = createAction(DECREMENT_REMAINING_TIME)
+export const dispatchDecrementRemainingTime = (...args) => dispatch(decrementRemainingTime(...args))
+
+
 // effects
+export const EFFECT_CHANGE_REMAINING_TIME = 'EFFECT_CHANGE_REMAINING_TIME'
+export const effectChangeRemainingTime = createAction(EFFECT_CHANGE_REMAINING_TIME)
+export const dispatchEffectChangeRemainingTime= (...args) =>
+  dispatch(effectChangeRemainingTime(...args))
+
 export const EFFECT_EDIT_EXAM = 'EFFECT_EDIT_EXAM'
 export const effectEditExam = createAction(EFFECT_EDIT_EXAM)
 export const dispatchEffectEditExam = (...args) =>

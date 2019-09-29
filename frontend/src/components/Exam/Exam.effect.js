@@ -19,6 +19,7 @@ import {
   dispatchStartExam,
   dispatchChangeAnswerOpt,
   dispatchSetUserStartTime,
+  dispatchHandleFinalStageClick,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
@@ -44,12 +45,11 @@ const effectDecreaseDurationEpic = action$ =>
     tap(dispatchChangeExamDuration),
     delay(1000),
     map(() => {
-      // if (295 < durationView() && durationView() < 300) {
-      //   dispatchChangeSnackbarStage('زمان باقی مانده: ۵ دقیقه')
-      // }
+      if (55 < durationView() && durationView() < 65) {
+        dispatchChangeSnackbarStage('زمان باقی مانده: ۱ دقیقه')
+      }
       if (durationView() < 1) {
-        push('/home')
-        dispatchSetIsParticipated(true)
+        dispatchHandleFinalStageClick()
         return { type: 'NOTHING' }
       } else return handleChangeExamDuration()
     }),

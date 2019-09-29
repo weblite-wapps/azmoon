@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
 // helper
-import { toPersian } from '../../helper/functions/utils.helper'
+import { toPersian, formattedSeconds } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
 const useStyles = makeStyles(() => ({
@@ -56,7 +56,6 @@ const useStyles = makeStyles(() => ({
 
 const Home = ({
   isParticipated,
-  isExamReady,
   isExamStarted,
   isExamFinished,
   isAdmin,
@@ -113,26 +112,26 @@ const Home = ({
           <>
             <InfoTags
               title="بیشترین درصد"
-              description={maxPercent !== '-' && maxPercent.toFixed(0)}
+              description={maxPercent !== '--' && maxPercent.toFixed(0)}
             />
             <InfoTags
               title="کمترین درصد"
-              description={minPercent !== '-' && minPercent.toFixed(0)}
+              description={minPercent !== '--' && minPercent.toFixed(0)}
             />
             <InfoTags
               title="میانگین درصد"
-              description={averagePercent !== '-' && averagePercent.toFixed(0)}
+              description={averagePercent !== '--' && averagePercent.toFixed(0)}
             />
           </>
         )}
         {!isExamFinished && (
-          <InfoTags title="زمان باقیمانده" description={remainingTime} />
+          <InfoTags title="زمان باقیمانده" description={formattedSeconds(remainingTime)} />
         )}
         {isExamFinished && !isAdmin && (
           <InfoTags
             title="نتیجه شما"
             description={
-              userResult !== '-' && userResult && userResult.toFixed(0)
+              userResult !== '--' && userResult && userResult.toFixed(0)
             }
           />
         )}
@@ -218,7 +217,6 @@ const Home = ({
 
 Home.propTypes = {
   isParticipated: PropTypes.bool.isRequired,
-  isExamReady: PropTypes.bool.isRequired,
   isExamStarted: PropTypes.bool.isRequired,
   isExamFinished: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
@@ -231,7 +229,7 @@ Home.propTypes = {
   maxPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   averagePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  remainingTime: PropTypes.string,
+  remainingTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   userResult: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   onCloseExam: PropTypes.func,
@@ -242,15 +240,15 @@ Home.propTypes = {
   onShowAnswerSheet: PropTypes.func,
 }
 Home.defaultProps = {
-  status: '-',
-  section: '-',
-  participantsCount: '-',
-  questionCount: '-',
-  maxPercent: '-',
-  minPercent: '-',
-  averagePercent: '-',
-  remainingTime: '-',
-  userResult: '-',
+  status: '--',
+  section: '--',
+  participantsCount: '--',
+  questionCount: '--',
+  maxPercent: '--',
+  minPercent: '--',
+  averagePercent: '--',
+  remainingTime: '--',
+  userResult: '--',
 
   onCloseExam: Function.prototype,
   onOpenExam: Function.prototype,

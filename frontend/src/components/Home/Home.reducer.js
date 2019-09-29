@@ -1,6 +1,10 @@
+// modules
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
-import { SET_HOME_INFO } from './Home.action'
+// actions
+import { SET_HOME_INFO, DECREMENT_REMAINING_TIME } from './Home.action'
+// helpers
+import { getRemainingTime } from '../../helper/functions/utils.helper'
 
 const initialState = {
   title: '',
@@ -15,6 +19,7 @@ const initialState = {
   minPercent: '',
   averagePercent: '',
   userResult: '',
+  remainingTime: '',
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
@@ -32,6 +37,7 @@ export const minPercentView = () => R.path(['Home', 'minPercent'])(getState())
 export const averagePercentView = () =>
   R.path(['Home', 'averagePercent'])(getState())
 export const userResultView = () => R.path(['Home', 'userResult'])(getState())
+export const remainingTimeView = () => R.path(['Home', 'remainingTime'])(getState())
 
 
 const reducer = {
@@ -61,6 +67,12 @@ const reducer = {
     minPercent: result && result.min,
     averagePercent: result && result.avg,
     userResult,
+    remainingTime: getRemainingTime(endTime),
+  }),
+
+  [DECREMENT_REMAINING_TIME]: state => ({
+    ...state,
+    remainingTime: state.remainingTime - 1,
   }),
 }
 

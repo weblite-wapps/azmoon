@@ -45,6 +45,8 @@ const reducer = {
         sol: '',
         solAttach: '',
         hasError: {},
+        questionImageUrl: '',
+        answerImageUrl: '',
       }),
       parseInt(data.questionCount),
     ),

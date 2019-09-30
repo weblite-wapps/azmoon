@@ -18,7 +18,7 @@ const mapStateToProps = () => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
-  results: R.take(10, resultsView()), // TODO: show all results for admins
+  results: R.take(5, resultsView()), // TODO: show all results for admins
 })
 
 const mapDispatchToProps = () => ({

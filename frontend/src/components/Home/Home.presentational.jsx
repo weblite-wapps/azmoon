@@ -102,9 +102,7 @@ const Home = ({
 
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
-        {isExamFinished && (
-          <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
-        )}
+        <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
         <InfoTags title="تعداد سوالات" description={questionCount} />
         <InfoTags title="مدت پاسخگویی" description={duration} />
 

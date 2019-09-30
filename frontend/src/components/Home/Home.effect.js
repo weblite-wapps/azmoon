@@ -21,7 +21,7 @@ import { dispatchHandleStartExam } from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
 import { wisView } from '../App/App.reducer'
-import { durationView } from './Home.reducer'
+import { remainingTimeView } from './Home.reducer'
 // helpers
 import { push } from '../../setup/redux'
 import { postRequest } from '../../helper/functions/request.helper'
@@ -34,7 +34,7 @@ const effectDecreaseRemainingTimeEpic = action$ =>
     tap(dispatchDecrementRemainingTime),
     delay(1000),
     map(() => {
-      if (durationView() < 1) {
+      if (remainingTimeView() < 1) {
         dispatchSetIsExamFinished(true)
         return { type: 'NOTHING' }
       } else return effectChangeRemainingTime()

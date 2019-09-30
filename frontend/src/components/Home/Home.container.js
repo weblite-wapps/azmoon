@@ -50,7 +50,7 @@ const mapStateToProps = state => ({
   questionCount: questionCountView() ? questionCountView() : '--',
   remainingTime: endTimeView() ? formattedSeconds(remainingTimeView()) : '--',
   participantsCount: participantsCountView()
-    ? parseInt(participantsCountView())
+    ? `${parseInt(participantsCountView())} نفر`
     : '--',
   maxPercent: maxPercentView(),
   minPercent: minPercentView(),

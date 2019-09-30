@@ -131,9 +131,9 @@ const effectEndExamButtonClick = action$ =>
         window.W.sendNotificationToAdmins(
           'آزمون',
           `${userNameView()} در آزمون شرکت کرد`,
-          {},
         ),
     ),
+    tap(() => window.W && window.W.analytics('FINISH_EXAM')),
     ignoreElements(),
   )
 
@@ -147,6 +147,7 @@ const effectHandleChangeQuestionIndex = action$ =>
     ),
     delay(0),
     tap(() => dispatchChangeQuestionIndex(1)),
+
     ignoreElements(),
   )
 

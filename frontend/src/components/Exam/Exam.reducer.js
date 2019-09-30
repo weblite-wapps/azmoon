@@ -29,7 +29,7 @@ const reducer = {
   [START_EXAM]: (state, answers) => ({
     ...state,
     answers: R.times(index =>
-      ({ opt: (answers[index] && answers[index].opt) || undefined, dur: (answers[index] && answers[index].dur) || 0 }), state.questionCount),
+      ({ opt: (answers[index] && (answers[index].opt + 1)) || undefined, dur: (answers[index] && answers[index].dur) || 0 }), state.questionCount),
   }),
 
   [CHANGE_EXAM_DURATION]: state => ({

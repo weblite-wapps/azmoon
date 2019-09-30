@@ -21,7 +21,7 @@ import { dispatchHandleStartExam } from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
 import { wisView } from '../App/App.reducer'
-import { durationView } from './Home.reducer'
+import { remainingTimeView } from './Home.reducer'
 // helpers
 import { push } from '../../setup/redux'
 import { postRequest } from '../../helper/functions/request.helper'
@@ -34,7 +34,7 @@ const effectDecreaseRemainingTimeEpic = action$ =>
     tap(dispatchDecrementRemainingTime),
     delay(1000),
     map(() => {
-      if (durationView() < 1) {
+      if (remainingTimeView() < 1) {
         dispatchSetIsExamFinished(true)
         return { type: 'NOTHING' }
       } else return effectChangeRemainingTime()
@@ -69,6 +69,7 @@ const effectOpenExam = action$ =>
       ),
     ),
     tap(() => dispatchSetIsExamStarted(true)),
+    tap(() => window.W && window.W.analytics('OPEN_EXAM')),
     ignoreElements(),
   )
 
@@ -84,6 +85,7 @@ const effectCloseExam = action$ =>
       ),
     ),
     tap(() => dispatchSetIsExamFinished(true)),
+    tap(() => window.W && window.W.analytics('CLOSE_EXAM')),
     ignoreElements(),
   )
 
@@ -92,6 +94,7 @@ const effectStartExam = action$ =>
     ofType(EFFECT_START_EXAM),
     tap(() => push('/exam')),
     tap(dispatchHandleStartExam),
+    tap(() => window.W && window.W.analytics('START_EXAM')),
     ignoreElements(),
   )
 
@@ -108,6 +111,7 @@ const effectShowResults = action$ =>
     //     )
     //   ),
     tap(() => push('/result')),
+    tap(() => window.W && window.W.analytics('SHOW_RESULTS')),
     ignoreElements(),
   )
 
@@ -124,6 +128,7 @@ const effectShowAnswerSheet = action$ =>
     //     )
     //   ),
     tap(() => push('/exam')),
+    tap(() => window.W && window.W.analytics('SHOW_ANSWER_SHEET')),
     ignoreElements(),
   )
 

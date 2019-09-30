@@ -42,6 +42,7 @@ const effectCreateExam = action$ =>
     tap(() => (new Date() > new Date(startTimeView())) && dispatchSetIsExamStarted(true)),
     tap(() => push('/home')),
     tap(() => dispatchEffectChangeRemainingTime()),
+    tap(() => window.W && window.W.analytics('CREATE_EXAM')),
     ignoreElements(),
   )
 

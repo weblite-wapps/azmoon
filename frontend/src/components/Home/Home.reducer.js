@@ -52,6 +52,7 @@ const reducer = {
       questions,
       result,
       userResult,
+      results,
     },
   ) => ({
     ...state,
@@ -62,7 +63,7 @@ const reducer = {
     endTime,
     questionCount: questions.length,
     questions,
-    participantsCount: result && result.count,
+    participantsCount: results ? results.length : 0,
     maxPercent: result && result.max,
     minPercent: result && result.min,
     averagePercent: result && result.avg,

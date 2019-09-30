@@ -69,8 +69,8 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => dispatchSetIsExamReady(true)),
-    tap(({ exam, result }) =>
-      dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
+    tap(({ exam, result, results }) =>
+      dispatchSetHomeInfo({ ...exam, results, userResult: result && result.percent }),
     ),
     tap(() => {
       dispatchEffectChangeRemainingTime()

@@ -56,6 +56,8 @@ export default class QuestionInfo extends Component {
         addQuestion(R.dissoc('index', this.state))
         changePage(num)
       }
+    } else {
+      changePage(num)
     }
   }
 

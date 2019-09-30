@@ -10,8 +10,8 @@ import './ResultItem.scss'
 
 const getMedal = rank => {
   if (rank === 1) return 'gold'
-  else if (rank === 2) return 'silver'
-  else if (rank === 3) return 'bronze'
+  // else if (rank === 2) return 'silver'
+  // else if (rank === 3) return 'bronze'
   return null
 }
 const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (

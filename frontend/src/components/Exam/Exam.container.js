@@ -17,6 +17,7 @@ import {
   dispatchHandleChangeAnswerOpt,
   dispatchChangeQuestionIndex,
   dispatchHandleFinalStageClick,
+  dispatchHandleChangeQuestionIndex,
 } from './Exam.action'
 // helpers
 import { push } from '../../setup/redux'
@@ -38,7 +39,7 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = () => ({
-  increaseQuestionIndex: () => dispatchChangeQuestionIndex(1),
+  increaseQuestionIndex: () => dispatchHandleChangeQuestionIndex(1),
   decreaseQuestionIndex: () => dispatchChangeQuestionIndex(-1),
   changeAnswerOpt: dispatchHandleChangeAnswerOpt,
   onReturn: () => push('/home'),

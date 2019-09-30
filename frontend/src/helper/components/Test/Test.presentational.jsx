@@ -32,6 +32,8 @@ const Test = ({
   studentTime,
 }) => {
   const classes = useStyle()
+  console.log('answer ', answer)
+  console.log('correctAnswer ', correctAnswer)
   return (
     <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
       <div dir="auto" className="c--test_text">
@@ -51,12 +53,14 @@ const Test = ({
               className="c--test_opt-circle"
               style={{
                 background:
-                  correctAnswer === index
-                    ? '#84CE2D'
+                  correctAnswer === index && answer != null
+                    ? '#84CE2D' // green
+                    : correctAnswer === index && answer == null
+                    ? '#ffe500' // yellow
                     : (correctAnswer != null && answer) === index
-                    ? '#D65555'
+                    ? '#D65555' // red
                     : (correctAnswer == null && answer) === index
-                    ? '#84CE2D'
+                    ? '#84CE2D' // green
                     : '#CCCCCC',
               }}
             >

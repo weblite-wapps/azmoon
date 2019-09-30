@@ -18,7 +18,8 @@ const initialState = {
 
 // const menuIsOpenLens = R.lensProp('menuIsOpen')
 
-export const questionIndexView = () => R.path(['Create', 'questionIndex'])(getState())
+export const questionIndexView = () =>
+  R.path(['Create', 'questionIndex'])(getState())
 export const currentStateView = () => R.path(['Create'])(getState())
 export const questionsView = () => R.path(['Create', 'questions'])(getState())
 export const titleView = () => R.path(['Create', 'title'])(getState())
@@ -26,12 +27,14 @@ export const sectionView = () => R.path(['Create', 'section'])(getState())
 export const durationView = () => R.path(['Create', 'duration'])(getState())
 export const startTimeView = () => R.path(['Create', 'startTime'])(getState())
 export const endTimeView = () => R.path(['Create', 'endTime'])(getState())
-export const questionCountView = () => R.path(['Create', 'questionCount'])(getState())
+export const questionCountView = () =>
+  R.path(['Create', 'questionCount'])(getState())
 
 const reducer = {
   [SET_INITIAL_INFO]: (state, data) => ({
     ...state,
     ...data,
+    startTime: data.startTime || new Date(),
     questionIndex: 0,
     questions: R.times(
       () => ({

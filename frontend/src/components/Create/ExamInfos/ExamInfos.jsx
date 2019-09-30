@@ -99,12 +99,12 @@ export default class ExamInfos extends Component {
         />
 
         <TimePicker
-          required
           onChange={this.handleAddDate('startTime')}
           label="موعد شروع آزمون"
         />
         <TimePicker
-          required
+          timeRequired
+          dateRequired
           hasError={hasError.endTime}
           onChange={this.handleAddDate('endTime')}
           label="موعد پایان آزمون"

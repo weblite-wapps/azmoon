@@ -1,6 +1,8 @@
+import React, { useState } from 'react'
+// third-party-packages
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import jMoment from 'moment-jalaali'
-import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 import JalaliUtils from '@date-io/jalaali'
@@ -9,7 +11,7 @@ import {
   DatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers'
-import { cns } from '../../functions/utils.helper'
+import { cns, ab } from '../../functions/utils.helper'
 
 jMoment.loadPersian({ dialect: 'persian-modern', usePersianDigits: true })
 
@@ -65,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const PersianExample = ({ label, onChange }) => {
+const PersianExample = ({ label, onChange, dateRequired, timeRequired }) => {
   const classes = useStyles()
   const [selectedDate, handleDateChange] = useState(moment())
 
@@ -96,7 +98,9 @@ const PersianExample = ({ label, onChange }) => {
                 onChange={changeHandler}
               />
             </div>
-            <Typography className={classes.typography}>ساعت</Typography>
+            <Typography className={classes.typography}>
+              {timeRequired && '*'}ساعت
+            </Typography>
           </div>
           <div className={classes.pickerComponent}>
             <div className={classes.pickerContainer}>
@@ -112,12 +116,24 @@ const PersianExample = ({ label, onChange }) => {
                 onChange={changeHandler}
               />
             </div>
-            <Typography className={classes.typography}>روز</Typography>
+            <Typography className={classes.typography}>
+              {dateRequired && '*'}روز
+            </Typography>
           </div>
         </div>
       </div>
     </MuiPickersUtilsProvider>
   )
+}
+
+PersianExample.propTypes = {
+  timeRequired: PropTypes.bool,
+  dateRequired: PropTypes.bool,
+}
+
+PersianExample.defaultProps = {
+  timeRequired: false,
+  dateRequired: false,
 }
 
 export default PersianExample

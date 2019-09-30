@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
+import Fab from '@material-ui/core/Fab'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import CloseIcon from '@material-ui/icons/Close'
+
 // helper
 import { cns, getDirection } from '../../functions/utils.helper'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   fileUploadComponent: {
     marginTop: 15,
   },
@@ -31,6 +34,12 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: '#4286b2',
     },
   },
+  deleteButton: {
+    backgroundColor: '#D65555',
+    '&:hover': {
+      backgroundColor: '#c32d2d',
+    },
+  },
   input: {
     display: 'none',
   },
@@ -51,6 +60,34 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 10,
     width: '100%',
   },
+  deleteIcon: {
+    height: 10,
+    width: 10,
+  },
+  deleteButton: {
+    height: 20,
+    width: 20,
+    padding: 0,
+    minWidth: 20,
+    borderRadius: 50,
+    minHeight: 'unset',
+    backgroundColor: '#D65555',
+    color: '#fff',
+    transition: 'none',
+    boxShadow: 'none',
+    '&:hover': {
+      backgroundColor: '#cc3838',
+    },
+    '&:active': {
+      boxShadow: 'none',
+    },
+  },
+  nameHelper: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
+    overflow: 'hidden',
+  },
 }))
 
 const FileUpload = ({
@@ -59,12 +96,14 @@ const FileUpload = ({
   label,
   onUpload,
   onChange,
+  onDelete,
 }) => {
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
   const direction = React.useRef('rtl')
 
   const onInputChange = () => {
+    console.log('onChange')
     if (!inputRef.current) return
 
     const {
@@ -75,7 +114,7 @@ const FileUpload = ({
     } = inputRef.current
 
     // WAPP API
-    onUpload(files[0]).then(onChange)
+    // onUpload(files[0]).then(onChange)
     direction.current = getDirection(name)
     setName(name)
   }
@@ -91,6 +130,7 @@ const FileUpload = ({
           ref={inputRef}
           accept="image/*"
           className={classes.input}
+          disabled={!!name}
           onChange={onInputChange}
           id={id}
           type="file"
@@ -111,12 +151,21 @@ const FileUpload = ({
           </Button>
         </label>
         {name && (
-          <Typography
-            className={cns(classes.fileName, classes.font)}
-            style={{ direction: direction.current }}
-          >
-            {name}
-          </Typography>
+          <div className={classes.nameHelper}>
+            <Typography
+              className={cns(classes.fileName, classes.font)}
+              style={{ direction: direction.current }}
+            >
+              {name}
+            </Typography>
+            <Fab
+              size="small"
+              onClick={onDelete}
+              className={classes.deleteButton}
+            >
+              <CloseIcon className={classes.deleteIcon} />
+            </Fab>
+          </div>
         )}
       </div>
     </div>
@@ -129,9 +178,11 @@ FileUpload.propTypes = {
   id: PropTypes.string.isRequired,
   /** API form Wapp to upload file */
   onUpload: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
 }
 FileUpload.defaultProps = {
   label: '',
+  onDelete: Function.prototype,
 }
 
 export default FileUpload

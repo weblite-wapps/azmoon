@@ -69,6 +69,7 @@ const effectOpenExam = action$ =>
       ),
     ),
     tap(() => dispatchSetIsExamStarted(true)),
+    tap(() => window.W && window.W.analytics('OPEN_EXAM')),
     ignoreElements(),
   )
 
@@ -84,6 +85,7 @@ const effectCloseExam = action$ =>
       ),
     ),
     tap(() => dispatchSetIsExamFinished(true)),
+    tap(() => window.W && window.W.analytics('CLOSE_EXAM')),
     ignoreElements(),
   )
 
@@ -92,6 +94,7 @@ const effectStartExam = action$ =>
     ofType(EFFECT_START_EXAM),
     tap(() => push('/exam')),
     tap(dispatchHandleStartExam),
+    tap(() => window.W && window.W.analytics('START_EXAM')),
     ignoreElements(),
   )
 
@@ -108,6 +111,7 @@ const effectShowResults = action$ =>
     //     )
     //   ),
     tap(() => push('/result')),
+    tap(() => window.W && window.W.analytics('SHOW_RESULTS')),
     ignoreElements(),
   )
 
@@ -124,6 +128,7 @@ const effectShowAnswerSheet = action$ =>
     //     )
     //   ),
     tap(() => push('/exam')),
+    tap(() => window.W && window.W.analytics('SHOW_ANSWER_SHEET')),
     ignoreElements(),
   )
 

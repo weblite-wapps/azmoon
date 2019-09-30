@@ -122,6 +122,7 @@ const effectEndExamButtonClick = action$ =>
     tap(() => dispatchChangeSnackbarStage('خسته نباشید! منتظر اعلام نتایج بمانید')),
     tap(() => dispatchSetIsParticipated(true)),
     tap(() => window.W && window.W.sendNotificationToAdmins("آزمون", `${userNameView()} در آزمون شرکت کرد`, {})),
+    tap(() => window.W && window.W.analytics('FINISH_EXAM')),
     ignoreElements(),
   )
 

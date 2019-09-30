@@ -26,7 +26,12 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
       <div className="c--result-item_user-info">
         <Avatar
           alt={fullName}
-          src={`https://www.weblite.me:3000/image/${profileImage}`}
+          src={
+            profileImage
+              ? `https://www.weblite.me:3000/image/${profileImage}`
+              : 'images/user.svg'
+          }
+          style={{ background: '#BC7DDE' }}
         ></Avatar>
 
         <div className="c--result-item_text">

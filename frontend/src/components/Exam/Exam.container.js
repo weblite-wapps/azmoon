@@ -10,7 +10,7 @@ import {
   questionCountView,
   answersView,
 } from './Exam.reducer'
-import { isExamFinishedView } from '../App/App.reducer'
+import { isExamFinishedView, isAdminView } from '../App/App.reducer'
 import { titleView } from '../Home/Home.reducer'
 // actions
 import {
@@ -36,6 +36,7 @@ const mapStateToProps = () => ({
     formattedSecondsForStats(answersView()[questionIndexView()].dur),
   isFinalStage: questionCountView() === questionIndexView() + 1,
   isExamFinished: isExamFinishedView(),
+  isAdmin: isAdminView(),
 })
 
 const mapDispatchToProps = () => ({

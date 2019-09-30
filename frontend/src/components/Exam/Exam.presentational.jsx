@@ -24,6 +24,7 @@ const Exam = ({
   isExamFinished,
   onReturn,
   finalStageClick,
+  isAdmin,
 }) => (
   <>
     {isExamFinished && <Tabs onReturn={onReturn} single />}
@@ -54,6 +55,7 @@ const Exam = ({
         correctAnswer={isExamFinished ? question.correct : null}
         isExamFinished={isExamFinished}
         studentTime={studentTime}
+        isAdmin={isAdmin}
       />
     </div>
   </>

@@ -34,6 +34,7 @@ const Test = ({
   studentTime,
   probAttach,
   solAttach,
+  isAdmin,
 }) => {
   const classes = useStyle()
   return (
@@ -58,7 +59,9 @@ const Test = ({
                 background:
                   correctAnswer === index && answer != null
                     ? '#84CE2D' // green
-                    : correctAnswer === index && answer == null
+                    : correctAnswer === index && answer == null && isAdmin
+                    ? '#84CE2D' // green
+                    : correctAnswer === index && answer == null && !isAdmin
                     ? '#ffe500' // yellow
                     : (correctAnswer != null && answer) === index
                     ? '#D65555' // red

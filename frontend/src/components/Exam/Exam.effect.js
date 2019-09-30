@@ -63,7 +63,6 @@ const effectDecreaseDurationEpic = action$ =>
 const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
-    tap(console.log),
     pluck('payload', 'opt'),
     map(opt => ({
       opt:

@@ -93,8 +93,8 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="question-input-file"
             onUpload={onUpload}
-            onChange={url => {
-              this.setState({ answerImageUrl: url })
+            onChange={({ url }) => {
+              this.setState({ probAttach: url })
             }}
           />
           <TextField
@@ -143,8 +143,8 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="answer-input-file"
             onUpload={onUpload}
-            onChange={url => {
-              this.setState({ answerImageUrl: url })
+            onChange={({ url }) => {
+              this.setState({ solAttach: url })
             }}
           />
         </div>

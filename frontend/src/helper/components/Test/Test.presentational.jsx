@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 // components
 import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
+import ImageModal from '../ImageModal/ImageModal.presentational'
+
 // helpers
 import { toPersian } from '../../functions/utils.helper'
 // style
@@ -30,16 +32,17 @@ const Test = ({
   isExamFinished,
   stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
+  probAttach,
+  solAttach,
 }) => {
   const classes = useStyle()
-  console.log('answer ', answer)
-  console.log('correctAnswer ', correctAnswer)
   return (
     <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
       <div dir="auto" className="c--test_text">
         {prob}
       </div>
 
+      <ImageModal src={probAttach} />
       <div className="c--test_opts">
         {options.map((value, index) => (
           <div
@@ -88,6 +91,8 @@ const Test = ({
           <div dir="auto" className="c--test_solution">
             {sol}
           </div>
+
+          <ImageModal src={solAttach} />
 
           <AnalysisBox
             label="تحلیل سوال"

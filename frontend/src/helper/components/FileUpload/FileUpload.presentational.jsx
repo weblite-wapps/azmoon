@@ -96,14 +96,15 @@ const FileUpload = ({
   label,
   onUpload,
   onChange,
-  onDelete,
 }) => {
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
   const direction = React.useRef('rtl')
-
+  const onDelete = () => {
+    setName('')
+    onChange('')
+  }
   const onInputChange = () => {
-    console.log('onChange')
     if (!inputRef.current) return
 
     const {
@@ -114,7 +115,7 @@ const FileUpload = ({
     } = inputRef.current
 
     // WAPP API
-    // onUpload(files[0]).then(onChange)
+    onUpload(files[0]).then(onChange)
     direction.current = getDirection(name)
     setName(name)
   }
@@ -178,11 +179,9 @@ FileUpload.propTypes = {
   id: PropTypes.string.isRequired,
   /** API form Wapp to upload file */
   onUpload: PropTypes.func.isRequired,
-  onDelete: PropTypes.func,
 }
 FileUpload.defaultProps = {
   label: '',
-  onDelete: Function.prototype,
 }
 
 export default FileUpload

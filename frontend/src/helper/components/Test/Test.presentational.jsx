@@ -42,7 +42,7 @@ const Test = ({
         {prob}
       </div>
 
-      <ImageModal src={probAttach} />
+      {probAttach && <ImageModal src={probAttach} />}
       <div className="c--test_opts">
         {options.map((value, index) => (
           <div
@@ -92,7 +92,7 @@ const Test = ({
             {sol}
           </div>
 
-          <ImageModal src={solAttach} />
+          {solAttach && <ImageModal src={solAttach} />}
 
           <AnalysisBox
             label="تحلیل سوال"

@@ -10,6 +10,14 @@ export const handleStartExam = createAction(HANDLE_START_EXAM)
 export const dispatchHandleStartExam = (...args) =>
   dispatch(handleStartExam(...args))
 
+export const HANDLE_CHANGE_QUESTION_INDEX = 'HANDLE_CHANGE_QUESTION_INDEX'
+export const handleChangeQuestionIndex = createAction(
+  HANDLE_CHANGE_QUESTION_INDEX,
+  number => ({ number }),
+)
+export const dispatchHandleChangeQuestionIndex = (...args) =>
+  dispatch(handleChangeQuestionIndex(...args))
+
 export const CHANGE_QUESTION_INDEX = 'CHANGE_QUESTION_INDEX'
 export const changeQuestionIndex = createAction(
   CHANGE_QUESTION_INDEX,
@@ -62,4 +70,5 @@ export const dispatchSetExamInfo = (...args) => dispatch(setExamInfo(...args))
 
 export const SET_EXAM_ANSWERS = 'SET_EXAM_ANSWERS'
 export const setExamAnswers = createAction(SET_EXAM_ANSWERS)
-export const dispatchSetExamAnswers = (...args) => dispatch(setExamAnswers(...args))
+export const dispatchSetExamAnswers = (...args) =>
+  dispatch(setExamAnswers(...args))

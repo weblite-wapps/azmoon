@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 // components
 import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
+import ImageModal from '../ImageModal/ImageModal.presentational'
+
 // helpers
 import { toPersian } from '../../functions/utils.helper'
 // style
@@ -30,6 +32,9 @@ const Test = ({
   isExamFinished,
   stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
+  probAttach,
+  solAttach,
+  isAdmin,
 }) => {
   const classes = useStyle()
   return (
@@ -38,6 +43,7 @@ const Test = ({
         {prob}
       </div>
 
+      {probAttach && <ImageModal src={probAttach} />}
       <div className="c--test_opts">
         {options.map((value, index) => (
           <div
@@ -51,12 +57,16 @@ const Test = ({
               className="c--test_opt-circle"
               style={{
                 background:
-                  correctAnswer === index
-                    ? '#84CE2D'
+                  correctAnswer === index && answer != null
+                    ? '#84CE2D' // green
+                    : correctAnswer === index && answer == null && isAdmin
+                    ? '#84CE2D' // green
+                    : correctAnswer === index && answer == null && !isAdmin
+                    ? '#ffe500' // yellow
                     : (correctAnswer != null && answer) === index
-                    ? '#D65555'
+                    ? '#D65555' // red
                     : (correctAnswer == null && answer) === index
-                    ? '#84CE2D'
+                    ? '#84CE2D' // green
                     : '#CCCCCC',
               }}
             >
@@ -84,6 +94,8 @@ const Test = ({
           <div dir="auto" className="c--test_solution">
             {sol}
           </div>
+
+          {solAttach && <ImageModal src={solAttach} />}
 
           <AnalysisBox
             label="تحلیل سوال"

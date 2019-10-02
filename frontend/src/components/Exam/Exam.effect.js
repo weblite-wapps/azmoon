@@ -7,6 +7,7 @@ import {
   pluck,
   mergeMap,
   ignoreElements,
+  filter,
 } from 'rxjs/operators'
 import {
   HANDLE_START_EXAM,
@@ -20,6 +21,10 @@ import {
   dispatchChangeAnswerOpt,
   dispatchSetUserStartTime,
   dispatchHandleFinalStageClick,
+  HANDLE_CHANGE_QUESTION_INDEX,
+  dispatchHandleChangeAnswerOpt,
+  dispatchHandleChangeQuestionIndex,
+  dispatchChangeQuestionIndex,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
@@ -59,9 +64,6 @@ const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
     pluck('payload', 'opt'),
-    // map(changeAnswerOpt),
-    // tap(a => console.log('2 ', a)),
-    // pluck('payload', 'opt'),
     map(opt => ({
       opt:
         R.prop('opt', R.nth(questionIndexView(), answersView())) === opt
@@ -119,10 +121,33 @@ const effectEndExamButtonClick = action$ =>
         ),
     ),
     tap(() => push('/home')),
-    tap(() => dispatchChangeSnackbarStage('خسته نباشید! منتظر اعلام نتایج بمانید')),
+    tap(() =>
+      dispatchChangeSnackbarStage('خسته نباشید! منتظر اعلام نتایج بمانید'),
+    ),
     tap(() => dispatchSetIsParticipated(true)),
-    tap(() => window.W && window.W.sendNotificationToAdmins("آزمون", `${userNameView()} در آزمون شرکت کرد`, {})),
+    tap(
+      () =>
+        window.W &&
+        window.W.sendNotificationToAdmins(
+          'آزمون',
+          `${userNameView()} در آزمون شرکت کرد`,
+        ),
+    ),
     tap(() => window.W && window.W.analytics('FINISH_EXAM')),
+    ignoreElements(),
+  )
+
+const effectHandleChangeQuestionIndex = action$ =>
+  action$.pipe(
+    ofType(HANDLE_CHANGE_QUESTION_INDEX),
+    tap(
+      () =>
+        typeof R.prop('opt', R.nth(questionIndexView(), answersView())) !==
+          'number' && dispatchHandleChangeAnswerOpt(null),
+    ),
+    delay(0),
+    tap(() => dispatchChangeQuestionIndex(1)),
+
     ignoreElements(),
   )
 
@@ -132,4 +157,5 @@ export default combineEpics(
   effectChangeAnswerOptEpic,
   effectSetUserStartTime,
   effectEndExamButtonClick,
+  effectHandleChangeQuestionIndex,
 )

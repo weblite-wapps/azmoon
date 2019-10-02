@@ -56,6 +56,8 @@ export default class QuestionInfo extends Component {
         addQuestion(R.dissoc('index', this.state))
         changePage(num)
       }
+    } else {
+      changePage(num)
     }
   }
 
@@ -93,6 +95,9 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="question-input-file"
             onUpload={onUpload}
+            onChange={({ url }) => {
+              this.setState({ probAttach: url })
+            }}
           />
           <TextField
             required
@@ -140,6 +145,9 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="answer-input-file"
             onUpload={onUpload}
+            onChange={({ url }) => {
+              this.setState({ solAttach: url })
+            }}
           />
         </div>
       </>

@@ -37,8 +37,8 @@ export const minPercentView = () => R.path(['Home', 'minPercent'])(getState())
 export const averagePercentView = () =>
   R.path(['Home', 'averagePercent'])(getState())
 export const userResultView = () => R.path(['Home', 'userResult'])(getState())
-export const remainingTimeView = () => R.path(['Home', 'remainingTime'])(getState())
-
+export const remainingTimeView = () =>
+  R.path(['Home', 'remainingTime'])(getState())
 
 const reducer = {
   [SET_HOME_INFO]: (

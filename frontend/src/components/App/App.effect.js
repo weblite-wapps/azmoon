@@ -13,7 +13,10 @@ import {
   FETCH_INITIAL_DATA,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { dispatchSetHomeInfo, dispatchEffectChangeRemainingTime } from '../Home/Home.action'
+import {
+  dispatchSetHomeInfo,
+  dispatchEffectChangeRemainingTime,
+} from '../Home/Home.action'
 import {
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
@@ -69,8 +72,13 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => dispatchSetIsExamReady(true)),
+    tap(console.log),
     tap(({ exam, result, results }) =>
-      dispatchSetHomeInfo({ ...exam, results, userResult: result && result.percent }),
+      dispatchSetHomeInfo({
+        ...exam,
+        results,
+        userResult: result && result.percent,
+      }),
     ),
     tap(() => {
       dispatchEffectChangeRemainingTime()
@@ -83,7 +91,7 @@ const initialFetchEpic = action$ =>
           dispatchSetResults(newResults)
         })
     }),
-    tap(console.log),
+
     tap(
       ({ exam: { startTime } }) =>
         new Date() > new Date(startTime) && dispatchSetIsExamStarted(true),
@@ -96,13 +104,12 @@ const initialFetchEpic = action$ =>
       if (result && !result.endTime) {
         const remainedTime = getRemainedTime(duration, result.startTime)
         if (remainedTime > 0) {
-          dispatchSetExamInfo({ duration: remainedTime , questions })
+          dispatchSetExamInfo({ duration: remainedTime, questions })
           dispatchStartExam(result.answers)
           dispatchHandleChangeExamDuration()
           push('/exam')
         }
-      }
-      else dispatchSetExamInfo({ duration: duration * 60 , questions })
+      } else dispatchSetExamInfo({ duration: duration * 60, questions })
     }),
     filter(({ result }) => !isAdminView() && result && result.endTime),
     tap(() => dispatchSetIsParticipated(true)),

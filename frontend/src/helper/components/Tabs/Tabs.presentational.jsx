@@ -49,13 +49,13 @@ const Tabs = ({ onReturn, onExport, single }) => {
           بازگشت
         </Button>
       </li>
-      {!single && (
+      {/* {!single && (
         <li className={classes.li}>
           <Button className={classes.button} onClick={onExport}>
             چاپ نتایج
           </Button>
         </li>
-      )}
+      )} */}
     </ul>
   )
 }

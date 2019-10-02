@@ -6,10 +6,15 @@ import Result from './Result.presentational'
 // views
 import { isAdminView } from '../App/App.reducer'
 import { resultsView } from './Result.reducer'
-import { participantsCountView, maxPercentView, minPercentView, averagePercentView, userResultView } from '../Home/Home.reducer'
+import {
+  participantsCountView,
+  maxPercentView,
+  minPercentView,
+  averagePercentView,
+  userResultView,
+} from '../Home/Home.reducer'
 // actions
 import { push } from '../../setup/redux'
-
 
 const mapStateToProps = () => ({
   isAdmin: isAdminView(),
@@ -18,7 +23,7 @@ const mapStateToProps = () => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
-  results: R.take(5, resultsView()), // TODO: show all results for admins
+  results: R.take(10, resultsView()), // TODO: show all results for admins
 })
 
 const mapDispatchToProps = () => ({

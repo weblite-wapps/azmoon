@@ -12,6 +12,7 @@ import {
   minPercentView,
   averagePercentView,
   userResultView,
+  titleView,
 } from '../Home/Home.reducer'
 // actions
 import { push } from '../../setup/redux'
@@ -24,11 +25,12 @@ const mapStateToProps = () => ({
   averagePercent: averagePercentView(),
   userResult: userResultView(),
   results: R.take(10, resultsView()), // TODO: show all results for admins
+  title: titleView(),
+  allResults: resultsView(),
 })
 
 const mapDispatchToProps = () => ({
   onReturn: () => push('/home'),
-  onExport: () => console.log('export'),
 })
 
 export default connect(

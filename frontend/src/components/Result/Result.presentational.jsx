@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import Html2Pdf from 'js-html2pdf'
+
 // third party packages
 import { makeStyles } from '@material-ui/core/styles'
 // components
@@ -10,6 +12,19 @@ import ResultItem from '../../helper/components/ResultItem/ResultItem.presentati
 import { convertToPersianFormat } from '../../helper/functions/time.helper'
 // style
 import './Result.scss'
+
+const handleClick = (element, title) => {
+  // Define optional configuration
+  const date = new Date()
+  var options = {
+    filename: `${title}-${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`,
+  }
+
+  // You can also use static methods for one time use...
+  options.source = element
+  options.download = true
+  Html2Pdf.getPdf(options)
+}
 
 const useStyles = makeStyles(() => ({
   separator: {
@@ -30,12 +45,19 @@ const Result = ({
   userResult,
   results,
   onReturn,
-  onExport,
+  title,
+  allResults,
 }) => {
   const classes = useStyles()
   return (
     <Fragment>
-      <Tabs onReturn={onReturn} onExport={onExport} />
+      <Tabs
+        isAdmin={isAdmin}
+        onReturn={onReturn}
+        onExport={() =>
+          handleClick(document.getElementById('element-to-pdf'), title)
+        }
+      />
       <div className="c--result_container scroll-bar">
         {!isAdmin && (
           <InfoTags
@@ -73,6 +95,48 @@ const Result = ({
             score={result && result.percent && result.percent.toFixed(0)}
           />
         ))}
+
+        <div style={{ display: 'none' }}>
+          <div id="element-to-pdf" dir="rtl">
+            <div>{title}</div>
+
+            <table dir="rtl" style={{ width: '100%' }}>
+              <thead>نفرات برتر آزمون</thead>
+
+              {allResults.map((result, index) => (
+                <>
+                  {index === 0 && (
+                    <tr>
+                      <td>رتبه</td>
+                      <td>نام شخص</td>
+                      <td>درصد</td>
+                    </tr>
+                  )}
+                  <tr>
+                    <td>{index + 1} </td>
+                    <td>
+                      {`${result.firstname}`}
+                      {` ${result.lastname}`}
+                    </td>
+                    <td>{result.percent.toFixed(1)}</td>
+                  </tr>
+
+                  <td>
+                    {result.answers.map((answer, index) => (
+                      <td style={{ marginLeft: '5px' }}>
+                        {index + 1} :
+                        {typeof answer.opt === 'number'
+                          ? answer.opt + 1
+                          : 'نزده'}
+                      </td>
+                    ))}
+                  </td>
+                  <br />
+                </>
+              ))}
+            </table>
+          </div>
+        </div>
       </div>
     </Fragment>
   )

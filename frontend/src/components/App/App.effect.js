@@ -72,7 +72,7 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => dispatchSetIsExamReady(true)),
-    // tap(console.log),
+    tap(console.log),
     tap(({ exam, result, results }) =>
       dispatchSetHomeInfo({
         ...exam,

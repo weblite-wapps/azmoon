@@ -47,7 +47,7 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-        getRequest(`/exam/${wisView()}/result`).on(
+        getRequest(`/exam/${wisView()}/results`).on(
           'error',
           err =>
             err.status !== 304 &&

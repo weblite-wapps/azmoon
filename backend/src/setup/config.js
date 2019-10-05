@@ -8,6 +8,8 @@ module.exports = {
       // promiseLibrary: P,
       useUnifiedTopology: true,
       useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
       autoReconnect: true,
       reconnectTries: Number.MAX_VALUE,
       reconnectInterval: 1000

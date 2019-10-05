@@ -121,7 +121,7 @@ const Result = ({
                     <td>{result.percent.toFixed(1)}</td>
                   </tr>
 
-                  <td>
+                  {/* <td>
                     {result.answers.map((answer, index) => (
                       <td style={{ marginLeft: '5px' }}>
                         {index + 1} :
@@ -130,7 +130,7 @@ const Result = ({
                           : 'نزده'}
                       </td>
                     ))}
-                  </td>
+                  </td> */}
                   <br />
                 </>
               ))}

@@ -8,9 +8,9 @@ import { toPersian } from '../../functions/utils.helper'
 // style
 import './InfoTags.scss'
 
-const InfoTags = ({ title, description, style }) => (
+const InfoTags = ({ title, description, style, direction }) => (
   <div className="info-tags" style={style}>
-    <Typography className="info-tags--description">
+    <Typography className="info-tags--description" style={{ direction }}>
       {toPersian(description)}
     </Typography>
     <Typography className="info-tags--title">{title}</Typography>
@@ -19,9 +19,12 @@ const InfoTags = ({ title, description, style }) => (
 
 InfoTags.propTypes = {
   title: PropTypes.string.isRequired,
+  direction: PropTypes.oneof(['rtl', 'ltr']),
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
-InfoTags.defaultProps = {}
+InfoTags.defaultProps = {
+  direction: 'rtl',
+}
 
 export default InfoTags

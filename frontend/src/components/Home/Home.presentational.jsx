@@ -109,14 +109,17 @@ const Home = ({
         {isExamFinished && (
           <>
             <InfoTags
+              direction="ltr"
               title="بیشترین درصد"
               description={maxPercent !== '--' && maxPercent.toFixed(0)}
             />
             <InfoTags
+              direction="ltr"
               title="کمترین درصد"
               description={minPercent !== '--' && minPercent.toFixed(0)}
             />
             <InfoTags
+              direction="ltr"
               title="میانگین درصد"
               description={averagePercent !== '--' && averagePercent.toFixed(0)}
             />

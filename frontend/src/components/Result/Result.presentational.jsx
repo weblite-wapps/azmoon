@@ -12,6 +12,7 @@ import ResultItem from '../../helper/components/ResultItem/ResultItem.presentati
 import { convertToPersianFormat } from '../../helper/functions/time.helper'
 // style
 import './Result.scss'
+import { toPersian } from '../../helper/functions/utils.helper'
 
 const handleClick = (element, title) => {
   // Define optional configuration
@@ -98,27 +99,25 @@ const Result = ({
 
         <div style={{ display: 'none' }}>
           <div id="element-to-pdf" dir="rtl">
-            <div>{title}</div>
-
             <table dir="rtl" style={{ width: '100%' }}>
-              <thead>نفرات برتر آزمون</thead>
+              <thead> {title} </thead>
 
               {allResults.map((result, index) => (
                 <>
                   {index === 0 && (
                     <tr>
                       <td>رتبه</td>
-                      <td>نام شخص</td>
+                      <td>نام دانش آموز</td>
                       <td>درصد</td>
                     </tr>
                   )}
                   <tr>
-                    <td>{index + 1} </td>
+                    <td>{toPersian(index + 1)} </td>
                     <td>
                       {`${result.firstname}`}
                       {` ${result.lastname}`}
                     </td>
-                    <td>{result.percent.toFixed(1)}</td>
+                    <td>{toPersian(result.percent.toFixed(1))}</td>
                   </tr>
 
                   {/* <td>

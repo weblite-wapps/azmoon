@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     padding: 0,
     margin: 0,
+    height: 30,
   },
   li: {
     listStyle: 'none',
@@ -22,8 +23,11 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#6DC2EF',
     },
-    '&:first-child': {
-      marginRight: 2,
+    '&:last-child': {
+      marginLeft: 2,
+    },
+    '&:only-child': {
+      margin: 0,
     },
   },
   button: {
@@ -45,13 +49,13 @@ const Tabs = ({ onReturn, onExport, single }) => {
           بازگشت
         </Button>
       </li>
-      {!single && (
+      {/* {!single && (
         <li className={classes.li}>
           <Button className={classes.button} onClick={onExport}>
             چاپ نتایج
           </Button>
         </li>
-      )}
+      )} */}
     </ul>
   )
 }

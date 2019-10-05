@@ -21,6 +21,7 @@ import {
   minPercentView,
   averagePercentView,
   userResultView,
+  remainingTimeView,
 } from '../Home/Home.reducer'
 // actions
 import {
@@ -32,8 +33,8 @@ import {
   dispatchEffectShowAnswerSheet,
 } from './Home.action'
 // helpers
-import { getRemainingTime } from '../../helper/functions/utils.helper'
 import { getStatus } from './Home.selector'
+import { formattedSeconds } from '../../helper/functions/utils.helper'
 
 const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),
@@ -44,12 +45,12 @@ const mapStateToProps = state => ({
 
   title: titleView(),
   section: sectionView(),
-  duration: `${durationView()} دقیقه`,
+  duration: durationView() ? `${durationView()} دقیقه` : '--',
   status: getStatus(state),
   questionCount: questionCountView() ? questionCountView() : '--',
-  remainingTime: endTimeView() ? getRemainingTime(endTimeView()) : '--',
+  remainingTime: endTimeView() ? formattedSeconds(remainingTimeView()) : '--',
   participantsCount: participantsCountView()
-    ? parseInt(participantsCountView())
+    ? `${parseInt(participantsCountView())} نفر`
     : '--',
   maxPercent: maxPercentView(),
   minPercent: minPercentView(),

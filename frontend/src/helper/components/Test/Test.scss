@@ -1,13 +1,27 @@
 .c--test_container {
-  margin: 20px;
+  margin-left: 15px;
+  margin-right: 1px;
+  padding-right: 10px;
+  // app-bar + fixed-button  = 50 + 40
+  // height: calc(100% - 50px - 40px);
+  height: calc(100% - 120px);
+  transform: translateZ(0);
+  &:after,
+  &:before {
+    content: '';
+    height: 20px;
+    display: block;
+  }
 }
 
 .c--test_text {
   font-size: 12px;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   margin: 20px 0px;
   border-radius: 10px;
   padding: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .c--test_opts {
@@ -17,25 +31,27 @@
 .c--test_opt {
   display: flex;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .c--test_opt-circle {
-  color: #FFFFFF;
+  color: #ffffff;
   width: 35px;
   height: 35px;
   border-radius: 35px;
   line-height: 35px;
   text-align: center;
-  cursor: pointer;
 }
 
 .c--test_opt-text {
   width: calc(100% - 67px);
-  margin-right: 10px;                  
+  margin-right: 10px;
   font-size: 12px;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   border-radius: 10px;
   padding: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .c--test_solution {

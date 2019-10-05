@@ -18,9 +18,14 @@ export const cns = (...args) => {
 }
 
 /* === Strings === */
-export const toPersian = (string = '') =>
-  string.toString().replace(/[0-9]/g, num => parseInt(num, 10).toLocaleString('fa-EG'))
-  
+/** caution DON'T PASS NULL */
+export const toPersian = text => {
+  if (!text) return text
+  if (typeof text === 'number') return text.toLocaleString('fa-IR')
+  return text.replace(/[0-9]/g, num =>
+    parseInt(num, 10).toLocaleString('fa-IR'),
+  )
+}
 
 // is rlt if arabic pattern contains all character
 const ARABIC_PATTERN = /[\u0600-\u06FF]/
@@ -37,16 +42,33 @@ export const getDirection = text => (ARABIC_PATTERN.test(text) ? 'rtl' : 'ltr')
 // }
 
 export const onExamError = ({ title, questionCount, duration, endTime }) => {
-  if (title && questionCount && duration && endTime) {
+  if (title && questionCount > 0 && duration > 0 && endTime > new Date()) {
     return false
-  } else if (!title) {
-    return { title: true }
-  } else if (!questionCount) {
-    return { questionCount: true }
-  } else if (!duration) {
-    return { duration: true }
-  } else if (!endTime) {
-    return { endTime: true }
+  } else {
+    if (!title) {
+      return { title: true, snackBar: 'همه ی موارد * دار را وارد کنید' }
+    } else if (!questionCount) {
+      return { questionCount: true, snackBar: 'همه ی موارد * دار را وارد کنید' }
+    } else if (!duration) {
+      return { duration: true, snackBar: 'همه ی موارد * دار را وارد کنید' }
+    } else if (!endTime) {
+      return { endTime: true, snackBar: 'زمان پایان آزمون را وارد کنید' }
+    } else if (questionCount <= 0) {
+      return {
+        questionCount: true,
+        snackBar: 'تعداد سوالات آزمون باید بیشتر از صفر باشد',
+      }
+    } else if (duration <= 0) {
+      return {
+        duration: true,
+        snackBar: 'مدت زمان آزمون باید مثبت باشد',
+      }
+    } else if (endTime < new Date()) {
+      return {
+        endTime: true,
+        snackBar: 'پایان آزمون باید بعد از شروع آزمون باشد',
+      }
+    }
   }
 }
 
@@ -67,46 +89,47 @@ export const onQuestionError = ({ prob, options }) => {
 }
 
 const { format } = new Intl.NumberFormat([], { minimumIntegerDigits: 2 })
-const formattedSeconds = (time) => `${format(Math.floor(time / 3600))}:${format(
+
+export const formattedSeconds = time =>
+  `${format(Math.floor(time / 3600))}:${format(
     Math.floor((time % 3600) / 60),
-    )}:${format(time % 60)}`
-
-export const getRemainingTime = (endTime) => {
-    const now = new Date()
-    const end = new Date(endTime)
-
-    return formattedSeconds(differenceInSeconds(end, now))
-}
-
-export const formattedSecondsForStats = (time) => `${format(
-  Math.floor((time % 3600) / 60),
   )}:${format(time % 60)}`
 
-export const getAverageTime = (stats) => {
+export const getRemainingTime = endTime => {
+  const now = new Date()
+  const end = new Date(endTime)
+
+  return differenceInSeconds(end, now)
+}
+
+export const formattedSecondsForStats = time =>
+  `${format(Math.floor((time % 3600) / 60))}:${format(time % 60)}`
+
+export const getAverageTime = stats => {
   const { dur, correct, wrong, white } = stats
 
   return formattedSecondsForStats(dur / (correct + wrong + white))
 }
 
-export const getStats = (stats) => {
+export const getStats = stats => {
   const { dur, correct, wrong, white } = stats
   const total = correct + wrong + white
   const average = (dur / total).toFixed(0)
   const averageTime = formattedSecondsForStats(average)
-  const corrects = ((correct / total ) * 100).toFixed(0)
-  const wrongs = ((wrong / total ) * 100).toFixed(0)
-  const whites = ((white / total ) * 100).toFixed(0)
+  const corrects = ((correct / total) * 100).toFixed(0)
+  const wrongs = ((wrong / total) * 100).toFixed(0)
+  const whites = ((white / total) * 100).toFixed(0)
 
   let hardness = ''
   if (average > 120 || corrects < 25) hardness = 'سخت'
   else if (corrects > 25 && corrects < 75) hardness = 'متوسط'
   else hardness = 'آسان'
 
-  return ({
+  return {
     hardness,
     averageTime,
     corrects,
     wrongs,
     whites,
-  })
+  }
 }

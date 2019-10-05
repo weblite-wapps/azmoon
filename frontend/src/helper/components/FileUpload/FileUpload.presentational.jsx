@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
+import Fab from '@material-ui/core/Fab'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import CloseIcon from '@material-ui/icons/Close'
+
 // helper
 import { cns, getDirection } from '../../functions/utils.helper'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   fileUploadComponent: {
     marginTop: 15,
   },
@@ -18,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid #ced4da',
     height: 35,
     boxSizing: 'border-box',
+    paddingRight: 6,
   },
 
   button: {
@@ -28,6 +32,12 @@ const useStyles = makeStyles(theme => ({
     width: 90,
     '&:hover': {
       backgroundColor: '#4286b2',
+    },
+  },
+  deleteButton: {
+    backgroundColor: '#D65555',
+    '&:hover': {
+      backgroundColor: '#c32d2d',
     },
   },
   input: {
@@ -48,25 +58,64 @@ const useStyles = makeStyles(theme => ({
   },
   fileName: {
     marginLeft: 10,
+    width: '100%',
+  },
+  deleteIcon: {
+    height: 10,
+    width: 10,
+  },
+  deleteButton: {
+    height: 20,
+    width: 20,
+    padding: 0,
+    minWidth: 20,
+    borderRadius: 50,
+    minHeight: 'unset',
+    backgroundColor: '#D65555',
+    color: '#fff',
+    transition: 'none',
+    boxShadow: 'none',
+    '&:hover': {
+      backgroundColor: '#cc3838',
+    },
+    '&:active': {
+      boxShadow: 'none',
+    },
+  },
+  nameHelper: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
+    overflow: 'hidden',
   },
 }))
 
-const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload }) => {
+const FileUpload = ({
+  uploadLabel = 'انتخاب فایل',
+  id,
+  label,
+  onUpload,
+  onChange,
+}) => {
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
   const direction = React.useRef('rtl')
-
-  const onChange = () => {
+  const onDelete = () => {
+    setName('')
+    onChange('')
+  }
+  const onInputChange = () => {
     if (!inputRef.current) return
 
     const {
+      files,
       files: {
         0: { name },
       },
     } = inputRef.current
 
     // WAPP API
-    // onUpload(files)
+    onUpload(files[0]).then(onChange)
     direction.current = getDirection(name)
     setName(name)
   }
@@ -82,7 +131,8 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload
           ref={inputRef}
           accept="image/*"
           className={classes.input}
-          onChange={onChange}
+          disabled={!!name}
+          onChange={onInputChange}
           id={id}
           type="file"
         />
@@ -92,22 +142,31 @@ const FileUpload = ({ uploadLabel = 'انتخاب فایل', id, label, onUpload
             className={cns(classes.button, classes.font)}
             aria-label="upload picture"
             component="span"
-            onClick={e => {
-              // TODO: if Upload API is ready get name and setName that name in resolved Promise
-              // e.preventDefault()
-              // onUpload(e)
-            }}
+            // onClick={e => {
+            // TODO: if Upload API is ready get name and setName that name in resolved Promise
+            // e.preventDefault()
+            // onUpload(e)
+            // }}
           >
             {uploadLabel}
           </Button>
         </label>
         {name && (
-          <Typography
-            className={cns(classes.fileName, classes.font)}
-            style={{ direction: direction.current }}
-          >
-            {name}
-          </Typography>
+          <div className={classes.nameHelper}>
+            <Typography
+              className={cns(classes.fileName, classes.font)}
+              style={{ direction: direction.current }}
+            >
+              {name}
+            </Typography>
+            <Fab
+              size="small"
+              onClick={onDelete}
+              className={classes.deleteButton}
+            >
+              <CloseIcon className={classes.deleteIcon} />
+            </Fab>
+          </div>
         )}
       </div>
     </div>

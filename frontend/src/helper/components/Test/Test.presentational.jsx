@@ -1,14 +1,26 @@
 // modules
 import React from 'react'
 import PropTypes from 'prop-types'
-import Divider from '@material-ui/core/Divider'
+import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 // components
 import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
+import ImageModal from '../ImageModal/ImageModal.presentational'
+
 // helpers
 import { toPersian } from '../../functions/utils.helper'
 // style
 import './Test.scss'
+
+const useStyle = makeStyles(() => ({
+  separator: {
+    height: 1.5,
+    border: 'none',
+    backgroundColor: '#ccc',
+    marginTop: 20,
+    marginBottom: 12,
+  },
+}))
 
 const Test = ({
   prob,
@@ -20,30 +32,43 @@ const Test = ({
   isExamFinished,
   stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
+  probAttach,
+  solAttach,
+  isAdmin,
 }) => {
-  return ( 
-    <div className="c--test_container" style={{ color: 'black' }}>
-      <div dir='auto' className='c--test_text'>
+  const classes = useStyle()
+  return (
+    <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
+      <div dir="auto" className="c--test_text">
         {prob}
       </div>
 
+      {probAttach && <ImageModal src={probAttach} />}
       <div className="c--test_opts">
         {options.map((value, index) => (
-          <div dir="rtl" className="c--test_opt" key={index}>
+          <div
+            dir="rtl"
+            className="c--test_opt"
+            key={index}
+            style={{ ...(isExamFinished && { cursor: 'default' }) }}
+            onClick={() => correctAnswer != null || chooseAnswer(index)}
+          >
             <div
               className="c--test_opt-circle"
               style={{
-                cursor: 'pointer',
                 background:
-                  correctAnswer === index
-                    ? '#84CE2D'
+                  correctAnswer === index && answer != null
+                    ? '#84CE2D' // green
+                    : correctAnswer === index && answer == null && isAdmin
+                    ? '#84CE2D' // green
+                    : correctAnswer === index && answer == null && !isAdmin
+                    ? '#ffe500' // yellow
                     : (correctAnswer != null && answer) === index
-                    ? '#D65555'
+                    ? '#D65555' // red
                     : (correctAnswer == null && answer) === index
-                    ? '#84CE2D'
+                    ? '#84CE2D' // green
                     : '#CCCCCC',
               }}
-              onClick={() => correctAnswer != null || chooseAnswer(index)}
             >
               {toPersian(index + 1)}
             </div>
@@ -54,14 +79,23 @@ const Test = ({
 
       {isExamFinished && (
         <>
-          <Divider variant="middle" />
+          <hr className={classes.separator} />
 
           <Typography
-            style={{ fontSize: 10, lineHeight: '17px', letterSpacing: -0.07, color: '#CCC' }}
-          >پاسخ تشریحی</Typography>
-          <div dir='auto' className='c--test_solution'>
+            style={{
+              fontSize: 10,
+              lineHeight: '17px',
+              letterSpacing: -0.07,
+              color: '#CCC',
+            }}
+          >
+            پاسخ تشریحی
+          </Typography>
+          <div dir="auto" className="c--test_solution">
             {sol}
           </div>
+
+          {solAttach && <ImageModal src={solAttach} />}
 
           <AnalysisBox
             label="تحلیل سوال"
@@ -89,8 +123,8 @@ Test.defaultProps = {
     averageTime: '-',
     corrects: '-',
     wrongs: '-',
-    whites: '-'
-  }
+    whites: '-',
+  },
 }
 
 export default Test

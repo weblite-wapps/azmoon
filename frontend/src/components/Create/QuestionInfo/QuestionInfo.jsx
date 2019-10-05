@@ -56,6 +56,8 @@ export default class QuestionInfo extends Component {
         addQuestion(R.dissoc('index', this.state))
         changePage(num)
       }
+    } else {
+      changePage(num)
     }
   }
 
@@ -67,7 +69,7 @@ export default class QuestionInfo extends Component {
 
   render() {
     const { prob, sol, options, hasError } = this.state
-    const { index, questions, createExam } = this.props
+    const { index, questions, createExam, onUpload } = this.props
     return (
       <>
         <StageManager
@@ -92,7 +94,10 @@ export default class QuestionInfo extends Component {
           <FileUpload
             label="تصویر مربوط به سوال"
             id="question-input-file"
-            onUpload={() => console.log('kind')}
+            onUpload={onUpload}
+            onChange={({ url }) => {
+              this.setState({ probAttach: url })
+            }}
           />
           <TextField
             required
@@ -139,7 +144,10 @@ export default class QuestionInfo extends Component {
           <FileUpload
             label="تصویر مربوط به سوال"
             id="answer-input-file"
-            onUpload={() => console.log('kind')}
+            onUpload={onUpload}
+            onChange={({ url }) => {
+              this.setState({ solAttach: url })
+            }}
           />
         </div>
       </>

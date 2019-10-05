@@ -24,11 +24,12 @@ const Exam = ({
   isExamFinished,
   onReturn,
   finalStageClick,
+  isAdmin,
 }) => (
   <>
     {isExamFinished && <Tabs onReturn={onReturn} single />}
 
-    <div>
+    <div className="full-height">
       <StageManager
         examMode={!isExamFinished}
         finalStage={isFinalStage}
@@ -40,26 +41,30 @@ const Exam = ({
         stageLevel={`سوال شماره ${questionIndex + 1}`}
         stageName={title}
       />
-      {!isExamFinished && <Timer time={duration} />} 
+      {!isExamFinished && <Timer time={duration} />}
+
       <Test
         prob={question.prob}
+        probAttach={question.probAttach}
         sol={question.sol}
+        solAttach={question.solAttach}
         options={question.options}
-        stats={question.stats && getStats(question.stats)} 
+        stats={question.stats && getStats(question.stats)}
         answer={answer}
         chooseAnswer={changeAnswerOpt}
         correctAnswer={isExamFinished ? question.correct : null}
         isExamFinished={isExamFinished}
         studentTime={studentTime}
+        isAdmin={isAdmin}
       />
     </div>
   </>
 )
 
 Exam.propTypes = {
-    duration: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    onReturn: PropTypes.func.isRequired,
+  duration: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  onReturn: PropTypes.func.isRequired,
 }
 Exam.defaultProps = {}
 

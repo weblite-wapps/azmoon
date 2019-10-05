@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   columnInfos: {
     width: '100%',
     display: 'flex',
-    marginTop: '5px',
+    marginTop: '10px',
   },
 }))
 
@@ -36,7 +36,11 @@ const AnalysisBox = ({
   return (
     <div>
       <Typography className={classes.label}>{label}</Typography>
-      <InfoTags description={hardness} title="درجه سختی" />
+      <InfoTags
+        style={{ marginTop: 6 }}
+        description={hardness}
+        title="درجه سختی"
+      />
       <div className={classes.columnInfos}>
         <ColumnInfo title="زمان شما" time={yourTime} />
         <ColumnInfo title="میانگین زمان" time={averageTime} />

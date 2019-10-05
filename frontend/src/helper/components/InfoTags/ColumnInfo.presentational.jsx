@@ -44,12 +44,12 @@ const InfoTags = ({ title, time, children }) => {
   return (
     <div className={classes.infoTags}>
       <Typography className={classes.typography}>{title}</Typography>
-      {time ? (
+      {children ? (
+        children
+      ) : (
         <Typography className={cns(classes.typography, classes.time)}>
           {toPersian(time)}
         </Typography>
-      ) : (
-        children
       )}
     </div>
   )

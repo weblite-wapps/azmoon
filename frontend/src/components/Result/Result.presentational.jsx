@@ -62,6 +62,7 @@ const Result = ({
       <div className="c--result_container scroll-bar">
         {!isAdmin && (
           <InfoTags
+            direction="ltr"
             title="نتیجه شما"
             description={
               userResult !== '-' && userResult && userResult.toFixed(0)
@@ -70,14 +71,17 @@ const Result = ({
         )}
         <InfoTags title="تعداد شرکت‌کننده" description={participantCount} />
         <InfoTags
+          direction="ltr"
           title="بیشترین درصد"
           description={maxPercent !== '-' && maxPercent.toFixed(0)}
         />
         <InfoTags
+          direction="ltr"
           title="کمترین درصد"
           description={minPercent !== '-' && minPercent.toFixed(0)}
         />
         <InfoTags
+          direction="ltr"
           title="میانگین درصد"
           description={averagePercent !== '-' && averagePercent.toFixed(0)}
         />

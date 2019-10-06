@@ -130,6 +130,7 @@ const Home = ({
         )}
         {isExamFinished && !isAdmin && (
           <InfoTags
+            direction="ltr"
             title="نتیجه شما"
             description={
               userResult !== '--' && userResult && userResult.toFixed(0)

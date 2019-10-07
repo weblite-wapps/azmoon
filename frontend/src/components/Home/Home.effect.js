@@ -121,6 +121,7 @@ const effectHandleSubmitSchool = action$ =>
   action$.pipe(
     ofType(EFFECT_HANDLE_SUBMIT_SCHOOL),
     pluck('payload'),
+    tap(dispatchSetSchool),
     mergeMap(school =>
       postRequest(`/user/${userIdView()}`)
         .send({ school })
@@ -131,7 +132,6 @@ const effectHandleSubmitSchool = action$ =>
           dispatchChangeSnackbarStage('Server disconnected!'),
       ),
     ),
-    tap(dispatchSetSchool),
     tap(() => dispatchSetIsSchoolModalOpen(false)),
     ignoreElements(),
   )

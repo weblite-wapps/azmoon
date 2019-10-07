@@ -97,6 +97,7 @@ const Result = ({
             finishTime={
               result.endTime && convertToPersianFormat(new Date(result.endTime))
             }
+            school={result.school}
             score={result && result.percent && result.percent.toFixed(0)}
           />
         ))}

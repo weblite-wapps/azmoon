@@ -58,8 +58,9 @@ const useStyles = makeStyles(theme => ({
       borderColor: 'rgb(128, 130, 133)',
     },
   },
-  textAlign: {
+  item: {
     textAlign: 'right',
+    fontFamily: 'iranyekan'
   },
   button: {
     marginTop: 10,
@@ -104,7 +105,7 @@ const SchoolModal = ({ open: dialogOpen, onSubmit }) => {
             }}
           >
             {SCHOOLS.map((item, index) => (
-              <MenuItem key={index} value={item} className={classes.textAlign}>
+              <MenuItem key={index} value={item} className={classes.item}>
                 {item}
               </MenuItem>
             ))}

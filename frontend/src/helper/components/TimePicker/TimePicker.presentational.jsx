@@ -11,7 +11,7 @@ import {
   DatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers'
-import { cns, ab } from '../../functions/utils.helper'
+import { cns } from '../../functions/utils.helper'
 
 jMoment.loadPersian({ dialect: 'persian-modern', usePersianDigits: true })
 

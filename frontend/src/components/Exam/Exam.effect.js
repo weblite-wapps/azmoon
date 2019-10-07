@@ -7,7 +7,6 @@ import {
   pluck,
   mergeMap,
   ignoreElements,
-  filter,
 } from 'rxjs/operators'
 import {
   HANDLE_START_EXAM,

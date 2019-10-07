@@ -1,13 +1,8 @@
 // modules
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
-import { SET_HOME_INFO } from './Home.action'
 // actions
 import { SET_HOME_INFO, DECREMENT_REMAINING_TIME, SET_IS_SCHOOL_MODAL_OPEN } from './Home.action'
-// helpers
-import { getRemainingTime } from '../../helper/functions/utils.helper'
-// actions
-import { SET_HOME_INFO, DECREMENT_REMAINING_TIME } from './Home.action'
 // helpers
 import { getRemainingTime } from '../../helper/functions/utils.helper'
 
@@ -28,7 +23,6 @@ const initialState = {
   creatorId: '',
   remainingTime: 0,
   isSchoolModalOpen: false,
-  remainingTime: 0,
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')

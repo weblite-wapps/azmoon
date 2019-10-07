@@ -5,7 +5,6 @@
   // app-bar + fixed-button  = 50 + 40
   // height: calc(100% - 50px - 40px);
   height: calc(100% - 120px);
-  transform: translateZ(0);
   &:after,
   &:before {
     content: '';

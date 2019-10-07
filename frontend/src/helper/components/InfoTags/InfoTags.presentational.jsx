@@ -19,7 +19,7 @@ const InfoTags = ({ title, description, style, direction }) => (
 
 InfoTags.propTypes = {
   title: PropTypes.string.isRequired,
-  direction: PropTypes.oneof(['rtl', 'ltr']),
+  direction: PropTypes.oneOf(['rtl', 'ltr']),
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 

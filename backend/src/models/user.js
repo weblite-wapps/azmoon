@@ -13,7 +13,7 @@ const userSchema = new Schema(
 const User = model('User', userSchema)
 
 module.exports.getUserById = id =>
-  User.findById(id).lean()
+  User.findById(id).select('-createdAt -updatedAt').lean()
 
 module.exports.updateUser = (_id, fields) =>
   User.updateOne({ _id }, { $set: fields }, { upsert: true }).exec()

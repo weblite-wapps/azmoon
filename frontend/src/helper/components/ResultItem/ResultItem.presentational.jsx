@@ -14,7 +14,7 @@ const getMedal = rank => {
   else if (rank === 3) return 'bronze'
   return null
 }
-const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
+const ResultItem = ({ rank, profileImage, fullName, finishTime, score, school }) => (
   <div className="c--result-item_container" dir="rtl">
     <div className="c--result-item_right-segment">
       <Typography style={{ margin: '11px' }} variant="subtitle2">
@@ -48,7 +48,7 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
             variant="body2"
             align="center"
           >
-            {finishTime}
+            {finishTime} - {school}
           </Typography>
         </div>
       </div>

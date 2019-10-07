@@ -17,6 +17,7 @@ const SCHOOLS = [
   'مدرسان اندیشه',
   'جاویدان',
   'تدبیر دانش',
+  'غیره',
 ]
 
 const useStyles = makeStyles(theme => ({
@@ -65,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const SchoolModal = ({ open: dialogOpen, onChange }) => {
+const SchoolModal = ({ open: dialogOpen, onSubmit }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const [school, setSchool] = React.useState(null)
@@ -112,7 +113,7 @@ const SchoolModal = ({ open: dialogOpen, onChange }) => {
         <Button
           className={classes.button}
           onClick={() =>
-            school !== null ? onChange(school) : Function.prototype
+            school !== null ? onSubmit(school) : Function.prototype
           }
         >
           تایید
@@ -122,6 +123,11 @@ const SchoolModal = ({ open: dialogOpen, onChange }) => {
   )
 }
 export default SchoolModal
+
+SchoolModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+}
 
 const BootstrapInputLabel = withStyles(() => ({
   formControl: {

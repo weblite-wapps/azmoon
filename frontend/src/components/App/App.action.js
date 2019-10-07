@@ -37,3 +37,7 @@ export const dispatchSetIsExamStarted = (...args) => dispatch(setIsExamStarted(.
 export const SET_IS_EXAM_FINISHED = 'SET_IS_EXAM_FINISHED'
 export const setIsExamFinished = createAction(SET_IS_EXAM_FINISHED)
 export const dispatchSetIsExamFinished = (...args) => dispatch(setIsExamFinished(...args))
+
+export const SET_SCHOOL = 'SET_SCHOOL'
+export const setSchool = createAction(SET_SCHOOL)
+export const dispatchSetSchool = (...args) => dispatch(setSchool(...args))

@@ -23,7 +23,6 @@ const useStyles = makeStyles(() => ({
     boxSizing: 'border-box',
     paddingRight: 6,
   },
-
   button: {
     backgroundColor: '#7dd9de',
     color: '#fff',
@@ -32,12 +31,6 @@ const useStyles = makeStyles(() => ({
     width: 90,
     '&:hover': {
       backgroundColor: '#4286b2',
-    },
-  },
-  deleteButton: {
-    backgroundColor: '#D65555',
-    '&:hover': {
-      backgroundColor: '#c32d2d',
     },
   },
   input: {
@@ -58,7 +51,7 @@ const useStyles = makeStyles(() => ({
   },
   fileName: {
     marginLeft: 10,
-    width: '100%',
+    width: '100%', 
   },
   deleteIcon: {
     height: 10,

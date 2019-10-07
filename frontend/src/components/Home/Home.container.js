@@ -22,6 +22,7 @@ import {
   averagePercentView,
   userResultView,
   remainingTimeView,
+  isSchoolModalOpenView,
 } from '../Home/Home.reducer'
 // actions
 import {
@@ -31,6 +32,7 @@ import {
   dispatchEffectStartExam,
   dispatchEffectShowResults,
   dispatchEffectShowAnswerSheet,
+  dispatchEffectHandleSubmitSchool,
 } from './Home.action'
 // helpers
 import { getStatus } from './Home.selector'
@@ -56,6 +58,7 @@ const mapStateToProps = state => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
+  isOpen: isSchoolModalOpenView(),
 })
 
 const mapDispatchToProps = () => ({
@@ -65,6 +68,7 @@ const mapDispatchToProps = () => ({
   onStartExam: () => dispatchEffectStartExam(),
   onShowResults: () => dispatchEffectShowResults(),
   onShowAnswerSheet: () => dispatchEffectShowAnswerSheet(),
+  onSubmit: dispatchEffectHandleSubmitSchool,
 })
 
 export default connect(

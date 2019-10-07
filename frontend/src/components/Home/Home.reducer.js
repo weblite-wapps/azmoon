@@ -1,6 +1,13 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
+<<<<<<< Updated upstream
 import { SET_HOME_INFO } from './Home.action'
+=======
+// actions
+import { SET_HOME_INFO, DECREMENT_REMAINING_TIME, SET_IS_SCHOOL_MODAL_OPEN } from './Home.action'
+// helpers
+import { getRemainingTime } from '../../helper/functions/utils.helper'
+>>>>>>> Stashed changes
 
 const initialState = {
   title: '',
@@ -15,7 +22,12 @@ const initialState = {
   minPercent: '',
   averagePercent: '',
   userResult: '',
+<<<<<<< Updated upstream
   creatorId: '',
+=======
+  remainingTime: 0,
+  isSchoolModalOpen: false,
+>>>>>>> Stashed changes
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
@@ -35,6 +47,10 @@ export const averagePercentView = () =>
 export const userResultView = () => R.path(['Home', 'userResult'])(getState())
 export const creatorIdView = () => R.path(['Home', 'creatorId'])(getState())
 
+export const remainingTimeView = () =>
+  R.path(['Home', 'remainingTime'])(getState())
+export const isSchoolModalOpenView = () =>
+  R.path(['Home', 'isSchoolModalOpen'])(getState())
 
 const reducer = {
   [SET_HOME_INFO]: (
@@ -65,6 +81,11 @@ const reducer = {
     averagePercent: result && result.avg,
     userResult,
     creatorId,
+  }),
+
+  [SET_IS_SCHOOL_MODAL_OPEN]: (state, isSchoolModalOpen) => ({
+    ...state,
+    isSchoolModalOpen,
   }),
 }
 

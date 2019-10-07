@@ -72,6 +72,7 @@ const Home = ({
   averagePercent,
   remainingTime,
   userResult,
+  isOpen,
 
   onCloseExam,
   onOpenExam,
@@ -79,6 +80,7 @@ const Home = ({
   onStartExam,
   onShowResults,
   onShowAnswerSheet,
+  onSubmit,
 }) => {
   const classes = useStyles()
   return (
@@ -212,6 +214,8 @@ const Home = ({
           text="پاسخ‌ نامه"
         />
       )}
+
+      <SchoolModal open={isOpen} onSubmit={onSubmit} />
     </div>
   )
 }
@@ -233,6 +237,7 @@ Home.propTypes = {
   averagePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   remainingTime: PropTypes.string,
   userResult: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isOpen: PropTypes.bool.isRequired,
 
   onCloseExam: PropTypes.func,
   onOpenExam: PropTypes.func,
@@ -240,6 +245,7 @@ Home.propTypes = {
   onStartExam: PropTypes.func,
   onShowResults: PropTypes.func,
   onShowAnswerSheet: PropTypes.func,
+  onSubmit: PropTypes.func,
 }
 Home.defaultProps = {
   status: '-',
@@ -258,6 +264,7 @@ Home.defaultProps = {
   onStartExam: Function.prototype,
   onShowResults: Function.prototype,
   onShowAnswerSheet: Function.prototype,
+  onSubmit: Function.prototype,
 }
 
 export default Home

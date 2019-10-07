@@ -5,6 +5,14 @@ export const SET_HOME_INFO = 'SET_HOME_INFO'
 export const setHomeInfo = createAction(SET_HOME_INFO)
 export const dispatchSetHomeInfo = (...args) => dispatch(setHomeInfo(...args))
 
+export const DECREMENT_REMAINING_TIME = 'DECREMENT_REMAINING_TIME'
+export const decrementRemainingTime = createAction(DECREMENT_REMAINING_TIME)
+export const dispatchDecrementRemainingTime = (...args) => dispatch(decrementRemainingTime(...args))
+
+export const SET_IS_SCHOOL_MODAL_OPEN = 'SET_IS_SCHOOL_MODAL_OPEN'
+export const setIsSchoolModalOpen = createAction(SET_IS_SCHOOL_MODAL_OPEN)
+export const dispatchSetIsSchoolModalOpen = (...args) => dispatch(setIsSchoolModalOpen(...args))
+
 // effects
 export const EFFECT_EDIT_EXAM = 'EFFECT_EDIT_EXAM'
 export const effectEditExam = createAction(EFFECT_EDIT_EXAM)
@@ -35,3 +43,8 @@ export const EFFECT_SHOW_ANSWER_SHEET = 'EFFECT_SHOW_ANSWER_SHEET'
 export const effectShowAnswerSheet = createAction(EFFECT_SHOW_ANSWER_SHEET)
 export const dispatchEffectShowAnswerSheet = (...args) =>
   dispatch(effectShowAnswerSheet(...args))
+
+export const EFFECT_HANDLE_SUBMIT_SCHOOL = 'EFFECT_HANDLE_SUBMIT_SCHOOL'
+export const effectHandleSubmitSchool = createAction(EFFECT_HANDLE_SUBMIT_SCHOOL)
+export const dispatchEffectHandleSubmitSchool = (...args) =>
+  dispatch(effectHandleSubmitSchool(...args))

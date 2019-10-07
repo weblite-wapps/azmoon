@@ -9,15 +9,22 @@ import {
   EFFECT_START_EXAM,
   EFFECT_SHOW_RESULTS,
   EFFECT_SHOW_ANSWER_SHEET,
+  effectChangeRemainingTime,
+  dispatchDecrementRemainingTime,
+  EFFECT_HANDLE_SUBMIT_SCHOOL,
+  dispatchSetIsSchoolModalOpen,
 } from './Home.action'
 import {
   dispatchSetIsExamFinished,
   dispatchSetIsExamStarted,
+  dispatchSetSchool,
 } from '../App/App.action'
 import { dispatchHandleUserStartTime } from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
 import { wisView } from '../App/App.reducer'
+import { wisView, userIdView } from '../App/App.reducer'
+import { remainingTimeView } from './Home.reducer'
 // helpers
 import { push } from '../../setup/redux'
 import { postRequest } from '../../helper/functions/request.helper'
@@ -80,15 +87,6 @@ const effectStartExam = action$ =>
 const effectShowResults = action$ =>
   action$.pipe(
     ofType(EFFECT_SHOW_RESULTS),
-    // mergeMap(() =>
-    //   postRequest(`/exam/${wisView()}/start`)
-    //     .on(
-    //       'error',
-    //       err =>
-    //         err.status !== 304 &&
-    //         dispatchChangeSnackbarStage('Server disconnected!'),
-    //     )
-    //   ),
     tap(() => push('/result')),
     ignoreElements(),
   )
@@ -96,16 +94,26 @@ const effectShowResults = action$ =>
 const effectShowAnswerSheet = action$ =>
   action$.pipe(
     ofType(EFFECT_SHOW_ANSWER_SHEET),
-    // mergeMap(() =>
-    //   postRequest(`/exam/${wisView()}/start`)
-    //     .on(
-    //       'error',
-    //       err =>
-    //         err.status !== 304 &&
-    //         dispatchChangeSnackbarStage('Server disconnected!'),
-    //     )
-    //   ),
     tap(() => push('/exam')),
+    ignoreElements(),
+  )
+
+const effectHandleSubmitSchool = action$ =>
+  action$.pipe(
+    ofType(EFFECT_HANDLE_SUBMIT_SCHOOL),
+    pluck('payload'),
+    mergeMap(school =>
+      postRequest(`/user/${userIdView()}`)
+        .send({ school })
+        .on(
+        'error',
+        err =>
+          err.status !== 304 &&
+          dispatchChangeSnackbarStage('Server disconnected!'),
+      ),
+    ),
+    tap(dispatchSetSchool),
+    tap(() => dispatchSetIsSchoolModalOpen(false)),
     ignoreElements(),
   )
 
@@ -116,4 +124,5 @@ export default combineEpics(
   effectStartExam,
   effectShowResults,
   effectShowAnswerSheet,
+  effectHandleSubmitSchool,
 )

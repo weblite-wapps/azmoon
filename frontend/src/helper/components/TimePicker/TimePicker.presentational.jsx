@@ -14,7 +14,7 @@ import { cns } from '../../functions/utils.helper'
 jMoment.loadPersian({ dialect: 'persian-modern', usePersianDigits: true })
 
 // style
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   timePickerComponent: {
     marginTop: 15,
   },

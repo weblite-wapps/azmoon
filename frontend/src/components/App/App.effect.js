@@ -11,11 +11,17 @@ import {
   dispatchSetIsParticipated,
   dispatchSetIsLoading,
   FETCH_INITIAL_DATA,
+  dispatchSetSchool,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import { dispatchSetHomeInfo } from '../Home/Home.action'
 import {
   dispatchSetExamDuration,
+  dispatchSetHomeInfo,
+  dispatchEffectChangeRemainingTime,
+  dispatchSetIsSchoolModalOpen,
+} from '../Home/Home.action'
+import {
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
   dispatchHandleStartExam,
@@ -53,14 +59,27 @@ const initialFetchEpic = action$ =>
             err.status !== 304 &&
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
-      ]).then(([exam, result, results]) => ({
+        getRequest(`/user/${userIdView()}`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+      ]).then(([exam, result, results, user]) => ({
         exam: exam.body,
         result: result.body,
         results: results.body,
+        user: user.body,
       })),
     ),
     tap(() => window.W && window.W.start()),
     tap(({ exam }) => !exam && !isAdminView() && push('/home')),
+    tap(({ user }) => {
+      if (!isAdminView()) {
+        user && user.school ? dispatchSetSchool(user.school) :
+        dispatchSetIsSchoolModalOpen(true)
+      }
+    }),
     filter(({ exam }) => {
       if (!exam) {
         dispatchSetIsLoading(false)

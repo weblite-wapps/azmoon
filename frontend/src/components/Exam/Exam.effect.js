@@ -18,12 +18,17 @@ import {
   SET_USER_START_TIME,
   dispatchChangeAnswerOpt,
   HANDLE_FINAL_STAGE_CLICK,
+  dispatchSetUserStartTime,
+  dispatchHandleFinalStageClick,
+  HANDLE_CHANGE_QUESTION_INDEX,
+  dispatchHandleChangeAnswerOpt,
+  dispatchChangeQuestionIndex,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
 import { postRequest } from '../../helper/functions/request.helper'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { wisView, userIdView, userNameView } from '../App/App.reducer'
+import { wisView, userIdView, userNameView, schoolView } from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
 import { creatorIdView } from '../Home/Home.reducer'
@@ -93,7 +98,7 @@ const effectSetUserStartTime = action$ =>
     ofType(SET_USER_START_TIME),
     mergeMap(() =>
       postRequest('/result/start')
-        .send({ exam: wisView(), stdId: userIdView() })
+        .send({ exam: wisView(), stdId: userIdView(), school: schoolView() })
         .on(
           'error',
           err =>

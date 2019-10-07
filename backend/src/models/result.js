@@ -4,6 +4,7 @@ const resultSchema = new Schema(
   {
     exam: { type: Schema.Types.ObjectId, ref: "Exam" },
     stdId: Schema.Types.ObjectId,
+    school: String,
     answers: [{ opt: Number, dur: Number }],
 
     percent: Number,
@@ -39,14 +40,14 @@ module.exports.getParticipantsCount = exam => Result.countDocuments({ exam });
 module.exports.getResult = (stdId, exam) =>
   Result.findOne({ stdId, exam }).lean();
 
-module.exports.startExam = ({ stdId, exam }) =>
+module.exports.startExam = ({ stdId, exam, school }) =>
   Result.findOne({ stdId, exam })
     .select("-_id stdId")
     .lean()
     .then(
       result =>
         result ||
-        Result.create({ exam, stdId, answers: [], startTime: new Date() })
+        Result.create({ exam, stdId, school, answers: [], startTime: new Date() })
     );
 
 module.exports.endExam = ({ stdId, exam }) =>

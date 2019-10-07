@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
     boxSizing: 'border-box',
     paddingRight: 6,
   },
-
   button: {
     backgroundColor: '#7dd9de',
     color: '#fff',

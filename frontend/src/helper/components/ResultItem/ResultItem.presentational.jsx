@@ -18,7 +18,7 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
   <div className="c--result-item_container" dir="rtl">
     <div className="c--result-item_right-segment">
       <Typography style={{ margin: '11px' }} variant="subtitle2">
-        {toPersian(rank)} 
+        {toPersian(rank)}
       </Typography>
     </div>
 
@@ -35,7 +35,12 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
         ></Avatar>
 
         <div className="c--result-item_text">
-          <Typography variant="subtitle1" align="center">
+          <Typography
+            noWrap
+            variant="subtitle1"
+            align="center"
+            style={{ width: '100%' }}
+          >
             {fullName}
           </Typography>
           <Typography
@@ -54,7 +59,9 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
         </div>
       )}
 
-      <Typography variant="subtitle2" style={{ direction: 'ltr' }}>{toPersian(score)}</Typography>
+      <Typography variant="subtitle2" style={{ direction: 'ltr' }}>
+        {toPersian(score)}
+      </Typography>
     </div>
   </div>
 )

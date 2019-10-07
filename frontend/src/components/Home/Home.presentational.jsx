@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
+import SchoolModal from '../../helper/components/SchoolModal/SchoolModal.presentational'
+
 // helper
 import { toPersian } from '../../helper/functions/utils.helper'
 // style
@@ -213,6 +215,8 @@ const Home = ({
           text="پاسخ‌ نامه"
         />
       )}
+
+      <SchoolModal open={true} />
     </div>
   )
 }

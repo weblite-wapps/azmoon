@@ -5,14 +5,13 @@ import {
   CHANGE_EXAM_DURATION,
   CHANGE_QUESTION_INDEX,
   CHANGE_ANSWER_OPT,
-  SET_EXAM_DURATION,
   SET_EXAM_INFO,
   SET_EXAM_ANSWERS,
 } from './Exam.action'
 
 const initialState = {
-  questionCount: 2,
-  duration: 1200 * 1,
+  questionCount: 0,
+  duration: 0,
   questionIndex: 0,
   questions: [],
   answers: [],
@@ -27,9 +26,18 @@ export const questionCountView = () =>
 export const answersView = () => R.path(['Exam', 'answers'])(getState())
 
 const reducer = {
-  [START_EXAM]: state => ({
+  [START_EXAM]: (state, answers) => ({
     ...state,
-    answers: R.times(() => ({ opt: undefined, dur: 0 }), state.questionCount),
+    answers: R.times(
+      index => ({
+        opt:
+          answers[index] && typeof answers[index].opt === 'number'
+            ? answers[index].opt
+            : undefined,
+        dur: (answers[index] && answers[index].dur) || 0,
+      }),
+      state.questionCount,
+    ),
   }),
 
   [CHANGE_EXAM_DURATION]: state => ({
@@ -40,11 +48,6 @@ const reducer = {
       ({ dur, opt }) => ({ opt, dur: dur + 1 }),
       state.answers,
     ),
-  }),
-
-  [SET_EXAM_DURATION]: (state, duration) => ({
-    ...state,
-    duration,
   }),
 
   [CHANGE_ANSWER_OPT]: (state, { opt }) => ({
@@ -60,11 +63,6 @@ const reducer = {
   [CHANGE_QUESTION_INDEX]: (state, { number }) => ({
     ...state,
     questionIndex: state.questionIndex + number,
-  }),
-
-  [SET_EXAM_DURATION]: (state, value) => ({
-    ...state,
-    duration: value,
   }),
 
   [SET_EXAM_INFO]: (state, { duration, questions }) => ({

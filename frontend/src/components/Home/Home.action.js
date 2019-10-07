@@ -14,6 +14,11 @@ export const setIsSchoolModalOpen = createAction(SET_IS_SCHOOL_MODAL_OPEN)
 export const dispatchSetIsSchoolModalOpen = (...args) => dispatch(setIsSchoolModalOpen(...args))
 
 // effects
+export const EFFECT_CHANGE_REMAINING_TIME = 'EFFECT_CHANGE_REMAINING_TIME'
+export const effectChangeRemainingTime = createAction(EFFECT_CHANGE_REMAINING_TIME)
+export const dispatchEffectChangeRemainingTime= (...args) =>
+  dispatch(effectChangeRemainingTime(...args))
+
 export const EFFECT_EDIT_EXAM = 'EFFECT_EDIT_EXAM'
 export const effectEditExam = createAction(EFFECT_EDIT_EXAM)
 export const dispatchEffectEditExam = (...args) =>

@@ -21,7 +21,8 @@ const router = new Router()
     ctx.status = 200;
   })
   .post("/saveOption", async ctx => {
-    ctx.body = await saveOption(ctx.request.body);
+    await saveOption(ctx.request.body);
+    ctx.status = 200
   });
 
 module.exports = router;

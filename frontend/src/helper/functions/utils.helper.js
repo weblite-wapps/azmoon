@@ -42,16 +42,33 @@ export const getDirection = text => (ARABIC_PATTERN.test(text) ? 'rtl' : 'ltr')
 // }
 
 export const onExamError = ({ title, questionCount, duration, endTime }) => {
-  if (title && questionCount && duration && endTime) {
+  if (title && questionCount > 0 && duration > 0 && endTime > new Date()) {
     return false
-  } else if (!title) {
-    return { title: true }
-  } else if (!questionCount) {
-    return { questionCount: true }
-  } else if (!duration) {
-    return { duration: true }
-  } else if (!endTime) {
-    return { endTime: true }
+  } else {
+    if (!title) {
+      return { title: true, snackBar: 'همه ی موارد * دار را وارد کنید' }
+    } else if (!questionCount) {
+      return { questionCount: true, snackBar: 'همه ی موارد * دار را وارد کنید' }
+    } else if (!duration) {
+      return { duration: true, snackBar: 'همه ی موارد * دار را وارد کنید' }
+    } else if (!endTime) {
+      return { endTime: true, snackBar: 'زمان پایان آزمون را وارد کنید' }
+    } else if (questionCount <= 0) {
+      return {
+        questionCount: true,
+        snackBar: 'تعداد سوالات آزمون باید بیشتر از صفر باشد',
+      }
+    } else if (duration <= 0) {
+      return {
+        duration: true,
+        snackBar: 'مدت زمان آزمون باید مثبت باشد',
+      }
+    } else if (endTime < new Date()) {
+      return {
+        endTime: true,
+        snackBar: 'پایان آزمون باید بعد از شروع آزمون باشد',
+      }
+    }
   }
 }
 
@@ -72,7 +89,8 @@ export const onQuestionError = ({ prob, options }) => {
 }
 
 const { format } = new Intl.NumberFormat([], { minimumIntegerDigits: 2 })
-const formattedSeconds = time =>
+
+export const formattedSeconds = time =>
   `${format(Math.floor(time / 3600))}:${format(
     Math.floor((time % 3600) / 60),
   )}:${format(time % 60)}`
@@ -81,7 +99,7 @@ export const getRemainingTime = endTime => {
   const now = new Date()
   const end = new Date(endTime)
 
-  return formattedSeconds(differenceInSeconds(end, now))
+  return differenceInSeconds(end, now)
 }
 
 export const formattedSecondsForStats = time =>

@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
+import SchoolModal from '../../helper/components/SchoolModal/SchoolModal.presentational'
+
 // helper
 import { toPersian } from '../../helper/functions/utils.helper'
 // style
@@ -56,7 +58,6 @@ const useStyles = makeStyles(() => ({
 
 const Home = ({
   isParticipated,
-  isExamReady,
   isExamStarted,
   isExamFinished,
   isAdmin,
@@ -105,25 +106,26 @@ const Home = ({
 
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
-        {isExamFinished && (
-          <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
-        )}
+        <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
         <InfoTags title="تعداد سوالات" description={questionCount} />
         <InfoTags title="مدت پاسخگویی" description={duration} />
 
         {isExamFinished && (
           <>
             <InfoTags
+              direction="ltr"
               title="بیشترین درصد"
-              description={maxPercent !== '-' && maxPercent.toFixed(0)}
+              description={maxPercent !== '--' && maxPercent.toFixed(0)}
             />
             <InfoTags
+              direction="ltr"
               title="کمترین درصد"
-              description={minPercent !== '-' && minPercent.toFixed(0)}
+              description={minPercent !== '--' && minPercent.toFixed(0)}
             />
             <InfoTags
+              direction="ltr"
               title="میانگین درصد"
-              description={averagePercent !== '-' && averagePercent.toFixed(0)}
+              description={averagePercent !== '--' && averagePercent.toFixed(0)}
             />
           </>
         )}
@@ -132,9 +134,10 @@ const Home = ({
         )}
         {isExamFinished && !isAdmin && (
           <InfoTags
+            direction="ltr"
             title="نتیجه شما"
             description={
-              userResult !== '-' && userResult && userResult.toFixed(0)
+              userResult !== '--' && userResult && userResult.toFixed(0)
             }
           />
         )}
@@ -222,7 +225,6 @@ const Home = ({
 
 Home.propTypes = {
   isParticipated: PropTypes.bool.isRequired,
-  isExamReady: PropTypes.bool.isRequired,
   isExamStarted: PropTypes.bool.isRequired,
   isExamFinished: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
@@ -235,7 +237,7 @@ Home.propTypes = {
   maxPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   averagePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  remainingTime: PropTypes.string,
+  remainingTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   userResult: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isOpen: PropTypes.bool.isRequired,
 
@@ -248,15 +250,15 @@ Home.propTypes = {
   onSubmit: PropTypes.func,
 }
 Home.defaultProps = {
-  status: '-',
-  section: '-',
-  participantsCount: '-',
-  questionCount: '-',
-  maxPercent: '-',
-  minPercent: '-',
-  averagePercent: '-',
-  remainingTime: '-',
-  userResult: '-',
+  status: '--',
+  section: '--',
+  participantsCount: '--',
+  questionCount: '--',
+  maxPercent: '--',
+  minPercent: '--',
+  averagePercent: '--',
+  remainingTime: '--',
+  userResult: '--',
 
   onCloseExam: Function.prototype,
   onOpenExam: Function.prototype,

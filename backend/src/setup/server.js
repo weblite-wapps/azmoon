@@ -18,4 +18,6 @@ const app = new Koa().use(
   .use(router.routes())
   .use(router.allowedMethods())
 
-app.listen(config.server.port, () => console.log('> server successfully started!'))
+app.listen(config.server.port, () =>
+  console.log(`> server successfully started on port ${config.server.port}!`)
+)

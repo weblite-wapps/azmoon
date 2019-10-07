@@ -3,8 +3,11 @@ const { startExamAnalysis, endExamAnalysis } = require("./models/exam");
 const { updateQuestionStats } = require("./models/question");
 const { getResultsByExam } = require("./models/result");
 
+// if result is not saved, `exam.result` will return `{}`
 module.exports.shouldAnalyze = exam =>
-  exam && !exam.result && new Date(exam.endTime) < new Date();
+  exam &&
+  (exam.result == null || exam.result.count == null) &&
+  new Date(exam.endTime) < new Date();
 
 const prefixStats = stats =>
   R.reduce(
@@ -19,6 +22,8 @@ const prefixStats = stats =>
 module.exports.analyze = async examId => {
   const exam = await startExamAnalysis(examId);
   if (!exam) return; // analyzing or analyzed
+
+  console.log('Analysis started for', examId)
 
   const results = await getResultsByExam(examId);
   if (!results.length) return;
@@ -64,12 +69,14 @@ module.exports.analyze = async examId => {
     questions.map((q, i) => updateQuestionStats(q, prefixStats(qStats[i])))
   );
 
-  return endExamAnalysis(examId, {
+  await endExamAnalysis(examId, {
     count: percents.length,
     min: Math.min(100, ...percents),
     max: Math.max(-34, ...percents),
     avg: R.sum(percents) / percents.length
   });
+
+  console.log('Analysis ended for', examId)
 };
 
 module.exports.isExamRunning = async examId => {

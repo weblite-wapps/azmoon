@@ -122,7 +122,7 @@ export const getStats = stats => {
 
   let hardness = ''
   if (average > 120 || corrects < 25) hardness = 'سخت'
-  else if (corrects > 25 && corrects < 75) hardness = 'متوسط'
+  else if (corrects >= 25 && corrects < 75) hardness = 'متوسط'
   else hardness = 'آسان'
 
   return {

@@ -28,7 +28,12 @@ import {
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
 import { postRequest } from '../../helper/functions/request.helper'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { wisView, userIdView, userNameView, schoolView } from '../App/App.reducer'
+import {
+  wisView,
+  userIdView,
+  userNameView,
+  schoolView,
+} from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
 
@@ -123,14 +128,14 @@ const effectEndExamButtonClick = action$ =>
       dispatchChangeSnackbarStage('خسته نباشید! منتظر اعلام نتایج بمانید'),
     ),
     tap(() => dispatchSetIsParticipated(true)),
-    tap(
-      () =>
-        window.W &&
-        window.W.sendNotificationToAdmins(
-          'آزمون',
-          `${userNameView()} در آزمون شرکت کرد`,
-        ),
-    ),
+    // tap(
+    //   () =>
+    //     window.W &&
+    //     window.W.sendNotificationToAdmins(
+    //       'آزمون',
+    //       `${userNameView()} در آزمون شرکت کرد`,
+    //     ),
+    // ),
     tap(() => window.W && window.W.analytics('FINISH_EXAM')),
     ignoreElements(),
   )

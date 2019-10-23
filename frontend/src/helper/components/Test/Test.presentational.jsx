@@ -39,9 +39,10 @@ const Test = ({
   const classes = useStyle()
   return (
     <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
-      <div dir="auto" className="c--test_text">
-        {prob}
-      </div>
+      {prob &&
+        <div dir="auto" className="c--test_text">
+          {prob}
+        </div>}
 
       {probAttach && <ImageModal src={probAttach} />}
       <div className="c--test_opts">

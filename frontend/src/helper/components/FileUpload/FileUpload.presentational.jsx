@@ -51,7 +51,7 @@ const useStyles = makeStyles(() => ({
   },
   fileName: {
     marginLeft: 10,
-    width: '100%', 
+    width: '100%',
   },
   deleteIcon: {
     height: 10,
@@ -89,6 +89,7 @@ const FileUpload = ({
   label,
   onUpload,
   onChange,
+  title,
 }) => {
   const [name, setName] = React.useState('')
   const inputRef = React.useRef(null)
@@ -97,6 +98,13 @@ const FileUpload = ({
     setName('')
     onChange('')
   }
+
+  React.useEffect(() => {
+    if (title !== name) {
+      onDelete()
+    }
+  })
+
   const onInputChange = () => {
     if (!inputRef.current) return
 

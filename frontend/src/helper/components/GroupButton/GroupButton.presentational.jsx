@@ -52,14 +52,19 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const GroupButton = ({ items, onChange, label }) => {
+const GroupButton = ({ items, onChange, label, value }) => {
   const classes = useStyles()
   const [option, setOption] = React.useState(0)
-
   const chooseOption = index => {
     setOption(index)
     onChange(index)
   }
+
+  React.useEffect(() => {
+    if (value !== option) {
+      chooseOption(value)
+    }
+  })
 
   return (
     <div className={classes.groupButtonComponent}>

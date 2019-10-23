@@ -68,7 +68,7 @@ export default class QuestionInfo extends Component {
   }
 
   render() {
-    const { prob, sol, options, hasError } = this.state
+    const { prob, sol, options, hasError, correct } = this.state
     const { index, questions, createExam, onUpload } = this.props
     return (
       <>
@@ -133,6 +133,7 @@ export default class QuestionInfo extends Component {
           />
           <GroupButton
             label="گزینه صحیح"
+            value={correct}
             onChange={ans => this.handleAddCorrect(ans)}
           />
           <TextArea

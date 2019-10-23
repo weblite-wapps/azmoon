@@ -12,6 +12,7 @@ import { makeStyles, withStyles, fade } from '@material-ui/core/styles'
 
 // schools
 const SCHOOLS = [
+  'برهان',
   'علامه حلی ۱',
   'ابوریحان',
   'انرژی اتمی',

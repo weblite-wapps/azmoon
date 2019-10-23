@@ -68,7 +68,15 @@ export default class QuestionInfo extends Component {
   }
 
   render() {
-    const { prob, sol, options, hasError, correct } = this.state
+    const {
+      prob,
+      sol,
+      options,
+      hasError,
+      correct,
+      probAttach,
+      solAttach,
+    } = this.state
     const { index, questions, createExam, onUpload } = this.props
     return (
       <>
@@ -98,6 +106,7 @@ export default class QuestionInfo extends Component {
             onChange={({ url }) => {
               this.setState({ probAttach: url })
             }}
+            title={probAttach}
           />
           <TextField
             required
@@ -149,6 +158,7 @@ export default class QuestionInfo extends Component {
             onChange={({ url }) => {
               this.setState({ solAttach: url })
             }}
+            title={solAttach}
           />
         </div>
       </>

@@ -23,6 +23,8 @@ import {
   HANDLE_CHANGE_QUESTION_INDEX,
   dispatchHandleChangeAnswerOpt,
   dispatchChangeQuestionIndex,
+  FINAL_STAGE_CLICK,
+  dispatchFinalStageClick,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
@@ -113,6 +115,12 @@ const effectSetUserStartTime = action$ =>
 const effectEndExamButtonClick = action$ =>
   action$.pipe(
     ofType(HANDLE_FINAL_STAGE_CLICK),
+    tap(
+      () =>
+        typeof R.prop('opt', R.nth(questionIndexView(), answersView())) !==
+          'number' && dispatchHandleChangeAnswerOpt(null),
+    ),
+    delay(0),
     mergeMap(() =>
       postRequest('/result/end')
         .send({ exam: wisView(), stdId: userIdView() })

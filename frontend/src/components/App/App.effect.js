@@ -75,8 +75,9 @@ const initialFetchEpic = action$ =>
     tap(({ exam }) => !exam && !isAdminView() && push('/home')),
     tap(({ user }) => {
       if (!isAdminView()) {
-        user && user.school ? dispatchSetSchool(user.school) :
-        dispatchSetIsSchoolModalOpen(true)
+        user && user.school
+          ? dispatchSetSchool(user.school)
+          : dispatchSetIsSchoolModalOpen(true)
       }
     }),
     filter(({ exam }) => {
@@ -87,7 +88,6 @@ const initialFetchEpic = action$ =>
       return true
     }),
     tap(() => dispatchSetIsExamReady(true)),
-    tap(console.log),
     tap(({ exam, result, results }) =>
       dispatchSetHomeInfo({
         ...exam,

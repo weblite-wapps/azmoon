@@ -89,21 +89,24 @@ const FileUpload = ({
   label,
   onUpload,
   onChange,
-  title,
+  url,
+  name,
 }) => {
-  const [name, setName] = React.useState('')
+  const [state, setState] = React.useState({ name: '', url: '' })
   const inputRef = React.useRef(null)
   const direction = React.useRef('rtl')
   const onDelete = () => {
-    setName('')
-    onChange('')
+    setState({ name: '', url: '' })
+    onChange({ name: '', url: '' })
   }
 
   React.useEffect(() => {
-    if (title !== name) {
-      onDelete()
+    if (url === '') {
+      setState({ name: '', url: '' })
+    } else if (url !== state.url) {
+      setState({ name, url })
     }
-  })
+  }, [url, name, state])
 
   const onInputChange = () => {
     if (!inputRef.current) return
@@ -114,11 +117,14 @@ const FileUpload = ({
         0: { name },
       },
     } = inputRef.current
-
+    // console.log('new name ', name)
+    // console.log('value ', title)
     // WAPP API
-    onUpload(files[0]).then(onChange)
+    onUpload(files[0]).then(({ name, url }) => {
+      onChange({ name, url })
+      setState({ name, url })
+    })
     direction.current = getDirection(name)
-    setName(name)
   }
 
   const classes = useStyles()

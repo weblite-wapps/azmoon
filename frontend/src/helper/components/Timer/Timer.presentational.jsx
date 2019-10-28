@@ -14,7 +14,7 @@ const Timer = ({
   return (
     <div
       style={{
-        background: '#808285 0% 0% no-repeat padding-box',
+        background: '#818181 0% 0% no-repeat padding-box',
       }}
     >
       <Typography variant="h4" align="center">{toPersian(formattedTime)}</Typography>

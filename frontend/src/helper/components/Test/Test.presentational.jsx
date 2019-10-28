@@ -59,15 +59,15 @@ const Test = ({
               style={{
                 background:
                   correctAnswer === index && answer != null
-                    ? '#84CE2D' // green
+                    ? '#68D200' // green
                     : correctAnswer === index && answer == null && isAdmin
-                    ? '#84CE2D' // green
+                    ? '#68D200' // green
                     : correctAnswer === index && answer == null && !isAdmin
                     ? '#ffe500' // yellow
                     : (correctAnswer != null && answer) === index
                     ? '#D65555' // red
                     : (correctAnswer == null && answer) === index
-                    ? '#84CE2D' // green
+                    ? '#68D200' // green
                     : '#CCCCCC',
               }}
             >

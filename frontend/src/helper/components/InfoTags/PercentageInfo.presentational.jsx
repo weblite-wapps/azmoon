@@ -47,8 +47,8 @@ const useStyles = makeStyles(theme => ({
     stroke: '#d65555',
   },
   correctsIcon: {
-    fill: '#84ce2d',
-    stroke: '#84ce2d',
+    fill: '#68D200',
+    stroke: '#68D200',
   },
 }))
 

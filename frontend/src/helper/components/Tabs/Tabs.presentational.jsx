@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#818181',
     transition: theme.transitions.create(['background-color']),
     '&:hover': {
-      backgroundColor: '#6DC2EF',
+      backgroundColor: '#4FC4F4',
     },
     '&:last-child': {
       marginLeft: 2,

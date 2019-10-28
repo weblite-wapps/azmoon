@@ -21,13 +21,13 @@ export default createMuiTheme({
         direction: 'rtl',
       },
       body2: {
-        color: '#808285',
+        color: '#818181',
         fontSize: '12px',
         fontWeight: 'bold',
       },
       h2: {
         fontSize: '42px',
-        color: '#808285',
+        color: '#818181',
       },
       h4: {
         fontSize: '16px',
@@ -56,7 +56,7 @@ export default createMuiTheme({
       subtitle2: {
         fontSize: '16px',
         fontWeight: 'bold',
-        color: '#808285',
+        color: '#818181',
       },
     },
     MuiIconButton: {

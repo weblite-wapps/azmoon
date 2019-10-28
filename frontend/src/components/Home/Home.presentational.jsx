@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
     lineHeight: '73px',
     fontWeight: 'bold',
     letterSpacing: -0.08,
-    color: '#808285',
+    color: '#818181',
     margin: 0,
   },
   examName: {
@@ -152,7 +152,7 @@ const Home = ({
               typography: classes.buttonTypography,
             }}
             onClick={onOpenExam}
-            color="#84CE2D"
+            color="#68D200"
             text="آغاز آزمون"
           />
           <Button
@@ -162,7 +162,7 @@ const Home = ({
             }}
             variant="normal"
             onClick={onEditExam}
-            color="#808285"
+            color="#818181"
             text="ویرایش آزمون"
           />
         </>
@@ -189,7 +189,7 @@ const Home = ({
           }}
           variant="normal"
           onClick={onStartExam}
-          color="#6DC2EF"
+          color="#4FC4F4"
           text="شروع آزمون"
         />
       )}
@@ -201,7 +201,7 @@ const Home = ({
           }}
           variant="normal"
           onClick={onShowResults}
-          color="#6DC2EF"
+          color="#4FC4F4"
           text="نتایج آزمون"
         />
       )}
@@ -213,7 +213,7 @@ const Home = ({
           }}
           variant="normal"
           onClick={onShowAnswerSheet}
-          color="#84CE2D"
+          color="#68D200"
           text="پاسخ‌ نامه"
         />
       )}

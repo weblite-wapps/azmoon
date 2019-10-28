@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     backgroundColor: '#f0f0f0',
-    color: '#818181',
+    color: '#68D200',
     fontSize: 12,
     lineHeight: '21px',
     letterSpacing: '-0.08px',
@@ -42,12 +42,12 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create(['background-color']),
     '&:first-child': { marginRight: 0 },
     '&:hover': {
-      backgroundColor: '#84CE2D',
+      backgroundColor: '#68D200',
       color: '#fff',
     },
   },
   buttonSelected: {
-    backgroundColor: '#84CE2D',
+    backgroundColor: '#68D200',
     color: '#fff',
   },
 }))

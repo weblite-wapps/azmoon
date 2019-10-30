@@ -130,11 +130,11 @@ const Home = ({
             />
           </>
         )}
-        {!isExamFinished && (
-          <InfoTags title="زمان باقیمانده" description={remainingTime} />
+        {!isExamStarted && !isExamFinished && (
+          <InfoTags title="تا شروع آزمون" description={timeToStart} />
         )}
-        {!isExamStarted && (
-          <InfoTags title="شروع آزمون" description={timeToStart} />
+        {!isExamFinished && (
+          <InfoTags title="تا پایان آزمون" description={remainingTime} />
         )}
         {isExamFinished && !isAdmin && (
           <InfoTags

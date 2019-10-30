@@ -102,6 +102,13 @@ export const getRemainingTime = endTime => {
   return differenceInSeconds(end, now)
 }
 
+export const getTimeToStart = startTime => {
+  const now = new Date()
+  const start = new Date(startTime)
+
+  return differenceInSeconds(start, now)
+}
+
 export const formattedSecondsForStats = time =>
   `${format(Math.floor((time % 3600) / 60))}:${format(time % 60)}`
 

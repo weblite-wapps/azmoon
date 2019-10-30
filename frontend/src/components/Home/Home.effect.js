@@ -1,6 +1,13 @@
 // modules
 import { ofType, combineEpics } from 'redux-observable'
-import { tap, mergeMap, ignoreElements, delay, pluck, map } from 'rxjs/operators'
+import {
+  tap,
+  mergeMap,
+  ignoreElements,
+  delay,
+  pluck,
+  map,
+} from 'rxjs/operators'
 // actions
 import {
   EFFECT_CHANGE_REMAINING_TIME,
@@ -28,7 +35,6 @@ import { remainingTimeView } from './Home.reducer'
 // helpers
 import { push } from '../../setup/redux'
 import { postRequest } from '../../helper/functions/request.helper'
-
 
 const effectDecreaseRemainingTimeEpic = action$ =>
   action$.pipe(
@@ -126,11 +132,11 @@ const effectHandleSubmitSchool = action$ =>
       postRequest(`/user/${userIdView()}`)
         .send({ school })
         .on(
-        'error',
-        err =>
-          err.status !== 304 &&
-          dispatchChangeSnackbarStage('Server disconnected!'),
-      ),
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
     ),
     tap(() => dispatchSetIsSchoolModalOpen(false)),
     ignoreElements(),

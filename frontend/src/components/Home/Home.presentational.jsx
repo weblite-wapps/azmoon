@@ -72,6 +72,7 @@ const Home = ({
   minPercent,
   averagePercent,
   remainingTime,
+  timeToStart,
   userResult,
   isOpen,
 
@@ -131,6 +132,9 @@ const Home = ({
         )}
         {!isExamFinished && (
           <InfoTags title="زمان باقیمانده" description={remainingTime} />
+        )}
+        {!isExamStarted && (
+          <InfoTags title="شروع آزمون" description={timeToStart} />
         )}
         {isExamFinished && !isAdmin && (
           <InfoTags
@@ -238,6 +242,7 @@ Home.propTypes = {
   minPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   averagePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   remainingTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  timeToStart: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   userResult: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isOpen: PropTypes.bool.isRequired,
 
@@ -258,6 +263,7 @@ Home.defaultProps = {
   minPercent: '--',
   averagePercent: '--',
   remainingTime: '--',
+  timeToStart: '--',
   userResult: '--',
 
   onCloseExam: Function.prototype,

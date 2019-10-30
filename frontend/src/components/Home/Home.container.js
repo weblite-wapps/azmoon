@@ -14,6 +14,7 @@ import {
   titleView,
   sectionView,
   durationView,
+  startTimeView,
   endTimeView,
   questionCountView,
   participantsCountView,
@@ -36,7 +37,10 @@ import {
 } from './Home.action'
 // helpers
 import { getStatus } from './Home.selector'
-import { formattedSeconds } from '../../helper/functions/utils.helper'
+import {
+  formattedSeconds,
+  getTimeToStart,
+} from '../../helper/functions/utils.helper'
 
 const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),
@@ -51,6 +55,9 @@ const mapStateToProps = state => ({
   status: getStatus(state),
   questionCount: questionCountView() ? questionCountView() : '--',
   remainingTime: endTimeView() ? formattedSeconds(remainingTimeView()) : '--',
+  timeToStart: endTimeView()
+    ? formattedSeconds(getTimeToStart(startTimeView()))
+    : '--',
   participantsCount: participantsCountView()
     ? `${parseInt(participantsCountView())} نفر`
     : '--',

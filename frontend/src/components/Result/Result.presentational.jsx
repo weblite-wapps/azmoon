@@ -113,6 +113,7 @@ const Result = ({
                     <tr>
                       <td>رتبه</td>
                       <td>نام دانش آموز</td>
+                      <td>مدرسه</td>
                       <td>درصد</td>
                     </tr>
                   )}
@@ -122,6 +123,7 @@ const Result = ({
                       {`${result.firstname}`}
                       {` ${result.lastname}`}
                     </td>
+                    <td>{result.school}</td>
                     <td>{toPersian(result.percent.toFixed(1))}</td>
                   </tr>
 

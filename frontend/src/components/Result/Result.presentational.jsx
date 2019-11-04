@@ -48,6 +48,8 @@ const Result = ({
   onReturn,
   title,
   allResults,
+  user,
+  userRank,
 }) => {
   const classes = useStyles()
   return (
@@ -101,6 +103,17 @@ const Result = ({
             score={result && result.percent && result.percent.toFixed(0)}
           />
         ))}
+
+        {userRank > 0 && (
+          <ResultItem
+            rank={userRank}
+            profileImage={user.profileImage}
+            fullName={user.firstname + user.lastname}
+            finishTime={convertToPersianFormat(new Date(user.endTime))}
+            school={user.school}
+            score={user.percent.toFixed(0)}
+          />
+        )}
 
         <div style={{ display: 'none' }}>
           <div id="element-to-pdf" dir="rtl">

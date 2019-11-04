@@ -27,7 +27,10 @@ import {
   dispatchSetIsExamStarted,
   dispatchSetSchool,
 } from '../App/App.action'
-import { dispatchHandleStartExam } from '../Exam/Exam.action'
+import {
+  dispatchHandleStartExam,
+  dispatchHandleFinalStageClick,
+} from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
 import { wisView, userIdView } from '../App/App.reducer'
@@ -43,8 +46,13 @@ const effectDecreaseRemainingTimeEpic = action$ =>
     tap(dispatchDecrementRemainingTime),
     delay(1000),
     map(() => {
+      if (55 < remainingTimeView() && remainingTimeView() < 65) {
+        dispatchChangeSnackbarStage('یک دقیقه زمان تا بسته شدن پنجره ی آزمون')
+      }
       if (remainingTimeView() < 1) {
+        dispatchHandleFinalStageClick()
         dispatchSetIsExamFinished(true)
+
         return { type: 'NOTHING' }
       } else return effectChangeRemainingTime()
     }),

@@ -23,8 +23,6 @@ import {
   HANDLE_CHANGE_QUESTION_INDEX,
   dispatchHandleChangeAnswerOpt,
   dispatchChangeQuestionIndex,
-  FINAL_STAGE_CLICK,
-  dispatchFinalStageClick,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
@@ -135,6 +133,7 @@ const effectEndExamButtonClick = action$ =>
     tap(() =>
       dispatchChangeSnackbarStage('خسته نباشید! منتظر اعلام نتایج بمانید'),
     ),
+
     tap(() => dispatchSetIsParticipated(true)),
     // tap(
     //   () =>
@@ -158,7 +157,6 @@ const effectHandleChangeQuestionIndex = action$ =>
     ),
     delay(0),
     tap(() => dispatchChangeQuestionIndex(1)),
-
     ignoreElements(),
   )
 

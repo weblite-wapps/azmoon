@@ -39,10 +39,11 @@ const Test = ({
   const classes = useStyle()
   return (
     <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
-      {prob &&
+      {prob && (
         <div dir="auto" className="c--test_text">
           {prob}
-        </div>}
+        </div>
+      )}
 
       {probAttach && <ImageModal src={probAttach} />}
       <div className="c--test_opts">
@@ -52,7 +53,9 @@ const Test = ({
             className="c--test_opt"
             key={index}
             style={{ ...(isExamFinished && { cursor: 'default' }) }}
-            onClick={() => correctAnswer != null || chooseAnswer(index)}
+            onClick={() =>
+              correctAnswer != null || isExamFinished || chooseAnswer(index)
+            }
           >
             <div
               className="c--test_opt-circle"

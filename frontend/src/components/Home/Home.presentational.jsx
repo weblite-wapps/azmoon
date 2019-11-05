@@ -11,6 +11,7 @@ import SchoolModal from '../../helper/components/SchoolModal/SchoolModal.present
 import { toPersian } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
+import { userRankView } from '../Result/Result.reducer'
 const useStyles = makeStyles(() => ({
   logoImage: {
     margin: 'auto',
@@ -137,13 +138,22 @@ const Home = ({
           <InfoTags title="تا پایان آزمون" description={remainingTime} />
         )}
         {isExamFinished && !isAdmin && (
-          <InfoTags
-            direction="ltr"
-            title="نتیجه شما"
-            description={
-              userResult !== '--' && userResult && userResult.toFixed(0)
-            }
-          />
+          <>
+            <InfoTags
+              direction="ltr"
+              title="نتیجه شما"
+              description={
+                userResult !== '--' && userResult && userResult.toFixed(0)
+              }
+            />
+            {userRankView() > -1 && (
+              <InfoTags
+                direction="ltr"
+                title="رتبه ی شما"
+                description={userRankView() + 1}
+              />
+            )}
+          </>
         )}
       </div>
 

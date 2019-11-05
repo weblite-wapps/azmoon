@@ -27,10 +27,13 @@ import {
   dispatchSetIsExamStarted,
   dispatchSetSchool,
 } from '../App/App.action'
-import { dispatchHandleStartExam } from '../Exam/Exam.action'
+import {
+  dispatchHandleStartExam,
+  dispatchHandleFinalStageClick,
+} from '../Exam/Exam.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 // views
-import { wisView, userIdView } from '../App/App.reducer'
+import { wisView, userIdView, isExamFinishedView } from '../App/App.reducer'
 import { remainingTimeView } from './Home.reducer'
 // helpers
 import { push } from '../../setup/redux'
@@ -43,8 +46,13 @@ const effectDecreaseRemainingTimeEpic = action$ =>
     tap(dispatchDecrementRemainingTime),
     delay(1000),
     map(() => {
-      if (remainingTimeView() < 1) {
+      if (55 < remainingTimeView() && remainingTimeView() < 65) {
+        dispatchChangeSnackbarStage('یک دقیقه زمان تا بسته شدن پنجره ی آزمون')
+      }
+      if (!isExamFinishedView() && remainingTimeView() < 1) {
+        dispatchHandleFinalStageClick()
         dispatchSetIsExamFinished(true)
+
         return { type: 'NOTHING' }
       } else return effectChangeRemainingTime()
     }),

@@ -146,11 +146,13 @@ const Home = ({
                 userResult !== '--' && userResult && userResult.toFixed(0)
               }
             />
-            <InfoTags
-              direction="ltr"
-              title="رتبه ی شما"
-              description={userRankView()}
-            />
+            {userRankView() > -1 && (
+              <InfoTags
+                direction="ltr"
+                title="رتبه ی شما"
+                description={userRankView() + 1}
+              />
+            )}
           </>
         )}
       </div>

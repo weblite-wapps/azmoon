@@ -71,7 +71,6 @@ const initialFetchEpic = action$ =>
         user: user.body,
       })),
     ),
-    tap(console.log),
     tap(() => window.W && window.W.start()),
     tap(({ exam }) => !exam && !isAdminView() && push('/home')),
     tap(({ user }) => {

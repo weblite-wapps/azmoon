@@ -117,8 +117,6 @@ const FileUpload = ({
         0: { name },
       },
     } = inputRef.current
-    // console.log('new name ', name)
-    // console.log('value ', title)
     // WAPP API
     onUpload(files[0]).then(({ name, url }) => {
       onChange({ name, url })

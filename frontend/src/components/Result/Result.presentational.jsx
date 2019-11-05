@@ -104,9 +104,9 @@ const Result = ({
           />
         ))}
 
-        {userRank > 0 && (
+        {userRank > 2 && (
           <ResultItem
-            rank={userRank}
+            rank={userRank + 1}
             profileImage={user.profileImage}
             fullName={user.firstname + user.lastname}
             finishTime={convertToPersianFormat(new Date(user.endTime))}

@@ -24,8 +24,8 @@ const mapStateToProps = () => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
-  // results: R.take(10, resultsView()), // TODO: show all results for admins
-  results: R.take(3, resultsView()), // TODO: show all results for admins
+  results: R.take(10, resultsView()), // TODO: show all results for admins
+  // results: R.take(3, resultsView()), // TODO: show all results for admins
   title: titleView(),
   allResults: resultsView(),
   user: userInfosView(),

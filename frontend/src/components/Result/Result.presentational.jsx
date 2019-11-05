@@ -104,7 +104,7 @@ const Result = ({
           />
         ))}
 
-        {userRank > 2 && (
+        {userRank > 9 && (
           <ResultItem
             rank={userRank + 1}
             profileImage={user.profileImage}

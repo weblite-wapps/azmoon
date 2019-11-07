@@ -109,9 +109,11 @@ const Result = ({
             rank={userRank + 1}
             profileImage={user.profileImage}
             fullName={user.firstname + user.lastname}
-            finishTime={convertToPersianFormat(new Date(user.endTime))}
+            finishTime={
+              user.endTime && convertToPersianFormat(new Date(user.endTime))
+            }
             school={user.school}
-            score={user.percent.toFixed(0)}
+            score={user.percent && user.percent.toFixed(0)}
           />
         )}
 

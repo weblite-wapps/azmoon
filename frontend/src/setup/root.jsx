@@ -15,10 +15,10 @@ import App from '../components/App/App.container'
 import Snackbar from '../components/Snackbar/Snackbar.container.react'
 import Loading from '../helper/components/Loading/Loading.presentational'
 
-const Home = lazy(() => import('../components/Home/Home.container'))
-const Create = lazy(() => import('../components/Create/Create.container'))
-const Result = lazy(() => import('../components/Result/Result.container'))
-const Exam = lazy(() => import('../components/Exam/Exam.container'))
+import Home from '../components/Home/Home.container'
+import Create from '../components/Create/Create.container'
+import Result from '../components/Result/Result.container'
+import Exam from '../components/Exam/Exam.container'
 
 export default () => (
   <Provider store={store}>

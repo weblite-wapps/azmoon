@@ -6,6 +6,7 @@ import {
   SET_IS_EXAM_READY,
   SET_IS_EXAM_STARTED,
   SET_IS_EXAM_FINISHED,
+  SET_SCHOOL,
 } from './App.action'
 
 const initialState = {
@@ -17,11 +18,13 @@ const initialState = {
   isExamStarted: false,
   isExamFinished: false,
   isAdmin: false,
+  school: '',
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
 
 export const wisView = () => R.path(['App', 'wis'])(getState())
+export const schoolView = () => R.path(['App', 'school'])(getState())
 export const userView = () => R.path(['App', 'user'])(getState())
 export const userIdView = () => R.path(['App', 'user', 'id'])(getState())
 export const userNameView = () => R.path(['App', 'user', 'name'])(getState())
@@ -59,6 +62,11 @@ const reducer = {
   [SET_IS_EXAM_FINISHED]: (state, isExamFinished) => ({
     ...state,
     isExamFinished,
+  }),
+
+  [SET_SCHOOL]: (state, school) => ({
+    ...state,
+    school,
   }),
 }
 

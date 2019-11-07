@@ -54,7 +54,7 @@ export default class ExamInfos extends Component {
     if (!onExamError(data)) setInitialInfo(data)
     else {
       this.setState({ hasError: onExamError(data) })
-      openSnackbar('همه ی موارد * دار را وارد کنید')
+      openSnackbar(onExamError(data).snackBar)
     }
   }
 

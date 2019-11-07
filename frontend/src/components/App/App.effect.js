@@ -11,21 +11,26 @@ import {
   dispatchSetIsParticipated,
   dispatchSetIsLoading,
   FETCH_INITIAL_DATA,
+  dispatchSetSchool,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { dispatchSetHomeInfo } from '../Home/Home.action'
 import {
-  dispatchSetExamDuration,
+  dispatchSetHomeInfo,
+  dispatchEffectChangeRemainingTime,
+  dispatchSetIsSchoolModalOpen,
+} from '../Home/Home.action'
+import {
   dispatchSetExamInfo,
   dispatchSetExamAnswers,
-  dispatchHandleStartExam,
+  dispatchHandleChangeExamDuration,
+  dispatchStartExam,
 } from '../Exam/Exam.action'
 // views
-import { wisView, isAdminView, userIdView, isExamFinishedView } from './App.reducer'
+import { wisView, isAdminView, userIdView } from './App.reducer'
 // helpers
 import { getRequest } from '../../helper/functions/request.helper'
 import { push } from '../../setup/redux'
-import { mapToUserIds, injectUserInfo } from './App.helper'
+import { mapToUserIds, injectUserInfo, getRemainedTime } from './App.helper'
 
 const initialFetchEpic = action$ =>
   action$.pipe(
@@ -47,20 +52,34 @@ const initialFetchEpic = action$ =>
               err.status !== 304 &&
               dispatchChangeSnackbarStage('Server disconnected!'),
           ),
-        getRequest(`/exam/${wisView()}/result`).on(
+        getRequest(`/exam/${wisView()}/results`).on(
           'error',
           err =>
             err.status !== 304 &&
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
-      ]).then(([exam, result, results]) => ({
+        getRequest(`/user/${userIdView()}`).on(
+          'error',
+          err =>
+            err.status !== 304 &&
+            dispatchChangeSnackbarStage('Server disconnected!'),
+        ),
+      ]).then(([exam, result, results, user]) => ({
         exam: exam.body,
         result: result.body,
         results: results.body,
+        user: user.body,
       })),
     ),
     tap(() => window.W && window.W.start()),
     tap(({ exam }) => !exam && !isAdminView() && push('/home')),
+    tap(({ user }) => {
+      if (!isAdminView()) {
+        user && user.school
+          ? dispatchSetSchool(user.school)
+          : dispatchSetIsSchoolModalOpen(true)
+      }
+    }),
     filter(({ exam }) => {
       if (!exam) {
         dispatchSetIsLoading(false)
@@ -68,7 +87,18 @@ const initialFetchEpic = action$ =>
       }
       return true
     }),
-    tap(() => push('/home')),
+    tap(() => dispatchSetIsExamReady(true)),
+    tap(({ exam, result, results }) =>
+      dispatchSetHomeInfo({
+        ...exam,
+        results,
+        userResult: result && result.percent,
+      }),
+    ),
+    tap(() => {
+      dispatchEffectChangeRemainingTime()
+      push('/home')
+    }),
     tap(({ results }) => {
       window.W &&
         window.W.getUsersInfoById(mapToUserIds(results)).then(usersInfo => {
@@ -76,27 +106,29 @@ const initialFetchEpic = action$ =>
           dispatchSetResults(newResults)
         })
     }),
-    tap(console.log),
-    tap(({ exam, result }) =>
-      dispatchSetHomeInfo({ ...exam, userResult: result && result.percent }),
-    ),
-    tap(({ exam: { duration, questions } }) =>
-      dispatchSetExamInfo({ duration, questions }),
-    ),
-    tap(({ exam }) => dispatchSetExamDuration(exam.duration * 60)),
-    tap(() => dispatchSetIsExamReady(true)),
+
     tap(
-      ({ exam }) =>
-        new Date() > new Date(exam.startTime) && dispatchSetIsExamStarted(true),
+      ({ exam: { startTime } }) =>
+        new Date() > new Date(startTime) && dispatchSetIsExamStarted(true),
     ),
     tap(
-      ({ exam }) =>
-        new Date() > new Date(exam.endTime) && dispatchSetIsExamFinished(true),
+      ({ exam: { endTime } }) =>
+        new Date() > new Date(endTime) && dispatchSetIsExamFinished(true),
     ),
-    tap(() => !isExamFinishedView() && dispatchHandleStartExam()),
-    filter(() => !isAdminView()),
-    tap(({ result }) => result && dispatchSetIsParticipated(true)),
-    tap(({ result }) => result && dispatchSetExamAnswers(result.answers)),
+    tap(({ result, exam: { duration, questions } }) => {
+      if (result && !result.endTime) {
+        const remainedTime = getRemainedTime(duration, result.startTime)
+        if (remainedTime > 0) {
+          dispatchSetExamInfo({ duration: remainedTime, questions })
+          dispatchStartExam(result.answers)
+          dispatchHandleChangeExamDuration()
+          push('/exam')
+        }
+      } else dispatchSetExamInfo({ duration: duration * 60, questions })
+    }),
+    filter(({ result }) => !isAdminView() && result && result.endTime),
+    tap(() => dispatchSetIsParticipated(true)),
+    tap(({ result }) => dispatchSetExamAnswers(result.answers)),
     ignoreElements(),
   )
 

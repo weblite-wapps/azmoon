@@ -11,28 +11,38 @@ import {
 import {
   HANDLE_START_EXAM,
   HANDLE_CHANGE_EXAM_DURATION,
-  handleChangeExamDuration,
   HANDLE_CHANGE_ANSWER_OPT,
+  SET_USER_START_TIME,
+  HANDLE_FINAL_STAGE_CLICK,
+  handleChangeExamDuration,
   dispatchChangeExamDuration,
   dispatchStartExam,
-  SET_USER_START_TIME,
   dispatchChangeAnswerOpt,
-  HANDLE_FINAL_STAGE_CLICK,
+  dispatchSetUserStartTime,
+  dispatchHandleFinalStageClick,
+  HANDLE_CHANGE_QUESTION_INDEX,
+  dispatchHandleChangeAnswerOpt,
+  dispatchChangeQuestionIndex,
 } from './Exam.action'
 // view
 import { durationView, questionIndexView, answersView } from './Exam.reducer'
 import { postRequest } from '../../helper/functions/request.helper'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
-import { wisView, userIdView, userNameView } from '../App/App.reducer'
+import {
+  wisView,
+  userIdView,
+  userNameView,
+  schoolView,
+} from '../App/App.reducer'
 import { push } from '../../setup/redux'
 import { dispatchSetIsParticipated } from '../App/App.action'
-import { creatorIdView } from '../Home/Home.reducer'
 
 const effectStartExamEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_START_EXAM),
     pluck('payload'),
-    tap(dispatchStartExam),
+    tap(dispatchSetUserStartTime),
+    tap(() => dispatchStartExam([])),
     map(handleChangeExamDuration),
   )
 
@@ -43,12 +53,11 @@ const effectDecreaseDurationEpic = action$ =>
     tap(dispatchChangeExamDuration),
     delay(1000),
     map(() => {
-      if (295 < durationView() && durationView() < 300) {
-        dispatchChangeSnackbarStage('5 minutes stood')
+      if (55 < durationView() && durationView() < 65) {
+        dispatchChangeSnackbarStage('زمان باقی مانده: ۱ دقیقه')
       }
       if (durationView() < 1) {
-        push('/home')
-        dispatchSetIsParticipated(true)
+        dispatchHandleFinalStageClick()
         return { type: 'NOTHING' }
       } else return handleChangeExamDuration()
     }),
@@ -58,9 +67,6 @@ const effectChangeAnswerOptEpic = action$ =>
   action$.pipe(
     ofType(HANDLE_CHANGE_ANSWER_OPT),
     pluck('payload', 'opt'),
-    // map(changeAnswerOpt),
-    // tap(a => console.log('2 ', a)),
-    // pluck('payload', 'opt'),
     map(opt => ({
       opt:
         R.prop('opt', R.nth(questionIndexView(), answersView())) === opt
@@ -93,7 +99,7 @@ const effectSetUserStartTime = action$ =>
     ofType(SET_USER_START_TIME),
     mergeMap(() =>
       postRequest('/result/start')
-        .send({ exam: wisView(), stdId: userIdView() })
+        .send({ exam: wisView(), stdId: userIdView(), school: schoolView() })
         .on(
           'error',
           err =>
@@ -107,6 +113,12 @@ const effectSetUserStartTime = action$ =>
 const effectEndExamButtonClick = action$ =>
   action$.pipe(
     ofType(HANDLE_FINAL_STAGE_CLICK),
+    tap(
+      () =>
+        typeof R.prop('opt', R.nth(questionIndexView(), answersView())) !==
+          'number' && dispatchHandleChangeAnswerOpt(null),
+    ),
+    delay(0),
     mergeMap(() =>
       postRequest('/result/end')
         .send({ exam: wisView(), stdId: userIdView() })
@@ -118,8 +130,33 @@ const effectEndExamButtonClick = action$ =>
         ),
     ),
     tap(() => push('/home')),
+    tap(() =>
+      dispatchChangeSnackbarStage('خسته نباشید! منتظر اعلام نتایج بمانید'),
+    ),
+
     tap(() => dispatchSetIsParticipated(true)),
-    tap(() => window.W && window.W.sendNotificationToUsers("آزمون", `${userNameView()} در آزمون شرکت کرد`, "", [creatorIdView()])),
+    // tap(
+    //   () =>
+    //     window.W &&
+    //     window.W.sendNotificationToAdmins(
+    //       'آزمون',
+    //       `${userNameView()} در آزمون شرکت کرد`,
+    //     ),
+    // ),
+    tap(() => window.W && window.W.analytics('FINISH_EXAM')),
+    ignoreElements(),
+  )
+
+const effectHandleChangeQuestionIndex = action$ =>
+  action$.pipe(
+    ofType(HANDLE_CHANGE_QUESTION_INDEX),
+    tap(
+      () =>
+        typeof R.prop('opt', R.nth(questionIndexView(), answersView())) !==
+          'number' && dispatchHandleChangeAnswerOpt(null),
+    ),
+    delay(0),
+    tap(() => dispatchChangeQuestionIndex(1)),
     ignoreElements(),
   )
 
@@ -129,4 +166,5 @@ export default combineEpics(
   effectChangeAnswerOptEpic,
   effectSetUserStartTime,
   effectEndExamButtonClick,
+  effectHandleChangeQuestionIndex,
 )

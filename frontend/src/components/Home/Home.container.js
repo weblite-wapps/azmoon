@@ -14,6 +14,7 @@ import {
   titleView,
   sectionView,
   durationView,
+  startTimeView,
   endTimeView,
   questionCountView,
   participantsCountView,
@@ -21,6 +22,8 @@ import {
   minPercentView,
   averagePercentView,
   userResultView,
+  remainingTimeView,
+  isSchoolModalOpenView,
 } from '../Home/Home.reducer'
 // actions
 import {
@@ -30,10 +33,14 @@ import {
   dispatchEffectStartExam,
   dispatchEffectShowResults,
   dispatchEffectShowAnswerSheet,
+  dispatchEffectHandleSubmitSchool,
 } from './Home.action'
 // helpers
-import { getRemainingTime } from '../../helper/functions/utils.helper'
 import { getStatus } from './Home.selector'
+import {
+  formattedSeconds,
+  getTimeToStart,
+} from '../../helper/functions/utils.helper'
 
 const mapStateToProps = state => ({
   isParticipated: isParticipatedView(),
@@ -44,17 +51,21 @@ const mapStateToProps = state => ({
 
   title: titleView(),
   section: sectionView(),
-  duration: `${durationView()} دقیقه`,
+  duration: durationView() ? `${durationView()} دقیقه` : '--',
   status: getStatus(state),
   questionCount: questionCountView() ? questionCountView() : '--',
-  remainingTime: endTimeView() ? getRemainingTime(endTimeView()) : '--',
+  remainingTime: endTimeView() ? formattedSeconds(remainingTimeView()) : '--',
+  timeToStart: endTimeView()
+    ? formattedSeconds(getTimeToStart(startTimeView()))
+    : '--',
   participantsCount: participantsCountView()
-    ? parseInt(participantsCountView())
+    ? `${parseInt(participantsCountView())} نفر`
     : '--',
   maxPercent: maxPercentView(),
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
+  isOpen: isSchoolModalOpenView(),
 })
 
 const mapDispatchToProps = () => ({
@@ -64,6 +75,7 @@ const mapDispatchToProps = () => ({
   onStartExam: () => dispatchEffectStartExam(),
   onShowResults: () => dispatchEffectShowResults(),
   onShowAnswerSheet: () => dispatchEffectShowAnswerSheet(),
+  onSubmit: dispatchEffectHandleSubmitSchool,
 })
 
 export default connect(

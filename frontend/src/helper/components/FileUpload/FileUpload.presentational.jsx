@@ -23,7 +23,6 @@ const useStyles = makeStyles(() => ({
     boxSizing: 'border-box',
     paddingRight: 6,
   },
-
   button: {
     backgroundColor: '#7dd9de',
     color: '#fff',
@@ -32,12 +31,6 @@ const useStyles = makeStyles(() => ({
     width: 90,
     '&:hover': {
       backgroundColor: '#4286b2',
-    },
-  },
-  deleteButton: {
-    backgroundColor: '#D65555',
-    '&:hover': {
-      backgroundColor: '#c32d2d',
     },
   },
   input: {
@@ -96,14 +89,26 @@ const FileUpload = ({
   label,
   onUpload,
   onChange,
-  onDelete,
+  url,
+  name,
 }) => {
-  const [name, setName] = React.useState('')
+  const [state, setState] = React.useState({ name: '', url: '' })
   const inputRef = React.useRef(null)
   const direction = React.useRef('rtl')
+  const onDelete = () => {
+    setState({ name: '', url: '' })
+    onChange({ name: '', url: '' })
+  }
+
+  React.useEffect(() => {
+    if (url === '') {
+      setState({ name: '', url: '' })
+    } else if (url !== state.url) {
+      setState({ name, url })
+    }
+  }, [url, name, state])
 
   const onInputChange = () => {
-    console.log('onChange')
     if (!inputRef.current) return
 
     const {
@@ -112,11 +117,12 @@ const FileUpload = ({
         0: { name },
       },
     } = inputRef.current
-
     // WAPP API
-    // onUpload(files[0]).then(onChange)
+    onUpload(files[0]).then(({ name, url }) => {
+      onChange({ name, url })
+      setState({ name, url })
+    })
     direction.current = getDirection(name)
-    setName(name)
   }
 
   const classes = useStyles()
@@ -178,11 +184,9 @@ FileUpload.propTypes = {
   id: PropTypes.string.isRequired,
   /** API form Wapp to upload file */
   onUpload: PropTypes.func.isRequired,
-  onDelete: PropTypes.func,
 }
 FileUpload.defaultProps = {
   label: '',
-  onDelete: Function.prototype,
 }
 
 export default FileUpload

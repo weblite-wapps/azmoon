@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#818181',
     transition: theme.transitions.create(['background-color']),
     '&:hover': {
-      backgroundColor: '#6DC2EF',
+      backgroundColor: '#4FC4F4',
     },
     '&:last-child': {
       marginLeft: 2,
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Tabs = ({ onReturn, onExport, single }) => {
+const Tabs = ({ onReturn, onExport, single, isAdmin }) => {
   const classes = useStyles()
 
   return (
@@ -49,7 +49,7 @@ const Tabs = ({ onReturn, onExport, single }) => {
           بازگشت
         </Button>
       </li>
-      {!single && (
+      {!single && isAdmin && (
         <li className={classes.li}>
           <Button className={classes.button} onClick={onExport}>
             چاپ نتایج

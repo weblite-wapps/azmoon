@@ -34,18 +34,19 @@ const reducer = {
   [SET_INITIAL_INFO]: (state, data) => ({
     ...state,
     ...data,
+    startTime: data.startTime || new Date(),
     questionIndex: 0,
     questions: R.times(
       () => ({
         prob: '',
         probAttach: '',
+        probAttachName: '',
         options: ['', '', '', ''],
         correct: 0,
         sol: '',
         solAttach: '',
+        solAttachName: '',
         hasError: {},
-        questionImageUrl: '',
-        answerImageUrl: '',
       }),
       parseInt(data.questionCount),
     ),

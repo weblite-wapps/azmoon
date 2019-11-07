@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 // components
 import AnalysisBox from '../AnalysisBox/AnalysisBox.presentational'
+import ImageModal from '../ImageModal/ImageModal.presentational'
+
 // helpers
 import { toPersian } from '../../functions/utils.helper'
 // style
@@ -30,14 +32,20 @@ const Test = ({
   isExamFinished,
   stats: { hardness, averageTime, corrects, wrongs, whites },
   studentTime,
+  probAttach,
+  solAttach,
+  isAdmin,
 }) => {
   const classes = useStyle()
   return (
     <div className="c--test_container scroll-bar" style={{ color: 'black' }}>
-      <div dir="auto" className="c--test_text">
-        {prob}
-      </div>
+      {prob && (
+        <div dir="auto" className="c--test_text">
+          {prob}
+        </div>
+      )}
 
+      {probAttach && <ImageModal src={probAttach} />}
       <div className="c--test_opts">
         {options.map((value, index) => (
           <div
@@ -45,18 +53,24 @@ const Test = ({
             className="c--test_opt"
             key={index}
             style={{ ...(isExamFinished && { cursor: 'default' }) }}
-            onClick={() => correctAnswer != null || chooseAnswer(index)}
+            onClick={() =>
+              correctAnswer != null || isExamFinished || chooseAnswer(index)
+            }
           >
             <div
               className="c--test_opt-circle"
               style={{
                 background:
-                  correctAnswer === index
-                    ? '#84CE2D'
+                  correctAnswer === index && answer != null
+                    ? '#68D200' // green
+                    : correctAnswer === index && answer == null && isAdmin
+                    ? '#68D200' // green
+                    : correctAnswer === index && answer == null && !isAdmin
+                    ? '#ffe500' // yellow
                     : (correctAnswer != null && answer) === index
-                    ? '#D65555'
+                    ? '#D65555' // red
                     : (correctAnswer == null && answer) === index
-                    ? '#84CE2D'
+                    ? '#68D200' // green
                     : '#CCCCCC',
               }}
             >
@@ -84,6 +98,8 @@ const Test = ({
           <div dir="auto" className="c--test_solution">
             {sol}
           </div>
+
+          {solAttach && <ImageModal src={solAttach} />}
 
           <AnalysisBox
             label="تحلیل سوال"

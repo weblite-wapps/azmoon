@@ -3,22 +3,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-// style
 import { makeStyles, darken } from '@material-ui/core/styles'
 // icons
 import AddIcon from '@material-ui/icons/Add'
-// helper
+// helpers
 import { cns, ab } from '../../functions/utils.helper'
+// styles
 import './Button.scss'
 
 const useStyles = makeStyles(() => ({
   base: {
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: '#6DC2EF',
+    backgroundColor: '#5ADBDF',
     borderRadius: 11,
     '&:hover': {
-      backgroundColor: darken('#6DC2EF', 0.1),
+      backgroundColor: darken('#5ADBDF', 0.1),
     },
   },
   fixedRoot: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
   },
   labeledRoot: {
     '--size': '8px',
-    '--color': '#6DC2EF',
+    '--color': '#5ADBDF',
     margin: '5px 0px',
   },
   typography: {

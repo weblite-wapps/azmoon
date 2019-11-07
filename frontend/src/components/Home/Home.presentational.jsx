@@ -5,10 +5,13 @@ import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
+import SchoolModal from '../../helper/components/SchoolModal/SchoolModal.presentational'
+
 // helper
 import { toPersian } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
+import { userRankView } from '../Result/Result.reducer'
 const useStyles = makeStyles(() => ({
   logoImage: {
     margin: 'auto',
@@ -32,7 +35,7 @@ const useStyles = makeStyles(() => ({
     lineHeight: '73px',
     fontWeight: 'bold',
     letterSpacing: -0.08,
-    color: '#808285',
+    color: '#818181',
     margin: 0,
   },
   examName: {
@@ -56,7 +59,6 @@ const useStyles = makeStyles(() => ({
 
 const Home = ({
   isParticipated,
-  isExamReady,
   isExamStarted,
   isExamFinished,
   isAdmin,
@@ -71,7 +73,9 @@ const Home = ({
   minPercent,
   averagePercent,
   remainingTime,
+  timeToStart,
   userResult,
+  isOpen,
 
   onCloseExam,
   onOpenExam,
@@ -79,6 +83,7 @@ const Home = ({
   onStartExam,
   onShowResults,
   onShowAnswerSheet,
+  onSubmit,
 }) => {
   const classes = useStyles()
   return (
@@ -103,38 +108,52 @@ const Home = ({
 
       <div className="c--home_info-tags">
         <InfoTags title="وضعیت آزمون" description={status} />
-        {isExamFinished && (
-          <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
-        )}
+        <InfoTags title="تعداد شرکت‌کننده" description={participantsCount} />
         <InfoTags title="تعداد سوالات" description={questionCount} />
         <InfoTags title="مدت پاسخگویی" description={duration} />
 
         {isExamFinished && (
           <>
             <InfoTags
+              direction="ltr"
               title="بیشترین درصد"
-              description={maxPercent !== '-' && maxPercent.toFixed(0)}
+              description={maxPercent !== '--' && maxPercent.toFixed(0)}
             />
             <InfoTags
+              direction="ltr"
               title="کمترین درصد"
-              description={minPercent !== '-' && minPercent.toFixed(0)}
+              description={minPercent !== '--' && minPercent.toFixed(0)}
             />
             <InfoTags
+              direction="ltr"
               title="میانگین درصد"
-              description={averagePercent !== '-' && averagePercent.toFixed(0)}
+              description={averagePercent !== '--' && averagePercent.toFixed(0)}
             />
           </>
         )}
+        {!isExamStarted && !isExamFinished && (
+          <InfoTags title="تا شروع آزمون" description={timeToStart} />
+        )}
         {!isExamFinished && (
-          <InfoTags title="زمان باقیمانده" description={remainingTime} />
+          <InfoTags title="تا پایان آزمون" description={remainingTime} />
         )}
         {isExamFinished && !isAdmin && (
-          <InfoTags
-            title="نتیجه شما"
-            description={
-              userResult !== '-' && userResult && userResult.toFixed(0)
-            }
-          />
+          <>
+            <InfoTags
+              direction="ltr"
+              title="نتیجه شما"
+              description={
+                userResult !== '--' && userResult && userResult.toFixed(0)
+              }
+            />
+            {userRankView() > -1 && (
+              <InfoTags
+                direction="ltr"
+                title="رتبه ی شما"
+                description={userRankView() + 1}
+              />
+            )}
+          </>
         )}
       </div>
 
@@ -147,7 +166,7 @@ const Home = ({
               typography: classes.buttonTypography,
             }}
             onClick={onOpenExam}
-            color="#84CE2D"
+            color="#68D200"
             text="آغاز آزمون"
           />
           <Button
@@ -157,7 +176,7 @@ const Home = ({
             }}
             variant="normal"
             onClick={onEditExam}
-            color="#808285"
+            color="#818181"
             text="ویرایش آزمون"
           />
         </>
@@ -184,7 +203,7 @@ const Home = ({
           }}
           variant="normal"
           onClick={onStartExam}
-          color="#6DC2EF"
+          color="#4FC4F4"
           text="شروع آزمون"
         />
       )}
@@ -196,7 +215,7 @@ const Home = ({
           }}
           variant="normal"
           onClick={onShowResults}
-          color="#6DC2EF"
+          color="#4FC4F4"
           text="نتایج آزمون"
         />
       )}
@@ -208,17 +227,18 @@ const Home = ({
           }}
           variant="normal"
           onClick={onShowAnswerSheet}
-          color="#84CE2D"
+          color="#68D200"
           text="پاسخ‌ نامه"
         />
       )}
+
+      <SchoolModal open={isOpen} onSubmit={onSubmit} />
     </div>
   )
 }
 
 Home.propTypes = {
   isParticipated: PropTypes.bool.isRequired,
-  isExamReady: PropTypes.bool.isRequired,
   isExamStarted: PropTypes.bool.isRequired,
   isExamFinished: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
@@ -231,8 +251,10 @@ Home.propTypes = {
   maxPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minPercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   averagePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  remainingTime: PropTypes.string,
+  remainingTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  timeToStart: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   userResult: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isOpen: PropTypes.bool.isRequired,
 
   onCloseExam: PropTypes.func,
   onOpenExam: PropTypes.func,
@@ -240,17 +262,19 @@ Home.propTypes = {
   onStartExam: PropTypes.func,
   onShowResults: PropTypes.func,
   onShowAnswerSheet: PropTypes.func,
+  onSubmit: PropTypes.func,
 }
 Home.defaultProps = {
-  status: '-',
-  section: '-',
-  participantsCount: '-',
-  questionCount: '-',
-  maxPercent: '-',
-  minPercent: '-',
-  averagePercent: '-',
-  remainingTime: '-',
-  userResult: '-',
+  status: '--',
+  section: '--',
+  participantsCount: '--',
+  questionCount: '--',
+  maxPercent: '--',
+  minPercent: '--',
+  averagePercent: '--',
+  remainingTime: '--',
+  timeToStart: '--',
+  userResult: '--',
 
   onCloseExam: Function.prototype,
   onOpenExam: Function.prototype,
@@ -258,6 +282,7 @@ Home.defaultProps = {
   onStartExam: Function.prototype,
   onShowResults: Function.prototype,
   onShowAnswerSheet: Function.prototype,
+  onSubmit: Function.prototype,
 }
 
 export default Home

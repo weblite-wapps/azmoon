@@ -5,7 +5,7 @@
 }
 
 .c--appBar_toolbar {
-  background-color: #0D2154;
+  background-color: #0A2057;
   height: 50px;
 }
 
@@ -16,5 +16,13 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: linear-gradient(to right, #EDCB19 25%,#84CE2D 25%, #84CE2D 50%, #D65555 50%, #D65555 75%, #6DC2EF 75%);
+  background: linear-gradient(
+    to right,
+    #EDCB19 25%,
+    #68D200 25%,
+    #68D200 50%,
+    #E6494F 50%,
+    #E6494F 75%,
+    #4FC4F4 75%
+  );
 }

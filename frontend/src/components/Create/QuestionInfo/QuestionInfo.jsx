@@ -56,6 +56,8 @@ export default class QuestionInfo extends Component {
         addQuestion(R.dissoc('index', this.state))
         changePage(num)
       }
+    } else {
+      changePage(num)
     }
   }
 
@@ -66,7 +68,17 @@ export default class QuestionInfo extends Component {
   }
 
   render() {
-    const { prob, sol, options, hasError } = this.state
+    const {
+      prob,
+      sol,
+      options,
+      hasError,
+      correct,
+      probAttach,
+      probAttachName,
+      solAttach,
+      solAttachName,
+    } = this.state
     const { index, questions, createExam, onUpload } = this.props
     return (
       <>
@@ -93,9 +105,12 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="question-input-file"
             onUpload={onUpload}
-            onChange={url => {
-              this.setState({ answerImageUrl: url })
+            onChange={({ url, name }) => {
+              this.setState({ probAttach: url })
+              this.setState({ probAttachName: name })
             }}
+            url={probAttach}
+            name={probAttachName}
           />
           <TextField
             required
@@ -131,6 +146,7 @@ export default class QuestionInfo extends Component {
           />
           <GroupButton
             label="گزینه صحیح"
+            value={correct}
             onChange={ans => this.handleAddCorrect(ans)}
           />
           <TextArea
@@ -143,9 +159,12 @@ export default class QuestionInfo extends Component {
             label="تصویر مربوط به سوال"
             id="answer-input-file"
             onUpload={onUpload}
-            onChange={url => {
-              this.setState({ answerImageUrl: url })
+            onChange={({ url, name }) => {
+              this.setState({ solAttach: url })
+              this.setState({ solAttachName: name })
             }}
+            name={solAttachName}
+            url={solAttach}
           />
         </div>
       </>

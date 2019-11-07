@@ -39,7 +39,6 @@ module.exports.createExam = exam =>
 module.exports.getExamById = (id, populate = true) => {
   const query = Exam.findById(id)
     .select("-createdAt -updatedAt -analyzing")
-    .lean();
 
   return populate
     ? query.populate("questions", "-createdAt -updatedAt -creatorId")

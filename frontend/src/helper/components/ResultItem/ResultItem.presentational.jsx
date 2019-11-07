@@ -14,7 +14,7 @@ const getMedal = rank => {
   else if (rank === 3) return 'bronze'
   return null
 }
-const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
+const ResultItem = ({ rank, profileImage, fullName, finishTime, score, school }) => (
   <div className="c--result-item_container" dir="rtl">
     <div className="c--result-item_right-segment">
       <Typography style={{ margin: '11px' }} variant="subtitle2">
@@ -26,11 +26,21 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
       <div className="c--result-item_user-info">
         <Avatar
           alt={fullName}
-          src={`https://www.weblite.me:3000/image/${profileImage}`}
+          src={
+            profileImage
+              ? `https://www.weblite.me:3000/image/${profileImage}`
+              : 'images/user.svg'
+          }
+          style={{ background: '#BC7DDE' }}
         ></Avatar>
 
         <div className="c--result-item_text">
-          <Typography variant="subtitle1" align="center">
+          <Typography
+            noWrap
+            variant="subtitle1"
+            align="center"
+            style={{ width: '100%' }}
+          >
             {fullName}
           </Typography>
           <Typography
@@ -38,7 +48,7 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
             variant="body2"
             align="center"
           >
-            {finishTime}
+            {finishTime} - {school}
           </Typography>
         </div>
       </div>
@@ -49,7 +59,9 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score }) => (
         </div>
       )}
 
-      <Typography variant="subtitle2">{toPersian(score)}</Typography>
+      <Typography variant="subtitle2" style={{ direction: 'ltr' }}>
+        {toPersian(score)}
+      </Typography>
     </div>
   </div>
 )

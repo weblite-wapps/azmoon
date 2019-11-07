@@ -28,6 +28,19 @@ const router = new Router()
   })
   .get("/:id", async ctx => {
     const exam = await getExamById(ctx.params.id);
+    // don't return solutions if exam is not finished
+    if (exam && new Date() < new Date(exam.endTime)) {
+      const trimmedExam = exam.toObject()
+      delete trimmedExam.result
+      trimmedExam.questions.forEach(q => {
+        delete q.correct
+        delete q.sol
+        delete q.solAttach
+        delete q.stats
+      })
+      ctx.body = trimmedExam;
+      return
+    }
     ctx.body = exam;
     if (shouldAnalyze(exam)) analyze(exam._id);
   })
@@ -42,7 +55,7 @@ const router = new Router()
     await updateExam(ctx.params.id, { endTime: new Date() });
     ctx.status = 200;
   })
-  .get("/:id/result", async ctx => {
+  .get("/:id/results", async ctx => {
     ctx.body = await getResultsByExam(ctx.params.id);
   });
 

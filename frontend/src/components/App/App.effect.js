@@ -108,12 +108,12 @@ const initialFetchEpic = action$ =>
     }),
 
     tap(
-      ({ exam: { startTime } }) =>
-        new Date() > new Date(startTime) && dispatchSetIsExamStarted(true),
+      ({ exam: { isStarted } }) =>
+        isStarted && dispatchSetIsExamStarted(true),
     ),
     tap(
-      ({ exam: { endTime } }) =>
-        new Date() > new Date(endTime) && dispatchSetIsExamFinished(true),
+      ({ exam: { isEnded } }) =>
+        isEnded && dispatchSetIsExamFinished(true),
     ),
     tap(({ result, exam: { duration, questions } }) => {
       if (result && !result.endTime) {

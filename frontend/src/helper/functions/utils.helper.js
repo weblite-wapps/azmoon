@@ -95,8 +95,8 @@ export const formattedSeconds = time =>
     Math.floor((time % 3600) / 60),
   )}:${format(time % 60)}`
 
-export const getRemainingTime = endTime => {
-  const now = new Date()
+export const getRemainingTime = (endTime, nowTime = Date.now()) => {
+  const now = new Date(nowTime)
   const end = new Date(endTime)
 
   return differenceInSeconds(end, now)

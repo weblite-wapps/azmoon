@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 // components
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import Slide from '@material-ui/core/Slide'
 import Snackbar from '@material-ui/core/Snackbar'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -66,7 +65,6 @@ const StageManager = ({
           <Snackbar
             key="verification"
             open={open}
-            onClose={console.log}
             className={`${classes.anchorOriginBottomCenter} ${classes.action}`}
             ContentProps={{
               'aria-describedby': 'message-id',

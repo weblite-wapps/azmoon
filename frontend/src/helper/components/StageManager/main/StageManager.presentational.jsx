@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 // components
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import Slide from '@material-ui/core/Slide'
 import Snackbar from '@material-ui/core/Snackbar'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -64,9 +63,9 @@ const StageManager = ({
             onClick={() => setOpen(true)}
           />
           <Snackbar
+            key="verification"
             open={open}
             className={`${classes.anchorOriginBottomCenter} ${classes.action}`}
-            TransitionComponent={props => <Slide {...props} direction="down" />}
             ContentProps={{
               'aria-describedby': 'message-id',
             }}
@@ -115,7 +114,6 @@ const StageManager = ({
     </div>
   )
 }
-
 StageManager.propTypes = {
   error: PropTypes.bool,
   finalStage: PropTypes.bool,
@@ -135,5 +133,4 @@ StageManager.defaultProps = {
   stageName: '',
   examMode: true,
 }
-
 export default StageManager

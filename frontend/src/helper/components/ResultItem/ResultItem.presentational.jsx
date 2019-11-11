@@ -38,7 +38,7 @@ const ResultItem = ({ rank, profileImage, fullName, finishTime, score, school })
           <Typography
             noWrap
             variant="subtitle1"
-            align="center"
+            align="right"
             style={{ width: '100%' }}
           >
             {fullName}

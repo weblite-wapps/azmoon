@@ -31,7 +31,6 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import {
   wisView,
   userIdView,
-  userNameView,
   schoolView,
 } from '../App/App.reducer'
 import { push } from '../../setup/redux'

@@ -1,5 +1,5 @@
 import { differenceInSeconds } from 'date-fns'
-const R = require('ramda')
+import * as R from 'ramda'
 /** Abbreviated for  A & B test for classnames
  * Caution try not to use branch function so much this function lead you to better
  * styling architecture */
@@ -18,9 +18,8 @@ export const cns = (...args) => {
 }
 
 /* === Strings === */
-/** caution DON'T PASS NULL */
 export const toPersian = text => {
-  if (!text) return text
+  if (text == null) return text
   if (typeof text === 'number') return text.toLocaleString('fa-IR')
   return text.replace(/[0-9]/g, num =>
     parseInt(num, 10).toLocaleString('fa-IR'),

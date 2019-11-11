@@ -3,30 +3,15 @@ import PropTypes from 'prop-types'
 import {
   Dialog,
   FormControl,
-  Select,
-  MenuItem,
   Button,
-  InputLabel,
 } from '@material-ui/core'
-import { makeStyles, withStyles, fade } from '@material-ui/core/styles'
-
-// schools
-const SCHOOLS = [
-  'برهان',
-  'علامه حلی ۱',
-  'ابوریحان',
-  'انرژی اتمی',
-  'دانش',
-  'الوند',
-  'رهنما',
-  'فرزانگان رودهن',
-  'شاهد مبشر',
-  'مدرسان اندیشه',
-  'جاویدان',
-  'تدبیر دانش',
-  'کلاس آنلاین',
-  'غیره',
-]
+import { fade, makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+// component
+import MySelect, { BootstrapInputLabel } from './MySelect.presentational'
+// const
+import cityMap from '../../../helper/consts/iran-cities'
 
 const useStyles = makeStyles(theme => ({
   formControlContainer: {
@@ -36,52 +21,62 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-end',
   },
   formControl: {
+    position: 'relative',
     minWidth: 120,
     height: '100%',
     width: '100%',
     boxSizing: 'border-box',
   },
-  paper: {
-    width: '100%',
-    height: 'auto',
-  },
   dialogPaper: {
     margin: 5,
     width: 300,
-    overflow: 'hidden',
+    overflowX: 'hidden',
   },
   menuItem: {
     textAlign: 'right',
     border: '1px solid #ced4da',
     fontSize: 12,
     lineHeight: '21px',
+    width: '100%',
     fontWeight: 500,
     letterSpacing: -0.08,
     borderRadius: 11,
     padding: '5px 10px',
-    marginTop: '25px !important',
+    margin: '20px 0 !important',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     '&:focus': {
       boxShadow: `${fade('rgb(128, 130, 133)', 0.5)} 0 0 0 0.1rem`,
       borderColor: 'rgb(128, 130, 133)',
     },
   },
-  item: {
-    textAlign: 'right',
-    fontFamily: 'iranyekan'
-  },
-  button: {
-    marginTop: 10,
-  },
 }))
 
-const SchoolModal = ({ open: dialogOpen, onSubmit }) => {
+const provinces = Object.keys(cityMap)
+
+const SchoolModal = ({ open: dialogOpen, onSubmit, onSearchSchools, oldSchool }) => {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
-  const [school, setSchool] = React.useState(null)
-  const handleChange = event => {
-    setSchool(event.target.value)
+  const [province, setProvince] = React.useState('تهران')
+  const [county, setCounty] = React.useState('تهران')
+  const [school, setSchool] = React.useState(oldSchool)
+  const [schools, setSchools] = React.useState([])
+
+  console.log(school)
+  const changeProvince = value => {
+    setProvince(value)
+    setCounty(cityMap[value][0])
   }
+
+  React.useEffect(() => {
+    let active = true
+
+    onSearchSchools(province, county)
+      .then(results => active && setSchools(results || []))
+
+    return () => {
+      active = false
+    }
+  }, [province, county, onSearchSchools])
+
   return (
     <Dialog
       disableBackdropClick
@@ -91,38 +86,54 @@ const SchoolModal = ({ open: dialogOpen, onSubmit }) => {
       classes={{ paper: classes.dialogPaper }}
     >
       <div className={classes.formControlContainer}>
+        <MySelect
+          name="province"
+          label="استان"
+          items={provinces}
+          onChange={changeProvince}
+          value={province} />
+
+        <MySelect
+          name="county"
+          label="شهرستان"
+          items={cityMap[province]}
+          onChange={setCounty}
+          value={county} />
+
         <FormControl
           fullWidth
-          classes={{ paper: classes.paper, root: classes.formControl }}
+          classes={{ root: classes.formControl }}
         >
-          <BootstrapInputLabel htmlFor="select-input-school-selection">
-            نام مدرسه
+          <BootstrapInputLabel htmlFor="autocomplete-school">
+            مدرسه
           </BootstrapInputLabel>
-          <Select
-            autoWidth
-            open={open}
-            onClose={() => setOpen(false)}
-            onOpen={() => setOpen(true)}
-            value={school}
-            onChange={handleChange}
-            className={classes.menuItem}
-            inputProps={{
-              name: 'school',
-              id: 'select-input-school-selection',
-              style: { direction: 'rtl' },
+          <Autocomplete
+            id="autocomplete-school"
+            classes={{
+              inputRoot: classes.menuItem
             }}
-          >
-            {SCHOOLS.map((item, index) => (
-              <MenuItem key={index} value={item} className={classes.item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
+            options={schools}
+            autoComplete
+            autoSelect
+            includeInputInList
+            freeSolo
+            onChange={(e, v) => setSchool(e.target.value || v)}
+            renderInput={params => (
+              <TextField
+                {...params}
+                variant="outlined"
+                fullWidth
+                onChange={e => setSchool(e.target.value)}
+              />
+            )}
+          />
         </FormControl>
         <Button
-          className={classes.button}
-          onClick={() =>
-            school !== null ? onSubmit(school) : Function.prototype
+          variant="contained"
+          onClick={() => {
+            if (school !== '')
+              onSubmit({ province, county, school: school.trim() })
+            }
           }
         >
           تایید
@@ -131,25 +142,12 @@ const SchoolModal = ({ open: dialogOpen, onSubmit }) => {
     </Dialog>
   )
 }
-export default SchoolModal
 
 SchoolModal.propTypes = {
   open: PropTypes.bool.isRequired,
+  oldSchool: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onSearchSchools: PropTypes.func.isRequired,
 }
 
-const BootstrapInputLabel = withStyles(() => ({
-  formControl: {
-    left: 'unset',
-    right: 0,
-    transition: 'none',
-    transform: 'unset',
-    color: '#000',
-    fontSize: 12,
-    fontWeight: 500,
-    marginBottom: 10,
-  },
-  shrink: {
-    transformOrigin: 'top right',
-  },
-}))(InputLabel)
+export default SchoolModal

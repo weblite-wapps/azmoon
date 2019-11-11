@@ -1,5 +1,6 @@
 // modules
 import { connect } from 'react-redux'
+import { getRequest } from '../../helper/functions/request.helper'
 // components
 import Home from './Home.presentational'
 // views
@@ -9,6 +10,7 @@ import {
   isExamStartedView,
   isExamFinishedView,
   isAdminView,
+  schoolView,
 } from '../App/App.reducer'
 import {
   titleView,
@@ -66,15 +68,19 @@ const mapStateToProps = state => ({
   averagePercent: averagePercentView(),
   userResult: userResultView(),
   isOpen: isSchoolModalOpenView(),
+  oldSchool: schoolView(),
 })
 
 const mapDispatchToProps = () => ({
   onEditExam: dispatchEffectEditExam,
-  onOpenExam: () => dispatchEffectOpenExam(),
-  onCloseExam: () => dispatchEffectCloseExam(),
-  onStartExam: () => dispatchEffectStartExam(),
-  onShowResults: () => dispatchEffectShowResults(),
-  onShowAnswerSheet: () => dispatchEffectShowAnswerSheet(),
+  onOpenExam: dispatchEffectOpenExam,
+  onCloseExam: dispatchEffectCloseExam,
+  onStartExam: dispatchEffectStartExam,
+  onShowResults: dispatchEffectShowResults,
+  onShowAnswerSheet: dispatchEffectShowAnswerSheet,
+  onSearchSchools: (province, county) =>
+    getRequest(`/school/?province=${province}&county=${county}`)
+      .then(resp => resp.body),
   onSubmit: dispatchEffectHandleSubmitSchool,
 })
 

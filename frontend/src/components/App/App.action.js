@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import { createAction } from 'redux-actions'
 import { dispatch } from '../../setup/redux'
 
@@ -38,6 +39,10 @@ export const SET_IS_EXAM_FINISHED = 'SET_IS_EXAM_FINISHED'
 export const setIsExamFinished = createAction(SET_IS_EXAM_FINISHED)
 export const dispatchSetIsExamFinished = (...args) => dispatch(setIsExamFinished(...args))
 
-export const SET_SCHOOL = 'SET_SCHOOL'
-export const setSchool = createAction(SET_SCHOOL)
-export const dispatchSetSchool = (...args) => dispatch(setSchool(...args))
+export const SET_USER_INFO = 'SET_USER_INFO'
+export const setUserInfo = createAction(SET_USER_INFO, R.pick([
+  'province',
+  'county',
+  'school',
+]))
+export const dispatchSetUserInfo = (...args) => dispatch(setUserInfo(...args))

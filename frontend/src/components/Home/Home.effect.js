@@ -25,7 +25,7 @@ import {
 import {
   dispatchSetIsExamFinished,
   dispatchSetIsExamStarted,
-  dispatchSetSchool,
+  dispatchSetUserInfo,
 } from '../App/App.action'
 import {
   dispatchHandleStartExam,
@@ -135,10 +135,10 @@ const effectHandleSubmitSchool = action$ =>
   action$.pipe(
     ofType(EFFECT_HANDLE_SUBMIT_SCHOOL),
     pluck('payload'),
-    tap(dispatchSetSchool),
-    mergeMap(school =>
+    tap(dispatchSetUserInfo),
+    mergeMap(userInfo =>
       postRequest(`/user/${userIdView()}`)
-        .send({ school })
+        .send(userInfo)
         .on(
           'error',
           err =>

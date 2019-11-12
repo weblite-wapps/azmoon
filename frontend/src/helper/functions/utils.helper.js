@@ -72,12 +72,14 @@ export const onExamError = ({ title, questionCount, duration, endTime }) => {
   }
 }
 
-export const onQuestionError = ({ prob, options }) => {
-  if (!!prob && !R.includes('', options)) {
+export const onQuestionError = ({ prob, probAttach, options }) => {
+  if ((!!prob || !!probAttach) && !R.includes('', options)) {
     return false
-  } else if (!prob) {
-    return { prob: true }
-  } else {
+  }
+  else if (!prob && !probAttach) {
+    return { prob: true, probAttach: true }
+  }
+  else {
     return {
       options: R.update(
         R.findIndex(R.equals(''))(options),

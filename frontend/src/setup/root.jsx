@@ -1,5 +1,5 @@
 // Modules
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense } from 'react'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router'
 import { ConnectedRouter } from 'connected-react-router'

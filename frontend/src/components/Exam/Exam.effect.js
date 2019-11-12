@@ -31,7 +31,6 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import {
   wisView,
   userIdView,
-  userNameView,
   schoolView,
 } from '../App/App.reducer'
 import { push } from '../../setup/redux'
@@ -53,9 +52,6 @@ const effectDecreaseDurationEpic = action$ =>
     tap(dispatchChangeExamDuration),
     delay(1000),
     map(() => {
-      if (55 < durationView() && durationView() < 65) {
-        dispatchChangeSnackbarStage('زمان باقی مانده: ۱ دقیقه')
-      }
       if (durationView() < 1) {
         dispatchHandleFinalStageClick()
         return { type: 'NOTHING' }
@@ -135,14 +131,6 @@ const effectEndExamButtonClick = action$ =>
     ),
 
     tap(() => dispatchSetIsParticipated(true)),
-    // tap(
-    //   () =>
-    //     window.W &&
-    //     window.W.sendNotificationToAdmins(
-    //       'آزمون',
-    //       `${userNameView()} در آزمون شرکت کرد`,
-    //     ),
-    // ),
     tap(() => window.W && window.W.analytics('FINISH_EXAM')),
     ignoreElements(),
   )

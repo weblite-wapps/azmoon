@@ -94,14 +94,14 @@ export default class QuestionInfo extends Component {
         />
         <div className="c--question-info_container scroll-bar">
           <TextArea
-            required
             hasError={hasError.prob}
             onChange={this.handleAddData('prob')}
             value={prob}
             label="سوال"
             placeholder="صورت سوال را وارد کنید"
           />
-          <FileUpload
+          <FileUpload 
+            hasError={hasError.probAttach}
             label="تصویر مربوط به سوال"
             id="question-input-file"
             onUpload={onUpload}

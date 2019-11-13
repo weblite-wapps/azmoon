@@ -59,6 +59,7 @@ const reducer = {
       duration,
       startTime,
       endTime,
+      nowTime,
       questions,
       result,
       userResult,
@@ -78,7 +79,7 @@ const reducer = {
     minPercent: result && result.min,
     averagePercent: result && result.avg,
     userResult,
-    remainingTime: getRemainingTime(endTime),
+    remainingTime: getRemainingTime(endTime, nowTime),
   }),
 
   [DECREMENT_REMAINING_TIME]: state => ({

@@ -28,20 +28,29 @@ const router = new Router()
   })
   .get("/:id", async ctx => {
     const exam = await getExamById(ctx.params.id);
+    if (!exam) return ctx.body = exam
+
+    const now = new Date()
+    const { startTime, endTime } = exam
+    const examObj = R.mergeRight(exam.toObject(), {
+      nowTime: now,
+      isStarted: now > startTime,
+      isEnded: now > endTime,
+    })
     // don't return solutions if exam is not finished
-    if (exam && new Date() < new Date(exam.endTime)) {
-      const trimmedExam = exam.toObject()
-      delete trimmedExam.result
-      trimmedExam.questions.forEach(q => {
+    if (now < endTime) {
+      delete examObj.result
+      examObj.questions.forEach(q => {
         delete q.correct
         delete q.sol
         delete q.solAttach
         delete q.stats
       })
-      ctx.body = trimmedExam;
-      return
+      return ctx.body = examObj
     }
-    ctx.body = exam;
+
+    ctx.body = examObj
+
     if (shouldAnalyze(exam)) analyze(exam._id);
   })
   .get("/:id/count", async ctx => {

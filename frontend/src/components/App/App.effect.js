@@ -11,13 +11,13 @@ import {
   dispatchSetIsParticipated,
   dispatchSetIsLoading,
   FETCH_INITIAL_DATA,
-  dispatchSetSchool,
+  dispatchSetUserInfo,
 } from './App.action'
 import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import {
   dispatchSetHomeInfo,
   dispatchEffectChangeRemainingTime,
-  dispatchSetIsSchoolModalOpen,
+  dispatchSetUserInfoModalOpen,
 } from '../Home/Home.action'
 import {
   dispatchSetExamInfo,
@@ -75,9 +75,8 @@ const initialFetchEpic = action$ =>
     tap(({ exam }) => !exam && !isAdminView() && push('/home')),
     tap(({ user }) => {
       if (!isAdminView()) {
-        user && user.school
-          ? dispatchSetSchool(user.school)
-          : dispatchSetIsSchoolModalOpen(true)
+        if (user) dispatchSetUserInfo(user)
+        if (!(user && user.county)) dispatchSetUserInfoModalOpen(true)
       }
     }),
     filter(({ exam }) => {

@@ -69,9 +69,15 @@ export default createMuiTheme({
     },
     MuiDialog: {
       root: {
+        direction: 'rtl',
         display: 'flex',
         flexDirection: 'column',
         top: '52px',
+      },
+    },
+    MuiPopover: {
+      root: {
+        direction: 'rtl',
       },
     },
     MuiBackdrop: {
@@ -126,10 +132,6 @@ export default createMuiTheme({
       },
     },
     MuiListItem: {
-      default: {
-        paddingTop: '0px',
-        paddingBottom: '0px',
-      },
       dense: {
         paddingLeft: '30px',
       },
@@ -211,5 +213,10 @@ export default createMuiTheme({
         borderRadius: '11px',
       },
     },
+    MuiAutocomplete: {
+      popup: {
+        direction: 'rtl',
+      }
+    }
   },
 })

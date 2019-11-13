@@ -6,7 +6,6 @@ import { isExamFinishedView } from './App.reducer'
 // actions
 import { dispatchSetApi, dispatchFetchInitialData } from './App.action'
 
-
 const mapStateToProps = () => ({
   isExamFinished: isExamFinishedView(),
 })

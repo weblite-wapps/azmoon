@@ -5,13 +5,14 @@ import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
-import SchoolModal from '../../helper/components/SchoolModal/SchoolModal.presentational'
+import UserInfoModal from '../../helper/components/UserInfoModal/UserInfoModal.presentational'
 
 // helper
 import { toPersian } from '../../helper/functions/utils.helper'
 // style
 import './Home.scss'
 import { userRankView } from '../Result/Result.reducer'
+
 const useStyles = makeStyles(() => ({
   logoImage: {
     margin: 'auto',
@@ -76,6 +77,7 @@ const Home = ({
   timeToStart,
   userResult,
   isOpen,
+  oldSchool,
 
   onCloseExam,
   onOpenExam,
@@ -84,6 +86,7 @@ const Home = ({
   onShowResults,
   onShowAnswerSheet,
   onSubmit,
+  onSearchSchools,
 }) => {
   const classes = useStyles()
   return (
@@ -232,7 +235,11 @@ const Home = ({
         />
       )}
 
-      <SchoolModal open={isOpen} onSubmit={onSubmit} />
+      <UserInfoModal
+        open={isOpen}
+        oldSchool={oldSchool}
+        onSubmit={onSubmit}
+        onSearchSchools={onSearchSchools} />
     </div>
   )
 }
@@ -242,6 +249,7 @@ Home.propTypes = {
   isExamStarted: PropTypes.bool.isRequired,
   isExamFinished: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  oldSchool: PropTypes.string,
 
   title: PropTypes.string.isRequired,
   section: PropTypes.string.isRequired,
@@ -263,6 +271,7 @@ Home.propTypes = {
   onShowResults: PropTypes.func,
   onShowAnswerSheet: PropTypes.func,
   onSubmit: PropTypes.func,
+  onSearchSchools: PropTypes.func,
 }
 Home.defaultProps = {
   status: '--',
@@ -275,6 +284,7 @@ Home.defaultProps = {
   remainingTime: '--',
   timeToStart: '--',
   userResult: '--',
+  oldSchool: '',
 
   onCloseExam: Function.prototype,
   onOpenExam: Function.prototype,
@@ -283,6 +293,7 @@ Home.defaultProps = {
   onShowResults: Function.prototype,
   onShowAnswerSheet: Function.prototype,
   onSubmit: Function.prototype,
+  onSearchSchools: () => Promise.resolve([]),
 }
 
 export default Home

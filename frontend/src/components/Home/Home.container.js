@@ -1,5 +1,6 @@
 // modules
 import { connect } from 'react-redux'
+import { getRequest } from '../../helper/functions/request.helper'
 // components
 import Home from './Home.presentational'
 // views
@@ -9,6 +10,7 @@ import {
   isExamStartedView,
   isExamFinishedView,
   isAdminView,
+  schoolView,
 } from '../App/App.reducer'
 import {
   titleView,
@@ -23,7 +25,7 @@ import {
   averagePercentView,
   userResultView,
   remainingTimeView,
-  isSchoolModalOpenView,
+  userInfoModalOpenView,
 } from '../Home/Home.reducer'
 // actions
 import {
@@ -33,7 +35,7 @@ import {
   dispatchEffectStartExam,
   dispatchEffectShowResults,
   dispatchEffectShowAnswerSheet,
-  dispatchEffectHandleSubmitSchool,
+  dispatchEffectHandleSubmitUserInfo,
 } from './Home.action'
 // helpers
 import { getStatus } from './Home.selector'
@@ -65,17 +67,21 @@ const mapStateToProps = state => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
-  isOpen: isSchoolModalOpenView(),
+  isOpen: userInfoModalOpenView(),
+  oldSchool: schoolView(),
 })
 
 const mapDispatchToProps = () => ({
   onEditExam: dispatchEffectEditExam,
-  onOpenExam: () => dispatchEffectOpenExam(),
-  onCloseExam: () => dispatchEffectCloseExam(),
-  onStartExam: () => dispatchEffectStartExam(),
-  onShowResults: () => dispatchEffectShowResults(),
-  onShowAnswerSheet: () => dispatchEffectShowAnswerSheet(),
-  onSubmit: dispatchEffectHandleSubmitSchool,
+  onOpenExam: dispatchEffectOpenExam,
+  onCloseExam: dispatchEffectCloseExam,
+  onStartExam: dispatchEffectStartExam,
+  onShowResults: dispatchEffectShowResults,
+  onShowAnswerSheet: dispatchEffectShowAnswerSheet,
+  onSearchSchools: (province, county) =>
+    getRequest(`/school/?province=${province}&county=${county}`)
+      .then(resp => resp.body),
+  onSubmit: dispatchEffectHandleSubmitUserInfo,
 })
 
 export default connect(

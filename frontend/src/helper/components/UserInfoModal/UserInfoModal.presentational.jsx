@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 
 const provinces = Object.keys(cityMap)
 
-const SchoolModal = ({ open: dialogOpen, onSubmit, onSearchSchools, oldSchool }) => {
+const UserInfoModal = ({ open: dialogOpen, onSubmit, onSearchSchools, oldSchool }) => {
   const classes = useStyles()
   const [province, setProvince] = React.useState('تهران')
   const [county, setCounty] = React.useState('تهران')
@@ -143,11 +143,11 @@ const SchoolModal = ({ open: dialogOpen, onSubmit, onSearchSchools, oldSchool })
   )
 }
 
-SchoolModal.propTypes = {
+UserInfoModal.propTypes = {
   open: PropTypes.bool.isRequired,
   oldSchool: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onSearchSchools: PropTypes.func.isRequired,
 }
 
-export default SchoolModal
+export default UserInfoModal

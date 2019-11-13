@@ -25,7 +25,7 @@ import {
   averagePercentView,
   userResultView,
   remainingTimeView,
-  isSchoolModalOpenView,
+  userInfoModalOpenView,
 } from '../Home/Home.reducer'
 // actions
 import {
@@ -35,7 +35,7 @@ import {
   dispatchEffectStartExam,
   dispatchEffectShowResults,
   dispatchEffectShowAnswerSheet,
-  dispatchEffectHandleSubmitSchool,
+  dispatchEffectHandleSubmitUserInfo,
 } from './Home.action'
 // helpers
 import { getStatus } from './Home.selector'
@@ -67,7 +67,7 @@ const mapStateToProps = state => ({
   minPercent: minPercentView(),
   averagePercent: averagePercentView(),
   userResult: userResultView(),
-  isOpen: isSchoolModalOpenView(),
+  isOpen: userInfoModalOpenView(),
   oldSchool: schoolView(),
 })
 
@@ -81,7 +81,7 @@ const mapDispatchToProps = () => ({
   onSearchSchools: (province, county) =>
     getRequest(`/school/?province=${province}&county=${county}`)
       .then(resp => resp.body),
-  onSubmit: dispatchEffectHandleSubmitSchool,
+  onSubmit: dispatchEffectHandleSubmitUserInfo,
 })
 
 export default connect(

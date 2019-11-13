@@ -19,8 +19,8 @@ import {
   EFFECT_SHOW_ANSWER_SHEET,
   effectChangeRemainingTime,
   dispatchDecrementRemainingTime,
-  EFFECT_HANDLE_SUBMIT_SCHOOL,
-  dispatchSetIsSchoolModalOpen,
+  EFFECT_HANDLE_SUBMIT_USER_INFO,
+  dispatchSetUserInfoModalOpen,
 } from './Home.action'
 import {
   dispatchSetIsExamFinished,
@@ -133,7 +133,7 @@ const effectShowAnswerSheet = action$ =>
 
 const effectHandleSubmitSchool = action$ =>
   action$.pipe(
-    ofType(EFFECT_HANDLE_SUBMIT_SCHOOL),
+    ofType(EFFECT_HANDLE_SUBMIT_USER_INFO),
     pluck('payload'),
     tap(dispatchSetUserInfo),
     mergeMap(userInfo =>
@@ -146,7 +146,7 @@ const effectHandleSubmitSchool = action$ =>
             dispatchChangeSnackbarStage('Server disconnected!'),
         ),
     ),
-    tap(() => dispatchSetIsSchoolModalOpen(false)),
+    tap(() => dispatchSetUserInfoModalOpen(false)),
     ignoreElements(),
   )
 

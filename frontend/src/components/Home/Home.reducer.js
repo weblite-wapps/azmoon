@@ -2,7 +2,11 @@
 import * as R from 'ramda'
 import { getState } from '../../setup/redux'
 // actions
-import { SET_HOME_INFO, DECREMENT_REMAINING_TIME, SET_IS_SCHOOL_MODAL_OPEN } from './Home.action'
+import {
+  SET_HOME_INFO,
+  DECREMENT_REMAINING_TIME,
+  SET_USER_INFO_MODAL_OPEN,
+} from './Home.action'
 // helpers
 import { getRemainingTime } from '../../helper/functions/utils.helper'
 
@@ -22,7 +26,7 @@ const initialState = {
   userResult: '',
   creatorId: '',
   remainingTime: 0,
-  isSchoolModalOpen: false,
+  userInfoModalOpen: false,
 }
 
 // const isParticipatedLens = R.lensProp('isParticipated')
@@ -41,8 +45,8 @@ export const averagePercentView = () =>
   R.path(['Home', 'averagePercent'])(getState())
 export const userResultView = () => R.path(['Home', 'userResult'])(getState())
 export const creatorIdView = () => R.path(['Home', 'creatorId'])(getState())
-export const isSchoolModalOpenView = () =>
-  R.path(['Home', 'isSchoolModalOpen'])(getState())
+export const userInfoModalOpenView = () =>
+  R.path(['Home', 'userInfoModalOpen'])(getState())
 export const remainingTimeView = () =>
   R.path(['Home', 'remainingTime'])(getState())
 
@@ -82,9 +86,9 @@ const reducer = {
     remainingTime: state.remainingTime - 1,
   }),
 
-  [SET_IS_SCHOOL_MODAL_OPEN]: (state, isSchoolModalOpen) => ({
+  [SET_USER_INFO_MODAL_OPEN]: (state, userInfoModalOpen) => ({
     ...state,
-    isSchoolModalOpen,
+    userInfoModalOpen,
   }),
 }
 

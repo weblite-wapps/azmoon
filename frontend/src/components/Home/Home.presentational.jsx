@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 // components
 import InfoTags from '../../helper/components/InfoTags/InfoTags.presentational'
 import Button from '../../helper/components/Button/Button.presentational'
-import SchoolModal from '../../helper/components/SchoolModal/SchoolModal.presentational'
+import UserInfoModal from '../../helper/components/UserInfoModal/UserInfoModal.presentational'
 
 // helper
 import { toPersian } from '../../helper/functions/utils.helper'
@@ -235,7 +235,7 @@ const Home = ({
         />
       )}
 
-      <SchoolModal
+      <UserInfoModal
         open={isOpen}
         oldSchool={oldSchool}
         onSubmit={onSubmit}

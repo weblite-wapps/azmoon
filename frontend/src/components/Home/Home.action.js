@@ -9,9 +9,9 @@ export const DECREMENT_REMAINING_TIME = 'DECREMENT_REMAINING_TIME'
 export const decrementRemainingTime = createAction(DECREMENT_REMAINING_TIME)
 export const dispatchDecrementRemainingTime = (...args) => dispatch(decrementRemainingTime(...args))
 
-export const SET_IS_SCHOOL_MODAL_OPEN = 'SET_IS_SCHOOL_MODAL_OPEN'
-export const setIsSchoolModalOpen = createAction(SET_IS_SCHOOL_MODAL_OPEN)
-export const dispatchSetIsSchoolModalOpen = (...args) => dispatch(setIsSchoolModalOpen(...args))
+export const SET_USER_INFO_MODAL_OPEN = 'SET_USER_INFO_MODAL_OPEN'
+export const setUserInfoModalOpen = createAction(SET_USER_INFO_MODAL_OPEN)
+export const dispatchSetUserInfoModalOpen = (...args) => dispatch(setUserInfoModalOpen(...args))
 
 // effects
 export const EFFECT_CHANGE_REMAINING_TIME = 'EFFECT_CHANGE_REMAINING_TIME'
@@ -49,7 +49,7 @@ export const effectShowAnswerSheet = createAction(EFFECT_SHOW_ANSWER_SHEET)
 export const dispatchEffectShowAnswerSheet = () =>
   dispatch(effectShowAnswerSheet())
 
-export const EFFECT_HANDLE_SUBMIT_SCHOOL = 'EFFECT_HANDLE_SUBMIT_SCHOOL'
-export const effectHandleSubmitSchool = createAction(EFFECT_HANDLE_SUBMIT_SCHOOL)
-export const dispatchEffectHandleSubmitSchool = (...args) =>
-  dispatch(effectHandleSubmitSchool(...args))
+export const EFFECT_HANDLE_SUBMIT_USER_INFO = 'EFFECT_HANDLE_SUBMIT_USER_INFO'
+export const effectHandleSubmitUserInfo = createAction(EFFECT_HANDLE_SUBMIT_USER_INFO)
+export const dispatchEffectHandleSubmitUserInfo = (...args) =>
+  dispatch(effectHandleSubmitUserInfo(...args))

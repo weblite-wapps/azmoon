@@ -17,7 +17,7 @@ import { dispatchChangeSnackbarStage } from '../Snackbar/Snackbar.action'
 import {
   dispatchSetHomeInfo,
   dispatchEffectChangeRemainingTime,
-  dispatchSetIsSchoolModalOpen,
+  dispatchSetUserInfoModalOpen,
 } from '../Home/Home.action'
 import {
   dispatchSetExamInfo,
@@ -76,7 +76,7 @@ const initialFetchEpic = action$ =>
     tap(({ user }) => {
       if (!isAdminView()) {
         if (user) dispatchSetUserInfo(user)
-        if (!(user && user.county)) dispatchSetIsSchoolModalOpen(true)
+        if (!(user && user.county)) dispatchSetUserInfoModalOpen(true)
       }
     }),
     filter(({ exam }) => {

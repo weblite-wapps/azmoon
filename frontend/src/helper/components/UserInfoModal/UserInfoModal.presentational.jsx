@@ -122,6 +122,7 @@ const UserInfoModal = ({ open: dialogOpen, onSubmit, onSearchSchools, oldSchool 
               <TextField
                 {...params}
                 variant="outlined"
+                label="مدرسه خود را انتخاب کنید یا بنویسید"
                 fullWidth
                 onChange={e => setSchool(e.target.value)}
               />
